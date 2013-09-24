@@ -1,0 +1,145 @@
+/* Layout */
+html {
+    height: 100%;
+}
+.redagent-loading {
+    background: url(../images/loading.gif) no-repeat center;
+    height: 100%;
+}
+.redagent-loading #container * {
+    display:none;
+}
+
+@media all and (max-width: 53.236em) {
+    .yui3-redagent-display #cr-stage {
+        width: auto !important;
+        height: auto !important;
+    }
+    .yui3-redagent-display canvas  {
+        width: 100% !important;
+        position: relative !important;
+    }
+    .yui3-redagent-chat {
+        display:none;
+    }
+    .redagent-menu .redagent-closebutton {
+        top:0;
+        left:0;
+        margin: 0;
+    }
+}
+/** Pages  styles */
+#container {
+    position: relative;
+}
+.redagent-page {
+    position:absolute;
+    left:0;
+    right: 0;
+    padding: 0 1em;
+    z-index: 1;
+    /*width: 100%;*/
+    background: white;
+    /*border: 1px solid #580000;*/
+    border-bottom: none;
+}
+.redagent-page .redagent-cl {
+    clear: both;
+}
+.redagent-page .redagent-spacer {
+    border-top: 1px solid #580000;
+    line-height: 0em;
+}
+/* Menu styles */
+.redagent-menu {
+    z-index: 2;
+    background:transparent;
+    position: fixed;
+    margin: 0 auto;
+}
+.redagent-menu .redagent-closebutton {
+    width: 20px;
+    height: 20px;
+    background: #580000 url(../images/redagent-closeicon.png) 2px 2px;
+    float: right;
+    cursor: pointer;
+    border: 1px solid #580000;
+    border-radius: 2px;
+    margin-right: 0.6em;
+}
+
+/* Contact page */
+/** Display style */
+.redagent-page-contact {
+    min-height: 631px;
+}
+/** Display style */
+.yui3-redagent-display #cr-stage {
+    line-height: 0em;
+}
+
+/** Chat styles */
+.yui3-redagent-chat textarea {
+    width: 95%;
+    border: 1px solid #580000;
+    margin:0;
+    padding: 5px 2.5%;
+    display: block;
+    margin-top: 5px;
+    font-size: 0.9em;
+}
+.yui3-redagent-chat .yui3-scrollview-content ul {
+    margin: 1px 0;
+}
+.yui3-redagent-chat .yui3-scrollview-content li {
+    padding: 5px 0;
+    font-size: 0.9em;
+    color: #580000;
+    list-style-type: none;
+    text-align: left;
+    line-height: 1.2em;
+}
+.yui3-redagent-chat .yui3-scrollview-content li.self {
+    color: darkgray;
+}
+
+/* For IE 6/7 - needs a background color (above) to pick up events, and zoom, to fill the UL */
+.yui3-redagent-chat .yui3-scrollview-content li {
+    *zoom:1;
+}
+
+/* For IE7 - needs zoom, otherwise clipped content is not rendered */
+.yui3-redagent-chat .yui3-scrollview-content ul {
+    *zoom:1;
+}
+
+/* YUI 3 Buttons styles */
+.yui3-skin-sam .yui3-button {
+    color: white;
+    background-color: #580000;
+}
+
+/* Gallery slideshow styles */
+.slideshow {
+    position:relative !important;
+    display:inline-block !important;
+    max-width: 420px;
+    width: 100%;
+    min-height: 380px;
+    overflow: hidden;
+}
+.yui3-slideshow-content {
+    position: relative;
+}
+
+.yui3-slideshow-content a {
+    position: absolute;
+}
+
+/* Lazy loaded images styles */
+.redagent-image {
+    background: url(../images/loading.gif) center no-repeat;
+    width: 100%;
+    height: 110px;
+    border: none;
+}

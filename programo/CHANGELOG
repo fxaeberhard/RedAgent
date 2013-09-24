@@ -1,0 +1,169 @@
+  /***************************************
+  * http://www.program-o.com
+  * PROGRAM O
+  * Version: 2.3.1
+  * FILE: CHANGELOG
+  * AUTHOR: Elizabeth Perreau and Dave Morton
+  * DATE: 11-05-2013
+  * DETAILS: Describes the version changes in Program O
+  ***************************************/
+
+Version History:
+2.3.1   Bug fixes, repaired missing table columns
+            1.) Corrected a bug in the function parse_learn_tag that prevented new data from being
+                inserted into the aiml_userdefined table
+            2.) Added a column in the aiml_userdefined table that was missing, which was also preventing
+                new data from being  added
+
+2.3.0   Minor DB refactor, in preparation for version 2.5
+            1.) removed the last of the PHP code columns from the database
+            2.) added an unknown_user field to the bots table, allowing per-bot settings for what the
+                will call someone they don't know
+            3.) Altered the chatbot general config page in the admin to reflect the above changes
+            4.) added a bot_id field and dropped a user_id field in the unknown_inputs table
+            5.) dropped the user_id field from the undefined_defaults table, as it was not used
+            6.) added a "memory bailout" feature to the function that returns potential AIML categories
+                to prevent memory overflow errors
+            7.) other miscellaneous minor bug fixes
+
+2.2.2   Bug Fixes/versioning refactor
+            1.) Fixed a bug that prevented proper implementation of template-side <that> tags
+            2.) updated and corrected the script version in all files that contain version information
+            3.) implemented functionality that sets the scripts internal version based on the contents
+                of version.txt, rather than hard-coding it
+
+2.2.1   Major bug fixes
+            1.) Fixed a bug that was mangling Unicode characters while removing punctuation
+            2.) Fixed a bug where the chatbot's debug level wasn't being used
+            3.) re-wrote several functions to be more efficient
+
+
+2.2.0   Foreign Langague Support
+            1.) Program O now support foreign languages! YEEHAAAA
+            2.) Tested against, Russian, Arabic, Turkish, French, Thai, Greek, Chinese
+            3.) Converted all character coding both internal and external to UTF-8
+            4.) Added the correct XML header to the display conversation functions for xml requests
+            5.) Updated the XML example gui to use simpleXML to send requests to the bot
+
+
+2.1.5   Bug fixes/merge to "Master" branch
+            1.) Corrected a bug that improperly ordered the collections of words gathered in <pattern> and <that> tags
+            2.) Corrected multiple minor bugs in the Download script that affected the use of said downloaded AIML
+                files with Pandorabots.
+            3.) Adjusted the function that checks GitHub for the current version of the script, based on changes they
+                made to their API. Also added some error handling, in case GitHub can't be reached.
+            4.) Modified some of the debugging output descriptors to avoid unnecessary and potentially confusing
+                message duplication.
+            5.) Corrected a bug in the main SQL query that caused certain valid AIML categories that use the <that> tag
+                to be missed in the main search.
+            6.) Added 'experimental' support for Pandorabots style <date> tags, adding functionality for both LOCALE
+                and TIMEZONE attributes (support for these attributes was mentioned previously, but not added at that
+                time).
+            7.) Other minor cosmetic changes and typo corrections that didn't affect functionality.
+
+2.1.4   Bug fixes & minor styling/feature changes
+            1.) Fixed several bugs that arose from the database refactor.
+            2.) Fixed the long-standing bug that caused the script to create a new user
+                instead of just updating the current user when they typed in the phrase
+                "clear properties".
+            3.) Fixed bugs in both the word censor and spell checker addons that prevented
+                botmasters from making changes to the DB.
+            4.) Updated the spell checker addon to allow botmasters to enable/disable
+                spell checking by editing the config file. In time, this will expand to
+                the ability to enable or disable the addon per bot (future plans).
+            5.) Changed the styling of the admin pages to include visible cues for BBCode
+                [code] blocks from the Program O Support Forums, when viewing posts from
+                the Support tab of the admin pages.
+
+2.1.3   Added the last of the AIML tag functions/Refactored the DB/Multiple Bug Fixes
+            1.) Added functions for the remaining AIML tags:
+                <thatstar>
+                <topicstar>
+                <gossip>
+            2.) Refactored the database, standardizing field names across all of the tables.
+            3.) Refactored the admin pages, replacing $_GET, $_POST and $_REQUEST with input
+                filtering functions.
+            4.) Fixed several minor bugs that were discovered during the database refactoring
+                process.
+            5.) Re-designed the AIML tag functions, consolidating duplicate code into a single
+                function. this cut more than 70 lines of code from the script while retaining
+                exactly the same functionality and performance.
+            6.) Created an experimental config file editor to the admin folder, to allow
+                botmasters to edit the file directly. For now, the script doesn't actually
+                change the config file, but that functionality will be added in the coming
+                weeks.
+            7.) Updated and modified the automatic upgrade script to incorporate all of the
+                above listed changes.
+
+2.1.2   Added more AIML tag functions/Script Streamlining
+            1.) Added functions for the following AIML tags:
+               <condition>
+               <system>
+               <learn>
+            2.) I went through the entire script, looking for and deleting "orphaned" functions
+                and streamlining code wherever possible.
+
+2.1.1   Added functions for some AIML tags
+            1.) Added functions for the following AIML tags:
+                <gender>
+                <person>
+                <person2>
+
+2.1.0   Major revision change / Bug fixes
+            1.) Altered the way that client properties are handled, by storing them in a table
+                in the DB, rather than keeping them in an element of the conversation array.
+            2.) Removed the AIML to PHP code functions, replacing it with an XML parser to
+                both improve performance and to address several bugs that arose from trying to
+                evaluate faulty PHP code strings.
+            3.) removed the function get_convo_var, replacing calls to that function with direct
+                queries to the conversation array.
+            4.) Corrected several minor bugs that were preventing proper use/setting of some variables
+        Please note that at this point, several functions still need to be written to parse certain AIML
+        tags. The file TODO lists all of the tags that are still not handled.
+
+2.0.9   Feature Update
+            1.) Added a function to the admin page to poll GitHub for the current release version, and notify
+                the botmaster if a new version is available, providing a link to the latest version.
+
+2.0.8   Performed the following upgrades/fixes:
+            1.) Added version information to the admin page. so that botmasters can see at a glance which version
+                they're using. This is a prelude to a new "version check" feature that I'm working on.
+            2.) Corrected a bug where changing the bot's default page format wasn't being reflected in the config
+                file. PLEASE NOTE that if you have several chatbots, this will affect ALL of them, but if that's
+                the case, you shouldn't be relying on the default chatbot page anyway.
+
+2.0.7   Two major changes, this time:
+            1.) Removed some settings from the install script that had been causing new chatbots to
+              fail to respond. These settings are still available in the admin pages, but during installation
+              are given default values.
+            2.) Added support for uploading ZIP file archives of AIML files, to make the process of adding
+              AIML files less faster and less tedious. the size limit for uploading files is still 2MB,
+              but a 2MB ZIP file can hold a LOT of AIML files. 
+
+2.0.6   Performed the following upgrades/fixes:
+            1.) Corrected typographical errors in several files, both in the admin pages, and in the config files.
+            2.) Consolidated error logging, adding a /logs/ folder to the base directory. Error logs are
+              also named for the pages where the errors occur. (e.g. admin.error.log for the admin pages,
+              install.error.log, etc.)
+            3.) Updated the addon checkForBan, activating it, and adding functionality to add banned users
+              to the list of banned IP addresses. It's still up to the botmaster to implement banning in
+              their AIML files. To ban a user, insert the following into the apropriate AIML template:
+              <ban><get name="ip_address" /></ban>
+          For further assistance, please check out the Program O Support Forums.
+
+2.0.5   Bug fixes
+            1.) Fixed a bug where uploaded AIML files were not being added to the DB, even if they passed validation.
+            2.) Added the variable $default_charset to allow character encoding other than UTF-8 for both AIML files
+                and chatbot pages.
+            3.) Added experimental support for international characters. This is far from it's "final" implementation,
+                but we hope that it's a start.
+
+2.0.4   Fixed a bug in the debugging functions that caused empty debugging files to be created on non-Windows systems
+
+2.0.3   Added simple AIML validation to the upload script, and restyled the admin pages accordingly
+
+2.0.2   Unspecified Bug fixes
+
+2.0.1   Unspecified Bug fixes
+
+2.0.0   Initial Release
