@@ -8,19 +8,28 @@ require_once 'Tools.php';
     </p>
     <aside class="redagent-page-text">
         <p class="redagent-date">August 2011</p>
-        <h1>Michael Jackson: The Exerience /Wii</h1>
+        <h1>Michael Jackson: The Exerience - Wii</h1>
         <h2>User Interface Programmer @Ubisoft</h2>
-        <p class="redagent-links">
-            <a href="http://theexperience-thegame.ubi.com/michael-jackson/en-US/home/index.aspx" target="_blank">website</a>
-        </p>
+
         <p class="redagent-content">
             Design and implementation of the in-game User Interfaceon Nintendo Wii.
         </p>
-        <p class="redagent-footer">
-            C++ (Nintendo Revolution SDK), Actionscript 2.0 (in-game interfaces)
-        </p>
+
+        <table>
+            <tr>
+                <td>Links</td>
+                <td style="font-style: normal">
+                    <a href="http://theexperience-thegame.ubi.com/michael-jackson/en-US/home/index.aspx" target="_blank">game site</a>
+                </td>
+            </tr>
+            <tr>
+                <td>Technologies</td>
+                <td>C++ <em>(Nintendo Revolution SDK)</em>, Actionscript 2.0 <em>(in-game interfaces)</em></td>
+            </tr>
+        </table>
     </aside>
-    <p class="redagent-cl redagent-spacer"></p>
+    <p class="redagent-cl "></p>
+    <p class="redagent-spacer"></p>
 
 
     <!--  -->
@@ -30,7 +39,8 @@ require_once 'Tools.php';
     <aside class="redagent-page-text">
 
     </aside>
-    <p class="redagent-cl redagent-spacer"></p>-->
+    <p class="redagent-cl "></p>
+    <p class="redagent-spacer"></p>-->
 
     <!--  MJTE Minigame-->
     <p class="redagent-page-img">
@@ -42,17 +52,29 @@ require_once 'Tools.php';
     <aside class="redagent-page-text">
         <p class="redagent-date">August 2011</p>
         <h1>
-            <a href="http://apps.facebook.com/mjte_minigame/" target="_blank">Michael Jackson: The Exerience /WebGame</a>
+            <a href="http://apps.facebook.com/mjte_minigame/" target="_blank">Michael Jackson: The Exerience - WebGame</a>
         </h1>
         <h2>User Interface Programmer @Ubisoft</h2>
-        <p class="redagent-links"><a href="http://apps.facebook.com/mjte_minigame/" target="_blank">play online</a></p>
         <p class="redagent-content">
             Design and imlementation of a promotionnal Facebook Application.
             A rythm game where you use the keyboard to mimic Michael.
         </p>
-        <p class="redagent-footer">Actionscript 3.0</p>
+
+        <table>
+            <tr>
+                <td>Links</td>
+                <td style="font-style: normal">
+                    <a href="http://apps.facebook.com/mjte_minigame/" target="_blank">play online</a>
+                </td>
+            </tr>
+            <tr>
+                <td>Technologies</td>
+                <td>Actionscript 3.0</td>
+            </tr>
+        </table>
     </aside>
-    <p class="redagent-cl redagent-spacer"></p>
+    <p class="redagent-cl"></p>
+    <p class="redagent-spacer"></p>
 
     <!-- Just Dance 2 -->
     <p class="redagent-page-img">
@@ -60,15 +82,29 @@ require_once 'Tools.php';
     </p>
     <aside class="redagent-page-text">
         <p class="redagent-date">February 2011</p>
-        <h1>Just Dance 2 /Wii</h1>
+        <h1>Just Dance 2 - Wii</h1>
         <h2>Gameplay Programmer @Ubisoft</h2>
-        <p class="redagent-links">
-            <a href="http://justdancegame.uk.ubi.com/just_dance_2.php" target="_blank">website</a>
+
+        <p class="redagent-content">
+            Design and prototype the connection between the game consoles (PS3
+            and Wii)and Social Networks (Facebook & iPhone applications).
         </p>
-        <p class="redagent-content">Design and prototype the connection between the game consoles (PS3 and Wii)and Social Networks (Facebook & iPhone applications).</p>
-        <p class="redagent-footer">C++ (Nintendo SDK & PS3 SDK), Actionscript 2.0 (in-game interfaces), Python, PHP (web-server for Facebook Application), Objective C (iPhone application)</p>
+
+        <table>
+            <tr>
+                <td>Links</td>
+                <td style="font-style: normal">
+                    <a href="http://justdancegame.uk.ubi.com/just_dance_2.php" target="_blank">game site</a>
+                </td>
+            </tr>
+            <tr>
+                <td>Technologies</td>
+                <td>C++ <em>(Nintendo SDK & PS3 SDK)</em>, Actionscript 2.0 <em>(in-game interfaces)</em>, Python, PHP <em>(web-server for Facebook Application)</em>, Objective C <em>(iPhone application)</em></td>
+            </tr>
+        </table>
     </aside>
-    <p class="redagent-cl redagent-spacer"></p>
+    <p class="redagent-cl"></p>
+    <p class="redagent-spacer"></p>
 
     <!--  3D  Blogosphere-->
     <p class="redagent-page-img">
@@ -77,7 +113,7 @@ require_once 'Tools.php';
                 <?php
                 $dir = "images/projects/3DBlogosphere";
                 $files = listdir($dir);
-                sort($files, SORT_LOCALE_STRING);
+//                sort($files, SORT_LOCALE_STRING);
 
                 foreach ($files as $entry) {
                     ?>
@@ -96,17 +132,25 @@ require_once 'Tools.php';
         <p class="redagent-date">August 2010</p>
         <h1>3DBlogosphere</h1>
         <h2>Knowledge Management Engineer @Siemens Cororate Research</h2>
-        <p class="redagent-links">
-            <a href="http://www.iaeng.org/publication/WCECS2009/WCECS2009_pp764-767.pdf" target="_blank">publication</a>
-        </p>
         <p class="redagent-content">
             Design and prototype of an application focused on the use of Virtual Worlds to enhancecollaboration in the company.
-            <br /><br />
-            Resulting paper: Aeberhard Francois-Xavier, Steve Russell, PhD, <a href=http://www.iaeng.org/publication/WCECS2009/WCECS2009_pp764-767.pdf" target="_blank">“3DBlogosphere: A Multisynchronous Approach of Virtual Worlds to Sustain Company Wide Communication”</a>,<em>International Conference on Internet and Multimedia Technologies 2009 ( ICIMT ), ACM,London UK</em>
         </p>
-        <p class="redagent-footer">J2SE (JMonkey), J2EE (Project Wonderland, Darkstar & Glassfish), XSLT,Javascript</p>
+        <table>
+            <tr>
+                <td>Publication</td>
+                <td style="font-style: normal">
+                    Aeberhard Francois-Xavier, Steve Russell, PhD,
+                    <a href=http://www.iaeng.org/publication/WCECS2009/WCECS2009_pp764-767.pdf" target="_blank">“3DBlogosphere: A Multisynchronous Approach of Virtual Worlds to Sustain Company Wide Communication”</a>,<em>International Conference on Internet and Multimedia Technologies 2009 ( ICIMT ), ACM,London UK</em>
+                </td>
+            </tr>
+            <tr>
+                <td>Technologies</td>
+                <td>J2SE <em>(JMonkey)</em>, J2EE <em>(Project Wonderland, Darkstar & Glassfish)</em>, XSLT, Javascript</td>
+            </tr>
+        </table>
     </aside>
-    <p class="redagent-cl redagent-spacer"></p>
+    <p class="redagent-cl"></p>
+    <p class="redagent-spacer"></p>
 
 
 
@@ -140,19 +184,45 @@ require_once 'Tools.php';
     <aside class="redagent-page-text">
         <p class="redagent-date">January 2003 - August 2009</p>
         <h1><a href="http://redcms.red-agent.com" target="_blank">RedCMS</a></h1>
-        <p class="redagent-links">
-            <a href="http://redcms.red-agent.com" target="_blank">website</a><br />
-            <a href="https://github.com/fxaeberhard/RedCMS" target="_blank">sources</a>
-        </p>
+
         <p class="redagent-content">
             RedCMS is a lightweight CMS designed with AJAX in mind. It is
             based on Yahoo User Interface (YUI3), PHP5, PDO and Smarty.
         </p>
-        <p class="redagent-footer">
-            Javascript (YUI 3 Framework), PHP, Smarty, HTML, CSS
-        </p>
+
+        <table>
+            <tr>
+                <td>Links</td>
+                <td style="font-style: normal">
+                    <a href="http://redcms.red-agent.com" target="_blank">site</a> |
+                    <a href="https://github.com/fxaeberhard/RedCMS" target="_blank">sources</a>
+                </td>
+            </tr>
+            <tr>
+                <td>Technologies</td>
+                <td>Javascript <em>(YUI 3 Framework)</em>, PHP, Smarty, HTML, CSS</td>
+            </tr>
+            <tr>
+                <td>Sites created</td>
+                <td>
+                    <a target="_blank" href="http://www.swissdesignnetwork.org">swissdesignnetwork.org</a>,
+                    <a target="_blank" href="http://www.hopiclowns.ch">hopiclowns.ch</a>,
+                    <a target="_blank" href="http://www.marisolimage.ch">marisolimage.ch</a>,
+                    <a target="_blank" href="http://www.smagonline.ch">smagonline.ch</a>,
+                    <a target="_blank" href="http://www.one-appointment.com">one-appointment.com</a>,
+                    <a target="_blank" href="http://www.velo-migrateur.com">velo-migrateur.com</a>,
+                    <a rel="shadowbox" href="images/projects/webdesign/wEspaceEstOuest--01.jpg">espace-est-ouest.com</a>,
+                    <a rel="shadowbox" href="images/projects/webdesign/web-fresh.jpg">freshprod.com</a>,
+                    <a rel="shadowbox" href="images/projects/webdesign/fiduswiss.png">fiduswiss.ch</a>,
+                    <a href="#">ultra-son.ch</a>,
+                    <a rel="shadowbox" href="images/projects/webdesign/micronarc.png">micronarc.ch</a>,
+                    <a href="#">fag-avenches.ch</a>,
+                    <a rel="shadowbox" href="images/projects/webdesign/Timetotime-v2-02.jpg" >timetotime.com</a>
+            </tr>
+        </table>
     </aside>
-    <p class="redagent-cl redagent-spacer"></p>
+    <p class="redagent-cl"></p>
+    <p class="redagent-spacer"></p>
 
     <!--  DTouch -->
     <p class="redagent-page-img">
@@ -163,13 +233,23 @@ require_once 'Tools.php';
         <p class="redagent-date">August 2009</p>
         <h1>Audio D-Touch</h1>
         <h2>Semester project @Design and Media Laboratory (LDM, EPFL)</h2>
-        <p class="redagent-links">
-            <a href="http://www.d-touch.org/audio/" target="_blank">project homepage</a>
-        </p>
         <p class="redagent-content">Design, prototye and user study on a tangible user interface (TUI) for audio sequencing, dtouch.</p>
-        <p class="redagent-footer">C++</p>
+
+        <table>
+            <tr>
+                <td>Links</td>
+                <td style="font-style: normal">
+                    <a href="http://www.d-touch.org/audio/" target="_blank">project homepage</a>
+                </td>
+            </tr>
+            <tr>
+                <td>Technologies</td>
+                <td>C++</td>
+            </tr>
+        </table>
     </aside>
-    <p class="redagent-cl redagent-spacer"></p>
+    <p class="redagent-cl"></p>
+    <p class="redagent-spacer"></p>
 
     <!-- Schlempf -->
     <p class="redagent-page-img">
@@ -181,14 +261,29 @@ require_once 'Tools.php';
         <p class="redagent-date">June 2004</p>
 
         <h1>Schlempf /Java Mobile</h1>
-        <p class="redagent-links">
-            <a href="http://schlempf.red-agent.com/" target="_blank">website</a>
+
+        <p class="redagent-content">
+            Participation Logiquest programming contest sponsored by Sun MicroSystem
+            and Swisscom.Creation of a mobile game, Schlempf, a mix between a tamagochi
+            and an adventure games.
         </p>
-        <p class="redagent-content">Participation Logiquest programming contest sponsored by Sun MicroSystem and Swisscom.Creation of a mobile game, Schlempf, a mix between a tamagochi and an adventure games.</p>
-        <p class="redagent-footer">Java 2 Mobile Edition (J2ME)</p>
+
+        <table>
+            <tr>
+                <td>Links</td>
+                <td style="font-style: normal">
+                    <a href="http://schlempf.red-agent.com/" target="_blank">site</a>
+                </td>
+            </tr>
+            <tr>
+                <td>Technologies</td>
+                <td>Java 2 Mobile Edition <em>(J2ME)</em></td>
+            </tr>
+        </table>
 
     </aside>
-    <p class="redagent-cl redagent-spacer"></p>
+    <p class="redagent-cl"></p>
+    <p class="redagent-spacer"></p>
 
     <!-- YUIMyAdmin -->
     <p class="redagent-page-img">
@@ -200,13 +295,27 @@ require_once 'Tools.php';
     <aside class="redagent-page-text">
         <p class="redagent-date">March 2003</p>
         <h1><a href="http://yuimyadmin.sourceforge.net/" target="_blank">YuiMyAdmin</a></h1>
-        <p class="redagent-links">
-            <a href="http://yuimyadmin.sourceforge.net/" target="_blank">website</a><br /><a href="http://yuimyadmin.sourceforge.net/yuimyadmin/" target="_blank">online demo</a><br /><a href="https://sourceforge.net/projects/yuimyadmin/files/" target="_blank">sources</a>
-        </p>
+
         <p class="redagent-content">
-            YUIMyAdmin is an web front-end to manage databases using the ajax libraries, Yahoo! User Interface (YUI). Written in php and using the ADOdb abstraction layer for the database. It is licensend under GNU Genral Public License V3.0</p>
-        <p class="redagent-footer">Javascript (YUI 2 Framework), PHP, HTML, CSS
+            YUIMyAdmin is an web front-end to manage databases using the ajax libraries,
+            Yahoo! User Interface (YUI). Written in php and using the ADOdb abstraction
+            layer for the database. It is licensend under GNU Genral Public License V3.0
         </p>
+
+        <table>
+            <tr>
+                <td>Links</td>
+                <td style="font-style: normal">
+                    <a href="http://yuimyadmin.sourceforge.net/yuimyadmin/" target="_blank">demo</a> |
+                    <a href="http://yuimyadmin.sourceforge.net/" target="_blank">site</a> |
+                    <a href="https://sourceforge.net/projects/yuimyadmin/files/" target="_blank">sources</a>
+                </td>
+            </tr>
+            <tr>
+                <td>Technologies</td>
+                <td>Javascript <em>(YUI 2 Framework)</em>, PHP, HTML, CSS</td>
+            </tr>
+        </table>
     </aside>
 
 

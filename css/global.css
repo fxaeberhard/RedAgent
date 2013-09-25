@@ -130,26 +130,26 @@ This file contains the unique styles  which do not appear in /css/global.css
 
 /* Din font */
 @font-face {
-    font-family: "Din Light";
+    font-family: "Din";
     font-style: normal;
     font-weight: normal;
     src: url("../fonts/DINL.TTF");
 }
-/*@font-face {
-        font-family: "SuperPolice";
-        font-style: normal;
-        font-weight: bold;
-        src: url("super-fonte-bold.otf") format("opentype");
-}*/
+@font-face {
+    font-family: "Din";
+    font-style: normal;
+    font-weight: bold;
+    src: url("../fonts/DIN Black.ttf");
+}
 
 html {
     -webkit-text-size-adjust: none;                                             /* disable text size adjust on the iPhone */
 
 }
 body, textarea, input {
-    font-family: Din Light, Verdana, Geneva, helvetica, sans-serif;
+    font-family: Din, Verdana, Geneva, helvetica, sans-serif;
 }
-a {
+a, a:visited {
     color: #580000;
 }
 textarea, input[type=text] {
@@ -163,11 +163,18 @@ textarea, input[type=text] {
 /* 5. GLOBAL LAYOUT & GLOBAL CUSTOM TYPOGRAPHY
 ----------------------------------------------------------------------------------------*/
 h1 {
-    /*text-align: center;*/
-    /*font-size: 2.618em;*/
-    /*line-height: 1.2em;*/
+    font-weight: bold;
+    font-size: 1.5em;
+    color: #580000;
+    line-height: 1.2em;
+    margin-bottom: 0;
 }
-
+h1 a {
+    text-decoration: none;
+}
+h2 {
+    margin-bottom: 1.68em;
+}
 h3 { text-transform:uppercase; letter-spacing:0.12em; }
 h3, h4, h5, h6 { font-weight: bold; }
 

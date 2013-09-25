@@ -1,10 +1,6 @@
 YUI.add("redagent-chat", function(Y) {
 
     var Chat = Y.Base.create("redagent-chat", Y.Widget, [], {
-        CONTENT_TEMPLATE: '<div>'
-                + '<div class="yui3-scrollview-loading"><ul></ul></div>'
-                + '<div class="form"><textarea placeholder="Type here to chat"></textarea></div>'
-                + '</div>',
         renderUI: function() {
             var cb = this.get("contentBox");
 

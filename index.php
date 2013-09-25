@@ -80,7 +80,20 @@ $convoId = get_convo_id();
 
                     <!-- Chat -->
                     <aside>
-                        <div class="scrollview-container"></div>
+                        <div class="scrollview-container">
+                            <div>
+                                <div class="yui3-scrollview-loading"><ul>
+                                        <li class="msg">
+                                            Red agent: Welcome on Francois-Xavier's profile. I'm a bot and it
+                                            appears there's only the two of us on this page at the moment.Feel
+                                            free to look around and ask me if you have any question.
+                                        </li>
+                                    </ul></div>
+                                <div class="form">
+                                    <textarea placeholder="Type here to chat"></textarea>
+                                </div>
+                            </div>
+                        </div>
                     </aside>
                     <div style="clear:both"></div>
 
@@ -143,8 +156,10 @@ $convoId = get_convo_id();
                 display = new Y.RedAgent.Display();                             // Render Crafty drawing area (canvas)
                 display.render(Y.one(".cr"));
 
-                chat = new Y.RedAgent.Chat();                                   // Render chat
-                chat.render(Y.one(".scrollview-container"));
+                chat = new Y.RedAgent.Chat({
+                    srcNode: ".scrollview-container div"
+                });                                                             // Render chat
+                chat.render();
 
                 controller.sync();                                              // Sync pages
 
@@ -162,7 +177,7 @@ $convoId = get_convo_id();
                             });                                                 // send websocket event
 
                         } else {                                                // Otherwise, player is alone
-                            Y.io("http:///www.red-agent.com/programo/chatbot/conversation_start.php", {// send io request to chatter bot
+                            Y.io("programo/chatbot/conversation_start.php", {// send io request to chatter bot
                                 method: "POST",
                                 data: "say=" + encodeURIComponent(e.msg)
                                         + "&convo_id=" + convoId
@@ -224,11 +239,6 @@ $convoId = get_convo_id();
                         "a.redagent-nav-projects", controller, "Projects");     // Nav click
                 bd.delegate("click", controller.showPage,
                         "a.redagent-nav-contact", controller, "Contact");
-
-                chat.say("Red agent", "Welcome on Francois-Xavier's profile. I'm a bot and"
-                        + "it appears there's only the two of us on this page at the moment."
-                        + "Feel free to look around and ask me if you have any question."); // Welcome message from the bot
-
             });
         </script>
 
