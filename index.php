@@ -54,7 +54,7 @@ $convoId = get_convo_id();
             <article class="redagent-page redagent-page-contact" <?php echo ($page !== "Contact") ? 'style="display:none;opacity: 0"' : '' ?> >
                 <?php
                 if ($page === "Contact") {
-                    include 'php/page-contact.php';
+                    include 'page-contact.php';
                 }
                 ?>
             </article>
@@ -64,7 +64,7 @@ $convoId = get_convo_id();
             <article class="redagent-page redagent-page-projects" <?php echo ($page !== "Projects") ? 'style="display:none;opacity: 0"' : '' ?>>
                 <?php
                 if ($page === "Projects") {
-                    include 'php/page-projects.php';
+                    include 'page-projects.php';
                 }
                 ?>
             </article>
@@ -129,7 +129,7 @@ $convoId = get_convo_id();
         <script type="text/javascript" src="js/lib/shadowbox/shadowbox.js"></script>
 
         <!-- Crafty -->
-        <script type="text/javascript" src="js/lib/crafty-mod.js"></script>
+        <script type="text/javascript" src="js/lib/crafty-min.js"></script>
 
         <!-- Site scripts -->
         <script type="text/javascript" src="./js/redagent-chat.js"></script>
@@ -141,14 +141,15 @@ $convoId = get_convo_id();
         <script type="text/javascript" >
             YUI({
                 useBrowserConsole: true
-            }).use("base", "widget", "scrollview", "button", "timers", "json", // Dependencies
-                    "transition", "io", "event-mouseenter", "history", "event-key",
+            }).use("base-build", "widget", "scrollview", "button", "timers", "json-parse", // Dependencies
+                    "transition", "io-base", "history", "event-key", "event-mouseenter",
                     "gallery-yui-slideshow",
                     "redagent-display", "redagent-chat", "redagent-pusher",
                     "redagent-controller", function(Y) {
 
                 var chat, display,
                         bd = Y.one("body"),
+                        currentPage = "<?php echo $page; ?>",
                         convoId = "<?php echo $convoId; ?>",
                         controller = new Y.RedAgent.Controller(), // Pages controller (history, loading, etc.)
                         pusher = new Y.RedAgent.Pusher();                       // Websocket facade
@@ -164,18 +165,16 @@ $convoId = get_convo_id();
                 controller.sync();                                              // Sync pages
 
                 Y.on("domready", function() {
-                    if (!pusher.channel) {                                      // If no channel is detected,
-                        return;                                                 // do not continue (for offline debug)
-                    }
-
                     chat.on("chatEnter", function(e) {                          // When chat input is entered
-                        if (pusher.channel.members.count > 1) {                 // and there are other players in the chat,
+
+                        display.say("You", e.msg);                              // Show msg in the canvas
+
+                        if (pusher.channel && pusher.channel.members.count > 1) {// and there are other players in the chat,
                             pusher.channel.trigger("client-chat", {
                                 name: "Anonymous",
                                 msg: e.msg,
                                 id: pusher.channel.members.me.id
                             });                                                 // send websocket event
-
                         } else {                                                // Otherwise, player is alone
                             Y.io("programo/chatbot/conversation_start.php", {// send io request to chatter bot
                                 method: "POST",
@@ -186,14 +185,20 @@ $convoId = get_convo_id();
                                     success: function(tId, e) {
                                         var response = Y.JSON.parse(e.responseText);
                                         chat.say("Red agent", response.botsay);
+                                        display.say("Red agent", response.botsay);
                                     }
                                 }
                             });
                         }
                     });
 
+                    if (!pusher.channel) {                                      // If no channel is detected,
+                        return;                                                 // do not continue (for offline debug)
+                    }
+
                     pusher.channel.bind("client-chat", function(e) {            // When a chat message is received through websocket
                         chat.say(e.name, e.msg);                                // display it in the chat
+                        display.say(e.id, e.msg);
                     });
 
                     pusher.channel.bind('pusher:subscription_succeeded', function(members) {// On connection to the channel,
@@ -239,12 +244,16 @@ $convoId = get_convo_id();
                         "a.redagent-nav-projects", controller, "Projects");     // Nav click
                 bd.delegate("click", controller.showPage,
                         "a.redagent-nav-contact", controller, "Contact");
+
+                if (currentPage !== "Red agent") {
+                    Crafty.pause();
+                }
+                display.say("Red agent", "Welcome on Francois-Xavier's profile. I'm a bot and it appears there's only the two of us on this page at the moment.Feel free to look around and ask me if you have any question.");
             });
         </script>
 
         <!-- Google analytics -->
         <script type="text/javascript">
-
             var _gaq = _gaq || [];
             _gaq.push(['_setAccount', 'UA-12224039-1']);
             _gaq.push(['_trackPageview']);
@@ -257,7 +266,6 @@ $convoId = get_convo_id();
                 var s = document.getElementsByTagName('script')[0];
                 s.parentNode.insertBefore(ga, s);
             })();
-
         </script>
 
     </body>

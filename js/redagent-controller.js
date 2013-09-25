@@ -42,7 +42,8 @@ YUI.add("redagent-controller", function(Y) {
             if (e.newVal === "Red agent") {
                 Y.all(".redagent-page").hide(true);                             // hide any displayed page button
                 Y.one(".redagent-menu").hide(true);                             // and hide button
-
+                if (Crafty.isPaused())
+                    Crafty.pause();
             } else {
                 var title = e.newVal,
                         targetNode = Y.one(".redagent-page-" + title.toLowerCase());
@@ -50,7 +51,10 @@ YUI.add("redagent-controller", function(Y) {
                 targetNode.show(true).addClass("redagent-page-loading");        // Show page
                 this.currentPage = title;                                       // Save current page
 
-                Y.io("php/page-" + title.toLowerCase() + ".php", {
+                if (!Crafty.isPaused())
+                    Crafty.pause();
+
+                Y.io("page-" + title.toLowerCase() + ".php", {
                     context: this,
                     on: {
                         success: function(tId, e) {
@@ -67,18 +71,20 @@ YUI.add("redagent-controller", function(Y) {
             Shadowbox.clearCache();                                             // Update shadowbox links
             Shadowbox.setup();
 
-            Y.all(".slideshow").each(function(node) {                           // Init slideshows in project page
-                if (!node.slinit) {
-                    new Y.Slideshow({
-                        srcNode: node,
-                        transition: Y.Slideshow.PRESETS.slideRight,
-                        duration: 1,
-                        interval: 3
-                                //nextButton: '#someID'
-                    }).render();
-                    node.slinit = true;
-                }
-            });
+            if (Y.Slideshow) {
+                Y.all(".slideshow").each(function(node) {                           // Init slideshows in project page
+                    if (!node.slinit) {
+                        new Y.Slideshow({
+                            srcNode: node,
+                            transition: Y.Slideshow.PRESETS.slideRight,
+                            duration: 1,
+                            interval: 3
+                                    //nextButton: '#someID'
+                        }).render();
+                        node.slinit = true;
+                    }
+                });
+            }
 
             var sendMailNode = Y.one(".redagent-sendmail-button");
             if (sendMailNode) {

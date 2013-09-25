@@ -1,5 +1,5 @@
 <?php
-require_once 'Tools.php';
+require_once 'php/Tools.php';
 ?><div role="main" class="cf">
 
     <!-- MJ -->
@@ -113,7 +113,7 @@ require_once 'Tools.php';
                 <?php
                 $dir = "images/projects/3DBlogosphere";
                 $files = listdir($dir);
-//                sort($files, SORT_LOCALE_STRING);
+                sort($files, SORT_LOCALE_STRING);
 
                 foreach ($files as $entry) {
                     ?>
@@ -166,7 +166,7 @@ require_once 'Tools.php';
                 <?php
                 $dir = "images/projects/webdesign";
                 $files = listdir($dir);
-//                sort($files, SORT_LOCALE_STRING);
+                sort($files, SORT_LOCALE_STRING);
 
                 foreach ($files as $entry) {
                     ?>

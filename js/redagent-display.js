@@ -3,7 +3,7 @@ YUI.add("redagent-display", function(Y) {
     var Display, GRIDWIDTH = 10,
             TILEWIDTH = 64,
             ANIMATIONSPEED = 8,
-            SPEED = 3,
+            SPEED = 4,
             ISOCOS = Math.cos(0.46365),
             ISOSIN = Math.sin(0.46365);
 
@@ -35,6 +35,7 @@ YUI.add("redagent-display", function(Y) {
             }
             this.player = Crafty.e('PlayablePC')
                     .attr({x: 390, y: 250, z: 200});                            // Init player
+            this.addLabel(this.player, "You");
 
             Crafty.e("House")                                                   // Init houses
                     .animate("Projects", ANIMATIONSPEED, 0)                     // Start animation
@@ -43,14 +44,12 @@ YUI.add("redagent-display", function(Y) {
                 targetPage: "Projects"
             });
             Crafty.e("House")                                                   // Init houses
-                    .animate("Contact", ANIMATIONSPEED, 0)                     // Start animation
-                    .attr({
-                x: 110, y: 350, z: 200,
-                targetPage: "Contact"
-            })
+                    .animate("Contact", ANIMATIONSPEED, 0)                      // Start animation
+                    .attr({x: 100, y: 350, z: 200, targetPage: "Contact"});
 
-            Crafty.e("Actor, BotSprite")                              // Init bot
+            this.bot = Crafty.e("Actor, BotSprite")                              // Init bot
                     .attr({x: 650, y: 400, z: 200});
+            this.addLabel(this.bot, "Red agent").css({"width": "5.1em"});
         },
         bindUI: function() {
             // Move map on click
@@ -81,8 +80,49 @@ YUI.add("redagent-display", function(Y) {
             Y.log("addPlayer()", "info", "RedAgent.Display");
             var entity = Crafty.e('NotPlayablePC')
                     .attr({x: 400, y: 200, z: 200});                           // Init player
+            this.addLabel(entity, "Anonymous");
+
             this.players[cfg.id] = entity;
             return entity;
+        },
+        addLabel: function(entity, label) {
+            var text = Crafty.e("2D, DOM, Text");
+            text.text(label)
+                    .attr({x: entity.x + 24, y: entity.y + 60, z: 400})
+                    .css({"text-align": "center", "background-color": "rgba(128, 128, 128, 0.7)",
+                "color": "white", "border-radius": "2px", "line-height": "1.3em",
+                "padding": "0.2em 0.5em",
+//                "font-family": "Verdana, Helvetica",
+//                "font-size": "0.9em"
+//                "font-weight": "bold"
+            });
+            entity.attach(text);
+            return text;
+        },
+        say: function(entity, text) {
+            if (entity === "You") {
+                entity = this.player;
+            } else if (entity === "Red agent") {
+                entity = this.bot;
+            } else {
+                entity = this.getPlayer(entity);
+            }
+
+            var textE = Crafty.e("2D, DOM, Text");
+            textE.text(text)
+                    .attr({x: entity.x - 125, y: entity.y - 20, z: 401})
+                    .css({ "background-color": "white",
+                "color": "#580000", "border": "1px solid #580000", "line-height": "1.1em",
+                "font-size": "0.9em",
+                "padding": "0.4em",
+                "width": "9em", "max-width": "10em"
+            });
+            entity.attach(textE);
+
+            Y.later(3500, textE, function () {
+                this.destroy();
+            });
+            return textE;
         },
         initCrafty: function() {
 
@@ -126,7 +166,7 @@ YUI.add("redagent-display", function(Y) {
                         this.color = "red";
                     }
                     this.requires('Actor, TileSprite, Mouse')
-                            .areaMap([32, 0], [64, 16], [64, 48], [32, 64], [0, 48], [0, 16])
+                            .areaMap([32, 0], [64, 16], [32, 32], [0, 16])
                             .bind("MouseOver", this.hover)
                             .bind("MouseOut", this.normal);
 
@@ -151,8 +191,7 @@ YUI.add("redagent-display", function(Y) {
             Crafty.c('PlayerCharacter', {// Main characters (self and others)
                 init: function() {
                     this.requires('Actor, Collision, PlayerSprite, SpriteAnimation, Tween')
-                            //.fourway(4)
-                            //.stopOnSolids()
+                            .collision([32, 0], [64, 16], [32, 32], [0, 16])    // Set up hit box
                             .animate('PlayerMovingDown', 0, 2, 16)              // Set up animations
                             .animate('PlayerMovingUp', 0, 3, 16)
                             .animate('PlayerMovingRight', 0, 0, 16)
@@ -232,13 +271,18 @@ YUI.add("redagent-display", function(Y) {
             Crafty.c('PlayablePC', {// This is the player-controlled character
                 init: function() {
                     this.requires('PlayerCharacter')
-                            .onHit('House', this.visitHouse);                   // Collisions
+                            .onHit('House', this.visitHouse, function() {
+                        Y.log("onHit over");
+                        this.windowOpened = false;
+                    });                                                         // Collisions
                 },
                 visitHouse: function(data) {                                    // Respond to this player visiting a village
+
                     var pageSelector = data[0].obj.attr("targetPage");
                     if (!this.windowOpened) {
-                        Y.RedAgent.controller.showPage(null, pageSelector);
+                        Y.log("onHit");
                         this.windowOpened = true;
+                        Y.RedAgent.controller.showPage(null, pageSelector);
                     }
                 }
             });
@@ -249,7 +293,8 @@ YUI.add("redagent-display", function(Y) {
             });
             Crafty.c('House', {
                 init: function() {
-                    this.requires('Actor, SpriteAnimation, BuildingSprite')
+                    this.requires('Actor, Collision, SpriteAnimation, BuildingSprite')
+                            .collision([32, 64], [64, 80], [32, 96], [0, 80])
                             .animate('Contact', 0, 0, 22)
                             .animate('Projects', 0, 1, 22);
                 }
