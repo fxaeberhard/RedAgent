@@ -42,7 +42,7 @@ YUI.add("redagent-chat", function(Y) {
             content.delegate("click", function(e) {                             // Prevent links from navigating as part of a scroll gesture
                 if (Math.abs(this.scrollView.lastScrolledAmt) > 2) {
                     e.preventDefault();
-                    Y.log("Link behavior suppressed.")
+                    Y.log("Link behavior suppressed.");
                 }
             }, "a");
 

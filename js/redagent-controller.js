@@ -9,6 +9,8 @@ YUI.add("redagent-controller", function(Y) {
             });                                                                 // Init history manager
             this.history.on('pageChange', this.onPageChange, this);             // Watch page changes
 
+            Shadowbox.init();                                                   // Init Shadow box
+
             //this.foldGroup = new Y.ImgLoadGroup({
             //    name: 'projects group',
             //    className: "redagent-image",
@@ -24,7 +26,7 @@ YUI.add("redagent-controller", function(Y) {
 
             this.history.addValue('page', title, {
                 title: title + ' - Francois-Xavier Aeberhard',
-                url: title.toLowerCase() + '.php'
+                url: title.toLowerCase() + '.html'
             });                                                                 // Update browser history
         },
         closePage: function() {
@@ -35,10 +37,9 @@ YUI.add("redagent-controller", function(Y) {
             //display.windowOpened = false;
         },
         onPageChange: function(e) {                                             // When history changes,
-            Y.log("Page history changed:" + e.newVal, "info", "RedAgent.Controller")
-            // The "kittens" key was added or changed.
-            if (e.newVal === "Red agent") {
+            Y.log("Page history changed:" + e.newVal, "info", "RedAgent.Controller");
 
+            if (e.newVal === "Red agent") {
                 Y.all(".redagent-page").hide(true);                             // hide any displayed page button
                 Y.one(".redagent-menu").hide(true);                             // and hide button
 
@@ -48,7 +49,7 @@ YUI.add("redagent-controller", function(Y) {
                 Y.one(".redagent-menu").show(true);                             // Show menu
                 targetNode.show(true).addClass("redagent-page-loading");        // Show page
                 this.currentPage = title;                                       // Save current page
-                Y.io(title.toLowerCase() + "-content.php", {
+                Y.io("php/page-" + title.toLowerCase() + ".php", {
                     context: this,
                     on: {
                         success: function(tId, e) {
@@ -78,14 +79,13 @@ YUI.add("redagent-controller", function(Y) {
                 }
             });
 
-
             var sendMailNode = Y.one(".redagent-sendmail-button");
             if (sendMailNode) {
                 new Y.Button({
                     label: "Send mail",
                     on: {
                         click: function() {                                     // On click,
-                            Y.io("sendMail.php", {
+                            Y.io("php/sendMail.php", {
                                 method: 'POST', // call send mail method
                                 data: "from=" + encodeURIComponent(Y.one(".redagent-page-contact input").get("value"))
                                         + "&msg=" + encodeURIComponent(Y.one(".redagent-page-contact textarea").get("value"))

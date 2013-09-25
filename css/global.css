@@ -122,3 +122,91 @@ a:active, a:focus { outline: none; }
 .cf:before, .cf:after { content: ""; display: block; }
 .cf:after { clear: both; }
 .ie6 .cf { zoom: 1 }
+
+/*
+This file contains the unique styles  which do not appear in /css/global.css
+----------------------------------------------------------------------------------------
+*/
+
+/* Din font */
+@font-face {
+    font-family: "Din Light";
+    font-style: normal;
+    font-weight: normal;
+    src: url("../fonts/DINL.TTF");
+}
+/*@font-face {
+        font-family: "SuperPolice";
+        font-style: normal;
+        font-weight: bold;
+        src: url("super-fonte-bold.otf") format("opentype");
+}*/
+
+html {
+    -webkit-text-size-adjust: none;                                             /* disable text size adjust on the iPhone */
+
+}
+body, textarea, input {
+    font-family: Din Light, Verdana, Geneva, helvetica, sans-serif;
+}
+a {
+    color: #580000;
+}
+textarea, input[type=text] {
+    width: 96%;
+    border: 1px solid #580000;
+    padding: 5px;
+    margin-top: 5px;
+    font-size: 0.9em;
+}
+
+/* 5. GLOBAL LAYOUT & GLOBAL CUSTOM TYPOGRAPHY
+----------------------------------------------------------------------------------------*/
+h1 {
+    /*text-align: center;*/
+    /*font-size: 2.618em;*/
+    /*line-height: 1.2em;*/
+}
+
+h3 { text-transform:uppercase; letter-spacing:0.12em; }
+h3, h4, h5, h6 { font-weight: bold; }
+
+p.intro { margin-bottom: 0; }
+
+.redagent-page {
+    /*min-width: 39em;*/
+}
+
+footer {
+    font-family: Verdana, Geneva, helvetica, sans-serif;
+    font-size: 0.7em;
+    font-style: italic;
+    color: #580000;
+    text-align: right;
+    border-top: 1px solid #580000;
+    max-width: 71.4em;
+    line-height: 1.1em;
+}
+
+footer p { float: left; margin-right:1em; }
+
+
+/* 6. CUSTOM LAYOUT & TYPOGRAPHY (Baby bear)
+----------------------------------------------------------------------------------------*/
+header h2:before {
+    content:"";
+    border-bottom:1px solid #333;
+    height: 1.618em;
+    width: 35%;
+    display: block;
+    float: left;
+}
+
+header h2:after {
+    content:"";
+    border-bottom:1px solid #333;
+    height: 1.618em;
+    width: 35%;
+    display: block;
+    float: right;
+}

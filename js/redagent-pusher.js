@@ -8,7 +8,7 @@ YUI.add("redagent-pusher", function(Y) {
             if (window.Pusher) {
                 window.Pusher.log = Y.log;
                 //var pusher = new Pusher(APPKEY);
-                var pusher = new window.Pusher(APPKEY, {authEndpoint: 'endpoint.php'});
+                var pusher = new window.Pusher(APPKEY, {authEndpoint: 'php/endpoint.php'});
 
                 this.channel = pusher.subscribe(PRESENCECHANNEL);
             }

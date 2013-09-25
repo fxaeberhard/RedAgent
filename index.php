@@ -23,8 +23,8 @@ $convoId = get_convo_id();
         <link rel="shortcut icon" href="favicon.ico">
         <!--<link rel="apple-touch-icon" href="/link/to/apple-touch-icon.png">-->
 
-        <link rel="stylesheet" href="css/example/global.css" media="all">
-        <link rel="stylesheet" href="css/example/layout.css" media="all and (min-width: 53.236em)">
+        <link rel="stylesheet" href="css/global.css" media="all">
+        <link rel="stylesheet" href="css/layout.css" media="all and (min-width: 53.236em)">
 
         <!--[if (lt IE 9) & (!IEMobile)]>
         <link rel="stylesheet" href="css/example/layout.css" media="all">
@@ -54,7 +54,7 @@ $convoId = get_convo_id();
             <article class="redagent-page redagent-page-contact" <?php echo ($page !== "Contact") ? 'style="display:none;opacity: 0"' : '' ?> >
                 <?php
                 if ($page === "Contact") {
-                    include 'contact-content.php';
+                    include 'php/page-contact.php';
                 }
                 ?>
             </article>
@@ -64,7 +64,7 @@ $convoId = get_convo_id();
             <article class="redagent-page redagent-page-projects" <?php echo ($page !== "Projects") ? 'style="display:none;opacity: 0"' : '' ?>>
                 <?php
                 if ($page === "Projects") {
-                    include 'projects-content.php';
+                    include 'php/page-projects.php';
                 }
                 ?>
             </article>
@@ -106,8 +106,8 @@ $convoId = get_convo_id();
         <script type="text/javascript" src="js/lib/modernizr-1.7.min.js"></script>
 
         <!-- YUI3 -->
-        <!--<script type="text/javascript" src="http://yui.yahooapis.com/3.12.0/build/yui/yui-min.js"></script>-->
-        <script type="text/javascript" src="js/lib/yui3/build/yui/yui-min.js"></script>
+        <script type="text/javascript" src="http://yui.yahooapis.com/3.12.0/build/yui/yui-min.js"></script>
+        <!--<script type="text/javascript" src="js/lib/yui3/build/yui/yui-min.js"></script>-->
 
         <!-- Pusher -->
         <script type="text/javascript" src="http://js.pusher.com/2.1/pusher.min.js"></script>
@@ -146,7 +146,7 @@ $convoId = get_convo_id();
                 chat = new Y.RedAgent.Chat();                                   // Render chat
                 chat.render(Y.one(".scrollview-container"));
 
-                controller.sync();
+                controller.sync();                                              // Sync pages
 
                 Y.on("domready", function() {
                     if (!pusher.channel) {                                      // If no channel is detected,
@@ -204,7 +204,8 @@ $convoId = get_convo_id();
 
                     pusher.channel.bind('client-move', function(e) {            // When somebody else moves,
                         Y.log("Client-move", e);
-                        display.getPlayer(e.id).moveTo(e.x, e.y).initialized = true; // update it's sprite
+                        display.getPlayer(e.id).moveTo(e.x, e.y)
+                                .initialized = true;                            // update it's sprite
                     });
 
                     pusher.channel.bind('client-jump', function(e) {            // Postion update event, so players are at the right position at the beginning
@@ -216,11 +217,12 @@ $convoId = get_convo_id();
                     });
                 });
 
-                Shadowbox.init();                                               // Init Shadow box
-
-                bd.delegate("click", controller.closePage, ".redagent-closebutton", controller);// Close button click
-                bd.delegate("click", controller.showPage, "a.redagent-nav-projects", controller, "Projects"); // Nav click
-                bd.delegate("click", controller.showPage, "a.redagent-nav-contact", controller, "Contact");
+                bd.delegate("click", controller.closePage,
+                        ".redagent-closebutton", controller);                   // Close button click
+                bd.delegate("click", controller.showPage,
+                        "a.redagent-nav-projects", controller, "Projects");     // Nav click
+                bd.delegate("click", controller.showPage,
+                        "a.redagent-nav-contact", controller, "Contact");
                 bd.removeClass("redagent-loading");
 
                 chat.say("Red agent", "Welcome on Francois-Xavier's profile. I'm a bot and"

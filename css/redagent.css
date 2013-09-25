@@ -6,8 +6,9 @@ html {
     background: url(../images/loading.gif) no-repeat center;
     height: 100%;
 }
-.redagent-loading #container * {
-    display:none;
+.redagent-loading #container > * {
+    /*display:none;*/
+    opacity: 0;
 }
 
 @media all and (max-width: 53.236em) {
