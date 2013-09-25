@@ -34,20 +34,23 @@ YUI.add("redagent-display", function(Y) {
                 }
             }
             this.player = Crafty.e('PlayablePC')
-                    .attr({x: 400, y: 200, z: 200});                            // Init player
+                    .attr({x: 390, y: 250, z: 200});                            // Init player
 
             Crafty.e("House")                                                   // Init houses
+                    .animate("Projects", ANIMATIONSPEED, 0)                     // Start animation
                     .attr({
-                x: 200, y: 100, z: 200,
+                x: 390, y: 50, z: 200,
                 targetPage: "Projects"
             });
             Crafty.e("House")                                                   // Init houses
+                    .animate("Contact", ANIMATIONSPEED, 0)                     // Start animation
                     .attr({
-                x: 100, y: 400, z: 200,
+                x: 110, y: 350, z: 200,
                 targetPage: "Contact"
-            });
+            })
+
             Crafty.e("Actor, BotSprite")                              // Init bot
-                    .attr({x: 500, y: 400, z: 200});
+                    .attr({x: 650, y: 400, z: 200});
         },
         bindUI: function() {
             // Move map on click
@@ -103,10 +106,8 @@ YUI.add("redagent-display", function(Y) {
             Crafty.sprite(64, "images/sprite-bot.png", {
                 BotSprite: [0, 0]
             });
-            Crafty.sprite(16, 'images/16x16_forest_1.gif', {
-                spr_tree: [0, 0],
-                spr_bush: [1, 0],
-                spr_village: [0, 1]
+            Crafty.sprite(64, 128, 'images/sprite-building.png', {
+                BuildingSprite: [0, 0]
             });
 
             Crafty.c('Actor', {// Components
@@ -248,7 +249,9 @@ YUI.add("redagent-display", function(Y) {
             });
             Crafty.c('House', {
                 init: function() {
-                    this.requires('Actor, spr_village');
+                    this.requires('Actor, SpriteAnimation, BuildingSprite')
+                            .animate('Contact', 0, 0, 22)
+                            .animate('Projects', 0, 1, 22);
                 }
             });
         }
