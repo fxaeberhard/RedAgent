@@ -101,6 +101,7 @@ html {
 /** Display style */
 .yui3-redagent-display #cr-stage {
     line-height: 0em;
+    cursor: pointer;
 }
 
 /** Chat styles */

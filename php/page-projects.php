@@ -166,7 +166,7 @@ require_once 'Tools.php';
                 <?php
                 $dir = "images/projects/webdesign";
                 $files = listdir($dir);
-                sort($files, SORT_LOCALE_STRING);
+//                sort($files, SORT_LOCALE_STRING);
 
                 foreach ($files as $entry) {
                     ?>

@@ -2,5 +2,4 @@
 
 $page = "Contact";
 include "index.php"
-
 ?>

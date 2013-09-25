@@ -2,5 +2,4 @@
 
 $page = "Projects";
 include "index.php"
-
 ?>

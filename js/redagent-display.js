@@ -16,7 +16,7 @@ YUI.add("redagent-display", function(Y) {
             this.initCrafty();                                                  // Init crafty, sprites & components
             var x, y, tile;
             for (x = 12; x >= 0; x--) {                                         // Init grid
-                for (y = 0; y < 35; y++) {
+                for (y = 0; y < 37; y++) {
                     tile = Crafty.e("Tile")
                             .attr('z', x + 1 * y + 1)
                             .bind("Click", Y.bind(function(x, y) {              // Whenever tile is clicked
@@ -85,7 +85,7 @@ YUI.add("redagent-display", function(Y) {
 
             Crafty.init(800, 595);                                              // Init crafty
             //Crafty.init(GRIDSIZE * this.gridW, GRIDSIZE * this.gridH);
-            
+
             this.iso = Crafty.isometric.size(TILEWIDTH);                        // Init isometric layout
 
             var renderMethod = 'DOM';                                           // Select rendering method
@@ -94,9 +94,8 @@ YUI.add("redagent-display", function(Y) {
                 renderMethod = 'Canvas';
             }
 
-            Crafty.sprite(64, "images/sprite-64.png", {// Sprites
-                GrassSprie: [0, 0, 1, 1],
-                StoneSprite: [1, 0, 1, 1]
+            Crafty.sprite(64, 32, "images/sprite-tiles.png", {// Sprites
+                TileSprite: [0, 0, 1, 1]
             });
             Crafty.sprite(64, "images/sprite-player.png", {
                 PlayerSprite: [0, 0]
@@ -117,28 +116,36 @@ YUI.add("redagent-display", function(Y) {
             });
             Crafty.c("Tile", {
                 init: function() {
-                    this.requires('Actor, GrassSprie, Mouse')
-                            //this.requires('Actor, grass, Mouse');
+                    var r = Math.random();
+                    if (r > 0.15) {
+                        this.color = "white";
+                    } else if (r > 0.04) {
+                        this.color = "gray";
+                    } else {
+                        this.color = "red";
+                    }
+                    this.requires('Actor, TileSprite, Mouse')
                             .areaMap([32, 0], [64, 16], [64, 48], [32, 64], [0, 48], [0, 16])
-//                            .bind("Click", function(e) {
-//                        //destroy on right click
-////                        if (e.button === 2)
-//                            this.destroy();
-//                    })
-                            .bind("MouseOver", function() {
-//                        if (this.has("grass")) {
-                        this.sprite(0, 1, 1, 1);
-//                        } else {
-//                            this.sprite(1, 1, 1, 1);
-//                        }
-                    }).bind("MouseOut", function() {
-//                        if (this.has("grass")) {
+                            .bind("MouseOver", this.hover)
+                            .bind("MouseOut", this.normal);
+
+                    this.normal();
+                },
+                hover: function() {
+                    if (this.color === "red")
+                        this.sprite(1, 0, 1, 1);
+                    else
                         this.sprite(0, 0, 1, 1);
-//                        } else {
-//                            this.sprite(1, 0, 1, 1);
-//                        }
-                    });
+                },
+                normal: function() {
+                    if (this.color === "white")
+                        this.sprite(1, 0, 1, 1);
+                    else if (this.color === "red")
+                        this.sprite(0, 0, 1, 1);
+                    else
+                        this.sprite(0, 2, 1, 1);
                 }
+
             });
             Crafty.c('PlayerCharacter', {// Main characters (self and others)
                 init: function() {
@@ -218,20 +225,6 @@ YUI.add("redagent-display", function(Y) {
                         y: Math.round((-((v.x) / ISOCOS + (v.y) / ISOSIN)) / 2),
                         z: 0
                     };
-                },
-                // Registers a stop-movement function to be called when
-                //  this entity hits an entity with the "Solid" component
-                stopOnSolids: function() {
-                    this.onHit('Solid', this.stopMovement);
-                    return this;
-                },
-                // Stops the movement
-                stopMovement: function() {
-                    this._speed = 0;
-                    if (this._movement) {
-                        this.x -= this._movement.x;
-                        this.y -= this._movement.y;
-                    }
                 }
             });
 
