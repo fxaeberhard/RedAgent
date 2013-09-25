@@ -405,3 +405,9 @@ require_once 'php/Tools.php';
     -->
 
 </div>
+<footer class="cf" style="max-width:100%; margin: 4em 0">
+    <a class="redagent-nav-projects" href="projects.php">Projects</a>
+    | <a class="redagent-nav-contact" href="contact.php">Contact</a>
+    | Powered by <a target="_blank" href="http://redcms.red-agent.com">RedCMS</a>
+    | ©2013 Francois-Xavier Aeberhard
+</footer>

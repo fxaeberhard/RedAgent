@@ -47,6 +47,7 @@ YUI.add("redagent-controller", function(Y) {
             } else {
                 var title = e.newVal,
                         targetNode = Y.one(".redagent-page-" + title.toLowerCase());
+                Y.all(".redagent-page").hide(true);                             // hide any displayed page button
                 Y.one(".redagent-menu").show(true);                             // Show menu
                 targetNode.show(true).addClass("redagent-page-loading");        // Show page
                 this.currentPage = title;                                       // Save current page
