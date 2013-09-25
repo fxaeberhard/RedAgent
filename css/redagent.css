@@ -43,6 +43,10 @@ html {
     /*border: 1px solid #580000;*/
     border-bottom: none;
 }
+.redagent-page-loading {
+    min-height:95%;
+    background: white url(../images/loading.gif) center no-repeat;
+}
 .redagent-page .redagent-cl {
     clear: both;
 }
@@ -71,7 +75,7 @@ html {
 /* Contact page */
 /** Display style */
 .redagent-page-contact {
-    min-height: 631px;
+    min-height: 596px;
 }
 /** Display style */
 .yui3-redagent-display #cr-stage {

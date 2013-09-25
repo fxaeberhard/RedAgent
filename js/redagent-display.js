@@ -41,12 +41,12 @@ YUI.add("redagent-display", function(Y) {
             Crafty.e("House")                                                   // Init houses
                     .attr({
                 x: 200, y: 100, z: 200,
-                targetPage: ".redagent-page-projects"
+                targetPage: "Projects"
             });
             Crafty.e("House")                                                   // Init houses
                     .attr({
                 x: 100, y: 400, z: 200,
-                targetPage: ".redagent-page-contact"
+                targetPage: "Contact"
             });
             Crafty.e("Actor, BotSprite")                              // Init bot
                     .attr({x: 500, y: 400, z: 200});
@@ -245,7 +245,7 @@ YUI.add("redagent-display", function(Y) {
                 visitHouse: function(data) {                                    // Respond to this player visiting a village
                     var pageSelector = data[0].obj.attr("targetPage");
                     if (!this.windowOpened) {
-                        Y.RedAgent.showPage(null, pageSelector);
+                        Y.RedAgent.controller.showPage(null, pageSelector);
                         this.windowOpened = true;
                     }
                 }
