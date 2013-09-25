@@ -129,7 +129,7 @@ $convoId = get_convo_id();
         <script type="text/javascript" src="js/lib/shadowbox/shadowbox.js"></script>
 
         <!-- Crafty -->
-        <script type="text/javascript" src="js/lib/crafty-min.js"></script>
+        <script type="text/javascript" src="js/lib/crafty-mod.js"></script>
 
         <!-- Site scripts -->
         <script type="text/javascript" src="./js/redagent-chat.js"></script>
