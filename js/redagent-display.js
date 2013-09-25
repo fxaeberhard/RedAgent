@@ -13,9 +13,7 @@ YUI.add("redagent-display", function(Y) {
             this.players = {};
         },
         renderUI: function() {
-
             this.initCrafty();                                                  // Init crafty, sprites & components
-
             var x, y, tile;
             for (x = 12; x >= 0; x--) {                                         // Init grid
                 for (y = 0; y < 35; y++) {
@@ -87,7 +85,7 @@ YUI.add("redagent-display", function(Y) {
 
             Crafty.init(800, 595);                                              // Init crafty
             //Crafty.init(GRIDSIZE * this.gridW, GRIDSIZE * this.gridH);
-
+            
             this.iso = Crafty.isometric.size(TILEWIDTH);                        // Init isometric layout
 
             var renderMethod = 'DOM';                                           // Select rendering method

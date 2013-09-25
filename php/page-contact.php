@@ -29,10 +29,10 @@
     <div class="redagent-cl" ></div>
     <p>
         <strong>Send me a mail</strong><br/>
-        <span class="redagent-sendmail">
-            <input type="text" placeholder="Your mail"></input><br />
-            <textarea placeholder="Your message" ></textarea>
+        <fieldset class="redagent-sendmail">
+            <input name="fdf" type="text" placeholder="Your mail" style="float:left"></input><br />
+            <textarea name="fdfd" placeholder="Your message" style="float:left"></textarea>
             <span class="redagent-sendmail-button"></span>
-        </span>
+        </fieldset>
     </p>
 </div>

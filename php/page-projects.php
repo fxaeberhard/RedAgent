@@ -1,34 +1,13 @@
 <?php
-require_once 'php/Tools.php';
+require_once 'Tools.php';
 ?><div role="main" class="cf">
-    <!--
-        SDN
-       <p class="redagent-page-img">
-           <a href="http://www.swissdesignnetwork.org/" target="_blank">
-               <img src="images/projects/sdn_420.jpg" />
-           </a>
-       </p>
-       <aside class="redagent-page-text">
-           <h1>
-               <a href="http://www.swissdesignnetwork.org/" target="_blank">swissdesignnetwork.org</a>
-           </h1>
-           <span class="redagent-links">
-               <a href="http://www.swissdesignnetwork.org/" target="_blank">website</a>
-           </span>
-           <span class="redagent-content">
-               Website of the association of the swiss art schools.
-           </span>
-           <span class="redagent-footer">
-               RedCMS, Javascript (YUI3 Framework), PHP, HTML, CSS
-           </span>
-       </aside>
-       <p class="redagent-cl redagent-spacer"></p>-->
 
     <!-- MJ -->
     <p class="redagent-page-img">
         <iframe title="YouTube video player" width="420" height="266" src="http://www.youtube.com/embed/EKI3U_uFv7Y?rel=0&controls=0&autohide=1&color2=580000" frameborder="0" allowfullscreen="1"></iframe>
     </p>
     <aside class="redagent-page-text">
+        <p class="redagent-date">August 2011</p>
         <h1>Michael Jackson: The Exerience /Wii</h1>
         <h2>User Interface Programmer @Ubisoft</h2>
         <p class="redagent-links">
@@ -61,6 +40,7 @@ require_once 'php/Tools.php';
         </a>
     </p>
     <aside class="redagent-page-text">
+        <p class="redagent-date">August 2011</p>
         <h1>
             <a href="http://apps.facebook.com/mjte_minigame/" target="_blank">Michael Jackson: The Exerience /WebGame</a>
         </h1>
@@ -79,6 +59,7 @@ require_once 'php/Tools.php';
         <iframe title="YouTube video player" width="420" height="266" src="http://www.youtube.com/embed/hMxwwAxicck?rel=0&controls=0&autohide=1&color2=580000" frameborder="0" allowfullscreen></iframe>
     </p>
     <aside class="redagent-page-text">
+        <p class="redagent-date">February 2011</p>
         <h1>Just Dance 2 /Wii</h1>
         <h2>Gameplay Programmer @Ubisoft</h2>
         <p class="redagent-links">
@@ -86,22 +67,6 @@ require_once 'php/Tools.php';
         </p>
         <p class="redagent-content">Design and prototype the connection between the game consoles (PS3 and Wii)and Social Networks (Facebook & iPhone applications).</p>
         <p class="redagent-footer">C++ (Nintendo SDK & PS3 SDK), Actionscript 2.0 (in-game interfaces), Python, PHP (web-server for Facebook Application), Objective C (iPhone application)</p>
-    </aside>
-    <p class="redagent-cl redagent-spacer"></p>
-
-    <!--  DTouch -->
-    <p class="redagent-page-img">
-        <!--<img class="redagent-image" data-src="images/projects/dtouch_420.jpg" />-->
-        <img src="images/projects/dtouch_420.jpg" />
-    </p>
-    <aside class="redagent-page-text">
-        <h1>Audio D-Touch</h1>
-        <h2>Semester project @Design and Media Laboratory (LDM, EPFL)</h2>
-        <p class="redagent-links">
-            <a href="http://www.d-touch.org/audio/" target="_blank">project homepage</a>
-        </p>
-        <p class="redagent-content">Design, prototye and user study on a tangible user interface (TUI) for audio sequencing, dtouch.</p>
-        <p class="redagent-footer">C++</p>
     </aside>
     <p class="redagent-cl redagent-spacer"></p>
 
@@ -128,6 +93,7 @@ require_once 'php/Tools.php';
         </span>
     </p>
     <aside class="redagent-page-text">
+        <p class="redagent-date">August 2010</p>
         <h1>3DBlogosphere</h1>
         <h2>Knowledge Management Engineer @Siemens Cororate Research</h2>
         <p class="redagent-links">
@@ -141,6 +107,8 @@ require_once 'php/Tools.php';
         <p class="redagent-footer">J2SE (JMonkey), J2EE (Project Wonderland, Darkstar & Glassfish), XSLT,Javascript</p>
     </aside>
     <p class="redagent-cl redagent-spacer"></p>
+
+
 
     <!-- Redcms -->
     <p class="redagent-page-img">
@@ -170,6 +138,7 @@ require_once 'php/Tools.php';
         </span>
     </p>
     <aside class="redagent-page-text">
+        <p class="redagent-date">January 2003 - August 2009</p>
         <h1><a href="http://redcms.red-agent.com" target="_blank">RedCMS</a></h1>
         <p class="redagent-links">
             <a href="http://redcms.red-agent.com" target="_blank">website</a><br />
@@ -185,6 +154,22 @@ require_once 'php/Tools.php';
     </aside>
     <p class="redagent-cl redagent-spacer"></p>
 
+    <!--  DTouch -->
+    <p class="redagent-page-img">
+        <!--<img class="redagent-image" data-src="images/projects/dtouch_420.jpg" />-->
+        <img src="images/projects/dtouch_420.jpg" />
+    </p>
+    <aside class="redagent-page-text">
+        <p class="redagent-date">August 2009</p>
+        <h1>Audio D-Touch</h1>
+        <h2>Semester project @Design and Media Laboratory (LDM, EPFL)</h2>
+        <p class="redagent-links">
+            <a href="http://www.d-touch.org/audio/" target="_blank">project homepage</a>
+        </p>
+        <p class="redagent-content">Design, prototye and user study on a tangible user interface (TUI) for audio sequencing, dtouch.</p>
+        <p class="redagent-footer">C++</p>
+    </aside>
+    <p class="redagent-cl redagent-spacer"></p>
 
     <!-- Schlempf -->
     <p class="redagent-page-img">
@@ -193,6 +178,7 @@ require_once 'php/Tools.php';
         </span>
     </p>
     <aside class="redagent-page-text">
+        <p class="redagent-date">June 2004</p>
 
         <h1>Schlempf /Java Mobile</h1>
         <p class="redagent-links">
@@ -212,6 +198,7 @@ require_once 'php/Tools.php';
         </a>
     </p>
     <aside class="redagent-page-text">
+        <p class="redagent-date">March 2003</p>
         <h1><a href="http://yuimyadmin.sourceforge.net/" target="_blank">YuiMyAdmin</a></h1>
         <p class="redagent-links">
             <a href="http://yuimyadmin.sourceforge.net/" target="_blank">website</a><br /><a href="http://yuimyadmin.sourceforge.net/yuimyadmin/" target="_blank">online demo</a><br /><a href="https://sourceforge.net/projects/yuimyadmin/files/" target="_blank">sources</a>
@@ -221,6 +208,30 @@ require_once 'php/Tools.php';
         <p class="redagent-footer">Javascript (YUI 2 Framework), PHP, HTML, CSS
         </p>
     </aside>
+
+
+    <!--
+        SDN
+       <p class="redagent-page-img">
+           <a href="http://www.swissdesignnetwork.org/" target="_blank">
+               <img src="images/projects/sdn_420.jpg" />
+           </a>
+       </p>
+       <aside class="redagent-page-text">
+           <h1>
+               <a href="http://www.swissdesignnetwork.org/" target="_blank">swissdesignnetwork.org</a>
+           </h1>
+           <span class="redagent-links">
+               <a href="http://www.swissdesignnetwork.org/" target="_blank">website</a>
+           </span>
+           <span class="redagent-content">
+               Website of the association of the swiss art schools.
+           </span>
+           <span class="redagent-footer">
+               RedCMS, Javascript (YUI3 Framework), PHP, HTML, CSS
+           </span>
+       </aside>
+       <p class="redagent-cl redagent-spacer"></p>-->
     <!--
 
       <div>

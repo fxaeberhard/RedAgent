@@ -70,7 +70,7 @@ $convoId = get_convo_id();
             </article>
 
             <!-- Main page -->
-            <article >
+            <article class="redagent-page-main">
                 <header></header>
 
                 <div id="main" role="main" class="cf">
@@ -116,7 +116,7 @@ $convoId = get_convo_id();
         <script type="text/javascript" src="js/lib/shadowbox/shadowbox.js"></script>
 
         <!-- Crafty -->
-        <script type="text/javascript" src="js/lib/crafty-min.js"></script>
+        <script type="text/javascript" src="js/lib/crafty-mod.js"></script>
 
         <!-- Site scripts -->
         <script type="text/javascript" src="./js/redagent-chat.js"></script>
@@ -217,13 +217,13 @@ $convoId = get_convo_id();
                     });
                 });
 
+                bd.removeClass("redagent-loading");
                 bd.delegate("click", controller.closePage,
                         ".redagent-closebutton", controller);                   // Close button click
                 bd.delegate("click", controller.showPage,
                         "a.redagent-nav-projects", controller, "Projects");     // Nav click
                 bd.delegate("click", controller.showPage,
                         "a.redagent-nav-contact", controller, "Contact");
-                bd.removeClass("redagent-loading");
 
                 chat.say("Red agent", "Welcome on Francois-Xavier's profile. I'm a bot and"
                         + "it appears there's only the two of us on this page at the moment."
@@ -249,6 +249,7 @@ $convoId = get_convo_id();
             })();
 
         </script>
+
     </body>
 
 </html>

@@ -1,6 +1,6 @@
 <?php
 
-require 'php/phpmailer/PHPMailerAutoload.php';
+require 'phpmailer/PHPMailerAutoload.php';
 
 //Create a new PHPMailer instance
 $mail = new PHPMailer();

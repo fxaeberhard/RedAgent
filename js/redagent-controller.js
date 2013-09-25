@@ -49,6 +49,7 @@ YUI.add("redagent-controller", function(Y) {
                 Y.one(".redagent-menu").show(true);                             // Show menu
                 targetNode.show(true).addClass("redagent-page-loading");        // Show page
                 this.currentPage = title;                                       // Save current page
+
                 Y.io("php/page-" + title.toLowerCase() + ".php", {
                     context: this,
                     on: {
