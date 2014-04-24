@@ -44,11 +44,7 @@
 </p>
 </div>
 
-<footer class="cf" style="max-width:100%; margin: 5em 0 1em;border:none">
-<br />
-<br />
-<br />
-<br />
+<footer class="cf" style="max-width:100%; margin: 19em 0 1em;border:none">
     <a class="redagent-nav-projects" href="projects.html">Projects</a>
     | <a class="redagent-nav-contact" href="contact.html">Contact</a>
     | Powered by <a target="_blank" href="http://redcms.red-agent.com">RedCMS</a>

@@ -43,8 +43,11 @@ ol { margin-left: 0.4em; }
 .redagent-page {
     padding: 1.618em;
 }
-.redagent-page, .redagent-menu {
+.redagent-page {
     width: 65em;
+}
+.yui3-skin-sam .redagent-menu {
+    width: 67.15em;
 }
 .redagent-page-img {
     width: 26em;
@@ -98,8 +101,11 @@ footer p { max-width: 17.942em; }
         float:right;
     }
 
-    .redagent-page, .redagent-menu {
+    .redagent-page{
         width: 50em;
+    }
+    .yui3-skin-sam  .redagent-menu  {
+             width: 52.15em;
     }
 
 }

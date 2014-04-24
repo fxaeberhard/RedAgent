@@ -83,6 +83,9 @@ html {
     background: white;
     z-index: 501;
     /*padding: 1em 0;*/
+    width:100%;
+}
+.redagent-menu .cf {    
     padding: 0.8em 1em;
     border: 1px solid #580000;
     border-bottom: none;

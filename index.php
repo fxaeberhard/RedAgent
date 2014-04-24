@@ -64,7 +64,7 @@ $convoId = get_convo_id();
                 <!--style="display:none;opacity: 0"-->
                 <div role="main" class="cf">
                     <div class="redagent-submenu redagent-menu-project" <?php echo ($page !== "Projects") ? 'style="display:none;opacity: 0"' : '' ?>>
-                        <a href="#wallogram">2012</a>
+                        <a href="#wallogram" class="redagent-selected">2012</a>
                         <a href="#mjte">2011</a>
                         <a href="#3dblogosphere">2010</a>
                         <a href="#redcms">2009</a>
