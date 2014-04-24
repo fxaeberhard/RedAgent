@@ -9,30 +9,48 @@
         <span class="redagent-links" style="text-decoration:none;font-size: 76%;color:#58000;" >
             <a href="http://www.linkedin.com/in/francoisxavieraeberhard" target="_blank">
                 <img src="images/icons/redagent-linkedin.png" /></a>
-            <a href="http://www.linkedin.com/in/francoisxavieraeberhard" target="_blank" style="text-decoration:none;vertical-align: 8px;" >
+            <a href="http://www.linkedin.com/in/francoisxavieraeberhard" target="_blank" style="text-decoration:none;vertical-align: 8px;">
                 LinkedIn
             </a>
             <br/>
+
             <a href="https://github.com/fxaeberhard/" target="_blank">
                 <img src="images/icons/redagent-github.png" /></a>
             <a href="https://github.com/fxaeberhard/" target="_blank" style="text-decoration:none;vertical-align: 8px;" >
-                github</a><br/>
-            <a href="http://www.delicious.com/FiiX" target="_blank"><img src="images/icons/redagent-delicious.png" /></a>
-            <a href="http://www.delicious.com/FiiX" target="_blank" style="text-decoration:none;vertical-align: 8px;" >delicious</a><br/>
-            <a href="https://picasaweb.google.com/francois.aeberhard" target="_blank"><img src="images/icons/redagent-picasa.png" /></a>
-            <a href="https://picasaweb.google.com/francois.aeberhard" target="_blank" style="text-decoration:none;vertical-align: 8px;" >Picasa</a><br/>
+                Github</a><br/>
+
+            <a href="https://plus.google.com/photos/111847855812041849491/albums" target="_blank"><img src="images/icons/redagent-picasa.png" /></a>
+            <a href="https://plus.google.com/photos/111847855812041849491/albums" target="_blank" style="text-decoration:none;vertical-align: 8px;">Pictures</a><br/>
+
             <a href="skype:francois.xavier.aeberhard?add"><img src="images/icons/redagent-skype.png" /></a>
             <a href="skype:francois.xavier.aeberhard?add" style="text-decoration:none;vertical-align: 8px;" >Skype</a>
             <!--<script type="text/javascript" src="http://download.skype.com/share/skypebuttons/js/skypeCheck.js"></script>-->
+
+            <!--<a href="http://www.delicious.com/FiiX" target="_blank"><img src="images/icons/redagent-delicious.png" /></a>-->
+            <!-- <a href="http://www.delicious.com/FiiX" target="_blank" style="text-decoration:none;vertical-align: 8px;" >delicious</a><br/>-->
+
         </span>
     </aside>
+
     <div class="redagent-cl" ></div>
-    <p>
+
+    <p style="margin-bottom: 0;margin-top: 49px;">
         <strong>Send me a mail</strong><br/>
-        <fieldset class="redagent-sendmail">
-            <input name="fdf" type="text" placeholder="Your mail" style="float:left"></input><br />
-            <textarea name="fdfd" placeholder="Your message" style="float:left"></textarea>
-            <span class="redagent-sendmail-button"></span>
-        </fieldset>
-    </p>
+    <fieldset class="redagent-sendmail">
+        <input name="fdf" type="text" placeholder="Your mail" style="float:left"></input><br />
+        <textarea name="fdfd" placeholder="Your message" style="float:left"></textarea>
+        <span class="redagent-sendmail-button"></span>
+    </fieldset>
+</p>
 </div>
+
+<footer class="cf" style="max-width:100%; margin: 5em 0 1em;border:none">
+<br />
+<br />
+<br />
+<br />
+    <a class="redagent-nav-projects" href="projects.html">Projects</a>
+    | <a class="redagent-nav-contact" href="contact.html">Contact</a>
+    | Powered by <a target="_blank" href="http://redcms.red-agent.com">RedCMS</a>
+    | ©2013 Francois-Xavier Aeberhard
+</footer>

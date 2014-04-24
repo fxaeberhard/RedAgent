@@ -41,16 +41,24 @@ YUI.add("redagent-controller", function(Y) {
 
             if (e.newVal === "Red agent") {
                 Y.all(".redagent-page").hide(true);                             // hide any displayed page button
+                Y.later(1000, this, function() {
+                    Y.all(".redagent-page").empty();
+                });
                 Y.one(".redagent-menu").hide(true);                             // and hide button
+                Y.all(".redagent-submenu").hide(true);
                 if (Crafty.isPaused())
                     Crafty.pause();
             } else {
                 var title = e.newVal,
                         targetNode = Y.one(".redagent-page-" + title.toLowerCase());
                 Y.all(".redagent-page").hide(true);                             // hide any displayed page button
+                Y.all(".redagent-submenu").hide(true);
                 Y.one(".redagent-menu").show(true);                             // Show menu
                 targetNode.show(true).addClass("redagent-page-loading");        // Show page
                 this.currentPage = title;                                       // Save current page
+                if (title === "Projects") {
+                    Y.all(".redagent-submenu").show(true);
+                }
 
                 if (!Crafty.isPaused())
                     Crafty.pause();
@@ -77,7 +85,7 @@ YUI.add("redagent-controller", function(Y) {
                     if (!node.slinit) {
                         new Y.Slideshow({
                             srcNode: node,
-                            transition: Y.Slideshow.PRESETS.slideRight,
+                            //transition: Y.Slideshow.PRESETS.slideRight,
                             duration: 1,
                             interval: 3
                                     //nextButton: '#someID'

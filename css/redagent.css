@@ -37,22 +37,24 @@ html {
     position:absolute;
     left:0;
     right: 0;
-    padding: 0 1em;
+    top: 0;
+    padding: 20px 1em 0;
     z-index: 500;
     /*width: 100%;*/
     background: white;
-    /*border: 1px solid #580000;*/
+    border: 1px solid #580000;
     border-bottom: none;
+    border-top: none;
 }
 .redagent-page-loading {
     min-height:95%;
     background: white url(../images/loading.gif) center no-repeat;
 }
-.redagent-page .redagent-cl {
+.redagent-cl {
     clear: both;
 }
 .redagent-page .redagent-spacer {
-    border-top: 1px solid #580000;
+    /*border-top: 1px solid #580000;*/
     line-height: 0em;
     margin-top: 1em;
     margin-bottom: 3.68em;
@@ -77,10 +79,28 @@ html {
 }
 /* Menu styles */
 .redagent-menu {
-    z-index: 501;
-    background:transparent;
     position: fixed;
-    margin: 0 auto;
+    background: white;
+    z-index: 501;
+    /*padding: 1em 0;*/
+    padding: 0.8em 1em;
+    border: 1px solid #580000;
+    border-bottom: none;
+    border-top: none;
+}
+.redagent-menu-project {
+    float: left;
+}
+.redagent-menu-project a {
+    padding-right: 0.5em;
+    border: 1px solid transparent;
+    border-radius: 0.2em;
+    padding: 0.05em 0.3em;
+    text-decoration: none;
+}
+.redagent-menu-project a.redagent-selected {
+    border-color: #580000;
+    background: #f4f4f4;
 }
 .redagent-menu .redagent-closebutton {
     width: 20px;
@@ -94,9 +114,13 @@ html {
 }
 
 /* Contact page */
+.redagent-page-projects {
+    padding-top: 0;
+}
 /** Display style */
 .redagent-page-contact {
     min-height: 596px;
+    top: 3em;
 }
 /** Display style */
 .yui3-redagent-display #cr-stage {
@@ -151,7 +175,7 @@ html {
     display:inline-block !important;
     max-width: 420px;
     width: 100%;
-    min-height: 380px;
+    min-height: 320px;
     overflow: hidden;
 }
 .yui3-slideshow-content {

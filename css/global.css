@@ -109,7 +109,7 @@ a:active, a:focus { outline: none; }
 /* 6. CUSTOM LAYOUT & TYPOGRAPHY (Baby bear)
 ----------------------------------------------------------------------------------------*/
 #container {
-    padding: 0.809em;
+    /*padding: 0 0.809em;*/
     /*max-width: 30em;*/
     margin: auto;
 }
@@ -144,7 +144,6 @@ This file contains the unique styles  which do not appear in /css/global.css
 
 html {
     -webkit-text-size-adjust: none;                                             /* disable text size adjust on the iPhone */
-
 }
 body, textarea, input {
     font-family: Din, Verdana, Geneva, helvetica, sans-serif;
@@ -180,8 +179,14 @@ h3, h4, h5, h6 { font-weight: bold; }
 
 p.intro { margin-bottom: 0; }
 
-.redagent-page {
+.redagent-page  {
+    padding: 0.809em;
+}
+.redagent-page , .redagent-menu{
     /*min-width: 39em;*/
+}
+.redagent-menu {
+    /*margin-left: -0.809em;*/
 }
 
 footer {

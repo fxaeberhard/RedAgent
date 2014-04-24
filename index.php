@@ -9,7 +9,6 @@ $convoId = get_convo_id();
 <html lang="en">
     <head>
         <title><?php echo $page ?> - Francois-Xavier Aeberhard</title>
-
         <meta name="description" content="">
         <meta name="author" content="Francois-Xavier Aeberhard">
         <meta name="contact" content="fx@red-agent.com">
@@ -21,17 +20,17 @@ $convoId = get_convo_id();
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link rel="shortcut icon" href="favicon.ico">
-        <!--<link rel="apple-touch-icon" href="/link/to/apple-touch-icon.png">-->
-
-        <link rel="stylesheet" href="css/global.css" media="all">
-        <link rel="stylesheet" href="css/layout.css" media="all and (min-width: 53.236em)">
-
-        <!--[if (lt IE 9) & (!IEMobile)]>
-        <link rel="stylesheet" href="css/example/layout.css" media="all">
-        <![endif]-->
+        <!--<link rel="apple-touch-icon" href="link to touch icon">-->
 
         <!-- Shadowbox -->
         <link rel="stylesheet" type="text/css" href="js/lib/shadowbox/shadowbox.css">
+
+        <!-- Layout -->
+        <link rel="stylesheet" href="css/global.css" media="all">
+        <link rel="stylesheet" href="css/layout.css" media="all and (min-width: 53.236em)">
+        <!--[if (lt IE 9) & (!IEMobile)]>
+        <link rel="stylesheet" href="css/example/layout.css" media="all">
+        <![endif]-->
 
         <!-- Site styles -->
         <link rel="stylesheet" href="css/redagent.css" media="all">
@@ -42,14 +41,6 @@ $convoId = get_convo_id();
 
         <div id="container" class="cf">
 
-            <!-- Menu -->
-            <article class="redagent-page redagent-menu" <?php echo ($page === "Red agent") ? 'style="display:none;opacity: 0"' : '' ?>>
-                <!--style="display:none;opacity: 0"-->
-                <div role="main" class="cf">
-                    <div class="redagent-closebutton"></div>
-                </div>
-            </article>
-
             <!-- Contact-page -->
             <article class="redagent-page redagent-page-contact" <?php echo ($page !== "Contact") ? 'style="display:none;opacity: 0"' : '' ?> >
                 <?php
@@ -59,7 +50,6 @@ $convoId = get_convo_id();
                 ?>
             </article>
 
-
             <!-- Projects page -->
             <article class="redagent-page redagent-page-projects" <?php echo ($page !== "Projects") ? 'style="display:none;opacity: 0"' : '' ?>>
                 <?php
@@ -67,6 +57,22 @@ $convoId = get_convo_id();
                     include 'page-projects.php';
                 }
                 ?>
+            </article>
+
+            <!-- Menu -->
+            <article class="redagent-menu" <?php echo ($page === "Red agent") ? 'style="display:none;opacity: 0"' : '' ?>>
+                <!--style="display:none;opacity: 0"-->
+                <div role="main" class="cf">
+                    <div class="redagent-submenu redagent-menu-project" <?php echo ($page !== "Projects") ? 'style="display:none;opacity: 0"' : '' ?>>
+                        <a href="#wallogram">2012</a>
+                        <a href="#mjte">2011</a>
+                        <a href="#3dblogosphere">2010</a>
+                        <a href="#redcms">2009</a>
+                        <a href="#schlempf">2004</a>
+                        <!--<a href="#yuimyadmin">2003</a>-->
+                    </div>
+                    <div class="redagent-closebutton"></div>
+                </div>
             </article>
 
             <!-- Main page -->
@@ -98,8 +104,8 @@ $convoId = get_convo_id();
                     <div style="clear:both"></div>
 
                     <footer class="cf">
-                        <a class="redagent-nav-projects" href="projects.php">Projects</a>
-                        | <a class="redagent-nav-contact" href="contact.php">Contact</a>
+                        <a class="redagent-nav-projects" href="projects.html">Projects</a>
+                        | <a class="redagent-nav-contact" href="contact.html">Contact</a>
                         | Powered by <a target="_blank" href="http://redcms.red-agent.com">RedCMS</a>
                         | ©2013 Francois-Xavier Aeberhard
                     </footer>
@@ -119,8 +125,8 @@ $convoId = get_convo_id();
         <script type="text/javascript" src="js/lib/modernizr-1.7.min.js"></script>
 
         <!-- YUI3 -->
-        <script type="text/javascript" src="http://yui.yahooapis.com/3.12.0/build/yui/yui-min.js"></script>
-        <!--<script type="text/javascript" src="js/lib/yui3/build/yui/yui-min.js"></script>-->
+        <!--<script type="text/javascript" src="http://yui.yahooapis.com/3.12.0/build/yui/yui-min.js"></script>-->
+        <script type="text/javascript" src="js/lib/yui3/build/yui/yui-min.js"></script>
 
         <!-- Pusher -->
         <script type="text/javascript" src="http://js.pusher.com/2.1/pusher.min.js"></script>
@@ -143,7 +149,7 @@ $convoId = get_convo_id();
                 useBrowserConsole: true
             }).use("base-build", "widget", "scrollview", "button", "timers", "json-parse", // Dependencies
                     "transition", "io-base", "history", "event-key", "event-mouseenter",
-                    "gallery-yui-slideshow",
+                    "gallery-yui-slideshow", "node-screen",//"galler-scrollintoview", 
                     "redagent-display", "redagent-chat", "redagent-pusher",
                     "redagent-controller", function(Y) {
 
@@ -238,17 +244,44 @@ $convoId = get_convo_id();
                 });
 
                 bd.removeClass("redagent-loading");
-                bd.delegate("click", controller.closePage,
-                        ".redagent-closebutton", controller);                   // Close button click
-                bd.delegate("click", controller.showPage,
-                        "a.redagent-nav-projects", controller, "Projects");     // Nav click
-                bd.delegate("click", controller.showPage,
-                        "a.redagent-nav-contact", controller, "Contact");
+                bd.delegate("click", controller.closePage, ".redagent-closebutton", controller);// Close button click
+                bd.delegate("click", controller.showPage, "a.redagent-nav-projects", controller, "Projects");// Nav click
+                bd.delegate("click", controller.showPage, "a.redagent-nav-contact", controller, "Contact");
+
+                var updateScroll = function() {
+                    var target, found = false;
+                    Y.all(".redagent-page-projects .cf > *[id]").each(function(n) {
+                        if (found) {
+                        } else if (n.get("id") && n.get("docScrollY") + 70 < n.get("region").top) {
+                            found = true;
+                        } else {
+                            target = n.get("id");
+                        }
+                    });
+                    if (target && Y.one("a[href='#" + target + "']")) {
+                        Y.all(".redagent-selected").removeClass("redagent-selected");
+                        Y.one("a[href='#" + target + "']").addClass("redagent-selected");
+                    }
+                };
+                window.onscroll = updateScroll;
+                updateScroll();
+                //bd.delegate("click", function(e) {
+                //    Y.one(e.currentTarget.getAttribute("href")).scrollIntoView();
+                //    e.halt(true);
+                //}, ".redagent-submenu a");
+                //Y.all(".redagent-submenu a").on("click", function (e) {
+                //    Y.one(e.currentTarget.getAttribute("href")).scrollIntoView();
+                //    e.halt(true);
+                //});
 
                 if (currentPage !== "Red agent") {
                     Crafty.pause();
                 }
-                display.say("Red agent", "Welcome on Francois-Xavier's profile. I'm a bot and it appears there's only the two of us on this page at the moment.Feel free to look around and ask me if you have any question.");
+
+                display.say("Red agent", "Welcome on Francois-Xavier's home page.");
+                Y.later(4000, this, function() {
+                    display.say("Red agent", "It appears there's only the two of us on this page at the moment. Feel free to look around and ask me if you have any question.");
+                });
             });
         </script>
 

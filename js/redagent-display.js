@@ -111,7 +111,7 @@ YUI.add("redagent-display", function(Y) {
             var textE = Crafty.e("2D, DOM, Text");
             textE.text(text)
                     .attr({x: entity.x - 125, y: entity.y - 20, z: 401})
-                    .css({ "background-color": "white",
+                    .css({"background-color": "white",
                 "color": "#580000", "border": "1px solid #580000", "line-height": "1.1em",
                 "font-size": "0.9em",
                 "padding": "0.4em",
@@ -119,7 +119,7 @@ YUI.add("redagent-display", function(Y) {
             });
             entity.attach(textE);
 
-            Y.later(3500, textE, function () {
+            Y.later(3500, textE, function() {
                 this.destroy();
             });
             return textE;

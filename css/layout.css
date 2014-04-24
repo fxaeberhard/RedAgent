@@ -4,9 +4,8 @@
     background: pink;
 }*/
 #container {
-    padding: 1.618em;
     margin: 0 auto;
-    max-width: 65em;
+    max-width: 67em;
 }
 
 header h2:before, header h2:after { width: 42%; }
@@ -42,6 +41,9 @@ ol { margin-left: 0.4em; }
     float:left;
 }
 .redagent-page {
+    padding: 1.618em;
+}
+.redagent-page, .redagent-menu {
     width: 65em;
 }
 .redagent-page-img {
@@ -72,7 +74,7 @@ footer p { max-width: 17.942em; }
     .yui3-redagent-chat {
         display:none;
     }
-    #container { width: 49em; }
+    #container { width: 52em; }
 
     header h2:before, header h2:after { width: 35%; }
 
@@ -96,7 +98,7 @@ footer p { max-width: 17.942em; }
         float:right;
     }
 
-    .redagent-page {
+    .redagent-page, .redagent-menu {
         width: 50em;
     }
 

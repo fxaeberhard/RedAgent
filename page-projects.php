@@ -2,9 +2,61 @@
 require_once 'php/Tools.php';
 ?><div role="main" class="cf">
 
+    <!-- Wallogram -->
+    <div>.</div>
+    <p class="redagent-cl"></p>
+    <p class="redagent-spacer" id="wallogram"></p>
+
+    <p class="redagent-page-img">
+        <span>
+            <span class="slideshow">
+                <?php
+                $dir = "images/projects/wallogram";
+                $files = listdir($dir);
+                sort($files, SORT_LOCALE_STRING);
+
+                foreach ($files as $entry) {
+                    ?>
+                    <a rel="shadowbox[Blogo]" href="<?php echo $entry ?>">
+                        <img src="<?php echo str_replace($dir, $dir . "/mini", $entry) ?>"/>
+                    </a>
+                <?php } ?>
+                <a rel="shadowbox[Blogo];width=720;height=404;player=flv;" href="wallogram/assets/screenshots/Wallogram-Montage.mp4">
+                    <img src="images/projects/wallogram/mini/Wallogram-Montage.png"/>
+                </a>
+            </span>
+        </span>
+    </p>
+    <aside class="redagent-page-text">
+        <p class="redagent-date">September 2012</p>
+        <h1>Wallogram - Video mapping</h1>
+        <h2></h2>
+
+        <p class="redagent-content">
+            Wallogram turns our environment in a video game playground. To do so the game is projected on walls 
+            and facades and several players use their mobile phone as a game controller.
+        </p>
+
+        <table>
+            <tr>
+                <td>Links</td>
+                <td style="font-style: normal">
+                    <a href="http://www.red-agent.com/wallogram/" target="_blank">Demo</a> | 
+                    <a href="https://github.com/fxaeberhard/Wallogram" target="_blank">Sources</a>
+                </td>
+            </tr>
+            <tr>
+                <td>Technologies</td>
+                <td>Javascript, Websocket</td>
+            </tr>
+        </table>
+    </aside>
+    <p class="redagent-cl"></p>
+    <p class="redagent-spacer" id="mjte"></p>
+
     <!-- MJ -->
     <p class="redagent-page-img">
-        <iframe title="YouTube video player" width="420" height="266" src="http://www.youtube.com/embed/EKI3U_uFv7Y?rel=0&controls=0&autohide=1&color2=580000" frameborder="0" allowfullscreen="1"></iframe>
+        <iframe title="YouTube video player" width="420" height="266" src="http://www.youtube.com/embed/EKI3U_uFv7Y?rel=0&controls=1&autohide=1&color2=580000&showinfo=0&modestbranding=1&rel=0" frameborder="0" allowfullscreen="1"></iframe>
     </p>
     <aside class="redagent-page-text">
         <p class="redagent-date">August 2011</p>
@@ -12,7 +64,7 @@ require_once 'php/Tools.php';
         <h2>User Interface Programmer @Ubisoft</h2>
 
         <p class="redagent-content">
-            Design and implementation of the in-game User Interfaceon Nintendo Wii.
+            Design and implementation of the in-game User Interface on Nintendo Wii.
         </p>
 
         <table>
@@ -31,18 +83,7 @@ require_once 'php/Tools.php';
     <p class="redagent-cl "></p>
     <p class="redagent-spacer"></p>
 
-
-    <!--  -->
-    <!--  <p class="redagent-page-img">
-
-    </p>
-    <aside class="redagent-page-text">
-
-    </aside>
-    <p class="redagent-cl "></p>
-    <p class="redagent-spacer"></p>-->
-
-    <!--  MJTE Minigame-->
+    <!--  MJTE Web game-->
     <p class="redagent-page-img">
         <a href="http://apps.facebook.com/mjte_minigame/" target="_blank">
             <!--<img class="redagent-image" data-src="images/projects/mjte_minigame_420.jpg" />-->
@@ -52,7 +93,7 @@ require_once 'php/Tools.php';
     <aside class="redagent-page-text">
         <p class="redagent-date">August 2011</p>
         <h1>
-            <a href="http://apps.facebook.com/mjte_minigame/" target="_blank">Michael Jackson: The Exerience - WebGame</a>
+            <a href="http://apps.facebook.com/mjte_minigame/" target="_blank">Michael Jackson: The Exerience - Web</a>
         </h1>
         <h2>User Interface Programmer @Ubisoft</h2>
         <p class="redagent-content">
@@ -78,7 +119,8 @@ require_once 'php/Tools.php';
 
     <!-- Just Dance 2 -->
     <p class="redagent-page-img">
-        <iframe title="YouTube video player" width="420" height="266" src="http://www.youtube.com/embed/hMxwwAxicck?rel=0&controls=0&autohide=1&color2=580000" frameborder="0" allowfullscreen></iframe>
+        <!--<iframe width="420" height="266" src="//www.youtube.com/embed/S6FgI2CR9I4" frameborder="0" allowfullscreen></iframe>-->
+        <iframe title="YouTube video player" width="420" height="266" src="http://www.youtube.com/embed/S6FgI2CR9I4?rel=0&controls=1&autohide=1&color2=580000&showinfo=0&modestbranding=1&rel=0" frameborder="0" allowfullscreen></iframe>
     </p>
     <aside class="redagent-page-text">
         <p class="redagent-date">February 2011</p>
@@ -94,7 +136,7 @@ require_once 'php/Tools.php';
             <tr>
                 <td>Links</td>
                 <td style="font-style: normal">
-                    <a href="http://justdancegame.uk.ubi.com/just_dance_2.php" target="_blank">game site</a>
+                    <a href="http://just-dance-thegame.ubi.com/jd-portal/en-gb/just-dance-games/just-dance-2/index.aspx" target="_blank">game site</a>
                 </td>
             </tr>
             <tr>
@@ -104,7 +146,7 @@ require_once 'php/Tools.php';
         </table>
     </aside>
     <p class="redagent-cl"></p>
-    <p class="redagent-spacer"></p>
+    <p class="redagent-spacer" id="3dblogosphere"></p>
 
     <!--  3D  Blogosphere-->
     <p class="redagent-page-img">
@@ -123,9 +165,6 @@ require_once 'php/Tools.php';
                     </a>
                 <?php } ?>
             </span>
-            <?php
-            //<embed type="application/x-shockwave-flash" src="https://picasaweb.google.com/s/c/bin/slideshow.swf" width="420" height="267" flashvars="host=picasaweb.google.com&captions=1&hl=fr&feat=flashalbum&RGB=0x000000&feed=https%3A%2F%2Fpicasaweb.google.com%2Fdata%2Ffeed%2Fapi%2Fuser%2Ffrancois.aeberhard%2Falbumid%2F5582820136320777985%3Falt%3Drss%26kind%3Dphoto%26hl%3Dfr" pluginspage="http://www.macromedia.com/go/getflashplayer"></embed>
-            ?>
         </span>
     </p>
     <aside class="redagent-page-text">
@@ -140,7 +179,7 @@ require_once 'php/Tools.php';
                 <td>Publication</td>
                 <td style="font-style: normal">
                     Aeberhard Francois-Xavier, Steve Russell, PhD,
-                    <a href=http://www.iaeng.org/publication/WCECS2009/WCECS2009_pp764-767.pdf" target="_blank">“3DBlogosphere: A Multisynchronous Approach of Virtual Worlds to Sustain Company Wide Communication”</a>,<em>International Conference on Internet and Multimedia Technologies 2009 ( ICIMT ), ACM,London UK</em>
+                    <a href="http://www.iaeng.org/publication/WCECS2009/WCECS2009_pp764-767.pdf" target="_blank" >“3DBlogosphere: A Multisynchronous Approach of Virtual Worlds to Sustain Company Wide Communication”</a>,<em>International Conference on Internet and Multimedia Technologies 2009 ( ICIMT ), ACM,London UK</em>
                 </td>
             </tr>
             <tr>
@@ -150,12 +189,10 @@ require_once 'php/Tools.php';
         </table>
     </aside>
     <p class="redagent-cl"></p>
-    <p class="redagent-spacer"></p>
-
-
+    <p class="redagent-spacer" id="redcms"></p>
 
     <!-- Redcms -->
-    <p class="redagent-page-img">
+    <p class="redagent-page-img" >
         <span>
             <span class="slideshow">
 
@@ -194,7 +231,7 @@ require_once 'php/Tools.php';
             <tr>
                 <td>Links</td>
                 <td style="font-style: normal">
-                    <a href="http://redcms.red-agent.com" target="_blank">site</a> |
+                    <a href="http://redcms.red-agent.com" target="_blank" >site</a> |
                     <a href="https://github.com/fxaeberhard/RedCMS" target="_blank">sources</a>
                 </td>
             </tr>
@@ -225,7 +262,7 @@ require_once 'php/Tools.php';
     <p class="redagent-spacer"></p>
 
     <!--  DTouch -->
-    <p class="redagent-page-img">
+    <p class="redagent-page-img" >
         <!--<img class="redagent-image" data-src="images/projects/dtouch_420.jpg" />-->
         <img src="images/projects/dtouch_420.jpg" />
     </p>
@@ -239,7 +276,7 @@ require_once 'php/Tools.php';
             <tr>
                 <td>Links</td>
                 <td style="font-style: normal">
-                    <a href="http://www.d-touch.org/audio/" target="_blank">project homepage</a>
+                    <a href="http://www.d-touch.org/audio/" target="_blank" href="dtouch">project homepage</a>
                 </td>
             </tr>
             <tr>
@@ -249,18 +286,17 @@ require_once 'php/Tools.php';
         </table>
     </aside>
     <p class="redagent-cl"></p>
-    <p class="redagent-spacer"></p>
+    <p class="redagent-spacer" id="schlempf"></p>
 
     <!-- Schlempf -->
     <p class="redagent-page-img">
-        <span style="width:420px" id="__ss_4800011">
-            <object id="__sse4800011" width="420" height="355"> <param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=schelmpfpresentation-0-2-slideshare-100720194537-phpapp02&rel=0&stripped_title=schelmpf-presentation-4800011&userName=FrancoisXav" /> <param name="allowFullScreen" value="true"/> <param name="allowScriptAccess" value="always"/> <embed name="__sse4800011" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=schelmpfpresentation-0-2-slideshare-100720194537-phpapp02&rel=0&stripped_title=schelmpf-presentation-4800011&userName=FrancoisXav" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="420" height="355"></embed> </object>
-        </span>
+        <iframe src="http://www.slideshare.net/slideshow/embed_code/4800011?rel=0" width="420" height="350" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px 1px 0; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> 
     </p>
+
     <aside class="redagent-page-text">
         <p class="redagent-date">June 2004</p>
 
-        <h1>Schlempf /Java Mobile</h1>
+        <h1 >Schlempf /Java Mobile</h1>
 
         <p class="redagent-content">
             Participation Logiquest programming contest sponsored by Sun MicroSystem
@@ -272,7 +308,7 @@ require_once 'php/Tools.php';
             <tr>
                 <td>Links</td>
                 <td style="font-style: normal">
-                    <a href="http://schlempf.red-agent.com/" target="_blank">site</a>
+                    <a href="http://www.red-agent.com/schlempf/" target="_blank">site</a>
                 </td>
             </tr>
             <tr>
@@ -283,10 +319,11 @@ require_once 'php/Tools.php';
 
     </aside>
     <p class="redagent-cl"></p>
-    <p class="redagent-spacer"></p>
+    <p class="redagent-spacer" id="yuimyadmin"></p>
 
     <!-- YUIMyAdmin -->
     <p class="redagent-page-img">
+
         <a href="http://yuimyadmin.sourceforge.net/" target="_blank">
             <!--<img class="redagent-image" data-src="images/projects/yuimyadmin.png" />-->
             <img src="images/projects/yuimyadmin.png" />
@@ -342,12 +379,12 @@ require_once 'php/Tools.php';
        </aside>
        <p class="redagent-cl redagent-spacer"></p>-->
     <!--
-
+    
       <div>
                         <div class="redagent-left">
                         <div class="redagent-right">   </div>
                     </div>
-
+    
                     <div class>
                         <div class="redagent-left">
                             <a href="http://www.swissdesignnetwork.org/" target="_blank">
@@ -369,7 +406,7 @@ require_once 'php/Tools.php';
                             </div>
                         </div>
                     </div>
-
+    
                     <div>
                         <div class="redagent-left">
                             <a href="http://www.smagonline.ch/" target="_blank"><img src="images/projects/smag_420.jpg" /></a>
@@ -388,26 +425,26 @@ require_once 'php/Tools.php';
                             </div>
                         </div>
                     </div>
-
-
-
+    
+    
+    
                     <div><div class="redagent-left"><div><a href="http://www.marisolimage.ch" target="_blank"><img src="images/projects/marisolimage_420.jpg" /></a></div></div><div class="redagent-right"><h1><a href="http://www.marisolimage.ch" target="_blank">MarisolImage.ch</a></h1><h2></h2><div class="redagent-links"><a href="http://www.marisolimage.ch" target="_blank">website</a><br /></div><div class="redagent-content">Website for a private Image consulting agency.</div><div class="redagent-footer">Javascript (YUI 3 Framework), PHP, Smarty, HTML, CSS</div></div></div>
-
+    
                     <div><div class="redagent-left"><div><a href="http://www.hopiclowns.ch/" target="_blank"><img src="images/projects/hopiclowns_420.jpg" /></a></div></div><div class="redagent-right"><h1><a href="http://www.hopiclowns.ch/" target="_blank">Hopiclowns.ch</a></h1><div class="redagent-links"><a href="http://www.hopiclowns.ch/" target="_blank">website</a><br /></div><div class="redagent-content"></div><div class="redagent-footer">RedCMS, Javascript (YUI3 Framework), PHP, HTML, CSS</div></div></div>
-
-
-
+    
+    
+    
                     <div><div class="redagent-left"><div style="text-align:center"><a href="http://www.velo-migrateur.com/" target="_blank"><img src="images/projects/velomigrateur_420.jpg" /></a></div></div><div class="redagent-right"><h1><a href="http://www.velo-migrateur.com/" target="_blank">Velo-Migrateur.com</a></h1><div class="redagent-links"><a href="http://www.velo-migrateur.com/" target="_blank">website</a><br /></div><div class="redagent-content"></div><div class="redagent-footer">RedCMS, Javascript (YUI3 Framework), PHP, HTML, CSS</div></div></div>
-
+    
                     <div><div class="redagent-left"><div style="text-align:center"><a href="http://www.one-appointment.com/" target="_blank"><img src="images/projects/oneapointment_420.jpg" /></a></div></div><div class="redagent-right"><h1><a href="http://www.one-appointment.com/" target="_blank">one-appointment.com</a></h1><div class="redagent-links"><a href="http://www.one-appointment.com/" target="_blank">website</a><br /></div><div class="redagent-content"></div><div class="redagent-footer">Javascript (YUI3 Framework), PHP, HTML, CSS</div></div></div>
-
+    
                     <div><div class="redagent-left"><div style="text-align:center"><a href="http://www.freshprod.com/" target="_blank"><img src="images/projects/web-fresh.jpg" /></a></div></div><div class="redagent-right"><h1><a href="http://www.freshprod.com/" target="_blank">FreshProd.com</a></h1><div class="redagent-links"><a href="http://www.freshprod.com/" target="_blank">website</a><br /></div><div class="redagent-content">Fresh Prod is a Filmmakers Collective.</div><div class="redagent-footer">Javascript (YUI3 Framework), PHP, HTML, CSS</div></div></div>
     -->
 
 </div>
-<footer class="cf" style="max-width:100%; margin: 4em 0">
-    <a class="redagent-nav-projects" href="projects.php">Projects</a>
-    | <a class="redagent-nav-contact" href="contact.php">Contact</a>
+<footer class="cf" style="max-width:100%; margin: 5em 0 1em;border:none">
+    <a class="redagent-nav-projects" href="projects.html">Projects</a>
+    | <a class="redagent-nav-contact" href="contact.html">Contact</a>
     | Powered by <a target="_blank" href="http://redcms.red-agent.com">RedCMS</a>
     | ©2013 Francois-Xavier Aeberhard
 </footer>
