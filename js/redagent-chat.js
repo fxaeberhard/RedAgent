@@ -1,3 +1,10 @@
+/*
+ * Red agent
+ * http://www.red-agent.com/wallogram
+ *
+ * Copyright (c) Francois-Xavier Aeberhard <fx@red-agent.com>
+ * Licensed under the MIT License
+ */
 YUI.add("redagent-chat", function(Y) {
 
     var Chat = Y.Base.create("redagent-chat", Y.Widget, [], {

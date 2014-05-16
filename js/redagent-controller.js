@@ -1,3 +1,10 @@
+/*
+ * Red agent
+ * http://www.red-agent.com/wallogram
+ *
+ * Copyright (c) Francois-Xavier Aeberhard <fx@red-agent.com>
+ * Licensed under the MIT License
+ */
 YUI.add("redagent-controller", function(Y) {
 
     var Controller = Y.Base.create("redagent-controller", Y.Base, [], {

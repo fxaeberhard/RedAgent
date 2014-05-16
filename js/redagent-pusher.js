@@ -1,3 +1,10 @@
+/*
+ * Red agent
+ * http://www.red-agent.com/wallogram
+ *
+ * Copyright (c) Francois-Xavier Aeberhard <fx@red-agent.com>
+ * Licensed under the MIT License
+ */
 YUI.add("redagent-pusher", function(Y) {
 
     var Pusher, PRESENCECHANNEL = "presence-redagent",

@@ -129,7 +129,7 @@ $convoId = get_convo_id();
         <script type="text/javascript" src="js/lib/yui3/build/yui/yui-min.js"></script>
 
         <!-- Pusher -->
-        <script type="text/javascript" src="http://js.pusher.com/2.1/pusher.min.js"></script>
+        <script type="text/javascript" src="http://js.pusher.com/2.2/pusher.min.js"></script>
 
         <!-- Shadow box -->
         <script type="text/javascript" src="js/lib/shadowbox/shadowbox.js"></script>

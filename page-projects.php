@@ -42,6 +42,7 @@ require_once 'php/Tools.php';
                 <td>Links</td>
                 <td style="font-style: normal">
                     <a href="http://www.red-agent.com/wallogram/" target="_blank">Demo</a> | 
+                    <a rel="shadowbox[Blogo]" href="images/projects/wallogram/20140321_124232.jpg">Screenshots</a> | 
                     <a href="https://github.com/fxaeberhard/Wallogram" target="_blank">Sources</a>
                 </td>
             </tr>
@@ -71,7 +72,7 @@ require_once 'php/Tools.php';
             <tr>
                 <td>Links</td>
                 <td style="font-style: normal">
-                    <a href="http://theexperience-thegame.ubi.com/michael-jackson/en-US/home/index.aspx" target="_blank">game site</a>
+                    <a href="http://theexperience-thegame.ubi.com/michael-jackson/en-US/home/index.aspx" target="_blank">Official website</a>
                 </td>
             </tr>
             <tr>
@@ -105,7 +106,7 @@ require_once 'php/Tools.php';
             <tr>
                 <td>Links</td>
                 <td style="font-style: normal">
-                    <a href="http://apps.facebook.com/mjte_minigame/" target="_blank">play online</a>
+                    <a href="http://apps.facebook.com/mjte_minigame/" target="_blank">Play online</a>
                 </td>
             </tr>
             <tr>
@@ -136,7 +137,7 @@ require_once 'php/Tools.php';
             <tr>
                 <td>Links</td>
                 <td style="font-style: normal">
-                    <a href="http://just-dance-thegame.ubi.com/jd-portal/en-gb/just-dance-games/just-dance-2/index.aspx" target="_blank">game site</a>
+                    <a href="http://just-dance-thegame.ubi.com/jd-portal/en-gb/just-dance-games/just-dance-2/index.aspx" target="_blank">Official website</a>
                 </td>
             </tr>
             <tr>
@@ -231,8 +232,9 @@ require_once 'php/Tools.php';
             <tr>
                 <td>Links</td>
                 <td style="font-style: normal">
-                    <a href="http://redcms.red-agent.com" target="_blank" >site</a> |
-                    <a href="https://github.com/fxaeberhard/RedCMS" target="_blank">sources</a>
+                    <a href="http://redcms.red-agent.com" target="_blank" >Website</a> |
+                    <a href="https://github.com/fxaeberhard/RedCMS" target="_blank">Sources</a> | 
+                     <a rel="shadowbox[Webdesign]" href="images/projects/webdesign/Prodoli-04.jpg">Screenshots</a>
                 </td>
             </tr>
             <tr>
@@ -270,13 +272,13 @@ require_once 'php/Tools.php';
         <p class="redagent-date">August 2009</p>
         <h1>Audio D-Touch</h1>
         <h2>Semester project @Design and Media Laboratory (LDM, EPFL)</h2>
-        <p class="redagent-content">Design, prototye and user study on a tangible user interface (TUI) for audio sequencing, dtouch.</p>
+        <p class="redagent-content">Design, prototype and user study on a tangible user interface (TUI) for audio sequencing, dtouch.</p>
 
         <table>
             <tr>
                 <td>Links</td>
                 <td style="font-style: normal">
-                    <a href="http://www.d-touch.org/audio/" target="_blank" href="dtouch">project homepage</a>
+                    <a href="http://www.d-touch.org/audio/" target="_blank" href="dtouch">Project homepage</a>
                 </td>
             </tr>
             <tr>
@@ -308,7 +310,7 @@ require_once 'php/Tools.php';
             <tr>
                 <td>Links</td>
                 <td style="font-style: normal">
-                    <a href="http://www.red-agent.com/schlempf/" target="_blank">site</a>
+                    <a href="http://www.red-agent.com/schlempf/" target="_blank">Website</a>
                 </td>
             </tr>
             <tr>
@@ -343,9 +345,9 @@ require_once 'php/Tools.php';
             <tr>
                 <td>Links</td>
                 <td style="font-style: normal">
-                    <a href="http://yuimyadmin.sourceforge.net/yuimyadmin/" target="_blank">demo</a> |
-                    <a href="http://yuimyadmin.sourceforge.net/" target="_blank">site</a> |
-                    <a href="https://sourceforge.net/projects/yuimyadmin/files/" target="_blank">sources</a>
+                    <a href="http://yuimyadmin.sourceforge.net/yuimyadmin/" target="_blank">Demo</a> |
+                    <a href="http://yuimyadmin.sourceforge.net/" target="_blank">Website</a> |
+                    <a href="https://sourceforge.net/projects/yuimyadmin/files/" target="_blank">Sources</a>
                 </td>
             </tr>
             <tr>
