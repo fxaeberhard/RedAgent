@@ -34,16 +34,16 @@ YUI.add("redagent-display", function(Y) {
                     tile = Crafty.e("Tile")
                             .attr('z', x + 1 * y + 1)
                             .bind("Click", Y.bind(function(x, y) {              // Whenever tile is clicked
-                        Y.log("clicked on tile:" + x, ", " + y);
+                                Y.log("clicked on tile:" + x, ", " + y);
 
-                        //var pos = this.px2pos(e.realX, e.realY);
-                        this.player.moveTo(x, y, 0);                            // Move player
-                        Y.RedAgent.pusher.channel.trigger("client-move", {
-                            id: Y.RedAgent.pusher.channel.members.me.id,
-                            x: x,
-                            y: y
-                        });                                                     // Send websocket event
-                    }, this, x, y));
+                                //var pos = this.px2pos(e.realX, e.realY);
+                                this.player.moveTo(x, y, 0);                    // Move player
+                                Y.RedAgent.pusher.channel.trigger("client-move", {
+                                    id: Y.RedAgent.pusher.channel.members.me.id,
+                                    x: x,
+                                    y: y
+                                });                                             // Send websocket event
+                            }, this, x, y));
                     this.iso.place(x, y, 0, tile);
                 }
             }
@@ -54,14 +54,14 @@ YUI.add("redagent-display", function(Y) {
             Crafty.e("House")                                                   // Init houses
                     .animate("Projects", ANIMATIONSPEED, 0)                     // Start animation
                     .attr({
-                x: 390, y: 50, z: 200,
-                targetPage: "Projects"
-            });
+                        x: 390, y: 50, z: 200,
+                        targetPage: "Projects"
+                    });
             Crafty.e("House")                                                   // Init houses
                     .animate("Contact", ANIMATIONSPEED, 0)                      // Start animation
                     .attr({x: 100, y: 350, z: 200, targetPage: "Contact"});
 
-            this.bot = Crafty.e("Actor, BotSprite")                              // Init bot
+            this.bot = Crafty.e("Actor, BotSprite")                             // Init bot
                     .attr({x: 650, y: 400, z: 200});
             this.addLabel(this.bot, "Red agent").css({"width": "5.1em"});
         },
@@ -104,9 +104,9 @@ YUI.add("redagent-display", function(Y) {
             text.text(label)
                     .attr({x: entity.x + 24, y: entity.y + 60, z: 400})
                     .css({"text-align": "center", "background-color": "rgba(128, 128, 128, 0.7)",
-                "color": "white", "border-radius": "2px", "line-height": "1.3em",
-                "padding": "0.2em 0.5em"
-            });
+                        "color": "white", "border-radius": "2px", "line-height": "1.3em",
+                        "padding": "0.2em 0.5em"
+                    });
             entity.attach(text);
             return text;
         },
@@ -122,19 +122,19 @@ YUI.add("redagent-display", function(Y) {
             var textE = Crafty.e("2D, DOM, Text")
                     .text(text)
                     .attr({
-                x: entity.x - 125,
-                y: entity.y - 20,
-                z: 401,
-                visible: false
-            })
+                        x: entity.x - 125,
+                        y: entity.y - 20,
+                        z: 401,
+                        visible: false
+                    })
                     .css({"background-color": "white", "color": "#580000",
-                "border": "1px solid #580000", "line-height": "1.1em",
-                "font-size": "0.9em", "padding": "0.4em",
-                "width": "12em",
-                visibility: "hidden"
-//                "max-width": "20em"
-            }),
-            connector = Crafty.e("2D, DOM").css({
+                        "border": "1px solid #580000", "line-height": "1.1em",
+                        "font-size": "0.9em", "padding": "0.4em",
+                        "width": "12em",
+                        visibility: "hidden"
+//"max-width": "20em"
+                    }),
+                    connector = Crafty.e("2D, DOM").css({
                 background: "url(images/dialogConnector.png) 0 0",
                 width: "32px",
                 height: "32px",
@@ -146,7 +146,7 @@ YUI.add("redagent-display", function(Y) {
 
             textE.bind("Draw", function() {
                 this.unbind("Draw");
-                Y.later(400, this, function() { // Attach a little later so the font file has enough time to be loaded
+                Y.later(10, this, function() { // Attach a little later so the font file has enough time to be loaded
                     this.attr({
                         x: entity.x - (this._element.offsetWidth / 2) + 14,
                         y: entity.y - this._element.offsetHeight - 10
@@ -220,7 +220,6 @@ YUI.add("redagent-display", function(Y) {
             else
                 this.sprite(0, 2, 1, 1);
         }
-
     });
     Crafty.c('PlayerCharacter', {// Main characters (self and others)
         init: function() {
@@ -293,8 +292,6 @@ YUI.add("redagent-display", function(Y) {
         },
         px2cart: function(v) {
             return {
-//                        x: ((v.x) / ISOCOS - (v.z + v.y) / ISOSIN) / 2,
-//                        y: (-((v.x) / ISOCOS + (v.z + v.y) / ISOSIN)) / 2,
                 x: Math.round(((v.x) / ISOCOS - (v.y) / ISOSIN) / 2),
                 y: Math.round((-((v.x) / ISOCOS + (v.y) / ISOSIN)) / 2),
                 z: 0
@@ -306,12 +303,11 @@ YUI.add("redagent-display", function(Y) {
         init: function() {
             this.requires('PlayerCharacter')
                     .onHit('House', this.visitHouse, function() {
-                Y.log("onHit over");
-                this.windowOpened = false;
-            });                                                                 // Collisions
+                        Y.log("onHit over");
+                        this.windowOpened = false;
+                    });                                                         // Collisions
         },
         visitHouse: function(data) {                                            // Respond to this player visiting a village
-
             var pageSelector = data[0].obj.attr("targetPage");
             if (!this.windowOpened) {
                 Y.log("onHit");
@@ -333,5 +329,4 @@ YUI.add("redagent-display", function(Y) {
                     .animate('Projects', 0, 1, 22);
         }
     });
-
 });

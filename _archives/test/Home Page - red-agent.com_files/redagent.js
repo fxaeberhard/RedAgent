@@ -456,7 +456,7 @@
         <script type="text/javascript" src="js/lib/yui3/build/yui/yui-min.js"></script>
 
         <!-- Pusher -->
-        <script src="http://js.pusher.com/2.1/pusher.min.js" type="text/javascript"></script>
+        <script src="http://js.pusher.com/2.2/pusher.min.js" type="text/javascript"></script>
 
         <!-- Shadow box -->
         <script type="text/javascript" src="js/lib/shadowbox/shadowbox.js"></script>

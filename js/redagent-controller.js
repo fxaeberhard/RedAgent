@@ -88,7 +88,7 @@ YUI.add("redagent-controller", function(Y) {
             Shadowbox.setup();
 
             if (Y.Slideshow) {
-                Y.all(".slideshow").each(function(node) {                           // Init slideshows in project page
+                Y.all(".slideshow").each(function(node) {                       // Init slideshows in project page
                     if (!node.slinit) {
                         new Y.Slideshow({
                             srcNode: node,
