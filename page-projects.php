@@ -2,11 +2,11 @@
 require_once 'php/Tools.php';
 ?><div role="main" class="cf">
 
-    <!--<div>.</div>-->
+    <div>.</div>
 
     <!-- Programming game -->
-    <p class="redagent-cl "></p>
-    <p class="redagent-spacer" id="proggame"></p>
+    <p class="redagent-cl " id="proggame"></p>
+    <p class="redagent-spacer"></p>
     <p class="redagent-page-img">
         <span>
             <span class="slideshow" style="min-height: 229px;">
@@ -91,7 +91,8 @@ require_once 'php/Tools.php';
                 <td  class="colum-right">Links</td>
                 <td style="font-style: normal">
                     <a href="http://www.ailleurs.ch/en/expositions/archives/exposition-stalker-experimenter-la-zone/#" target="_blank">Website</a>
-                    | <a rel="shadowbox[stalker]" href="images/projects/wallogram/20140321_124232.jpg">Pictures</a>
+                    | 
+                    <a rel="shadowbox[stalker]" href="images/projects/stalker/IMG_4522RE.jpg">Pictures</a>
                 </td>
             </tr>
             <tr>
@@ -240,7 +241,7 @@ require_once 'php/Tools.php';
         </a>
     </p>
     <aside class="redagent-page-text">
-        <p class="redagent-date">August 2011</p>
+        <p class="redagent-date">August 2010</p>
         <h1>
             <a href="http://apps.facebook.com/mjte_minigame/" target="_blank">Michael Jackson: The Exerience - Web</a>
         </h1>
@@ -485,6 +486,7 @@ require_once 'php/Tools.php';
     <aside class="redagent-page-text">
         <p class="redagent-date">March 2003</p>
         <h1><a href="http://yuimyadmin.sourceforge.net/" target="_blank">YuiMyAdmin</a></h1>
+        <h2>Open source project</h2>
 
         <p class="redagent-content">
             YUIMyAdmin is an web-based front-end to manage databases using the 

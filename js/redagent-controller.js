@@ -18,6 +18,7 @@ YUI.add("redagent-controller", function(Y) {
 
             Shadowbox.init();                                                   // Init Shadow box
 
+            this.sync();
             //this.foldGroup = new Y.ImgLoadGroup({
             //    name: 'projects group',
             //    className: "redagent-image",
@@ -94,7 +95,7 @@ YUI.add("redagent-controller", function(Y) {
                             srcNode: node,
                             //transition: Y.Slideshow.PRESETS.slideRight,
                             duration: 1,
-                            interval: 3
+                            interval: 6
                                     //nextButton: '#someID'
                         }).render();
                         node.slinit = true;

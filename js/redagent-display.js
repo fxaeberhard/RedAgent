@@ -61,7 +61,6 @@ YUI.add("redagent-display", function(Y) {
                         targetPage: "Contact"
                     });
 
-
             this.bot = Crafty.e("Actor, BotSprite")                             // Init bot
                     .attr({x: 650, y: 400, z: 200});
             this.addLabel(this.bot, "Red agent").css({"width": "5.1em"});
@@ -223,7 +222,7 @@ YUI.add("redagent-display", function(Y) {
     Crafty.c('PlayerCharacter', {// Main characters (self and others)
         init: function() {
             this.requires('Actor, Collision, PlayerSprite, SpriteAnimation, Tween')
-                    .collision([32, 0], [64, 16], [32, 32], [0, 16])            // Set up hit box
+                    .collision([32, 32], [64, 48], [32, 64], [0, 48])            // Set up hit box
                     .animate('PlayerMovingDown', 0, 2, 16)                      // Set up animations
                     .animate('PlayerMovingUp', 0, 3, 16)
                     .animate('PlayerMovingRight', 0, 0, 16)
@@ -300,7 +299,7 @@ YUI.add("redagent-display", function(Y) {
 
     Crafty.c('PlayablePC', {// This is the player-controlled character
         init: function() {
-            this.requires('PlayerCharacter')
+            this.requires('PlayerCharacter'/*+ " SolidHitBox"*/)
                     .onHit('House', this.visitHouse, function() {
                         Y.log("onHit over");
                         this.windowOpened = false;
@@ -338,9 +337,8 @@ YUI.add("redagent-display", function(Y) {
     });
     Crafty.c('House', {
         init: function() {
-            this.requires('Actor, Mouse, Collision, SpriteAnimation, BuildingSprite')
+            this.requires('Actor, Mouse, Collision, SpriteAnimation, BuildingSprite' /*+ " SolidHitBox"*/)
                     .attr({visible: false})
-                    .collision([32, 107], [63, 121], [92, 106], [62, 99])
                     .animate('Contact', 0, 0, 22)
                     .animate('ContactOpen', 23, 0, 44)
                     .animate('ContactHover', 45, 0, 45)
@@ -349,6 +347,7 @@ YUI.add("redagent-display", function(Y) {
                     .animate('ProjectsOpen', 23, 1, 44)
                     .animate('ProjectsHover', 45, 1, 45)
                     .animate('ProjectsOut', 22, 1, 22)
+                    .collision([22, 109], [65, 132], [108, 109], [65, 85])
                     .areaMap([35, 109], [65, 123], [94, 108], [93, 50], [64, 34], [36, 50])
                     .bind("Click", function() {                                 // Whenever tile is clicked
                         Y.log("Clicked on house:" + x, ", " + y);
