@@ -44,9 +44,12 @@
 </p>
 </div>
 
-<footer class="cf" style="max-width:100%; margin: 19em 0 1em;border:none">
-    <a class="redagent-nav-projects" href="projects.html">Projects</a>
-    | <a class="redagent-nav-contact" href="contact.html">Contact</a>
-    | Powered by <a target="_blank" href="http://redcms.red-agent.com">RedCMS</a>
-    | ©2013 Francois-Xavier Aeberhard
+<footer class="cf" style="max-width:100%; margin: 19em 0 1em;border:none;">
+    François-Xavier Aeberhard homepage
+    <div style="float:right">
+        ©2013 
+        <a class="redagent-nav-projects" href="projects.html">Projects</a>
+        | <a class="redagent-nav-contact" href="contact.html">Contact</a>
+        | Created with <a target="_blank" href="http://redcms.red-agent.com">RedCMS</a>
+    </div>
 </footer>

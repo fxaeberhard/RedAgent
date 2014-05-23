@@ -9,7 +9,7 @@ YUI.add("redagent-display", function(Y) {
 
     var Display, TILEWIDTH = 64,
             ANIMATIONSPEED = 8,
-            SPEED = 4,
+            SPEED = 4.5,
             ISOCOS = Math.cos(0.46365),
             ISOSIN = Math.sin(0.46365),
             renderMethod = Crafty.support.canvas ? "Canvas" : 'DOM';            // Select rendering method
@@ -35,8 +35,6 @@ YUI.add("redagent-display", function(Y) {
                             .attr('z', x + 1 * y + 1)
                             .bind("Click", Y.bind(function(x, y) {              // Whenever tile is clicked
                                 Y.log("clicked on tile:" + x, ", " + y);
-
-                                //var pos = this.px2pos(e.realX, e.realY);
                                 this.player.moveTo(x, y, 0);                    // Move player
                                 Y.RedAgent.pusher.channel.trigger("client-move", {
                                     id: Y.RedAgent.pusher.channel.members.me.id,
@@ -49,17 +47,20 @@ YUI.add("redagent-display", function(Y) {
             }
             this.player = Crafty.e('PlayablePC')
                     .attr({x: 390, y: 250, z: 200});                            // Init player
-            this.addLabel(this.player, "You");
+
+            this.addLabel(this.player, "You");                                  // Add label to current player
 
             Crafty.e("House")                                                   // Init houses
-                    .animate("Projects", ANIMATIONSPEED, 0)                     // Start animation
                     .attr({
-                        x: 390, y: 50, z: 200,
+                        x: 384, y: 52, z: 210,
                         targetPage: "Projects"
                     });
             Crafty.e("House")                                                   // Init houses
-                    .animate("Contact", ANIMATIONSPEED, 0)                      // Start animation
-                    .attr({x: 100, y: 350, z: 200, targetPage: "Contact"});
+                    .attr({
+                        x: 64, y: 339, z: 220,
+                        targetPage: "Contact"
+                    });
+
 
             this.bot = Crafty.e("Actor, BotSprite")                             // Init bot
                     .attr({x: 650, y: 400, z: 200});
@@ -130,9 +131,7 @@ YUI.add("redagent-display", function(Y) {
                     .css({"background-color": "white", "color": "#580000",
                         "border": "1px solid #580000", "line-height": "1.1em",
                         "font-size": "0.9em", "padding": "0.4em",
-                        "width": "12em",
-                        visibility: "hidden"
-//"max-width": "20em"
+                        "width": "12em", visibility: "hidden"  //"max-width": "20em"
                     }),
                     connector = Crafty.e("2D, DOM").css({
                 background: "url(images/dialogConnector.png) 0 0",
@@ -179,7 +178,7 @@ YUI.add("redagent-display", function(Y) {
     Crafty.sprite(64, "images/sprite-bot.png", {
         BotSprite: [0, 0]
     });
-    Crafty.sprite(64, 128, 'images/sprite-building.png', {
+    Crafty.sprite(128, 128, 'images/sprite-building.png', {
         BuildingSprite: [0, 0]
     });
 
@@ -305,14 +304,30 @@ YUI.add("redagent-display", function(Y) {
                     .onHit('House', this.visitHouse, function() {
                         Y.log("onHit over");
                         this.windowOpened = false;
-                    });                                                         // Collisions
+                    })                                                          // Collisions
+                    .bind("EnterFrame", function() {
+                        var z = 200, that = this;
+                        Crafty("House").each(function(i, h, h) {
+                            if (that._y - 55 > this._y) {
+                                z = Math.max(this._z + 1, z);
+                            }
+                        });
+                        this.attr("z", z);
+                    });
         },
         visitHouse: function(data) {                                            // Respond to this player visiting a village
             var pageSelector = data[0].obj.attr("targetPage");
             if (!this.windowOpened) {
                 Y.log("onHit");
+                data[0].obj.animate(pageSelector + "Open", ANIMATIONSPEED, 0);
                 this.windowOpened = true;
-                Y.RedAgent.controller.showPage(null, pageSelector);
+                Y.later(900, this, function() {
+                    Y.RedAgent.controller.showPage(null, pageSelector);
+                });
+
+                Y.later(3000, this, function() {
+                    data[0].obj.animate(pageSelector + "Out", ANIMATIONSPEED, 0);
+                });
             }
         }
     });
@@ -323,10 +338,47 @@ YUI.add("redagent-display", function(Y) {
     });
     Crafty.c('House', {
         init: function() {
-            this.requires('Actor, Collision, SpriteAnimation, BuildingSprite')
-                    .collision([32, 64], [64, 80], [32, 96], [0, 80])
+            this.requires('Actor, Mouse, Collision, SpriteAnimation, BuildingSprite')
+                    .attr({visible: false})
+                    .collision([32, 107], [63, 121], [92, 106], [62, 99])
                     .animate('Contact', 0, 0, 22)
-                    .animate('Projects', 0, 1, 22);
+                    .animate('ContactOpen', 23, 0, 44)
+                    .animate('ContactHover', 45, 0, 45)
+                    .animate('ContactOut', 22, 0, 22)
+                    .animate('Projects', 0, 1, 22)
+                    .animate('ProjectsOpen', 23, 1, 44)
+                    .animate('ProjectsHover', 45, 1, 45)
+                    .animate('ProjectsOut', 22, 1, 22)
+                    .areaMap([35, 109], [65, 123], [94, 108], [93, 50], [64, 34], [36, 50])
+                    .bind("Click", function() {                                 // Whenever tile is clicked
+                        Y.log("Clicked on house:" + x, ", " + y);
+                        var x, y;
+                        if (this.attr("targetPage") === "Projects") {
+                            x = 6;
+                            y = 11;
+                        } else {
+                            x = 1;
+                            y = 29;
+                        }
+                        Crafty("PlayablePC").moveTo(x, y, 0);                    // Move player
+                        Y.RedAgent.pusher.channel.trigger("client-move", {
+                            id: Y.RedAgent.pusher.channel.members.me.id,
+                            x: x,
+                            y: y
+                        });                                             // Send websocket event
+                    })
+                    .bind("MouseOver", function() {
+                        this.animate(this.attr("targetPage") + "Hover", ANIMATIONSPEED, 0);           // Start animation
+
+                    })
+                    .bind("MouseOut", function() {
+                        this.animate(this.attr("targetPage") + "Out", ANIMATIONSPEED, 0);           // Start animation
+                    });
+
+            Y.later(500, this, function() {
+                this.visible = true;
+                this.animate(this.attr("targetPage"), ANIMATIONSPEED, 0);           // Start animation
+            });
         }
     });
 });

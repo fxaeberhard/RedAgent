@@ -64,10 +64,12 @@ $convoId = get_convo_id();
                 <!--style="display:none;opacity: 0"-->
                 <div role="main" class="cf">
                     <div class="redagent-submenu redagent-menu-project" <?php echo ($page !== "Projects") ? 'style="display:none;opacity: 0"' : '' ?>>
-                        <a href="#wallogram" class="redagent-selected">2012</a>
-                        <a href="#mjte">2011</a>
-                        <a href="#3dblogosphere">2010</a>
-                        <a href="#redcms">2009</a>
+                        <a href="#proggame" class="redagent-selected">2014</a>
+                        <a href="#stalker" >2013</a>
+                        <a href="#wegas" >2011</a>
+                        <a href="#mjte">2010</a>
+                        <a href="#3dblogosphere">2009</a>
+                        <a href="#redcms">2005</a>
                         <a href="#schlempf">2004</a>
                         <!--<a href="#yuimyadmin">2003</a>-->
                     </div>
@@ -79,7 +81,7 @@ $convoId = get_convo_id();
             <article class="redagent-page-main">
                 <header></header>
 
-                <div id="main" role="main" class="cf">
+                <div id="main" role="main" class="cf" style="padding-top:10px">
 
                     <!-- Crafty stage -->
                     <p class="intro cr" style="float:left"></p>
@@ -98,10 +100,13 @@ $convoId = get_convo_id();
                     <div style="clear:both"></div>
 
                     <footer class="cf">
-                        <a class="redagent-nav-projects" href="projects.html">Projects</a>
-                        | <a class="redagent-nav-contact" href="contact.html">Contact</a>
-                        | Powered by <a target="_blank" href="http://redcms.red-agent.com">RedCMS</a>
-                        | ©2013 Francois-Xavier Aeberhard
+                        François-Xavier Aeberhard homepage
+                        <div style="float:right">
+                            ©2013 
+                            <a class="redagent-nav-projects" href="projects.html">Projects</a>
+                            | <a class="redagent-nav-contact" href="contact.html">Contact</a>
+                            | Created with <a target="_blank" href="http://redcms.red-agent.com">RedCMS</a>
+                        </div>
                     </footer>
 
                 </div><!-- /main -->
@@ -276,8 +281,11 @@ $convoId = get_convo_id();
 
                         var firstmsg = "Welcome on Francois-Xavier's home page.",
                                 secmsg = "It appears there's only the two of us on this page at the moment. Feel free to look around and ask me if you have any question.";
-                        chat.say("Red agent", firstmsg);
-                        display.say("Red agent", firstmsg);
+
+                        Y.later(2000, this, function() {
+                            chat.say("Red agent", firstmsg);
+                            display.say("Red agent", firstmsg);
+                        });
                         Y.later(4000, this, function() {
                             chat.say("Red agent", secmsg);
                             display.say("Red agent", secmsg);

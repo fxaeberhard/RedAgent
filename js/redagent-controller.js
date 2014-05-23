@@ -68,7 +68,7 @@ YUI.add("redagent-controller", function(Y) {
                 }
 
                 if (!Crafty.isPaused())
-                    Crafty.pause();
+                    Y.later(1000, Crafty, Crafty.pause());
 
                 Y.io("page-" + title.toLowerCase() + ".php", {
                     context: this,
