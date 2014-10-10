@@ -40,7 +40,7 @@ YUI.add("redagent-controller", function(Y) {
         closePage: function() {
             this.history.addValue('page', "Red agent", {
                 title: 'Red agent - Francois-Xavier Aeberhard',
-                url: '/'
+                url: this.getPath()
             });
             //display.windowOpened = false;
         },
@@ -58,7 +58,7 @@ YUI.add("redagent-controller", function(Y) {
                     Crafty.pause();
             } else {
                 var title = e.newVal,
-                        targetNode = Y.one(".redagent-page-" + title.toLowerCase());
+                    targetNode = Y.one(".redagent-page-" + title.toLowerCase());
                 Y.all(".redagent-page").hide(true);                             // hide any displayed page button
                 Y.all(".redagent-submenu").hide(true);
                 Y.one(".redagent-menu").show(true);                             // Show menu
@@ -76,7 +76,7 @@ YUI.add("redagent-controller", function(Y) {
                     on: {
                         success: function(tId, e) {
                             targetNode.setContent(e.responseText)
-                                    .removeClass("redagent-page-loading");
+                                .removeClass("redagent-page-loading");
                             this.sync();
                         }
                     }
@@ -96,7 +96,7 @@ YUI.add("redagent-controller", function(Y) {
                             //transition: Y.Slideshow.PRESETS.slideRight,
                             duration: 1,
                             interval: 6
-                                    //nextButton: '#someID'
+                                //nextButton: '#someID'
                         }).render();
                         node.slinit = true;
                     }
@@ -106,16 +106,16 @@ YUI.add("redagent-controller", function(Y) {
             var sendMailNode = Y.one(".redagent-sendmail-button");
             if (sendMailNode) {
                 new Y.Button({
-                    label: "Send mail",
+                    label: "Send",
                     on: {
                         click: function() {                                     // On click,
                             Y.io("php/sendMail.php", {
                                 method: 'POST', // call send mail method
                                 data: "from=" + encodeURIComponent(Y.one(".redagent-page-contact input").get("value"))
-                                        + "&msg=" + encodeURIComponent(Y.one(".redagent-page-contact textarea").get("value"))
+                                    + "&msg=" + encodeURIComponent(Y.one(".redagent-page-contact textarea").get("value"))
                             });
                             Y.one(".redagent-sendmail")
-                                    .setContent("<em><center><br />Your mail has been sent, I'll get back to you as soon as possible.</center></em>");
+                                .setContent("<em><center><br />Your mail has been sent, I'll get back to you as soon as possible.</center></em>");
                         }
                     }
                 }).render(sendMailNode);                                        // Create send mail button
@@ -129,8 +129,11 @@ YUI.add("redagent-controller", function(Y) {
             //}, this);
             //foldGroup.addTrigger(window, 'scroll');
             //foldGroup.fetch();
+        },
+        getPath: function() {
+            var loc = window.location.pathname;
+            return loc.substring(0, loc.lastIndexOf('/')+1);
         }
     });
     Y.namespace("RedAgent").Controller = Controller;
-
 });

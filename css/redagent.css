@@ -7,12 +7,11 @@ html {
     height: 100%;
 }
 .redagent-loading #container > * {
-    /*display:none;*/
     opacity: 0;
 }
 .colum-right {
     font-style: italic;
-    color: gray;
+    color: #A0A0A0;
 }
 @media all and (max-width: 53.236em) {
     .yui3-redagent-display #cr-stage {
@@ -43,11 +42,7 @@ html {
     top: 0;
     padding: 20px 2em 0;
     z-index: 500;
-    /*width: 100%;*/
     background: white;
-    border: 1px solid #580000;
-    /*border-bottom: none;*/
-    border-top: none;
 }
 .redagent-page-loading {
     min-height:95%;
@@ -57,10 +52,9 @@ html {
     clear: both;
 }
 .redagent-page .redagent-spacer {
-    /*border-top: 1px solid #580000;*/
     line-height: 0em;
-    margin-top: 1em;
-    margin-bottom: 4.68em;
+    margin: 3.3em 0;
+    border-bottom: 1px solid #580000;
 }
 .redagent-date {
     margin-bottom: 0;
@@ -68,13 +62,10 @@ html {
     line-height: 0.9em;
 }
 .redagent-content {
-    /* font-style: italic; */
     margin-top: 2em;
     margin-bottom: 2em;
 }
 .redagent-page td {
-    /* color:gray; */
-    /*font-style: italic;*/
     padding-right: 10px;
 }
 .redagent-page td a {
@@ -85,38 +76,43 @@ html {
     position: fixed;
     background: white;
     z-index: 501;
-    /*padding: 1em 0;*/
     width:100%;
 }
 .redagent-menu .cf {    
-    padding: 0.8em 2em;
-    border: 1px solid #580000;
-    border-bottom: none;
-    border-top: none;
+    padding: 0.6em 2em;
 }
 .redagent-menu-project {
-    float: left;
+    display: inline-block;  
+    letter-spacing: normal; 
+    word-spacing: normal;  
+    vertical-align: top;  
+    margin-top: 0px;
 }
 .redagent-menu-project a {
-    padding-right: 0.5em;
-    border: 1px solid transparent;
-    border-radius: 0.2em;
-    padding: 0.05em 0.3em;
+    padding: 0.1em 0.6em 0.1em 0.8em;
     text-decoration: none;
+    margin: 0;
+    float: left;
+    display: inline-block;
+}
+.redagent-menu-project a:hover {
+    background-color: darkgray;
+    color: white;
 }
 .redagent-menu-project a.redagent-selected {
-    border-color: #580000;
-    background: #f4f4f4;
+    color: inherit;
+    background: #EDEDED;
+    cursor: default;
 }
 .redagent-menu .redagent-closebutton {
-    width: 20px;
-    height: 20px;
-    background: #580000 url(../images/redagent-closeicon.png) 2px 2px;
-    float: right;
-    cursor: pointer;
-    border: 1px solid #580000;
-    border-radius: 2px;
-    /* margin-right: 0.6em; */
+    width: 46px;
+    height: 28px;
+    background: #580000 url(../images/back-22.png) center no-repeat;
+    cursor: pointer;        
+    float: left;
+}
+.redagent-menu .redagent-closebutton:hover {
+    background-color: darkgray;
 }
 
 /* Contact page */
@@ -125,8 +121,21 @@ html {
 }
 /** Display style */
 .redagent-page-contact {
-    min-height: 596px;
-    top: 3em;
+    min-height: 570px;
+    top: 2.8em;
+}
+.redagent-sendmail-button {
+    display: block;
+    text-align: center;
+    widtH: 100%;
+}
+.redagent-sendmail-button .yui3-button {
+    padding: 0.5em 3.7em 0.4em 5.2em;
+    max-width: 100%;
+    font-size: 1.1em;
+    font-weight: bold;
+    /*text-transform: uppercase;*/
+    background: #580000 url(../images/mail.png) 3.2em 13px no-repeat!important;
 }
 /** Display style */
 .yui3-redagent-display #cr-stage {
@@ -136,7 +145,7 @@ html {
 
 /** Chat styles */
 .yui3-redagent-chat textarea {
-    width: 95%;
+    width: 94.5%;
     border: 1px solid #580000;
     margin:0;
     padding: 5px 2.5%;
@@ -172,7 +181,13 @@ html {
 /* YUI 3 Buttons styles */
 .yui3-skin-sam .yui3-button {
     color: white;
-    background-color: #580000;
+    background: #580000;
+    border-radius: 0;
+    padding-top: 0.7em;
+    box-shadow: none;
+}
+.yui3-skin-sam .yui3-button:hover {
+    background-color: darkgray !important;
 }
 
 /* Gallery slideshow styles */

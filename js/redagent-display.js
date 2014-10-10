@@ -8,11 +8,11 @@
 YUI.add("redagent-display", function(Y) {
 
     var Display, TILEWIDTH = 64,
-            ANIMATIONSPEED = 8,
-            SPEED = 4.5,
-            ISOCOS = Math.cos(0.46365),
-            ISOSIN = Math.sin(0.46365),
-            renderMethod = Crafty.support.canvas ? "Canvas" : 'DOM';            // Select rendering method
+        ANIMATIONSPEED = 8,
+        SPEED = 4.5,
+        ISOCOS = Math.cos(0.46365),
+        ISOSIN = Math.sin(0.46365),
+        renderMethod = Crafty.support.canvas ? "Canvas" : 'DOM';                // Select rendering method
 
     Display = Y.Base.create("redagent-display", Y.Widget, [], {
         CONTENT_TEMPLATE: '<div><div id="cr-stage"></div></div>',
@@ -32,37 +32,37 @@ YUI.add("redagent-display", function(Y) {
             for (x = 12; x >= 0; x--) {                                         // Init grid
                 for (y = 0; y < 37; y++) {
                     tile = Crafty.e("Tile")
-                            .attr('z', x + 1 * y + 1)
-                            .bind("Click", Y.bind(function(x, y) {              // Whenever tile is clicked
-                                Y.log("clicked on tile:" + x, ", " + y);
-                                this.player.moveTo(x, y, 0);                    // Move player
-                                Y.RedAgent.pusher.channel.trigger("client-move", {
-                                    id: Y.RedAgent.pusher.channel.members.me.id,
-                                    x: x,
-                                    y: y
-                                });                                             // Send websocket event
-                            }, this, x, y));
+                        .attr('z', x + 1 * y + 1)
+                        .bind("Click", Y.bind(function(x, y) {                  // Whenever tile is clicked
+                            Y.log("clicked on tile:" + x, ", " + y);
+                            this.player.moveTo(x, y, 0);                        // Move player
+                            Y.RedAgent.pusher.channel.trigger("client-move", {
+                                id: Y.RedAgent.pusher.channel.members.me.id,
+                                x: x,
+                                y: y
+                            });                                                 // Send websocket event
+                        }, this, x, y));
                     this.iso.place(x, y, 0, tile);
                 }
             }
             this.player = Crafty.e('PlayablePC')
-                    .attr({x: 390, y: 250, z: 200});                            // Init player
+                .attr({x: 390, y: 250, z: 200});                                // Init player
 
             this.addLabel(this.player, "You");                                  // Add label to current player
 
             Crafty.e("House")                                                   // Init houses
-                    .attr({
-                        x: 384, y: 52, z: 210,
-                        targetPage: "Projects"
-                    });
+                .attr({
+                    x: 384, y: 52, z: 210,
+                    targetPage: "Projects"
+                });
             Crafty.e("House")                                                   // Init houses
-                    .attr({
-                        x: 64, y: 339, z: 220,
-                        targetPage: "Contact"
-                    });
+                .attr({
+                    x: 64, y: 339, z: 220,
+                    targetPage: "Contact"
+                });
 
             this.bot = Crafty.e("Actor, BotSprite")                             // Init bot
-                    .attr({x: 650, y: 400, z: 200});
+                .attr({x: 650, y: 400, z: 200});
             this.addLabel(this.bot, "Red agent").css({"width": "5.1em"});
         },
         bindUI: function() {
@@ -93,7 +93,7 @@ YUI.add("redagent-display", function(Y) {
         addPlayer: function(cfg) {
             Y.log("addPlayer()", "info", "RedAgent.Display");
             var entity = Crafty.e('NotPlayablePC')
-                    .attr({x: 400, y: 200, z: 200});                           // Init player
+                .attr({x: 400, y: 200, z: 200});                                // Init player
             this.addLabel(entity, "Anonymous");
 
             this.players[cfg.id] = entity;
@@ -102,11 +102,11 @@ YUI.add("redagent-display", function(Y) {
         addLabel: function(entity, label) {
             var text = Crafty.e("2D, DOM, Text");
             text.text(label)
-                    .attr({x: entity.x + 24, y: entity.y + 60, z: 400})
-                    .css({"text-align": "center", "background-color": "rgba(128, 128, 128, 0.7)",
-                        "color": "white", "border-radius": "2px", "line-height": "1.3em",
-                        "padding": "0.2em 0.5em"
-                    });
+                .attr({x: entity.x + 24, y: entity.y + 60, z: 400})
+                .css({"text-align": "center", "background-color": "rgba(128, 128, 128, 0.7)",
+                    "color": "white", "border-radius": "2px", "line-height": "1.3em",
+                    "padding": "0.2em 0.5em"
+                });
             entity.attach(text);
             return text;
         },
@@ -120,19 +120,19 @@ YUI.add("redagent-display", function(Y) {
             }
 
             var textE = Crafty.e("2D, DOM, Text")
-                    .text(text)
-                    .attr({
-                        x: entity.x - 125,
-                        y: entity.y - 20,
-                        z: 401,
-                        visible: false
-                    })
-                    .css({"background-color": "white", "color": "#580000",
-                        "border": "1px solid #580000", "line-height": "1.1em",
-                        "font-size": "0.9em", "padding": "0.4em",
-                        "width": "12em", visibility: "hidden"  //"max-width": "20em"
-                    }),
-                    connector = Crafty.e("2D, DOM").css({
+                .text(text)
+                .attr({
+                    x: entity.x - 125,
+                    y: entity.y - 20,
+                    z: 401,
+                    visible: false
+                })
+                .css({"background-color": "white", "color": "#580000",
+                    "border": "1px solid #580000", "line-height": "1.1em",
+                    "font-size": "0.9em", "padding": "0.4em",
+                    "width": "12em", visibility: "hidden"  //"max-width": "20em"
+                }),
+                connector = Crafty.e("2D, DOM").css({
                 background: "url(images/dialogConnector.png) 0 0",
                 width: "32px",
                 height: "32px",
@@ -198,9 +198,9 @@ YUI.add("redagent-display", function(Y) {
                 this.color = "red";
             }
             this.requires('Actor, TileSprite, Mouse')
-                    .areaMap([32, 0], [64, 16], [32, 32], [0, 16])
-                    .bind("MouseOver", this.hover)
-                    .bind("MouseOut", this.normal);
+                .areaMap([32, 0], [64, 16], [32, 32], [0, 16])
+                .bind("MouseOver", this.hover)
+                .bind("MouseOut", this.normal);
 
             this.normal();
         },
@@ -222,16 +222,15 @@ YUI.add("redagent-display", function(Y) {
     Crafty.c('PlayerCharacter', {// Main characters (self and others)
         init: function() {
             this.requires('Actor, Collision, PlayerSprite, SpriteAnimation, Tween')
-                    .collision([32, 32], [64, 48], [32, 64], [0, 48])            // Set up hit box
-                    .animate('PlayerMovingDown', 0, 2, 16)                      // Set up animations
-                    .animate('PlayerMovingUp', 0, 3, 16)
-                    .animate('PlayerMovingRight', 0, 0, 16)
-                    .animate('PlayerMovingLeft', 0, 1, 16);
-
-            this.bind('TweenEnd', function(e) {                                 // Whenever the player
-                this.stop();
-                this.moveTo(this.targetMove.x, this.targetMove.y, this.targetMove.z);
-            });
+                .collision([32, 32], [64, 48], [32, 64], [0, 48])               // Set up hit box
+                .animate('PlayerMovingDown', 0, 2, 16)                          // Set up animations
+                .animate('PlayerMovingUp', 0, 3, 16)
+                .animate('PlayerMovingRight', 0, 0, 16)
+                .animate('PlayerMovingLeft', 0, 1, 16)
+                .bind('TweenEnd', function(e) {                                 // Whenever the player
+                    this.stop();
+                    this.moveTo(this.targetMove.x, this.targetMove.y, this.targetMove.z);
+                });
         },
         at: function(x, y, z) {
             Y.log("Player.at(" + x + ", " + y + ")");
@@ -242,9 +241,9 @@ YUI.add("redagent-display", function(Y) {
         moveTo: function(x, y, z) {
             Y.log("moveTo(" + x + ", " + y + ", " + z + ")", "info", "Player");
             var to, anim,
-                    targetPx = this.pos2px(x, y, z),
-                    targetCart = this.px2cart(targetPx),
-                    currentCart = this.px2cart({x: this.x, y: this.y, z: 0});
+                targetPx = this.pos2px(x, y, z),
+                targetCart = this.px2cart(targetPx),
+                currentCart = this.px2cart({x: this.x, y: this.y, z: 0});
 
             this.targetMove = {x: x, y: y, z: z};                               // Save target
 
@@ -268,7 +267,7 @@ YUI.add("redagent-display", function(Y) {
                 y: to.y + Crafty.viewport._y
             };
             var dist = Math.sqrt(Crafty.math.squaredDistance(this.x, this.y, to.x, to.y)),
-                    time = Math.round(((dist / TILEWIDTH) * (100 / SPEED))) + 1; //+1 because if time = 0, time = infinite
+                time = Math.round(((dist / TILEWIDTH) * (100 / SPEED))) + 1;    //+1 because if time = 0, time = infinite
 
             this.animate(anim, ANIMATIONSPEED, -1);                             // Start animation
             this.tween(to, time);                                               // Tween to next step
@@ -300,19 +299,19 @@ YUI.add("redagent-display", function(Y) {
     Crafty.c('PlayablePC', {// This is the player-controlled character
         init: function() {
             this.requires('PlayerCharacter'/*+ " SolidHitBox"*/)
-                    .onHit('House', this.visitHouse, function() {
-                        Y.log("onHit over");
-                        this.windowOpened = false;
-                    })                                                          // Collisions
-                    .bind("EnterFrame", function() {
-                        var z = 200, that = this;
-                        Crafty("House").each(function(i, h, h) {
-                            if (that._y - 55 > this._y) {
-                                z = Math.max(this._z + 1, z);
-                            }
-                        });
-                        this.attr("z", z);
+                .onHit('House', this.visitHouse, function() {
+                    Y.log("onHit over");
+                    this.windowOpened = false;
+                })                                                              // Collisions
+                .bind("EnterFrame", function() {
+                    var z = 200, that = this;
+                    Crafty("House").each(function(i, h, h) {
+                        if (that._y - 55 > this._y) {
+                            z = Math.max(this._z + 1, z);
+                        }
                     });
+                    this.attr("z", z);
+                });
         },
         visitHouse: function(data) {                                            // Respond to this player visiting a village
             var pageSelector = data[0].obj.attr("targetPage");
@@ -338,45 +337,45 @@ YUI.add("redagent-display", function(Y) {
     Crafty.c('House', {
         init: function() {
             this.requires('Actor, Mouse, Collision, SpriteAnimation, BuildingSprite' /*+ " SolidHitBox"*/)
-                    .attr({visible: false})
-                    .animate('Contact', 0, 0, 22)
-                    .animate('ContactOpen', 23, 0, 44)
-                    .animate('ContactHover', 45, 0, 45)
-                    .animate('ContactOut', 22, 0, 22)
-                    .animate('Projects', 0, 1, 22)
-                    .animate('ProjectsOpen', 23, 1, 44)
-                    .animate('ProjectsHover', 45, 1, 45)
-                    .animate('ProjectsOut', 22, 1, 22)
-                    .collision([22, 109], [65, 132], [108, 109], [65, 85])
-                    .areaMap([35, 109], [65, 123], [94, 108], [93, 50], [64, 34], [36, 50])
-                    .bind("Click", function() {                                 // Whenever tile is clicked
-                        Y.log("Clicked on house:" + x, ", " + y);
-                        var x, y;
-                        if (this.attr("targetPage") === "Projects") {
-                            x = 6;
-                            y = 11;
-                        } else {
-                            x = 1;
-                            y = 29;
-                        }
-                        Crafty("PlayablePC").moveTo(x, y, 0);                    // Move player
-                        Y.RedAgent.pusher.channel.trigger("client-move", {
-                            id: Y.RedAgent.pusher.channel.members.me.id,
-                            x: x,
-                            y: y
-                        });                                             // Send websocket event
-                    })
-                    .bind("MouseOver", function() {
-                        this.animate(this.attr("targetPage") + "Hover", ANIMATIONSPEED, 0);           // Start animation
+                .attr({visible: false})
+                .animate('Contact', 0, 0, 22)
+                .animate('ContactOpen', 23, 0, 44)
+                .animate('ContactHover', 45, 0, 45)
+                .animate('ContactOut', 22, 0, 22)
+                .animate('Projects', 0, 1, 22)
+                .animate('ProjectsOpen', 23, 1, 44)
+                .animate('ProjectsHover', 45, 1, 45)
+                .animate('ProjectsOut', 22, 1, 22)
+                .collision([22, 109], [65, 132], [108, 109], [65, 85])
+                .areaMap([35, 109], [65, 123], [94, 108], [93, 50], [64, 34], [36, 50])
+                .bind("Click", function() {                                     // Whenever tile is clicked
+                    Y.log("Clicked on house:" + x, ", " + y);
+                    var x, y;
+                    if (this.attr("targetPage") === "Projects") {
+                        x = 6;
+                        y = 11;
+                    } else {
+                        x = 1;
+                        y = 29;
+                    }
+                    Crafty("PlayablePC").moveTo(x, y, 0);                       // Move player
+                    Y.RedAgent.pusher.channel.trigger("client-move", {
+                        id: Y.RedAgent.pusher.channel.members.me.id,
+                        x: x,
+                        y: y
+                    });                                                         // Send websocket event
+                })
+                .bind("MouseOver", function() {
+                    this.animate(this.attr("targetPage") + "Hover", ANIMATIONSPEED, 0);// Start animation
 
-                    })
-                    .bind("MouseOut", function() {
-                        this.animate(this.attr("targetPage") + "Out", ANIMATIONSPEED, 0);           // Start animation
-                    });
+                })
+                .bind("MouseOut", function() {
+                    this.animate(this.attr("targetPage") + "Out", ANIMATIONSPEED, 0);// Start animation
+                });
 
             Y.later(500, this, function() {
                 this.visible = true;
-                this.animate(this.attr("targetPage"), ANIMATIONSPEED, 0);           // Start animation
+                this.animate(this.attr("targetPage"), ANIMATIONSPEED, 0);       // Start animation
             });
         }
     });

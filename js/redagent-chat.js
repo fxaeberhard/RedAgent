@@ -60,5 +60,4 @@ YUI.add("redagent-chat", function(Y) {
         }
     });
     Y.namespace("RedAgent").Chat = Chat;
-
 });

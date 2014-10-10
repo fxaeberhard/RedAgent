@@ -22,8 +22,8 @@
             <a href="https://plus.google.com/photos/111847855812041849491/albums" target="_blank"><img src="images/icons/redagent-picasa.png" /></a>
             <a href="https://plus.google.com/photos/111847855812041849491/albums" target="_blank" style="text-decoration:none;vertical-align: 8px;">Pictures</a><br/>
 
-            <a href="skype:francois.xavier.aeberhard?add"><img src="images/icons/redagent-skype.png" /></a>
-            <a href="skype:francois.xavier.aeberhard?add" style="text-decoration:none;vertical-align: 8px;" >Skype</a>
+            <!--<a href="skype:francois.xavier.aeberhard?add"><img src="images/icons/redagent-skype.png" /></a>-->
+            <!--<a href="skype:francois.xavier.aeberhard?add" style="text-decoration:none;vertical-align: 8px;" >Skype</a>-->
             <!--<script type="text/javascript" src="http://download.skype.com/share/skypebuttons/js/skypeCheck.js"></script>-->
 
             <!--<a href="http://www.delicious.com/FiiX" target="_blank"><img src="images/icons/redagent-delicious.png" /></a>-->
@@ -34,17 +34,17 @@
 
     <div class="redagent-cl" ></div>
 
-    <p style="margin-bottom: 0;margin-top: 49px;">
+    <p style="margin-bottom: 0;margin-top: 1.4em;">
         <strong>Send me a mail</strong><br/>
     <fieldset class="redagent-sendmail">
-        <input name="fdf" type="text" placeholder="Your mail" style="float:left"></input><br />
-        <textarea name="fdfd" placeholder="Your message" style="float:left"></textarea>
+        <input name="fdf" type="text" placeholder="Your mail" ></input><br />
+        <textarea name="fdfd" placeholder="Your message" style="height:5em"></textarea>
         <span class="redagent-sendmail-button"></span>
     </fieldset>
 </p>
 </div>
 
-<footer class="cf" style="max-width:100%; margin: 19em 0 1em;border:none;">
+<footer class="cf" style="max-width:100%; margin: 19em 0 1em;">
     François-Xavier Aeberhard homepage
     <div style="float:right">
         ©2013 

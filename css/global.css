@@ -81,7 +81,7 @@ h1, h2, h3, h4, h5, h6 {
 p, ul, ol, dl, blockquote {
     font-size: 1em;
     line-height: 1.618em;
-    margin-bottom: 1.618em;
+    /* margin-bottom: 1.318em; */
     /*max-width: 30em;  Optimal width for long-form text */
 }
 
@@ -152,7 +152,7 @@ a, a:visited {
     color: #580000;
 }
 textarea, input[type=text] {
-    width: 96%;
+    width: 98.8%;
     border: 1px solid #580000;
     padding: 5px;
     margin-top: 5px;
@@ -175,6 +175,7 @@ h2 {
     margin-bottom: 1.68em;
     margin-top: 0.2em;
     font-style: italic;
+    font-size: 1.2em;
 }
 h3 { text-transform:uppercase; letter-spacing:0.12em; }
 h3, h4, h5, h6 { font-weight: bold; }
@@ -200,6 +201,7 @@ footer {
     border-top: 1px solid #580000;
     max-width: 71.4em;
     line-height: 1.1em;
+    padding-top: 4px;
 }
 
 footer p { float: left; margin-right:1em; }

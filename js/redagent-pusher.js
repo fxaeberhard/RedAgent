@@ -7,8 +7,9 @@
  */
 YUI.add("redagent-pusher", function(Y) {
 
-    var Pusher, PRESENCECHANNEL = "presence-redagent",
-            APPKEY = '9d4eb6ada84f3af3c77f';
+    var Pusher,
+        PRESENCECHANNEL = "presence-redagent",
+        APPKEY = '9d4eb6ada84f3af3c77f';
 
     Pusher = Y.Base.create("redagent-pusher", Y.Base, [], {
         initializer: function() {

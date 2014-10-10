@@ -64,7 +64,7 @@ function getFileContent($fileName) {
     else
         return null;
 }
-
+$cookie_name = 'Program_O_JSON_GUI';
 function get_convo_id() {
     global $cookie_name;
     session_name($cookie_name);
