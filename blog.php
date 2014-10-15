@@ -1,5 +1,4 @@
 <?php
-
-$page = "Projects";
+$page = "Blog";
 include "index.php"
 ?>

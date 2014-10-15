@@ -1,6 +1,6 @@
 ###################################################################OPTIONS DE L'INDEX
 Options -Indexes
-DirectoryIndex index.php
+DirectoryIndex index.php index.html
 
 ###################################################################We set error pages
 #ERROR TARGETS
@@ -41,6 +41,7 @@ DirectoryIndex index.php
 
 	RewriteRule ^contact\.html$ contact.php [L]
 	RewriteRule ^projects\.html$ projects.php [L]
+	RewriteRule ^blog\.html$ blog.php [L]
 	#########################################################
 </IfModule>
 

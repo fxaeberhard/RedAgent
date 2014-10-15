@@ -60,12 +60,21 @@ $convoId = get_convo_id();
                 ?>
             </article>
 
+            <!-- Blog page -->
+            <article class="redagent-page redagent-page-blog" <?php echo ($page !== "Blog") ? 'style="display:none;opacity: 0"' : '' ?>>
+                <?php
+                if ($page === "Blog") {
+                    include 'page-blog.php';
+                }
+                ?>
+            </article>
+
             <!-- Menu -->
             <article class="redagent-menu" <?php echo ($page === "Red agent") ? 'style="display:none;opacity: 0"' : '' ?>>
                 <!--style="display:none;opacity: 0"-->
                 <div role="main" class="cf">
                     <div class="redagent-closebutton"></div>
-                    <div class="redagent-submenu redagent-menu-project" <?php echo ($page !== "Projects") ? 'style="display:none;opacity: 0"' : '' ?>>
+                    <div class="redagent-submenu redagent-menu-projects" <?php echo ($page !== "Projects") ? 'style="display:none;opacity: 0"' : '' ?>>
                         <a href="#proggame" class="redagent-selected">2014</a>
                         <a href="#stalker" >2013</a>
                         <a href="#wegas" >2011</a>
@@ -73,6 +82,12 @@ $convoId = get_convo_id();
                         <a href="#3dblogosphere">2009</a>
                         <a href="#redcms">2005</a>
                         <a href="#schlempf">2004</a>
+                        <!--<a href="#yuimyadmin">2003</a>-->
+                    </div>
+
+
+                    <div class="redagent-submenu redagent-menu-blog" <?php echo ($page !== "Blog") ? 'style="display:none;opacity: 0"' : '' ?>>
+                        <a href="#2014" class="redagent-selected">2014</a>
                         <!--<a href="#yuimyadmin">2003</a>-->
                     </div>
                 </div>
@@ -106,6 +121,7 @@ $convoId = get_convo_id();
                             ©2013 
                             <a class="redagent-nav-projects" href="projects.html">Projects</a>
                             | <a class="redagent-nav-contact" href="contact.html">Contact</a>
+                            | <a class="redagent-nav-blog" href="blog.html">Blog</a>
                             | Created with <a target="_blank" href="http://redcms.red-agent.com">RedCMS</a>
                         </div>
                     </footer>
@@ -156,15 +172,12 @@ $convoId = get_convo_id();
                         convoId = "<?php echo $convoId; ?>",
                         controller = new Y.RedAgent.Controller(), // Pages controller (history, loading, etc.)
                         pusher = new Y.RedAgent.Pusher(), // Websocket facade
-                        display = new Y.RedAgent.Display(), // Render Crafty drawing area (canvas)
+                        display = new Y.RedAgent.Display().render(Y.one(".cr")), // Render Crafty drawing area (canvas)
                         chat = new Y.RedAgent.Chat({
                             srcNode: ".scrollview-container div"
-                        });
-                    display.render(Y.one(".cr"));
+                        }).render();                                            // Render chat              
 
-                    chat.render();                                              // Render chat
-
-                    //controller.sync();                                          // Sync pages
+                    //controller.sync();                                        // Sync pages
 
                     Y.on("domready", function() {
                         chat.on("chatEnter", function(e) {                      // When chat input is entered
@@ -247,23 +260,29 @@ $convoId = get_convo_id();
                     bd.delegate("click", controller.closePage, ".redagent-closebutton", controller);// Close button click
                     bd.delegate("click", controller.showPage, "a.redagent-nav-projects", controller, "Projects");// Nav click
                     bd.delegate("click", controller.showPage, "a.redagent-nav-contact", controller, "Contact");
+                    bd.delegate("click", controller.showPage, "a.redagent-nav-blog", controller, "Blog");// Nav click
 
                     var updateScroll = function() {
-                        var target, found = false;
-                        Y.all(".redagent-page-projects .cf > *[id]").each(function(n) {
-                            if (found) {
-                            } else if (n.get("id") && n.get("docScrollY") + 70 < n.get("region").top) {
-                                found = true;
-                            } else {
-                                target = n.get("id");
+                        var doUpdate = function(pageName) {
+                            var target, found = false;
+                            Y.all(".redagent-page-" + pageName + " .cf > *[id]").each(function(n) {
+                                if (found) {
+                                } else if (n.get("id") && n.get("docScrollY") + 60 < n.get("region").top) {
+                                    found = true;
+                                } else {
+                                    target = n.get("id");
+                                }
+                            });
+                            if (target && Y.one("a[href='#" + target + "']")) {
+                                Y.all(".redagent-menu-" + pageName + " .redagent-selected").removeClass("redagent-selected");
+                                Y.one("a[href='#" + target + "']").addClass("redagent-selected");
                             }
-                        });
-                        if (target && Y.one("a[href='#" + target + "']")) {
-                            Y.all(".redagent-selected").removeClass("redagent-selected");
-                            Y.one("a[href='#" + target + "']").addClass("redagent-selected");
-                        }
+                        };
+                        doUpdate("projects");
+                        doUpdate("blog");
                     };
                     window.onscroll = updateScroll;
+                    bb.delegate("click", updateScroll, "a.redagent-nav-projects, a.redagent-nav-blog");
                     updateScroll();
                     //bd.delegate("click", function(e) {
                     //    Y.one(e.currentTarget.getAttribute("href")).scrollIntoView();

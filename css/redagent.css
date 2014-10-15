@@ -81,25 +81,25 @@ html {
 .redagent-menu .cf {    
     padding: 0.6em 2em;
 }
-.redagent-menu-project {
+.redagent-submenu {
     display: inline-block;  
     letter-spacing: normal; 
     word-spacing: normal;  
     vertical-align: top;  
     margin-top: 0px;
 }
-.redagent-menu-project a {
+.redagent-submenu a {
     padding: 0.1em 0.6em 0.1em 0.8em;
     text-decoration: none;
     margin: 0;
     float: left;
     display: inline-block;
 }
-.redagent-menu-project a:hover {
+.redagent-submenu a:hover {
     background-color: darkgray;
     color: white;
 }
-.redagent-menu-project a.redagent-selected {
+.redagent-submenu a.redagent-selected {
     color: inherit;
     background: #EDEDED;
     cursor: default;

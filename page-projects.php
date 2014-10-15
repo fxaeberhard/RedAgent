@@ -166,11 +166,11 @@ require_once 'php/Tools.php';
 
                 foreach ($files as $entry) {
                     ?>
-                    <a rel="shadowbox[Blogo]" href="<?php echo $entry ?>">
+                    <a rel="shadowbox[Wallo]" href="<?php echo $entry ?>">
                         <img src="<?php echo str_replace($dir, $dir . "/mini", $entry) ?>"/>
                     </a>
                 <?php } ?>
-                <a rel="shadowbox[Blogo];width=720;height=404;player=flv;" href="wallogram/assets/screenshots/Wallogram-Montage.mp4">
+                <a rel="shadowbox[Wallo];width=720;height=404;player=flv;" href="wallogram/assets/screenshots/Wallogram-Montage.mp4">
                     <img src="images/projects/wallogram/mini/Wallogram-Montage.png"/>
                 </a>
             </span>
@@ -192,7 +192,7 @@ require_once 'php/Tools.php';
                 <td style="font-style: normal">
                     <a href="http://www.red-agent.com/wallogram/" target="_blank">Demo</a> | 
                     <a href="https://github.com/fxaeberhard/Wallogram" target="_blank">Sources</a> | 
-                    <a rel="shadowbox[Blogo]" href="images/projects/wallogram/20140321_124232.jpg">Screenshots</a>
+                    <a rel="shadowbox[Wallo]" href="images/projects/wallogram/20140321_124232.jpg">Screenshots</a>
                 </td>
             </tr>
             <tr>
@@ -340,34 +340,6 @@ require_once 'php/Tools.php';
     </aside>
 
 
-    <!--  DTouch -->
-    <p class="redagent-cl"></p>
-    <p class="redagent-spacer" id="dtouch"></p>
-    <p class="redagent-page-img" >
-        <!--<img class="redagent-image" data-src="images/projects/dtouch_420.jpg" />-->
-        <img src="images/projects/dtouch_420.jpg" />
-    </p>
-    <aside class="redagent-page-text">
-        <p class="redagent-date">February 2009</p>
-        <h1>Audio D-Touch</h1>
-        <h2>Semester project at Design and Media Laboratory (LDM, EPFL)</h2>
-        <p class="redagent-content">
-            Design, prototype and user study on a tangible user interface 
-            (TUI) for audio sequencing, D-Touch.
-        </p>
-        <table>
-            <tr>
-                <td  class="colum-right">Links</td>
-                <td style="font-style: normal">
-                    <a href="http://www.d-touch.org/audio/" target="_blank" href="dtouch">Project homepage</a>
-                </td>
-            </tr>
-            <tr>
-                <td  class="colum-right">Technologies</td>
-                <td>C++</td>
-            </tr>
-        </table>
-    </aside>
 
 
     <!-- Redcms -->
@@ -434,6 +406,35 @@ require_once 'php/Tools.php';
                     <a rel="shadowbox" href="images/projects/webdesign/micronarc.png">micronarc.ch</a>,
                     <a href="#">fag-avenches.ch</a>,
                     <a rel="shadowbox" href="images/projects/webdesign/Timetotime-v2-02.jpg" >timetotime.com</a>
+            </tr>
+        </table>
+    </aside>
+
+    <!--  DTouch -->
+    <p class="redagent-cl"></p>
+    <p class="redagent-spacer" id="dtouch"></p>
+    <p class="redagent-page-img" >
+        <!--<img class="redagent-image" data-src="images/projects/dtouch_420.jpg" />-->
+        <img src="images/projects/dtouch_420.jpg" />
+    </p>
+    <aside class="redagent-page-text">
+        <p class="redagent-date">February 2009</p>
+        <h1>Audio D-Touch</h1>
+        <h2>Semester project at Design and Media Laboratory (LDM, EPFL)</h2>
+        <p class="redagent-content">
+            Design, prototype and user study on a tangible user interface 
+            (TUI) for audio sequencing, D-Touch.
+        </p>
+        <table>
+            <tr>
+                <td  class="colum-right">Links</td>
+                <td style="font-style: normal">
+                    <a href="http://www.d-touch.org/audio/" target="_blank" href="dtouch">Project homepage</a>
+                </td>
+            </tr>
+            <tr>
+                <td  class="colum-right">Technologies</td>
+                <td>C++</td>
             </tr>
         </table>
     </aside>

@@ -64,9 +64,8 @@ YUI.add("redagent-controller", function(Y) {
                 Y.one(".redagent-menu").show(true);                             // Show menu
                 targetNode.show(true).addClass("redagent-page-loading");        // Show page
                 this.currentPage = title;                                       // Save current page
-                if (title === "Projects") {
-                    Y.all(".redagent-submenu").show(true);
-                }
+
+                Y.all(".redagent-menu-" + title.toLowerCase()).show(true);      // Show current menu
 
                 if (!Crafty.isPaused())
                     Y.later(1000, Crafty, Crafty.pause());
@@ -132,7 +131,7 @@ YUI.add("redagent-controller", function(Y) {
         },
         getPath: function() {
             var loc = window.location.pathname;
-            return loc.substring(0, loc.lastIndexOf('/')+1);
+            return loc.substring(0, loc.lastIndexOf('/') + 1);
         }
     });
     Y.namespace("RedAgent").Controller = Controller;
