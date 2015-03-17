@@ -139,8 +139,8 @@ $convoId = get_convo_id();
         <script type="text/javascript" src="js/lib/modernizr-1.7.min.js"></script>
 
         <!-- YUI3 -->
-        <!--<script type="text/javascript" src="http://yui.yahooapis.com/3.12.0/build/yui/yui-min.js"></script>-->
-        <script type="text/javascript" src="js/lib/yui3/build/yui/yui-min.js"></script>
+        <!--<script type="text/javascript" src="http://yui.yahooapis.com/3.18.1/build/yui/yui-min.js"></script>-->
+        <script type="text/javascript" src="lib/yui3/build/yui/yui-min.js"></script>
 
         <!-- Pusher -->
         <script type="text/javascript" src="http://js.pusher.com/2.2/pusher.min.js"></script>
