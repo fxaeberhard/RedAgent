@@ -130,12 +130,16 @@ html {
     widtH: 100%;
 }
 .redagent-sendmail-button .yui3-button {
-    padding: 0.5em 3.7em 0.4em 5.2em;
+    padding: 0.5em 3.7em 0.6em;
     max-width: 100%;
     font-size: 1.1em;
     font-weight: bold;
     /*text-transform: uppercase;*/
-    background: #580000 url(../images/mail.png) 3.2em 13px no-repeat!important;
+    /* background: #580000 url(../images/mail.png) 3.2em 13px no-repeat!important; */
+    /* vertical-align: bottom; */
+}
+.redagent-sendmail-button .yui3-button i {
+    font-size: 1.2em;
 }
 /** Display style */
 .yui3-redagent-display #cr-stage {

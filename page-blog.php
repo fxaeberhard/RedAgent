@@ -1,6 +1,7 @@
 <?php
-require_once 'php/Tools.php';
-?><div role="main" class="cf">
+require_once 'Tools.php';
+?>
+<div role="main" class="cf">
 
     <div style="height:.3em">.</div>
 
@@ -597,12 +598,6 @@ require_once 'php/Tools.php';
     -->
 
 </div>
-<footer class="cf" style="max-width:100%; margin: 5em 0 1em;">
-    François-Xavier Aeberhard homepage
-    <div style="float:right">
-        ©2013 
-        <a class="redagent-nav-projects" href="projects.html">Projects</a>
-        | <a class="redagent-nav-contact" href="contact.html">Contact</a>
-        | Created with <a target="_blank" href="http://redcms.red-agent.com">RedCMS</a>
-    </div>
+<footer class="cf" style="max-width:100%; margin: 5em 0 1em;">    
+    <?php include 'footer.php'; ?>
 </footer>

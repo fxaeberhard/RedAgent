@@ -139,7 +139,7 @@ This file contains the unique styles  which do not appear in /css/global.css
     font-family: "Din";
     font-style: normal;
     font-weight: bold;
-    src: url("../fonts/DIN Black.ttf");
+    src: url("../fonts/DINB.ttf");
 }
 
 html {

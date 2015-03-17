@@ -1,6 +1,7 @@
 <?php
 require_once 'php/Tools.php';
 
+$page = filter_input(INPUT_GET, 'page');
 if (!isset($page)) {
     $page = "Red agent";
 }
@@ -9,32 +10,28 @@ $convoId = get_convo_id();
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title><?php echo $page ?> - Francois-Xavier Aeberhard</title>
+        <title><?php echo ucfirst($page) ?> - Francois-Xavier Aeberhard</title>
+        <meta name="author" content="Francois-Xavier Aeberhard" />
+        <meta name="contact" content="fx@red-agent.com" />
+        <meta name="keywords" content="françois-xavier, aeberhard, gamedesign, webdesign, user experience" />
         <meta name="description" content="">
-        <meta name="author" content="Francois-Xavier Aeberhard">
-        <meta name="contact" content="fx@red-agent.com">
-        <meta name="keywords" content="françois-xavier, aeberhard, gamedesign, webdesign, user experience">
-        <meta charset="utf-8">
-        <meta name="robots" content="index, follow">
+        <meta charset="utf-8" />
+        <meta name="robots" content="index, follow" />
         <meta http-equiv="cleartype" content="on" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="shortcut icon" href="favicon.ico" />
 
-        <link rel="shortcut icon" href="favicon.ico">
-        <!--<link rel="apple-touch-icon" href="link to touch icon">-->
-
-        <!-- Shadowbox -->
-        <link rel="stylesheet" type="text/css" href="js/lib/shadowbox/shadowbox.css">
-
-        <!-- Layout -->
-        <link rel="stylesheet" href="css/global.css" media="all">
-        <link rel="stylesheet" href="css/layout.css" media="all and (min-width: 53.236em)">
-        <!--[if (lt IE 9) & (!IEMobile)]>
-        <link rel="stylesheet" href="css/example/layout.css" media="all">
-        <![endif]-->
+        <!-- CSS Libraries (shadobox, fontawesome) -->
+        <link rel="stylesheet" href="php/min/f=lib/shadowbox/shadowbox.css,lib/font-awesome/css/font-awesome.min.css" />
 
         <!-- Site styles -->
-        <link rel="stylesheet" href="css/redagent.css" media="all">
+        <link rel="stylesheet" href="css/global.css" media="all" />
+        <link rel="stylesheet" href="css/layout.css" media="all and (min-width: 53.236em)" />
+        <!--[if (lt IE 9) & (!IEMobile)]>
+        <link rel="stylesheet" href="css/layout.css" media="all" />
+        <![endif]-->
+        <link rel="stylesheet" href="css/redagent.css" media="all" />
 
     </head>
 
@@ -42,39 +39,25 @@ $convoId = get_convo_id();
 
         <div id="container" class="cf">
 
-            <!-- Contact-page -->
-            <article class="redagent-page redagent-page-contact" <?php echo ($page !== "Contact") ? 'style="display:none;opacity: 0"' : '' ?> >
-                <?php
-                if ($page === "Contact") {
-                    include 'page-contact.php';
-                }
+            <?php
+            $pages = array("contact", "projects", "blog");
+            foreach ($pages as $p) {
                 ?>
-            </article>
-
-            <!-- Projects page -->
-            <article class="redagent-page redagent-page-projects" <?php echo ($page !== "Projects") ? 'style="display:none;opacity: 0"' : '' ?>>
-                <?php
-                if ($page === "Projects") {
-                    include 'page-projects.php';
-                }
-                ?>
-            </article>
-
-            <!-- Blog page -->
-            <article class="redagent-page redagent-page-blog" <?php echo ($page !== "Blog") ? 'style="display:none;opacity: 0"' : '' ?>>
-                <?php
-                if ($page === "Blog") {
-                    include 'page-blog.php';
-                }
-                ?>
-            </article>
+                <article class="redagent-page redagent-page-<?php echo $p ?>" <?php echo ($page !== $p) ? 'style="display:none;opacity: 0"' : '' ?> >
+                    <?php
+                    if ($page === $p) {
+                        include "page-$p.php";
+                    }
+                    ?>
+                </article>
+            <?php } ?>
 
             <!-- Menu -->
             <article class="redagent-menu" <?php echo ($page === "Red agent") ? 'style="display:none;opacity: 0"' : '' ?>>
-                <!--style="display:none;opacity: 0"-->
                 <div role="main" class="cf">
                     <div class="redagent-closebutton"></div>
-                    <div class="redagent-submenu redagent-menu-projects" <?php echo ($page !== "Projects") ? 'style="display:none;opacity: 0"' : '' ?>>
+
+                    <div class="redagent-submenu redagent-menu-projects" <?php echo ($page !== "projects") ? 'style="display:none;opacity: 0"' : '' ?>>
                         <a href="#proggame" class="redagent-selected">2014</a>
                         <a href="#stalker" >2013</a>
                         <a href="#wegas" >2011</a>
@@ -85,8 +68,7 @@ $convoId = get_convo_id();
                         <!--<a href="#yuimyadmin">2003</a>-->
                     </div>
 
-
-                    <div class="redagent-submenu redagent-menu-blog" <?php echo ($page !== "Blog") ? 'style="display:none;opacity: 0"' : '' ?>>
+                    <div class="redagent-submenu redagent-menu-blog" <?php echo ($page !== "blog") ? 'style="display:none;opacity: 0"' : '' ?>>
                         <a href="#2014" class="redagent-selected">2014</a>
                         <!--<a href="#yuimyadmin">2003</a>-->
                     </div>
@@ -94,13 +76,11 @@ $convoId = get_convo_id();
             </article>
 
             <!-- Main page -->
-            <article class="redagent-page-main">
-                <header></header>
-
-                <div id="main" role="main" class="cf" style="padding-top:10px">
+            <article>
+                <div id="main" role="main" class="cf">
 
                     <!-- Crafty stage -->
-                    <p class="intro cr" style="float:left"></p>
+                    <p class="intro cr"></p>
 
                     <!-- Chat -->
                     <aside>
@@ -116,14 +96,7 @@ $convoId = get_convo_id();
                     <div style="clear:both"></div>
 
                     <footer class="cf">
-                        François-Xavier Aeberhard homepage
-                        <div style="float:right">
-                            ©2013 
-                            <a class="redagent-nav-projects" href="projects.html">Projects</a>
-                            | <a class="redagent-nav-contact" href="contact.html">Contact</a>
-                            | <a class="redagent-nav-blog" href="blog.html">Blog</a>
-                            | Created with <a target="_blank" href="http://redcms.red-agent.com">RedCMS</a>
-                        </div>
+                        <?php include 'php/footer.php'; ?>
                     </footer>
 
                 </div><!-- /main -->

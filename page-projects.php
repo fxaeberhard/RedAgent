@@ -1,26 +1,30 @@
 <?php
 require_once 'php/Tools.php';
-?><div role="main" class="cf">
+
+function renderGallery($dir) {
+    $path = "images/projects/" . $dir . "/";
+    $files = listdir($path);
+    sort($files, SORT_LOCALE_STRING);
+    foreach ($files as $entry) {
+        echo '<a rel="shadowbox[' . $dir . ']" href="' . $entry . '">'
+        . '<img src="' . str_replace($path, $path . "/mini", $entry) . '"/>'
+        . '</a>';
+    }
+}
+?>
+<div role="main" class="cf">
 
     <div style="height:.3em">.</div>
 
     <!-- Programming game -->
     <p class="redagent-cl " id="proggame"></p>
-    <p class="redagent-spacer"></p>
+    <p class="redagent-spacer" style="border-color:white;margin: 0;margin-top: 2.8em;"></p>
     <p class="redagent-page-img">
         <span>
             <span class="slideshow" style="min-height: 229px;">
                 <?php
-                $dir = "images/projects/proggame";
-                $files = listdir($dir);
-                sort($files, SORT_LOCALE_STRING);
-
-                foreach ($files as $entry) {
-                    ?>
-                    <a rel="shadowbox[proggame]" href="<?php echo $entry ?>">
-                        <img src="<?php echo str_replace($dir, $dir . "/mini", $entry) ?>"/>
-                    </a>
-                <?php } ?>
+                renderGallery("proggame");
+                ?>
             </span>
         </span>
     </p>
@@ -62,16 +66,8 @@ require_once 'php/Tools.php';
         <span>
             <span class="slideshow" style="min-height:280px;">
                 <?php
-                $dir = "images/projects/stalker";
-                $files = listdir($dir);
-                sort($files, SORT_LOCALE_STRING);
-
-                foreach ($files as $entry) {
-                    ?>
-                    <a rel="shadowbox[stalker]" href="<?php echo $entry ?>">
-                        <img src="<?php echo str_replace($dir, $dir . "/mini", $entry) ?>"/>
-                    </a>
-                <?php } ?>
+                renderGallery("stalker");
+                ?>
             </span>
         </span>
     </p>
@@ -110,16 +106,8 @@ require_once 'php/Tools.php';
         <span>
             <span class="slideshow" style="min-height: 229px;">
                 <?php
-                $dir = "images/projects/wegas";
-                $files = listdir($dir);
-                sort($files, SORT_LOCALE_STRING);
-
-                foreach ($files as $entry) {
-                    ?>
-                    <a rel="shadowbox[wegas]" href="<?php echo $entry ?>">
-                        <img src="<?php echo str_replace($dir, $dir . "/mini", $entry) ?>"/>
-                    </a>
-                <?php } ?>
+                renderGallery("wegas");
+                ?>
             </span>
         </span>
     </p>
@@ -160,16 +148,8 @@ require_once 'php/Tools.php';
         <span>
             <span class="slideshow">
                 <?php
-                $dir = "images/projects/wallogram";
-                $files = listdir($dir);
-                sort($files, SORT_LOCALE_STRING);
-
-                foreach ($files as $entry) {
-                    ?>
-                    <a rel="shadowbox[Wallo]" href="<?php echo $entry ?>">
-                        <img src="<?php echo str_replace($dir, $dir . "/mini", $entry) ?>"/>
-                    </a>
-                <?php } ?>
+                renderGallery("wallogram");
+                ?>
                 <a rel="shadowbox[Wallo];width=720;height=404;player=flv;" href="wallogram/assets/screenshots/Wallogram-Montage.mp4">
                     <img src="images/projects/wallogram/mini/Wallogram-Montage.png"/>
                 </a>
@@ -301,19 +281,10 @@ require_once 'php/Tools.php';
     <!--  3D  Blogosphere-->
     <p class="redagent-page-img">
         <span>
-            <span class="slideshow">
+            <span class="slideshow">   
                 <?php
-                $dir = "images/projects/3DBlogosphere";
-                $files = listdir($dir);
-                sort($files, SORT_LOCALE_STRING);
-
-                foreach ($files as $entry) {
-                    ?>
-                    <a rel="shadowbox[Blogo]" href="<?php echo $entry ?>">
-                        <!--<img class="redagent-image" data-src="<?php echo str_replace($dir, $dir . "/mini", $entry) ?>"/>-->
-                        <img src="<?php echo str_replace($dir, $dir . "/mini", $entry) ?>"/>
-                    </a>
-                <?php } ?>
+                renderGallery("3DBlogosphere");
+                ?>
             </span>
         </span>
     </p>
@@ -353,22 +324,13 @@ require_once 'php/Tools.php';
                     <img src="images/projects/redcms-logo.jpg" />
                 </a>
                 <?php
-                $dir = "images/projects/webdesign";
-                $files = listdir($dir);
-                sort($files, SORT_LOCALE_STRING);
-
-                foreach ($files as $entry) {
-                    ?>
-                    <a rel="shadowbox[Webdesign]" href="<?php echo $entry ?>">
-                        <img src="<?php echo str_replace($dir, $dir . "/mini", $entry) ?>"/>
-                        <!--<img class="redagent-image" data-src="<?php echo str_replace($dir, $dir . "/mini", $entry) ?>"/>-->
-                    </a>
-                <?php } ?>
+                renderGallery("webdesign");
+                ?>
             </span>
         </span>
     </p>
     <aside class="redagent-page-text">
-        <p class="redagent-date">January 2005 - August 2009</p>
+        <p class="redagent-date" >January 2005 - August 2009</p>
         <h1><a href="http://redcms.red-agent.com" target="_blank">RedCMS</a></h1>
         <h2>Freelance web designer</h2>
 
@@ -492,7 +454,7 @@ require_once 'php/Tools.php';
         <p class="redagent-content">
             YUIMyAdmin is an web-based front-end to manage databases using the 
             Yahoo! User Interface (YUI) javascript library. Written in php and using the ADOdb abstraction
-            layer for the database. It is licensed under GNU General Public License V3.0
+            layer for the database. It is licensed under GNU General Public License V3.0.
         </p>
 
         <table>
@@ -511,99 +473,7 @@ require_once 'php/Tools.php';
         </table>
     </aside>
 
-
-    <!--
-        SDN
-       <p class="redagent-page-img">
-           <a href="http://www.swissdesignnetwork.org/" target="_blank">
-               <img src="images/projects/sdn_420.jpg" />
-           </a>
-       </p>
-       <aside class="redagent-page-text">
-           <h1>
-               <a href="http://www.swissdesignnetwork.org/" target="_blank">swissdesignnetwork.org</a>
-           </h1>
-           <span class="redagent-links">
-               <a href="http://www.swissdesignnetwork.org/" target="_blank">website</a>
-           </span>
-           <span class="redagent-content">
-               Website of the association of the swiss art schools.
-           </span>
-           <span class="redagent-footer">
-               RedCMS, Javascript (YUI3 Framework), PHP, HTML, CSS
-           </span>
-       </aside>
-       <p class="redagent-cl redagent-spacer"></p>-->
-    <!--
-    
-      <div>
-                        <div class="redagent-left">
-                        <div class="redagent-right">   </div>
-                    </div>
-    
-                    <div class>
-                        <div class="redagent-left">
-                            <a href="http://www.swissdesignnetwork.org/" target="_blank">
-                                <img src="images/projects/sdn_420.jpg" />
-                            </a>
-                        </div>
-                        <div class="redagent-right">
-                            <h1>
-                                <a href="http://www.swissdesignnetwork.org/" target="_blank">swissdesignnetwork.org</a>
-                            </h1>
-                            <div class="redagent-links">
-                                <a href="http://www.swissdesignnetwork.org/" target="_blank">website</a>
-                            </div>
-                            <div class="redagent-content">
-                                Website of the association of the swiss art schools.
-                            </div>
-                            <div class="redagent-footer">
-                                RedCMS, Javascript (YUI3 Framework), PHP, HTML, CSS
-                            </div>
-                        </div>
-                    </div>
-    
-                    <div>
-                        <div class="redagent-left">
-                            <a href="http://www.smagonline.ch/" target="_blank"><img src="images/projects/smag_420.jpg" /></a>
-                        </div>
-                        <div class="redagent-right">
-                            <h1>
-                                <a href="http://www.smagonline.ch/" target="_blank">smagonline.ch</a>
-                            </h1>
-                            <div class="redagent-links">
-                                <a href="http://www.smagonline.ch/" target="_blank">website</a>
-                            </div>
-                            <div class="redagent-content">
-                                Website for the Antesthesist's association of Geneva</div>
-                            <div class="redagent-footer">
-                                RedCMS, Javascript (YUI3 Framework), PHP, HTML, CSS
-                            </div>
-                        </div>
-                    </div>
-    
-    
-    
-                    <div><div class="redagent-left"><div><a href="http://www.marisolimage.ch" target="_blank"><img src="images/projects/marisolimage_420.jpg" /></a></div></div><div class="redagent-right"><h1><a href="http://www.marisolimage.ch" target="_blank">MarisolImage.ch</a></h1><h2></h2><div class="redagent-links"><a href="http://www.marisolimage.ch" target="_blank">website</a><br /></div><div class="redagent-content">Website for a private Image consulting agency.</div><div class="redagent-footer">Javascript (YUI 3 Framework), PHP, Smarty, HTML, CSS</div></div></div>
-    
-                    <div><div class="redagent-left"><div><a href="http://www.hopiclowns.ch/" target="_blank"><img src="images/projects/hopiclowns_420.jpg" /></a></div></div><div class="redagent-right"><h1><a href="http://www.hopiclowns.ch/" target="_blank">Hopiclowns.ch</a></h1><div class="redagent-links"><a href="http://www.hopiclowns.ch/" target="_blank">website</a><br /></div><div class="redagent-content"></div><div class="redagent-footer">RedCMS, Javascript (YUI3 Framework), PHP, HTML, CSS</div></div></div>
-    
-    
-    
-                    <div><div class="redagent-left"><div style="text-align:center"><a href="http://www.velo-migrateur.com/" target="_blank"><img src="images/projects/velomigrateur_420.jpg" /></a></div></div><div class="redagent-right"><h1><a href="http://www.velo-migrateur.com/" target="_blank">Velo-Migrateur.com</a></h1><div class="redagent-links"><a href="http://www.velo-migrateur.com/" target="_blank">website</a><br /></div><div class="redagent-content"></div><div class="redagent-footer">RedCMS, Javascript (YUI3 Framework), PHP, HTML, CSS</div></div></div>
-    
-                    <div><div class="redagent-left"><div style="text-align:center"><a href="http://www.one-appointment.com/" target="_blank"><img src="images/projects/oneapointment_420.jpg" /></a></div></div><div class="redagent-right"><h1><a href="http://www.one-appointment.com/" target="_blank">one-appointment.com</a></h1><div class="redagent-links"><a href="http://www.one-appointment.com/" target="_blank">website</a><br /></div><div class="redagent-content"></div><div class="redagent-footer">Javascript (YUI3 Framework), PHP, HTML, CSS</div></div></div>
-    
-                    <div><div class="redagent-left"><div style="text-align:center"><a href="http://www.freshprod.com/" target="_blank"><img src="images/projects/web-fresh.jpg" /></a></div></div><div class="redagent-right"><h1><a href="http://www.freshprod.com/" target="_blank">FreshProd.com</a></h1><div class="redagent-links"><a href="http://www.freshprod.com/" target="_blank">website</a><br /></div><div class="redagent-content">Fresh Prod is a Filmmakers Collective.</div><div class="redagent-footer">Javascript (YUI3 Framework), PHP, HTML, CSS</div></div></div>
-    -->
-
 </div>
 <footer class="cf" style="max-width:100%; margin: 5em 0 1em;">
-    François-Xavier Aeberhard homepage
-    <div style="float:right">
-        ©2013 
-        <a class="redagent-nav-projects" href="projects.html">Projects</a>
-        | <a class="redagent-nav-contact" href="contact.html">Contact</a>
-        | Created with <a target="_blank" href="http://redcms.red-agent.com">RedCMS</a>
-    </div>
+    <?php include 'footer.php'; ?>
 </footer>

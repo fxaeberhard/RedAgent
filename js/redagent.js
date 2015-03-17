@@ -53,6 +53,7 @@ YUI({
             }
 
             pusher.channel.bind("client-chat", function(e) {                    // When a chat message is received through websocket
+                controller.playNotification();
                 chat.say(e.name, e.msg);                                        // display it in the chat
                 display.say(e.id, e.msg);
             });

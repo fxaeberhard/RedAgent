@@ -39,9 +39,9 @@ DirectoryIndex index.php index.html
 	RewriteRule ^User+Experience/$ http://www.red-agent.com/projects.html  [R=301,L]
 	RewriteRule ^Games/$ http://www.red-agent.com/projects.html  [R=301,L]
 
-	RewriteRule ^contact\.html$ contact.php [L]
-	RewriteRule ^projects\.html$ projects.php [L]
-	RewriteRule ^blog\.html$ blog.php [L]
+	RewriteRule ^contact\.html$ index.php?page=contact [L]
+	RewriteRule ^projects\.html$ index.php?page=projects [L]
+	RewriteRule ^blog\.html$ index.php?page=blog [L]
 	#########################################################
 </IfModule>
 
