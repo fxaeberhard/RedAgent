@@ -24,9 +24,7 @@ YUI.add("redagent-display", function(Y) {
 
             this.iso = Crafty.isometric.size(TILEWIDTH);                        // Init isometric layout
 
-            if (Crafty.support.canvas) {
-                Crafty.canvas.init();
-            }
+            Crafty.support.canvas && Crafty.canvas.init();
 
             var x, y, tile;
             for (x = 12; x >= 0; x--) {                                         // Init grid
@@ -45,25 +43,37 @@ YUI.add("redagent-display", function(Y) {
                     this.iso.place(x, y, 0, tile);
                 }
             }
-            this.player = Crafty.e('PlayablePC')
-                .attr({x: 390, y: 250, z: 200});                                // Init player
+            var player = this.player = Crafty.e('PlayablePC')
+                .attr({x: 390, y: 250, z: 200})
+                .label("You");                                                  // Init player
 
-            this.addLabel(this.player, "You");                                  // Add label to current player
+            $(player._label._element).editable(function(value) {                // Make current player label editable
+                player._label.text(value);
+                return value;
+            }, {
+                indicator: 'Saving...',
+                submit: 'OK',
+                tooltip: 'Click to edit...',
+                width: 70,
+                select: true,
+                onblur: "submit"
+            });
 
             Crafty.e("House")                                                   // Init houses
                 .attr({
                     x: 384, y: 52, z: 210,
-                    targetPage: "Projects"
+                    targetPage: "projects"
                 });
             Crafty.e("House")                                                   // Init houses
                 .attr({
                     x: 64, y: 339, z: 220,
-                    targetPage: "Contact"
+                    targetPage: "contact"
                 });
 
-            this.bot = Crafty.e("Actor, BotSprite")                             // Init bot
-                .attr({x: 650, y: 400, z: 200});
-            this.addLabel(this.bot, "Red agent").css({"width": "5.1em"});
+            this.bot = Crafty.e("Actor, Character, BotSprite")                  // Init bot
+                .attr({x: 650, y: 400, z: 200})
+                .label("Red agent");
+            this.bot._label.css({width: "5.1em"});
         },
         bindUI: function() {
             // Move map on click
@@ -93,22 +103,11 @@ YUI.add("redagent-display", function(Y) {
         addPlayer: function(cfg) {
             Y.log("addPlayer()", "info", "RedAgent.Display");
             var entity = Crafty.e('NotPlayablePC')
-                .attr({x: 400, y: 200, z: 200});                                // Init player
-            this.addLabel(entity, "Anonymous");
+                .attr({x: 400, y: 200, z: 200})
+                .label("Anonymous");                                            // Init player
 
             this.players[cfg.id] = entity;
             return entity;
-        },
-        addLabel: function(entity, label) {
-            var text = Crafty.e("2D, DOM, Text");
-            text.text(label)
-                .attr({x: entity.x + 24, y: entity.y + 60, z: 400})
-                .css({"text-align": "center", "background-color": "rgba(128, 128, 128, 0.7)",
-                    "color": "white", "border-radius": "2px", "line-height": "1.3em",
-                    "padding": "0.2em 0.5em"
-                });
-            entity.attach(text);
-            return text;
         },
         say: function(entity, text) {
             if (entity === "You") {
@@ -118,51 +117,7 @@ YUI.add("redagent-display", function(Y) {
             } else {
                 entity = this.getPlayer(entity);
             }
-
-            var textE = Crafty.e("2D, DOM, Text")
-                .text(text)
-                .attr({
-                    x: entity.x - 125,
-                    y: entity.y - 20,
-                    z: 401,
-                    visible: false
-                })
-                .css({"background-color": "white", "color": "#580000",
-                    "border": "1px solid #580000", "line-height": "1.1em",
-                    "font-size": "0.9em", "padding": "0.4em",
-                    "width": "12em", visibility: "hidden"  //"max-width": "20em"
-                }),
-                connector = Crafty.e("2D, DOM").css({
-                background: "url(images/dialogConnector.png) 0 0",
-                width: "32px",
-                height: "32px",
-                visibility: "hidden"
-            }).attr({
-                z: 402,
-                visible: false
-            });
-
-            textE.bind("Draw", function() {
-                this.unbind("Draw");
-                Y.later(10, this, function() { // Attach a little later so the font file has enough time to be loaded
-                    this.attr({
-                        x: entity.x - (this._element.offsetWidth / 2) + 14,
-                        y: entity.y - this._element.offsetHeight - 10
-                    });
-                    connector.attr({
-                        x: entity.x + 10,
-                        y: entity.y - 19
-                    });
-                    this.visible = true;
-                    connector.visible = true;
-                });
-            });
-
-            entity.attach(textE);
-            textE.attach(connector);
-
-            Y.later(3500, textE, textE.destroy);                                // Destroy after 3.5 sec
-            return textE;
+            entity.say(text);
         }
     });
     Y.namespace("RedAgent").Display = Display;
@@ -219,15 +174,81 @@ YUI.add("redagent-display", function(Y) {
                 this.sprite(0, 2, 1, 1);
         }
     });
-    Crafty.c('PlayerCharacter', {// Main characters (self and others)
+
+    Crafty.c("Character", {
+        label: function(label) {
+            if (!this._label) {
+                this._label = Crafty.e("2D, DOM, Text").attr({x: this.x + 24, y: this.y + 60, z: 400})
+                    .css({
+                        "text-align": "center", "background-color": "rgba(128, 128, 128, 0.7)",
+                        "color": "white", "border-radius": "2px", "line-height": "1.3em",
+                        "padding": "0.2em 0.5em"
+                    });
+                this.attach(this._label);
+            }
+            this._label.text(label);
+            return this;
+        },
+        say: function(text) {
+            var that = this,
+                textE = Crafty.e("2D, DOM, Text")
+                .text(text)
+                .attr({
+                    x: this.x - 125,
+                    y: this.y - 20,
+                    z: 401,
+                    visible: false
+                })
+                .css({
+                    "background-color": "white", "color": "#580000",
+                    "border": "1px solid #580000", "line-height": "1.1em",
+                    "font-size": "0.9em", "padding": "0.4em",
+                    "width": "12em", visibility: "hidden"  //"max-width": "20em"
+                }),
+                connector = Crafty.e("2D, DOM").css({
+                background: "url(images/dialogConnector.png) 0 0",
+                width: "32px",
+                height: "32px",
+                visibility: "hidden"
+            }).attr({
+                z: 402,
+                visible: false
+            });
+
+            textE.bind("Draw", function() {
+                this.unbind("Draw");
+                Y.later(10, this, function() {                                  // Attach a little later so the font file has enough time to be loaded
+                    this.attr({
+                        x: that.x - this._element.offsetWidth / 2 + 14,
+                        y: that.y - this._element.offsetHeight - 10
+                    });
+                    connector.attr({
+                        x: that.x + 10,
+                        y: that.y - 19
+                    });
+                    this.visible = true;
+                    connector.visible = true;
+                });
+            });
+
+            this.attach(textE);
+            textE.attach(connector);
+
+            Y.later(3500, textE, textE.destroy);                                // Destroy after 3.5 sec
+            return textE;
+        }
+    });
+
+    // Characters (self and others)
+    Crafty.c('PlayerCharacter', {
         init: function() {
-            this.requires('Actor, Collision, PlayerSprite, SpriteAnimation, Tween')
+            this.requires('Character, Actor, Collision, PlayerSprite, SpriteAnimation, Tween')
                 .collision([32, 32], [64, 48], [32, 64], [0, 48])               // Set up hit box
                 .animate('PlayerMovingDown', 0, 2, 16)                          // Set up animations
                 .animate('PlayerMovingUp', 0, 3, 16)
                 .animate('PlayerMovingRight', 0, 0, 16)
                 .animate('PlayerMovingLeft', 0, 1, 16)
-                .bind('TweenEnd', function(e) {                                 // Whenever the player
+                .bind('TweenEnd', function() {                                  // Whenever the player
                     this.stop();
                     this.moveTo(this.targetMove.x, this.targetMove.y, this.targetMove.z);
                 });
@@ -267,30 +288,29 @@ YUI.add("redagent-display", function(Y) {
                 y: to.y + Crafty.viewport._y
             };
             var dist = Math.sqrt(Crafty.math.squaredDistance(this.x, this.y, to.x, to.y)),
-                time = Math.round(((dist / TILEWIDTH) * (100 / SPEED))) + 1;    //+1 because if time = 0, time = infinite
+                time = Math.round((dist / TILEWIDTH) * (100 / SPEED)) + 1;      //+1 because if time = 0, time = infinite
 
             this.animate(anim, ANIMATIONSPEED, -1);                             // Start animation
             this.tween(to, time);                                               // Tween to next step
-            //this.attr(to);
 
             return this;
         },
         pos2px: function(x, y, z) {
             return  {
                 x: x * 64 + (y & 1) * (64 / 2),
-                y: (y * 64 / 4) - 32 - 5
+                y: y * 64 / 4 - 32 - 5
             };
         },
         cart2px: function(v) {
             return {
-                x: ((v.x - v.y) * ISOCOS),
-                y: (-(v.z + (v.x + v.y) * ISOSIN))
+                x: (v.x - v.y) * ISOCOS,
+                y: -(v.z + (v.x + v.y) * ISOSIN)
             };
         },
         px2cart: function(v) {
             return {
-                x: Math.round(((v.x) / ISOCOS - (v.y) / ISOSIN) / 2),
-                y: Math.round((-((v.x) / ISOCOS + (v.y) / ISOSIN)) / 2),
+                x: Math.round((v.x / ISOCOS - v.y / ISOSIN) / 2),
+                y: Math.round(-(v.x / ISOCOS + v.y / ISOSIN) / 2),
                 z: 0
             };
         }
@@ -322,36 +342,37 @@ YUI.add("redagent-display", function(Y) {
                 Y.later(900, this, function() {
                     Y.RedAgent.controller.showPage(null, pageSelector);
                 });
-
                 Y.later(3000, this, function() {
                     data[0].obj.animate(pageSelector + "Out", ANIMATIONSPEED, 0);
                 });
             }
         }
     });
+
     Crafty.c('NotPlayablePC', {// This is the player-controlled character
         init: function() {
             this.requires('PlayerCharacter');
         }
     });
+
     Crafty.c('House', {
         init: function() {
-            this.requires('Actor, Mouse, Collision, SpriteAnimation, BuildingSprite' /*+ " SolidHitBox"*/)
+            this.requires('Actor, Mouse, Collision, SpriteAnimation, BuildingSprite')
                 .attr({visible: false})
-                .animate('Contact', 0, 0, 22)
-                .animate('ContactOpen', 23, 0, 44)
-                .animate('ContactHover', 45, 0, 45)
-                .animate('ContactOut', 22, 0, 22)
-                .animate('Projects', 0, 1, 22)
-                .animate('ProjectsOpen', 23, 1, 44)
-                .animate('ProjectsHover', 45, 1, 45)
-                .animate('ProjectsOut', 22, 1, 22)
+                .animate('contact', 0, 0, 22)
+                .animate('contactOpen', 23, 0, 44)
+                .animate('contactHover', 45, 0, 45)
+                .animate('contactOut', 22, 0, 22)
+                .animate('projects', 0, 1, 22)
+                .animate('projectsOpen', 23, 1, 44)
+                .animate('projectsHover', 45, 1, 45)
+                .animate('projectsOut', 22, 1, 22)
                 .collision([22, 109], [65, 132], [108, 109], [65, 85])
                 .areaMap([35, 109], [65, 123], [94, 108], [93, 50], [64, 34], [36, 50])
                 .bind("Click", function() {                                     // Whenever tile is clicked
                     Y.log("Clicked on house:" + x, ", " + y);
                     var x, y;
-                    if (this.attr("targetPage") === "Projects") {
+                    if (this.attr("targetPage") === "projects") {
                         x = 6;
                         y = 11;
                     } else {
@@ -367,7 +388,6 @@ YUI.add("redagent-display", function(Y) {
                 })
                 .bind("MouseOver", function() {
                     this.animate(this.attr("targetPage") + "Hover", ANIMATIONSPEED, 0);// Start animation
-
                 })
                 .bind("MouseOut", function() {
                     this.animate(this.attr("targetPage") + "Out", ANIMATIONSPEED, 0);// Start animation
