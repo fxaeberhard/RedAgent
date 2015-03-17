@@ -33,25 +33,22 @@ YUI.add("redagent-chat", function(Y) {
                 }
 
                 this.say("You", value, "self");                                 // show the value
-                this.fire("chatEnter", {// Send event
+                this.fire("chatEnter", {//                                      // Send event
                     msg: value
                 });
             }, "13", this);
         },
         bindUI: function() {
-            return;
-            var content = this.scrollView.get("contentBox");
-
-            content.delegate("click", function(e) {                             // Prevent links from navigating as part of a scroll gesture
-                if (Math.abs(this.scrollView.lastScrolledAmt) > 2) {
-                    e.preventDefault();
-                    Y.log("Link behavior suppressed.");
-                }
-            }, "a");
-
-            content.delegate("mousedown", function(e) {                         // Prevent default anchor drag behavior, on browsers which let you drag anchors to the desktop
-                e.preventDefault();
-            }, "a");
+            //var content = this.scrollView.get("contentBox");
+            //content.delegate("click", function(e) {                             // Prevent links from navigating as part of a scroll gesture
+            //    if (Math.abs(this.scrollView.lastScrolledAmt) > 2) {
+            //        e.preventDefault();
+            //        Y.log("Link behavior suppressed.");
+            //    }
+            //}, "a");
+            //content.delegate("mousedown", function(e) {                         // Prevent default anchor drag behavior, on browsers which let you drag anchors to the desktop
+            //    e.preventDefault();
+            //}, "a");
         },
         say: function(name, msg, cssclass) {
             this.scrollView.get("contentBox").one("ul").append("<li class=\"" + (cssclass || "msg") + "\">" + name + ": " + msg + "</li>");

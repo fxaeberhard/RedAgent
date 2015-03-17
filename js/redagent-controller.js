@@ -8,6 +8,7 @@
 YUI.add("redagent-controller", function(Y) {
 
     var Controller = Y.Base.create("redagent-controller", Y.Base, [], {
+        windowActive: true,
         initializer: function() {
             this.history = new Y.History({
                 initialState: {
@@ -19,6 +20,14 @@ YUI.add("redagent-controller", function(Y) {
             Shadowbox.init();                                                   // Init Shadow box
 
             this.sync();
+
+            $(window).blur(function() {
+                Controller.windowActive = false;
+            });
+            $(window).focus(function() {
+                Controller.windowActive = true;
+            });
+
             //this.foldGroup = new Y.ImgLoadGroup({
             //    name: 'projects group',
             //    className: "redagent-image",
@@ -28,9 +37,7 @@ YUI.add("redagent-controller", function(Y) {
             Y.RedAgent.controller = this;
         },
         showPage: function(e, title) {                                          // Show a page
-            if (e) {                                                            // Prevent default event
-                e.halt(true);
-            }
+            e && e.halt(true);// Prevent default event
 
             this.history.addValue('page', title, {
                 title: title + ' - Francois-Xavier Aeberhard',
@@ -42,25 +49,23 @@ YUI.add("redagent-controller", function(Y) {
                 title: 'Red agent - Francois-Xavier Aeberhard',
                 url: this.getPath()
             });
-            //display.windowOpened = false;
         },
         onPageChange: function(e) {                                             // When history changes,
             Y.log("Page history changed:" + e.newVal, "info", "RedAgent.Controller");
-
+            Y.all(".redagent-page").hide(true);                                 // hide any displayed page button
+            Y.all(".redagent-submenu").hide(true);
             if (e.newVal === "Red agent") {
-                Y.all(".redagent-page").hide(true);                             // hide any displayed page button
+
                 Y.later(1000, this, function() {
-                    Y.all(".redagent-page").empty();
+                    Y.all(".redagent-page").setContent("");
                 });
                 Y.one(".redagent-menu").hide(true);                             // and hide button
-                Y.all(".redagent-submenu").hide(true);
                 if (Crafty.isPaused())
                     Crafty.pause();
             } else {
                 var title = e.newVal,
                     targetNode = Y.one(".redagent-page-" + title.toLowerCase());
-                Y.all(".redagent-page").hide(true);                             // hide any displayed page button
-                Y.all(".redagent-submenu").hide(true);
+
                 Y.one(".redagent-menu").show(true);                             // Show menu
                 targetNode.show(true).addClass("redagent-page-loading");        // Show page
                 this.currentPage = title;                                       // Save current page
@@ -80,7 +85,6 @@ YUI.add("redagent-controller", function(Y) {
                         }
                     }
                 });                                                             // Fetch page content from server
-                //this.showPage(null, e.newVal);
             }
         },
         sync: function() {
@@ -92,9 +96,9 @@ YUI.add("redagent-controller", function(Y) {
                     if (!node.slinit) {
                         new Y.Slideshow({
                             srcNode: node,
-                            //transition: Y.Slideshow.PRESETS.slideRight,
                             duration: 1,
                             interval: 6
+                                //transition: Y.Slideshow.PRESETS.slideRight,
                                 //nextButton: '#someID'
                         }).render();
                         node.slinit = true;
@@ -105,7 +109,7 @@ YUI.add("redagent-controller", function(Y) {
             var sendMailNode = Y.one(".redagent-sendmail-button");
             if (sendMailNode) {
                 new Y.Button({
-                    label: "Send",
+                    labelHTML: '<i class="fa fa-envelope"></i> Send',
                     on: {
                         click: function() {                                     // On click,
                             Y.io("php/sendMail.php", {
@@ -132,6 +136,12 @@ YUI.add("redagent-controller", function(Y) {
         getPath: function() {
             var loc = window.location.pathname;
             return loc.substring(0, loc.lastIndexOf('/') + 1);
+        },
+        playNotification: function() {
+            if (!Controller.windowActive) {
+                Y.log("Controller.playNotification()");
+                new Audio('images/Air Plane Ding.mp3').play();
+            }
         }
     });
     Y.namespace("RedAgent").Controller = Controller;
