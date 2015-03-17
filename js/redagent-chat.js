@@ -19,8 +19,7 @@ YUI.add("redagent-chat", function(Y) {
                     minVelocity: 0.3,
                     axis: "y"
                 }
-            });
-            this.scrollView.render();                                           // Render scrollview
+            }).render();                                                        // Render scrollview
 
             cb.one("textarea").on("key", function(e) {                          // On "enter" key in textarea,
                 var value = e.target.get("value");
@@ -32,7 +31,7 @@ YUI.add("redagent-chat", function(Y) {
                     return;
                 }
 
-                this.say("You", value, "self");                                 // show the value
+                this.say("Me", value, "self");                                 // show the value
                 this.fire("chatEnter", {//                                      // Send event
                     msg: value
                 });
@@ -51,7 +50,13 @@ YUI.add("redagent-chat", function(Y) {
             //}, "a");
         },
         say: function(name, msg, cssclass) {
-            this.scrollView.get("contentBox").one("ul").append("<li class=\"" + (cssclass || "msg") + "\">" + name + ": " + msg + "</li>");
+            this.addParagraph("<em>" + name + ":</em> " + msg, cssclass);
+        },
+        notify: function(msg) {
+            this.addParagraph(msg, "notification");
+        },
+        addParagraph: function(msg, cssclass) {
+            this.scrollView.get("contentBox").one("ul").append("<li class=\"" + cssclass + "\">" + msg + "</li>");
             this.scrollView._uiDimensionsChange();
             this.scrollView.scrollTo(0, this.scrollView._maxScrollY, 1000);
         }

@@ -171,6 +171,10 @@ html {
 .yui3-redagent-chat .yui3-scrollview-content li.self {
     color: darkgray;
 }
+.yui3-redagent-chat .yui3-scrollview-content li.notification {
+    color: darkgray;
+    font-style: italic;
+}
 
 /* For IE 6/7 - needs a background color (above) to pick up events, and zoom, to fill the UL */
 .yui3-redagent-chat .yui3-scrollview-content li {
@@ -218,4 +222,20 @@ html {
     width: 100%;
     height: 110px;
     border: none;
+}
+
+#cr-stage .Text {
+    width: auto !important;
+    height: auto !important;
+    font-size: 0.9em !important;
+    font-family: Din, Verdana, Geneva, helvetica, sans-serif !important;
+}
+#cr-stage .Dialog {
+    min-width: 12em;
+    background-color: white;
+    color: #580000;
+    border: 1px solid #580000;
+    line-height: 1.1em;
+    font-size: 0.9em;
+    padding: 0.4em;
 }

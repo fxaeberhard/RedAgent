@@ -33,16 +33,16 @@
 
     <div class="redagent-cl" ></div>
 
-    <p style="margin-bottom: 0;margin-top: 1.4em;">
+    <div style="margin-bottom: 0;margin-top: 1.4em;">
         <strong>Send me a message</strong><br/>
-    <fieldset class="redagent-sendmail">
-        <input type="text" placeholder="Your mail" ></input><br />
-        <textarea placeholder="Your message" style="height:5em"></textarea>
-        <span class="redagent-sendmail-button"></span>
-    </fieldset>
-</p>
+        <fieldset class="redagent-sendmail">
+            <input type="text" placeholder="Your mail" /><br />
+            <textarea placeholder="Your message" style="height:5em"></textarea>
+            <span class="redagent-sendmail-button"></span>
+        </fieldset>
+    </div>
 </div>
 
 <footer class="cf" style="max-width:100%; margin: 19em 0 1em;">
-    <?php include 'footer.php'; ?>
+    <?php include 'php/footer.php'; ?>
 </footer>

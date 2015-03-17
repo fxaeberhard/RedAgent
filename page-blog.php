@@ -1,5 +1,5 @@
 <?php
-require_once 'Tools.php';
+require_once 'php/Tools.php';
 ?>
 <div role="main" class="cf">
 
@@ -215,7 +215,7 @@ require_once 'Tools.php';
         <h2>User Interface Programmer at Ubisoft</h2>
 
         <p class="redagent-content">
-            Design and implementation of the in-game User Interface on Nintendo Wii.
+            Design and implementation of the in-game user interface on Nintendo Wii.
         </p>
 
         <table>
@@ -360,7 +360,7 @@ require_once 'Tools.php';
             <tr>
                 <td  class="colum-right">Links</td>
                 <td style="font-style: normal">
-                    <a href="http://www.d-touch.org/audio/" target="_blank" href="dtouch">Project homepage</a>
+                    <a href="http://www.d-touch.org/audio/" target="_blank">Project homepage</a>
                 </td>
             </tr>
             <tr>
@@ -599,5 +599,5 @@ require_once 'Tools.php';
 
 </div>
 <footer class="cf" style="max-width:100%; margin: 5em 0 1em;">    
-    <?php include 'footer.php'; ?>
+    <?php include 'php/footer.php'; ?>
 </footer>

@@ -391,7 +391,7 @@ function renderGallery($dir) {
             <tr>
                 <td  class="colum-right">Links</td>
                 <td style="font-style: normal">
-                    <a href="http://www.d-touch.org/audio/" target="_blank" href="dtouch">Project homepage</a>
+                    <a href="http://www.d-touch.org/audio/" target="_blank" >Project homepage</a>
                 </td>
             </tr>
             <tr>
@@ -475,5 +475,5 @@ function renderGallery($dir) {
 
 </div>
 <footer class="cf" style="max-width:100%; margin: 5em 0 1em;">
-    <?php include 'footer.php'; ?>
+    <?php include 'php/footer.php'; ?>
 </footer>

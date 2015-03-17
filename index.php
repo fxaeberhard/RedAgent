@@ -23,7 +23,8 @@ $convoId = get_convo_id();
         <link rel="shortcut icon" href="favicon.ico" />
 
         <!-- CSS Libraries (shadobox, fontawesome) -->
-        <link rel="stylesheet" href="php/min/f=lib/shadowbox/shadowbox.css,lib/font-awesome/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="lib/shadowbox/shadowbox.css" />
+        <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css" />
 
         <!-- Site styles -->
         <link rel="stylesheet" href="css/global.css" media="all" />
@@ -109,14 +110,14 @@ $convoId = get_convo_id();
         <![endif]-->
 
         <!-- YUI3 -->
-        <!--<script type="text/javascript" src="http://yui.yahooapis.com/3.18.1/build/yui/yui-min.js"></script>-->
-        <script type="text/javascript" src="lib/yui3/build/yui/yui-min.js"></script>
+        <script type="text/javascript" src="http://yui.yahooapis.com/3.18.1/build/yui/yui-min.js"></script>
+        <!--<script type="text/javascript" src="lib/yui3/build/yui/yui-min.js"></script>-->
 
         <!-- Pusher -->
         <script type="text/javascript" src="http://js.pusher.com/2.2/pusher.min.js"></script>
 
         <!-- Libraries (Crafty, shadowbox, jQuery, Modernizer) -->
-        <script type="text/javascript" src="php/min/f=lib/modernizr-1.7.min.js,lib/shadowbox/shadowbox.js,lib/crafty-mod.js,lib/jquery-2.1.1.min.js,lib/jquery.scrollTo/jquery.scrollTo.min.js,lib/jquery.localScroll/jquery.localScroll.min.js,lib/jquery.jeditable.mini.js"></script>
+        <script type="text/javascript" src="php/min/f=lib/modernizr-1.7.min.js,lib/shadowbox/shadowbox.js,lib/jquery-2.1.1.min.js,lib/jquery.scrollTo/jquery.scrollTo.min.js,lib/jquery.localScroll/jquery.localScroll.min.js,lib/jquery.jeditable.mini.js,lib/crafty-mod.js"></script>
 
         <!-- Variables -->
         <script type="text/javascript" >
