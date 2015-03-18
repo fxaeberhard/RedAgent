@@ -22,9 +22,8 @@ YUI({
             display.say("You", e.msg);                                          // Show msg in the canvas
 
             if (pusher.channel && pusher.channel.members.count > 1) {           // and there are other players in the chat,
-                pusher.channel.trigger("client-chat", {
-                    msg: e.msg,
-                    id: pusher.channel.members.me.id
+                pusher.trigger("chat", {
+                    msg: e.msg
                 });                                                             // send websocket event
             } else {                                                            // Otherwise, player is alone
                 Y.io("programo/chatbot/conversation_start.php", {//             // send io request to chatter bot
@@ -45,8 +44,7 @@ YUI({
 
         if (pusher.channel) {                                                   // If channel is detected (for offline debug)
             var sendJump = function() {
-                pusher.channel.trigger("client-jump", {//                       // Send him a message to tell our actual position
-                    id: pusher.channel.members.me.id,
+                pusher.trigger("jump", {//                                      // Send him a message to tell our actual position
                     x: display.player.x,
                     y: display.player.y,
                     name: display.player.label()
@@ -109,7 +107,7 @@ YUI({
         bd.delegate("click", controller.closePage, ".redagent-closebutton", controller);// Close button click
         bd.delegate("click", controller.showPage, "a.redagent-nav-projects", controller, "Projects");// Nav click
         bd.delegate("click", controller.showPage, "a.redagent-nav-contact", controller, "Contact");
-        bd.delegate("click", controller.showPage, "a.redagent-nav-blog", controller, "Blog");// Nav click
+        bd.delegate("click", controller.showPage, "a.redagent-nav-blog", controller, "Blog");
 
         var doUpdate = function(pageName) {
             var target, found = false;
@@ -151,7 +149,7 @@ YUI({
         });
 
         $.localScroll({
-            target: 'body', // could be a selector or a jQuery object too.
+            target: 'body',
             duration: 1000,
             hash: true
         });

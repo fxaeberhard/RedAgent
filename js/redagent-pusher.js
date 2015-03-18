@@ -19,6 +19,11 @@ YUI.add("redagent-pusher", function(Y) {
                 this.channel = pusher.subscribe(PRESENCECHANNEL);
             }
             Y.RedAgent.pusher = this;
+        },
+        trigger: function(name, data) {
+            this.channel && this.channel.trigger("client-" + name, Y.mix(data, {
+                id: this.channel.members.me.id
+            }));
         }
     });
     Y.namespace("RedAgent").Pusher = Pusher;
