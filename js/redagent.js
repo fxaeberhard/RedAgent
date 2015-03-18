@@ -7,25 +7,22 @@
  */
 YUI({
     useBrowserConsole: true
-}).use("base-build", "widget", "scrollview", "button", "timers", "json-parse", // Dependencies
+}).use("base-build", "widget", "node-screen", "button", "timers", "json-parse", // Dependencies
     "transition", "io-base", "history", "event-key", "event-mouseenter",
-    "gallery-yui-slideshow", "node-screen",
+    "gallery-yui-slideshow",
     "redagent-display", "redagent-chat", "redagent-pusher",
     "redagent-controller", function(Y) {
         var bd = Y.one("body"),
             controller = new Y.RedAgent.Controller(), //                        // Pages controller (history, loading, etc.)
             pusher = new Y.RedAgent.Pusher(), //                                // Websocket facade
             display = new Y.RedAgent.Display().render(".cr"), //                // Render Crafty drawing area (canvas)
-            chat = new Y.RedAgent.Chat({
-                srcNode: ".scrollview-container div"
-            }).render();                                                        // Render chat              
+            chat = new Y.RedAgent.Chat().render(".scrollview-container");       // Render chat
 
         chat.on("chatEnter", function(e) {                                      // When chat input is entered
             display.say("You", e.msg);                                          // Show msg in the canvas
 
             if (pusher.channel && pusher.channel.members.count > 1) {           // and there are other players in the chat,
                 pusher.channel.trigger("client-chat", {
-                    name: "Anonymous",
                     msg: e.msg,
                     id: pusher.channel.members.me.id
                 });                                                             // send websocket event
@@ -54,12 +51,7 @@ YUI({
                     y: display.player.y,
                     name: display.player.label()
                 });
-            }
-            pusher.channel.bind("client-chat", function(e) {                    // When a chat message is received through websocket
-                controller.playNotification();
-                chat.say(e.name, e.msg);                                        // display it in the chat
-                display.say(e.id, e.msg);
-            });
+            };
 
             pusher.channel.bind('pusher:subscription_succeeded', function(members) {// On connection to the channel,
                 Y.log("Presence channel subscription_succeeded, count: " + members.count);
@@ -97,6 +89,13 @@ YUI({
                     entity.visible = true;
                     entity.label(e.name);
                 }
+            });
+
+            pusher.channel.bind("client-chat", function(e) {                    // When a chat message is received through websocket
+                var player = display.getPlayer(e.id);
+                chat.say(player.label(), e.msg);                                // display it in the chat
+                player.say(e.msg);
+                controller.playNotification();
             });
 
             pusher.channel.bind("client-rename", function(e) {                  // When a player is renamed

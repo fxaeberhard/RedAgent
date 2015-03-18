@@ -8,20 +8,14 @@
 YUI.add("redagent-chat", function(Y) {
 
     var Chat = Y.Base.create("redagent-chat", Y.Widget, [], {
+        CONTENT_TEMPLATE: '<div>'
+            + '<div class="chat-msgs"></div>'
+            + '<div><textarea placeholder="Type here to chat"></textarea></div>'
+            + '</div>',
         renderUI: function() {
-            var cb = this.get("contentBox");
+            $('.chat-msgs').perfectScrollbar();
 
-            this.scrollView = new Y.ScrollView({
-                srcNode: cb.one(".yui3-scrollview-loading"),
-                height: 544,
-                flick: {
-                    minDistance: 10,
-                    minVelocity: 0.3,
-                    axis: "y"
-                }
-            }).render();                                                        // Render scrollview
-
-            cb.one("textarea").on("key", function(e) {                          // On "enter" key in textarea,
+            this.get("contentBox").one("textarea").on("key", function(e) {      // On "enter" key in textarea,
                 var value = e.target.get("value");
 
                 Y.soon(Y.bind(e.target.set, e.target, "value", ""));            // empty, textarea
@@ -31,34 +25,24 @@ YUI.add("redagent-chat", function(Y) {
                     return;
                 }
 
-                this.say("Me", value, "self");                                 // show the value
+                this.say("Me", value, "self");                                  // show the value
                 this.fire("chatEnter", {//                                      // Send event
                     msg: value
                 });
             }, "13", this);
         },
-        bindUI: function() {
-            //var content = this.scrollView.get("contentBox");
-            //content.delegate("click", function(e) {                             // Prevent links from navigating as part of a scroll gesture
-            //    if (Math.abs(this.scrollView.lastScrolledAmt) > 2) {
-            //        e.preventDefault();
-            //        Y.log("Link behavior suppressed.");
-            //    }
-            //}, "a");
-            //content.delegate("mousedown", function(e) {                         // Prevent default anchor drag behavior, on browsers which let you drag anchors to the desktop
-            //    e.preventDefault();
-            //}, "a");
-        },
         say: function(name, msg, cssclass) {
-            this.addParagraph("<em>" + name + ":</em> " + msg, cssclass);
+            this.addParagraph(name + ": " + msg, cssclass);
         },
         notify: function(msg) {
             this.addParagraph(msg, "notification");
         },
         addParagraph: function(msg, cssclass) {
-            this.scrollView.get("contentBox").one("ul").append("<li class=\"" + cssclass + "\">" + msg + "</li>");
-            this.scrollView._uiDimensionsChange();
-            this.scrollView.scrollTo(0, this.scrollView._maxScrollY, 1000);
+            $('.chat-msgs').append("<div class=\"chat-msg " + cssclass + "\">" + msg + "</div>")
+                .animate({
+                    scrollTop: $(".chat-msgs").prop("scrollHeight")
+                }, 1500)
+                .perfectScrollbar('update');
         }
     });
     Y.namespace("RedAgent").Chat = Chat;

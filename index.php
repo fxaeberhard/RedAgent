@@ -25,6 +25,7 @@ $convoId = get_convo_id();
         <!-- CSS Libraries (shadobox, fontawesome) -->
         <link rel="stylesheet" href="lib/shadowbox/shadowbox.css" />
         <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="lib/perfect-scrollbar/css/perfect-scrollbar.min.css" />
 
         <!-- Site styles -->
         <link rel="stylesheet" href="css/global.css" media="all" />
@@ -85,14 +86,7 @@ $convoId = get_convo_id();
 
                     <!-- Chat -->
                     <aside>
-                        <div class="scrollview-container">
-                            <div>
-                                <div class="yui3-scrollview-loading"><ul></ul></div>
-                                <div class="form">
-                                    <textarea placeholder="Type here to chat"></textarea>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="scrollview-container"></div>
                     </aside>
                     <div style="clear:both"></div>
 
@@ -100,9 +94,9 @@ $convoId = get_convo_id();
                         <?php include 'php/footer.php'; ?>
                     </footer>
 
-                </div><!-- /main -->
+                </div>
             </article>
-        </div><!-- /container -->
+        </div>
 
         <!-- Media queries for IE < 9 -->
         <!--[if lt IE 9]>
@@ -117,7 +111,7 @@ $convoId = get_convo_id();
         <script type="text/javascript" src="http://js.pusher.com/2.2/pusher.min.js"></script>
 
         <!-- Libraries (Crafty, shadowbox, jQuery, Modernizer) -->
-        <script type="text/javascript" src="php/min/f=lib/modernizr-1.7.min.js,lib/shadowbox/shadowbox.js,lib/jquery-2.1.1.min.js,lib/jquery.scrollTo/jquery.scrollTo.min.js,lib/jquery.localScroll/jquery.localScroll.min.js,lib/jquery.jeditable.mini.js,lib/crafty-mod.js"></script>
+        <script type="text/javascript" src="php/min/f=lib/modernizr-1.7.min.js,lib/shadowbox/shadowbox.js,lib/jquery-2.1.1.min.js,lib/jquery.scrollTo/jquery.scrollTo.min.js,lib/jquery.localScroll/jquery.localScroll.min.js,lib/jquery.jeditable.mini.js,lib/crafty-mod.js,lib/perfect-scrollbar/js/min/perfect-scrollbar.jquery.min.js"></script>
 
         <!-- Variables -->
         <script type="text/javascript" >
@@ -127,6 +121,11 @@ $convoId = get_convo_id();
 
         <!-- Scripts -->
         <script type="text/javascript" src="php/min/f=js/redagent-chat.js,js/redagent-display.js,js/redagent-pusher.js,js/redagent-controller.js,js/redagent.js"></script>
+        <!--<script type="text/javascript" src="js/redagent-chat.js"></script>
+        <script type="text/javascript" src="js/redagent-display.js"></script>
+        <script type="text/javascript" src="js/redagent-pusher.js"></script>
+        <script type="text/javascript" src="js/redagent-controller.js"></script>
+        <script type="text/javascript" src="js/redagent.js"></script>-->
 
         <!-- Google analytics -->
         <script type="text/javascript">

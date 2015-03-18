@@ -72,11 +72,12 @@ DirectoryIndex index.php index.html
 	</FilesMatch>
 
 	###############################################################Enable cache
-	<FilesMatch "\.(gif|jpe?g|png|ico|css|js|swf)$">
+	<FilesMatch "\.(gif|jpe?g|png|ico|css|js|swf|ttf|TTF)$">
 		Header set Cache-Control "public, max-age=290304000"
 		Header unset Vary
 	</FilesMatch>
 </IfModule>
+
 ###################################################################activate gzip if possible
 <ifModule mod_gzip.c>
 	mod_gzip_on Yes
@@ -90,3 +91,8 @@ DirectoryIndex index.php index.html
 	mod_gzip_item_exclude         file       \.gz$
 	mod_gzip_item_exclude         file       \.zip$
 </ifModule>
+<IfModule mod_deflate.c>
+    <filesMatch "\.(js|css|html|php)$">
+        SetOutputFilter DEFLATE
+    </filesMatch>
+</IfModule>
