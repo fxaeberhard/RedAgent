@@ -10,7 +10,7 @@ YUI.add("redagent-display", function(Y) {
     var Display, TILEWIDTH = 64,
         SPEED = 4.5,
         ISOCOS = Math.cos(0.46365), ISOSIN = Math.sin(0.46365),
-        WIDTH = 800, HEIGHT = 595, BORDER = 50;
+        WIDTH = 800, HEIGHT = 595, BORDER = 48;
 
     Display = Y.Base.create("redagent-display", Y.Widget, [], {
         CONTENT_TEMPLATE: '<div><div id="cr-stage"></div></div>',
@@ -23,9 +23,9 @@ YUI.add("redagent-display", function(Y) {
             Crafty.support.canvas && Crafty.canvas.init();                      // Init canvas if available
 
             var x, y, tile;
-            for (x = 22; x >= 0; x--) {                                         // Init grid
-                for (y = 0; y < 37; y++) {
-                    tile = Crafty.e("Tile").attr('z', x + 1 * y + 1);
+            for (x = 22; x >= -13; x--) {                                         // Init grid
+                for (y = -37; y < 37; y++) {
+                    tile = Crafty.e("Tile").attr('z', x + y + 51);
                     Crafty.isometric.place(x, y, 0, tile);
                     tile.randomSprite();
                 }
@@ -130,16 +130,34 @@ YUI.add("redagent-display", function(Y) {
         },
         randomSprite: function() {
             var r = Math.random(),
-                pos = JSON.stringify(Crafty.isometric.px2pos(this.x, this.y)),
-                path = [{x: 6, y: 9}, {x: 7, y: 10}, {x: 7, y: 11}, {x: 8, y: 12}, {x: 8, y: 13}, {x: 9, y: 14}, {x: 9, y: 15}, {x: 10, y: 16}, {x: 10, y: 17}, {x: 11, y: 18}, {x: 11, y: 19}, {x: 12, y: 20}, {x: 12, y: 21}, {x: 13, y: 22}, {x: 13, y: 23}, {x: 14, y: 24}, {x: 14, y: 25},
-                    {x: 15, y: 24}, {x: 15, y: 23}, {x: 16, y: 22}, {x: 16, y: 21}, {x: 17, y: 20},
-                    {x: 10, y: 18}, {x: 9, y: 19}, {x: 9, y: 20}, {x: 8, y: 21}, {x: 8, y: 22}, {x: 7, y: 23}, {x: 7, y: 24}, {x: 6, y: 25}, {x: 6, y: 26}, {x: 5, y: 27}, {x: 5, y: 28}, {x: 4, y: 29}, {x: 4, y: 30}, {x: 3, y: 31},
-                    {x: 3, y: 30}, {x: 2, y: 29}, {x: 2, y: 28}, {x: 1, y: 27}];
+                pos = (Crafty.isometric.px2pos(this.x, this.y)),
+                comp = function(i) {
+                    return pos.x !== i[0] || pos.y !== i[1];
+                },
+                greyTiles = [[6, 9], [7, 10], [7, 11], [8, 12], [8, 13], [9, 14], [9, 15], [10, 16], [10, 17], [11, 18], [11, 19], [12, 20], [12, 21], [13, 22], [13, 23], [14, 24], [14, 25],
+                    [15, 24], [15, 23], [16, 22], [16, 21], [17, 20],
+                    [10, 18], [9, 19], [9, 20], [8, 21], [8, 22], [7, 23], [7, 24], [6, 25], [6, 26], [5, 27], [5, 28], [4, 29], [4, 30], [3, 31],
+                    [3, 30], [2, 29], [2, 28], [1, 27],
+                    [6, -8], [6, -9], [7, -10], [7, -11], //                    //top guys
+                    [5, -9], [6, -10], [6, -11], [7, -12],
+                    [5, -10], [5, -11], [6, -12], [6, -13],
+                    [4, -11], [5, -12], [5, -13], [6, -14],
+                    [3, -16], [3, -17], [3, -15], [4, -16] // head
+                ],
+                redTiles = [[0, -17], [1, -16], [1, -15], [2, -14], [2, -13], [3, -12], [3, -11], [4, -10], [4, -9], [5, -8], [5, -7], [6, -6], [6, -5], [7, -4], [7, -3],
+                    [7, -2], [6, -1], [6, 0],
+                    [6, -7], [7, -8], [7, -9], [8, -10],
+                    [4, -12], [4, -13], [5, -14], [5, -15],
+                    [6, -16], [6, -15], [7, -14], [7, -13], [8, -12], [8, -11], [9, -10], [9, -9], [10, -8],
+                    [10, -9], [11, -10], [1, -11],
+                    [4, -14], [4, -15], [3, -14], [2, -15], [4, -17], [4, -18], [2, -17], [3, -18] // head
+                ];
 
-            if ($.grep(path, function(i) {
-                return pos !== JSON.stringify(i);
-            }, this).length) {
+
+            if ($.grep(greyTiles, comp, this).length) {
                 this.__sprite = [1, 2, 1, 1];                                   // light gray path
+            } else if ($.grep(redTiles, comp, this).length) {
+                this.__sprite = [0, 0, 1, 1];                                   // red botth
             } else if (r > 0.10) {
                 this.__sprite = [1, 0, 1, 1];                                   // white
             } else if (r > 0.05) {
@@ -320,13 +338,23 @@ YUI.add("redagent-display", function(Y) {
                 })                                                              // Collisions
                 .bind("EnterFrame", function() {
                     var WMB = WIDTH - BORDER, WM2B = WIDTH - 2 * BORDER, //     // Scroll background
-                        MAXX = 1, MINX = 0;
+                        MAXX = 1, MINX = 0,
+                        HMB = HEIGHT - BORDER, HM2B = HEIGHT - 2 * BORDER,
+                        MAXY = 0, MINY = -1;
+
                     if (this.x + 32 > this.screen.x * WM2B + WMB && this.screen.x < MAXX) {
                         Crafty.viewport.pan(WM2B, 0, 1000);
                         this.screen.x++;
                     } else if (this.x + 32 < this.screen.x * WM2B + BORDER && this.screen.x > MINX) {
                         Crafty.viewport.pan(-WM2B, 0, 1000);
                         this.screen.x--;
+                    }
+                    if (this.y + 32 > this.screen.y * HM2B + HMB && this.screen.y < MAXY) {
+                        Crafty.viewport.pan(0, HM2B, 1000);
+                        this.screen.y++;
+                    } else if (this.y + 32 < this.screen.y * HM2B + BORDER && this.screen.y > MINY) {
+                        Crafty.viewport.pan(0, -HM2B, 1000);
+                        this.screen.y--;
                     }
                 });
         }
