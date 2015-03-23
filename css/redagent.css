@@ -40,7 +40,7 @@ html {
     left:0;
     right: 0;
     top: 0;
-    padding: 20px 2em 0;
+    padding: 20px 0 0;
     z-index: 500;
     background: white;
 }
@@ -53,8 +53,8 @@ html {
 }
 .redagent-page .redagent-spacer {
     line-height: 0em;
-    margin: 3.3em 0;
-    border-bottom: 1px solid #580000;
+    margin: 2.8em 0 3.3em;
+    border-bottom: 1px solid #efefef;
 }
 .redagent-date {
     margin-bottom: 0;
@@ -79,7 +79,7 @@ html {
     width:100%;
 }
 .redagent-menu .cf {    
-    padding: 0.6em 2em;
+    padding: 0.6em 0em;
 }
 .redagent-submenu {
     display: inline-block;  
@@ -200,7 +200,7 @@ html {
 .yui3-slideshow-content {
     position: relative;
 }
-
+.slideshow  a,
 .yui3-slideshow-content a {
     position: absolute;
 }
@@ -227,4 +227,60 @@ html {
     line-height: 1.1em;
     font-size: 0.9em;
     padding: 0.4em;
+}
+
+.mce-tinymce {
+    border-top: none !important;
+}
+.mce-panel {
+    background: white !important; 
+    border-color: lightgray !important; 
+}
+.mce-toolbar-grp {
+    padding-bottom: 0px !important; 
+}
+.mce-btn {
+    border-color: lightgray !important; 
+    background-color: white !important; 
+    background-image: none !important;
+    border-radius: 0 !important; 
+    border: none !important;
+    box-shadow: none !important;
+}
+.mce-btn,  .mce-btn i,.mce-menubtn span {
+    color: #580000 !important; 
+}
+.mce-caret {
+    border-top:  4px solid #580000 !important;
+}
+.mce-menu {
+    border-radius: 0 !important;
+}
+.mce-btn.mce-last {
+    float:right;
+}
+.mce-btn.mce-last {
+    padding-left: 1em;
+    padding-right: 1em;    
+}
+.mce-btn.mce-last, .mce-btn.mce-last button, .mce-btn.mce-last i {
+    color: white !important;
+    text-shadow: 1px 1px #000000 !important;
+    background: #580000 !important;
+}
+.mce-btn-group {
+    width: 100% !important;
+    margin: 0 !important;
+}
+.mce-btn-group > div {
+    width: auto !important;
+}
+.blog-comment {
+    margin-top: 1em;
+}
+.blog-addcomment {
+    margin: 1em 0 4em;
+}
+.page-blog textarea {
+    border-color: lightgray;
 }

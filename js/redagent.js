@@ -7,11 +7,9 @@
  */
 YUI({
     useBrowserConsole: true
-}).use("base-build", "widget", "node-screen", "button", "timers", "json-parse", // Dependencies
-    "transition", "io-base", "history", "event-key", "event-mouseenter",
-    "gallery-yui-slideshow",
-    "redagent-display", "redagent-chat", "redagent-pusher",
-    "redagent-controller", function(Y) {
+}).use("base-build", "widget", "node-screen", "timers", "json-parse", "history", // Dependencies
+    "transition", "io-base", "event-key", "redagent-display", "redagent-chat",
+    "redagent-pusher", "redagent-controller", function(Y) {
         var bd = Y.one("body"),
             controller = new Y.RedAgent.Controller(), //                        // Pages controller (history, loading, etc.)
             pusher = new Y.RedAgent.Pusher(), //                                // Websocket facade
@@ -53,7 +51,8 @@ YUI({
 
             pusher.channel.bind('pusher:subscription_succeeded', function(members) {// On connection to the channel,
                 Y.log("Presence channel subscription_succeeded, count: " + members.count);
-                display.getPlayer("You").label("Anonymous " + members.count + " <em>(me)</em>");
+                var label = $.cookie("chatname") || "Anonymous " + members.count + " <em>(me)</em>";
+                display.getPlayer("You").label(label);
                 members.each(function(m) {                                      // display all members that are already on the channel
                     if (m.id !== members.myID) {
                         display.addPlayer(m);
@@ -104,10 +103,14 @@ YUI({
         }
 
         bd.removeClass("redagent-loading");
+        var onNavClick = function(e, page) {
+            e.halt(true);                                                       // Prevent default event
+            controller.showPage(page);
+        };
         bd.delegate("click", controller.closePage, ".redagent-closebutton", controller);// Close button click
-        bd.delegate("click", controller.showPage, "a.redagent-nav-projects", controller, "Projects");// Nav click
-        bd.delegate("click", controller.showPage, "a.redagent-nav-contact", controller, "Contact");
-        bd.delegate("click", controller.showPage, "a.redagent-nav-blog", controller, "Blog");
+        bd.delegate("click", onNavClick, "a.redagent-nav-projects", controller, "Projects");// Nav click
+        bd.delegate("click", onNavClick, "a.redagent-nav-contact", controller, "Contact");
+        bd.delegate("click", onNavClick, "a.redagent-nav-blog", controller, "Blog");
 
         var doUpdate = function(pageName) {
             var target, found = false;

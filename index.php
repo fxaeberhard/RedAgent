@@ -71,8 +71,8 @@ $convoId = get_convo_id();
                     </div>
 
                     <div class="redagent-submenu redagent-menu-blog" <?php echo ($page !== "blog") ? 'style="display:none;opacity: 0"' : '' ?>>
-                        <a href="#2014" class="redagent-selected">2014</a>
-                        <!--<a href="#yuimyadmin">2003</a>-->
+                        <a href="#arthur" class="redagent-selected">2014</a>
+                        <a href="#mariagelaurent" >2013</a>                        
                     </div>
                 </div>
             </article>
@@ -110,17 +110,17 @@ $convoId = get_convo_id();
         <!-- Pusher -->
         <script type="text/javascript" src="http://js.pusher.com/2.2/pusher.min.js"></script>
 
-        <!-- Libraries (Crafty, shadowbox, jQuery, Modernizer) -->
-        <script type="text/javascript" src="php/min/f=lib/modernizr-1.7.min.js,lib/shadowbox/shadowbox.js,lib/jquery-2.1.1.min.js,lib/jquery.scrollTo/jquery.scrollTo.min.js,lib/jquery.localScroll/jquery.localScroll.min.js,lib/jquery.jeditable.mini.js,lib/crafty-mod.js,lib/perfect-scrollbar/js/min/perfect-scrollbar.jquery.min.js"></script>
-
         <!-- Variables -->
         <script type="text/javascript" >
             var currentPage = "<?php echo $page; ?>",
                 convoId = "<?php echo $convoId; ?>";
         </script>
 
+        <!-- Libraries (Crafty, shadowbox, jQuery, Modernizer) -->
+        <!--<script type="text/javascript" src="php/min/f=lib/modernizr-1.7.min.js,lib/shadowbox/shadowbox.js,lib/jquery-2.1.1.min.js,lib/jquery.scrollTo/jquery.scrollTo.min.js,lib/jquery.localScroll/jquery.localScroll.min.js,lib/jquery.jeditable.mini.js,lib/crafty-mod.js,lib/perfect-scrollbar/js/min/perfect-scrollbar.jquery.min.js,lib/jquery.cookie.js"></script>-->
+
         <!-- Scripts -->
-        <script type="text/javascript" src="php/min/f=js/redagent-chat.js,js/redagent-display.js,js/redagent-pusher.js,js/redagent-controller.js,js/redagent.js"></script>
+        <script type="text/javascript" src="php/min/f=lib/modernizr-1.7.min.js,lib/shadowbox/shadowbox.js,lib/jquery-2.1.1.min.js,lib/jquery.scrollTo/jquery.scrollTo.min.js,lib/jquery.localScroll/jquery.localScroll.min.js,lib/jquery.jeditable.mini.js,lib/crafty-mod.js,lib/perfect-scrollbar/js/min/perfect-scrollbar.jquery.min.js,lib/jquery.cookie.js,js/redagent-chat.js,js/redagent-display.js,js/redagent-pusher.js,js/redagent-controller.js,js/redagent.js"></script>
         <!--<script type="text/javascript" src="js/redagent-chat.js"></script>
         <script type="text/javascript" src="js/redagent-display.js"></script>
         <script type="text/javascript" src="js/redagent-pusher.js"></script>

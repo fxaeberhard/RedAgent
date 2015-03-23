@@ -10,8 +10,7 @@ YUI.add("redagent-display", function(Y) {
     var Display, TILEWIDTH = 64,
         SPEED = 4.5,
         ISOCOS = Math.cos(0.46365), ISOSIN = Math.sin(0.46365),
-        WIDTH = 800, HEIGHT = 595, BORDER = 50,
-        renderMethod = Crafty.support.canvas ? "Canvas" : 'DOM';                // Select rendering method
+        WIDTH = 800, HEIGHT = 595, BORDER = 50;
 
     Display = Y.Base.create("redagent-display", Y.Widget, [], {
         CONTENT_TEMPLATE: '<div><div id="cr-stage"></div></div>',
@@ -28,6 +27,7 @@ YUI.add("redagent-display", function(Y) {
                 for (y = 0; y < 37; y++) {
                     tile = Crafty.e("Tile").attr('z', x + 1 * y + 1);
                     Crafty.isometric.place(x, y, 0, tile);
+                    tile.randomSprite();
                 }
             }
 
@@ -39,6 +39,7 @@ YUI.add("redagent-display", function(Y) {
             this.player._label.css({cursor: "text"});
             $(this.player._label._element).editable(function(value) {           // Make current player label editable
                 that.player.label(value + " <em>(me)</em>");
+                $.cookie("chatname", value, {expires: 10});
                 Y.RedAgent.pusher.trigger("rename", {
                     name: value
                 });
@@ -105,29 +106,21 @@ YUI.add("redagent-display", function(Y) {
     // Crafty components
     Crafty.c('Actor', {
         init: function() {
-            this.requires('2D, ' + renderMethod);
+            this.requires('2D ' + Crafty.support.canvas ? "Canvas" : 'DOM');    // Select rendering method
         }
     });
+
     Crafty.c("Tile", {
         init: function() {
-            var r = Math.random();
-            if (r > 0.15) {
-                this.color = "white";
-            } else if (r > 0.04) {
-                this.color = "gray";
-            } else {
-                this.color = "red";
-            }
             this.requires('Actor, TileSprite, Mouse')
                 .areaMap([32, 0], [64, 16], [32, 32], [0, 16])
                 .bind("MouseOver", this.hover)
-                .bind("MouseOut", this.normal)
-                .bind("Click", function(x, y) {                                 // Whenever tile is clicked
+                .bind("MouseOut", this.resetSprite)
+                .bind("Click", function() {                                     // Whenever tile is clicked
                     var p = Crafty.isometric.px2pos(this.x, this.y);
                     Y.log("clicked on tile:" + p.x + ", " + p.y);
                     Crafty('PlayablePC').moveAndNotify(Math.round(p.x), Math.round(p.y), 0);// Move player
-                })
-                .normal();
+                });
         },
         hover: function() {
             if (this.color === "red")
@@ -135,13 +128,30 @@ YUI.add("redagent-display", function(Y) {
             else
                 this.sprite(0, 0, 1, 1);
         },
-        normal: function() {
-            if (this.color === "white")
-                this.sprite(1, 0, 1, 1);
-            else if (this.color === "red")
-                this.sprite(0, 0, 1, 1);
-            else
-                this.sprite(0, 2, 1, 1);
+        randomSprite: function() {
+            var r = Math.random(),
+                pos = JSON.stringify(Crafty.isometric.px2pos(this.x, this.y)),
+                path = [{x: 6, y: 9}, {x: 7, y: 10}, {x: 7, y: 11}, {x: 8, y: 12}, {x: 8, y: 13}, {x: 9, y: 14}, {x: 9, y: 15}, {x: 10, y: 16}, {x: 10, y: 17}, {x: 11, y: 18}, {x: 11, y: 19}, {x: 12, y: 20}, {x: 12, y: 21}, {x: 13, y: 22}, {x: 13, y: 23}, {x: 14, y: 24}, {x: 14, y: 25},
+                    {x: 15, y: 24}, {x: 15, y: 23}, {x: 16, y: 22}, {x: 16, y: 21}, {x: 17, y: 20},
+                    {x: 10, y: 18}, {x: 9, y: 19}, {x: 9, y: 20}, {x: 8, y: 21}, {x: 8, y: 22}, {x: 7, y: 23}, {x: 7, y: 24}, {x: 6, y: 25}, {x: 6, y: 26}, {x: 5, y: 27}, {x: 5, y: 28}, {x: 4, y: 29}, {x: 4, y: 30}, {x: 3, y: 31},
+                    {x: 3, y: 30}, {x: 2, y: 29}, {x: 2, y: 28}, {x: 1, y: 27}];
+
+            if ($.grep(path, function(i) {
+                return pos !== JSON.stringify(i);
+            }, this).length) {
+                this.__sprite = [1, 2, 1, 1];                                   // light gray path
+            } else if (r > 0.10) {
+                this.__sprite = [1, 0, 1, 1];                                   // white
+            } else if (r > 0.05) {
+                this.__sprite = [0, 2, 1, 1];                                   // gray
+            } else {
+                this.__sprite = [0, 0, 1, 1];                                   // red
+            }
+            this.resetSprite();
+            return this;
+        },
+        resetSprite: function() {
+            this.sprite.apply(this, this.__sprite);
         }
     });
 
@@ -216,6 +226,15 @@ YUI.add("redagent-display", function(Y) {
                 .bind('TweenEnd', function() {                                  // Whenever the player
                     this.pauseAnimation();
                     this.moveTo(this.targetMove.x, this.targetMove.y, this.targetMove.z);
+                })
+                .bind("EnterFrame", function() {
+                    var z = 200, that = this;
+                    Crafty("House").each(function() {                           // Reorder base on z positionning
+                        if (that._y - 55 > this._y) {
+                            z = Math.max(this._z + 1, z);
+                        }
+                    });
+                    this.attr("z", z);
                 });
         },
         at: function(x, y, z) {
@@ -288,7 +307,7 @@ YUI.add("redagent-display", function(Y) {
     Crafty.c('PlayablePC', {//                                                  // This is the player-controlled character
         init: function() {
             this.screen = {x: 0, y: 0};
-            this.requires('PlayerCharacter'/*+ " SolidHitBox"*/)
+            this.requires('PlayerCharacter')
                 .onHit('House', function(data) {                                // Respond to this player visiting a house
                     if (!this.windowOpened) {
                         Y.log("onHit");
@@ -300,14 +319,6 @@ YUI.add("redagent-display", function(Y) {
                     this.windowOpened = false;
                 })                                                              // Collisions
                 .bind("EnterFrame", function() {
-                    var z = 200, that = this;
-                    Crafty("House").each(function() {                           // Reorder base on z positionning
-                        if (that._y - 55 > this._y) {
-                            z = Math.max(this._z + 1, z);
-                        }
-                    });
-                    this.attr("z", z);
-
                     var WMB = WIDTH - BORDER, WM2B = WIDTH - 2 * BORDER, //     // Scroll background
                         MAXX = 1, MINX = 0;
                     if (this.x + 32 > this.screen.x * WM2B + WMB && this.screen.x < MAXX) {
@@ -364,7 +375,7 @@ YUI.add("redagent-display", function(Y) {
         },
         openTargetPage: function() {
             this.animate("Open");
-            Y.later(900, Y.RedAgent.controller, Y.RedAgent.controller.showPage, [null, this.attr("targetPage")]);
+            Y.later(900, Y.RedAgent.controller, Y.RedAgent.controller.showPage, this.attr("targetPage"));
             Y.later(3000, this, this.animate, "Out");
         }
     });

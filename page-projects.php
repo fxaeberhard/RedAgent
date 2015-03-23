@@ -14,7 +14,7 @@ function renderGallery($dir) {
 ?>
 <div role="main" class="cf">
 
-    <div style="height:.3em">.</div>
+    <div style="height:1em">.</div>
 
     <!-- Programming game -->
     <p class="redagent-cl " id="proggame"></p>
@@ -112,7 +112,7 @@ function renderGallery($dir) {
         </span>
     </p>
     <aside class="redagent-page-text">
-        <p class="redagent-date">July 2011 - present</p>
+        <p class="redagent-date">July 2011</p>
         <h1>Wegas</h1>
         <h2>UX Engineer at School for Business & Engineering Vaud (HEIG-Vd)</h2>
 
@@ -309,9 +309,6 @@ function renderGallery($dir) {
             </tr>
         </table>
     </aside>
-
-
-
 
     <!-- Redcms -->
     <p class="redagent-cl"></p>
