@@ -7,7 +7,7 @@
  */
 YUI({
     useBrowserConsole: true
-}).use("base-build", "widget", "node-screen", "timers", "json-parse", "history", // Dependencies
+}).use("base-build", "widget", "timers", "json-parse", "history", // Dependencies
     "transition", "io-base", "event-key", "redagent-display", "redagent-chat",
     "redagent-pusher", "redagent-controller", function(Y) {
         var bd = Y.one("body"),
@@ -112,26 +112,36 @@ YUI({
         bd.delegate("click", onNavClick, "a.redagent-nav-contact", controller, "Contact");
         bd.delegate("click", onNavClick, "a.redagent-nav-blog", controller, "Blog");
 
-        var doUpdate = function(pageName) {
-            var target, found = false;
-            Y.all(".redagent-page-" + pageName + " .cf > *[id]").each(function(n) {
-                if (found) {
-                } else if (n.get("id") && n.get("docScrollY") + 60 < n.get("region").top) {
-                    found = true;
-                } else {
-                    target = n.get("id");
-                }
-            });
-            if (target && Y.one("a[href='#" + target + "']")) {
-                Y.all(".redagent-menu-" + pageName + " .redagent-selected").removeClass("redagent-selected");
-                Y.one("a[href='#" + target + "']").addClass("redagent-selected");
+        var isElementInViewport = function(el) {
+            if (typeof jQuery === "function" && el instanceof jQuery) {             //special bonus for those using jQuery
+                el = el[0];
             }
+            var rect = el.getBoundingClientRect();
+            return rect.top >= 0 && rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && /*or $(window).height() */
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth) /*or $(window).width() */;
         },
+            doUpdate = function(pageName) {
+                var target, found = false;
+                Y.all(".redagent-page-" + pageName + " .cf > *[id]").each(function(n) {
+                    if (found) {
+                    } else if (n.get("id") && isElementInViewport(n.getDOMNode())) {
+                        found = true;
+                    } else {
+                        target = n.get("id");
+                    }
+                });
+                if (target && Y.one("a[href='#" + target + "']")) {
+                    Y.all(".redagent-menu-" + pageName + " .redagent-selected").removeClass("redagent-selected");
+                    Y.one("a[href='#" + target + "']").addClass("redagent-selected");
+                }
+            },
             updateScroll = function() {
                 doUpdate("projects");
                 doUpdate("blog");
             };
-        window.onscroll = updateScroll;
+
+        $(window).on('DOMContentLoaded load resize scroll', updateScroll);
         bd.delegate("click", updateScroll, "a.redagent-nav-projects, a.redagent-nav-blog");
         updateScroll();
 
@@ -157,3 +167,21 @@ YUI({
             hash: true
         });
     });
+
+/* Require config */
+require.config({
+    baseUrl: 'lib/',
+    paths: {
+        slick: "slick/slick",
+//        jquery: "jquery-2.1.1.min"
+    },
+    shim: {
+//        'slick': {
+//            deps: ['jquery'],
+//            exports: 'jQuery.fn.slick'
+//        },
+//        jquery: {
+//            exports: "jQuery"
+//        }
+    }
+});

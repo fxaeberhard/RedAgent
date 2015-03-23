@@ -83,18 +83,15 @@ YUI.add("redagent-controller", function(Y) {
             Shadowbox.setup();
 
             if (Y.one(".slideshow")) {
-                Y.use("gallery-yui-slideshow", function() {
-                    Y.all(".slideshow").each(function(node) {                   // Init slideshows in project page
-                        if (!node.slinit) {
-                            new Y.Slideshow({
-                                srcNode: node,
-                                duration: 1,
-                                interval: 6
-                                    //transition: Y.Slideshow.PRESETS.slideRight,
-                                    //nextButton: '#someID'
-                            }).render();
-                            node.slinit = true;
-                        }
+                require(["slick"], function() {
+                    $('.slideshow').slick({
+                        lazyLoad: "ondemand",
+                        infinite: true,
+                        autoplay: true,
+                        autoplaySpeed: 6000,
+                        fade: true,
+                        arrows: false
+                            // adaptiveHeight: true, vertical: true, slidesToShow: 1, speed: 300, dots: true, cssEase: 'linear',
                     });
                 });
             }

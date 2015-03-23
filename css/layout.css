@@ -1,78 +1,68 @@
 /* 8. CUSTOM LAYOUT & TYPOGRAPHY (Daddy bear)
 ----------------------------------------------------------------------------------------*/
-/*body {
-    background: pink;
-}*/
-#container {
-    margin: 0 auto;
-    max-width: 69em;
-}
+@media all and (min-width: 53.236em){
+    /*body {
+        background: pink;
+    }*/
+    #container {
+        margin: 0 auto;
+        max-width: 69em;
+    }
 
-header h2:before, header h2:after { width: 42%; }
+    header h2:before, header h2:after { width: 42%; }
 
-/*h1 { font-size: 4.4em; line-height:1.618em; margin-bottom:0.1em; }*/
+    h1 span:before, h1 span:after {
+        content:"";
+        border-top:1px solid #333;
+        height: 0.1em;
+        width: 19%;
+        display: block;
+        margin-top: 1.618em;
+    }
 
-/*h1 span {
-    font-family: "proxima-nova-1","proxima-nova-2", arial, helvetica, sans-serif;
-    text-transform: uppercase;
-    letter-spacing:0.1em;
-    font-size:0.382em;
-    line-height:3.236em;
-    display:block;
-}*/
+    h1 span:before { float: left; }
+    h1 span:after { float: right; }
 
-h1 span:before, h1 span:after {
-    content:"";
-    border-top:1px solid #333;
-    height: 0.1em;
-    width: 19%;
-    display: block;
-    margin-top: 1.618em;
-}
+    ul { margin-left: 0.4em; }
+    ol { margin-left: 0.4em; }
 
-h1 span:before { float: left; }
-h1 span:after { float: right; }
+    #main {
+        padding-top:10px;
+    }
+    .intro {
+        max-width: 50em;
+        float:left;
+    }
+    .redagent-page {
+        padding: 1.618em;
+    }
+    .redagent-page {
+        width: 69em;
+    }
+    .yui3-skin-sam .redagent-menu {
+        width: 69.15em;
+    }
+    .redagent-page-img {
+        width: 26em;
+        float:left;
+    }
+    aside {
+        float: right;
+        clear: right;
+        width: 17em;
+        /*margin-top:-12.5em;*/
+        height:auto;
+    }
+    aside.redagent-page-text {
+        width: 41.5em;
+    }
 
-ul { margin-left: 0.4em; }
-ol { margin-left: 0.4em; }
+    footer p { max-width: 17.942em; }
 
-#main {
-    padding-top:10px;
 }
-.intro {
-    max-width: 50em;
-    float:left;
-}
-.redagent-page {
-    padding: 1.618em;
-}
-.redagent-page {
-    width: 69em;
-}
-.yui3-skin-sam .redagent-menu {
-    width: 69.15em;
-}
-.redagent-page-img {
-    width: 26em;
-    float:left;
-}
-aside {
-    float: right;
-    clear: right;
-    width: 17em;
-    /*margin-top:-12.5em;*/
-    height:auto;
-}
-aside.redagent-page-text {
-    width: 41.5em;
-}
-
-footer p { max-width: 17.942em; }
-
-
 /* 9. CUSTOM LAYOUT & TYPOGRAPHY (Mummy bear)
 ----------------------------------------------------------------------------------------*/
-@media screen and (min-width: 50em) and (max-width: 72.236em) {
+@media screen and (min-width: 53.236em) and (max-width: 72.236em) {
     /*    body {
             background: yellow;
         }*/

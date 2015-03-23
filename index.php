@@ -23,17 +23,19 @@ $convoId = get_convo_id();
         <link rel="shortcut icon" href="favicon.ico" />
 
         <!-- CSS Libraries (shadobox, fontawesome) -->
-        <link rel="stylesheet" href="lib/shadowbox/shadowbox.css" />
+        <!--<link rel="stylesheet" href="lib/shadowbox/shadowbox.css" />
         <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css" />
         <link rel="stylesheet" href="lib/perfect-scrollbar/css/perfect-scrollbar.min.css" />
+        <link rel="stylesheet" type="text/css" href="lib/slick/slick.css"/>-->
+        <!--<link rel="stylesheet" type="text/css" href="lib/slick/slick-theme.css"/>-->
 
         <!-- Site styles -->
-        <link rel="stylesheet" href="css/global.css" media="all" />
+        <!--<link rel="stylesheet" href="css/global.css" media="all" />
         <link rel="stylesheet" href="css/layout.css" media="all and (min-width: 53.236em)" />
-        <!--[if (lt IE 9) & (!IEMobile)]>
-        <link rel="stylesheet" href="css/layout.css" media="all" />
-        <![endif]-->
-        <link rel="stylesheet" href="css/redagent.css" media="all" />
+        <link rel="stylesheet" href="css/redagent.css" media="all" />-->
+
+        <!-- Combine -->
+        <link rel="stylesheet" type="text/css" href="php/min/?f=lib/shadowbox/shadowbox.css,lib/font-awesome/css/font-awesome.min.css,lib/perfect-scrollbar/css/perfect-scrollbar.min.css,lib/slick/slick.css,css/global.css,css/layout.css,css/redagent.css"/>
 
     </head>
 
@@ -110,22 +112,24 @@ $convoId = get_convo_id();
         <!-- Pusher -->
         <script type="text/javascript" src="http://js.pusher.com/2.2/pusher.min.js"></script>
 
+        <!-- Libraries (Crafty, shadowbox, jQuery, Modernizer) -->
+        <!--<script type="text/javascript" src="php/min/f=lib/modernizr-1.7.min.js,lib/shadowbox/shadowbox.js,lib/jquery-2.1.1.min.js,lib/jquery.scrollTo/jquery.scrollTo.min.js,lib/jquery.localScroll/jquery.localScroll.min.js,lib/jquery.jeditable.mini.js,lib/crafty-mod.js,lib/perfect-scrollbar/js/min/perfect-scrollbar.jquery.min.js,lib/jquery.cookie.js,lib/require.js"></script>-->
+
         <!-- Variables -->
         <script type="text/javascript" >
             var currentPage = "<?php echo $page; ?>",
                 convoId = "<?php echo $convoId; ?>";
         </script>
 
-        <!-- Libraries (Crafty, shadowbox, jQuery, Modernizer) -->
-        <!--<script type="text/javascript" src="php/min/f=lib/modernizr-1.7.min.js,lib/shadowbox/shadowbox.js,lib/jquery-2.1.1.min.js,lib/jquery.scrollTo/jquery.scrollTo.min.js,lib/jquery.localScroll/jquery.localScroll.min.js,lib/jquery.jeditable.mini.js,lib/crafty-mod.js,lib/perfect-scrollbar/js/min/perfect-scrollbar.jquery.min.js,lib/jquery.cookie.js"></script>-->
-
         <!-- Scripts -->
-        <script type="text/javascript" src="php/min/f=lib/modernizr-1.7.min.js,lib/shadowbox/shadowbox.js,lib/jquery-2.1.1.min.js,lib/jquery.scrollTo/jquery.scrollTo.min.js,lib/jquery.localScroll/jquery.localScroll.min.js,lib/jquery.jeditable.mini.js,lib/crafty-mod.js,lib/perfect-scrollbar/js/min/perfect-scrollbar.jquery.min.js,lib/jquery.cookie.js,js/redagent-chat.js,js/redagent-display.js,js/redagent-pusher.js,js/redagent-controller.js,js/redagent.js"></script>
         <!--<script type="text/javascript" src="js/redagent-chat.js"></script>
         <script type="text/javascript" src="js/redagent-display.js"></script>
         <script type="text/javascript" src="js/redagent-pusher.js"></script>
         <script type="text/javascript" src="js/redagent-controller.js"></script>
         <script type="text/javascript" src="js/redagent.js"></script>-->
+
+        <!-- Combine -->
+        <script type="text/javascript" src="php/min/f=lib/modernizr-1.7.min.js,lib/shadowbox/shadowbox.js,lib/jquery-2.1.1.min.js,lib/jquery.scrollTo/jquery.scrollTo.min.js,lib/jquery.localScroll/jquery.localScroll.min.js,lib/jquery.jeditable.mini.js,lib/crafty-mod.js,lib/perfect-scrollbar/js/min/perfect-scrollbar.jquery.min.js,lib/jquery.cookie.js,js/redagent-chat.js,lib/require.js,js/redagent-display.js,js/redagent-pusher.js,js/redagent-controller.js,js/redagent.js"></script>
 
         <!-- Google analytics -->
         <script type="text/javascript">

@@ -6,9 +6,9 @@ function renderGallery($dir) {
     $files = listdir($path);
     sort($files, SORT_LOCALE_STRING);
     foreach ($files as $entry) {
-        echo '<a rel="shadowbox[' . $dir . ']" href="' . $entry . '">'
-        . '<img src="' . str_replace($path, $path . "/mini", $entry) . '"/>'
-        . '</a>';
+        echo '<div><a rel="shadowbox[' . $dir . ']" href="' . $entry . '">'
+        . '<img data-lazy="' . str_replace($path, $path . "/mini", $entry) . '"/>'
+        . '</a></div>';
     }
 }
 ?>
@@ -19,15 +19,13 @@ function renderGallery($dir) {
     <!-- Programming game -->
     <p class="redagent-cl " id="proggame"></p>
     <p class="redagent-spacer" style="border-color:white;margin: 0;margin-top: 2.8em;"></p>
-    <p class="redagent-page-img">
-        <span>
-            <span class="slideshow" style="min-height: 229px;">
-                <?php
-                renderGallery("proggame");
-                ?>
-            </span>
-        </span>
-    </p>
+    <div class="redagent-page-img">
+        <div class="slideshow" style="min-height: 229px;">
+            <?php
+            renderGallery("proggame");
+            ?>
+        </div>
+    </div>
     <aside class="redagent-page-text">
         <p class="redagent-date">January 2014</p>
         <h1>Programming game</h1>
@@ -62,15 +60,13 @@ function renderGallery($dir) {
     <p class="redagent-cl"></p>
     <p class="redagent-spacer" id="stalker"></p>
 
-    <p class="redagent-page-img">
-        <span>
-            <span class="slideshow" style="min-height:280px;">
-                <?php
-                renderGallery("stalker");
-                ?>
-            </span>
-        </span>
-    </p>
+    <div class="redagent-page-img">
+        <div class="slideshow" style="min-height:280px;">
+            <?php
+            renderGallery("stalker");
+            ?>
+        </div>
+    </div>
     <aside class="redagent-page-text">
         <p class="redagent-date">September 2013</p>
         <h1>Stalker - Experimenting the Zone</h1>
@@ -102,15 +98,13 @@ function renderGallery($dir) {
     <p class="redagent-cl"></p>
     <p class="redagent-spacer" id="wegas"></p>
 
-    <p class="redagent-page-img">
-        <span>
-            <span class="slideshow" style="min-height: 229px;">
-                <?php
-                renderGallery("wegas");
-                ?>
-            </span>
-        </span>
-    </p>
+    <div class="redagent-page-img">
+        <div class="slideshow" style="min-height: 229px;">
+            <?php
+            renderGallery("wegas");
+            ?>
+        </div>
+    </div>
     <aside class="redagent-page-text">
         <p class="redagent-date">July 2011</p>
         <h1>Wegas</h1>
@@ -144,18 +138,16 @@ function renderGallery($dir) {
     <p class="redagent-cl"></p>
     <p class="redagent-spacer" id="wallogram"></p>
 
-    <p class="redagent-page-img">
-        <span>
-            <span class="slideshow">
-                <?php
-                renderGallery("wallogram");
-                ?>
-                <a rel="shadowbox[Wallo];width=720;height=404;player=flv;" href="wallogram/assets/screenshots/Wallogram-Montage.mp4">
-                    <img src="images/projects/wallogram/mini/Wallogram-Montage.png"/>
-                </a>
-            </span>
-        </span>
-    </p>
+    <div class="redagent-page-img">
+        <div class="slideshow">
+            <?php
+            renderGallery("wallogram");
+            ?>
+            <a rel="shadowbox[Wallo];width=720;height=404;player=flv;" href="wallogram/assets/screenshots/Wallogram-Montage.mp4">
+                <img src="images/projects/wallogram/mini/Wallogram-Montage.png"/>
+            </a>
+        </div>
+    </div>
     <aside class="redagent-page-text">
         <p class="redagent-date">January 2011</p>
         <h1>Wallogram</h1>
@@ -279,15 +271,13 @@ function renderGallery($dir) {
     <p class="redagent-spacer" id="3dblogosphere"></p>
 
     <!--  3D  Blogosphere-->
-    <p class="redagent-page-img">
-        <span>
-            <span class="slideshow">   
-                <?php
-                renderGallery("3DBlogosphere");
-                ?>
-            </span>
-        </span>
-    </p>
+    <div class="redagent-page-img">
+        <div class="slideshow">   
+            <?php
+            renderGallery("3DBlogosphere");
+            ?>
+        </div>
+    </div>
     <aside class="redagent-page-text">
         <p class="redagent-date">August 2009</p>
         <h1>3DBlogosphere</h1>
@@ -313,19 +303,17 @@ function renderGallery($dir) {
     <!-- Redcms -->
     <p class="redagent-cl"></p>
     <p class="redagent-spacer" id="redcms"></p>
-    <p class="redagent-page-img" >
-        <span>
-            <span class="slideshow">
-                <a href="http://redcms.red-agent.com" target="_blank">
-                    <!--<img class="redagent-image" data-src="images/projects/redcms-logo.jpg" />-->
-                    <img src="images/projects/redcms-logo.jpg" />
-                </a>
-                <?php
-                renderGallery("webdesign");
-                ?>
-            </span>
-        </span>
-    </p>
+    <div class="redagent-page-img" >
+        <div class="slideshow">
+            <a href="http://redcms.red-agent.com" target="_blank">
+                <!--<img class="redagent-image" data-src="images/projects/redcms-logo.jpg" />-->
+                <img src="images/projects/redcms-logo.jpg" />
+            </a>
+            <?php
+            renderGallery("webdesign");
+            ?>
+        </div>
+    </div>
     <aside class="redagent-page-text">
         <p class="redagent-date" >January 2005 - August 2009</p>
         <h1><a href="http://redcms.red-agent.com" target="_blank">RedCMS</a></h1>
