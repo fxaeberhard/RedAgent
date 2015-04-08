@@ -24,7 +24,7 @@ if ($op === "comment") {
     $files = array_reverse($files);
     foreach ($files as $entry) {
         ?>
-        <div class="blog-post" data-post="<?php echo $entry ?>">
+        <div class="redagent-article blog-post" data-post="<?php echo $entry ?>">
 
             <div><?php include $entry; ?></div>
 

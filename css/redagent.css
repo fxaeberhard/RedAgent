@@ -43,10 +43,19 @@ html {
     padding: 20px 0 0;
     z-index: 500;
     background: white;
+    min-height: 630px;
 }
 .redagent-page-loading {
     min-height:95%;
     background: white url(../images/loading.gif) center no-repeat;
+}
+.redagent-article {
+    overflow: hidden;
+    transition: max-height 1s;
+/*    -o-transition: max-height 0.15s;
+    -moz-transition: max-height 0.15s;
+    -ms-transition: max-height 0.15s;
+    -webkit-transition: max-height 0.15s;*/
 }
 .redagent-cl {
     clear: both;
@@ -54,7 +63,7 @@ html {
 .redagent-page .redagent-spacer {
     line-height: 0em;
     margin: 2.8em 0 3.3em;
-    border-bottom: 1px solid #efefef;
+    border-bottom: 1px solid #EDEDED;
 }
 .redagent-date {
     margin-bottom: 0;
@@ -87,6 +96,7 @@ html {
     word-spacing: normal;  
     vertical-align: top;  
     margin-top: 0px;
+    float: left;
 }
 .redagent-submenu a {
     padding: 0.1em 0.6em 0.1em 0.8em;
@@ -113,6 +123,24 @@ html {
 }
 .redagent-menu .redagent-closebutton:hover {
     background-color: darkgray;
+}
+.redagent-search {
+    float: right;
+    position: relative;
+    margin-top: 2px;
+    margin-right: 3px;
+}
+.redagent-search input {    
+    font-size: 1em;
+    padding: 0.1em 0.1em 0.1em 1.4em;
+    border: 1px solid lightgray;
+    width: 100px;
+}
+.redagent-search i {
+    position: absolute;
+    top: 0.3em;
+    left: 0.3em;
+    color: #580000;
 }
 
 /* Contact page */
@@ -149,7 +177,7 @@ html {
 
 /** Chat styles */
 .yui3-redagent-chat textarea {
-    width: 94.5%;
+    width: 94%;
     border: 1px solid #580000;
     margin:0;
     padding: 5px 2.5%;

@@ -7,8 +7,8 @@
  */
 YUI({
     useBrowserConsole: true
-}).use("base-build", "widget", "timers", "json-parse", "history", // Dependencies
-    "transition", "io-base", "event-key", "redagent-display", "redagent-chat",
+}).use("base-build", "widget", "timers", "json-parse", "history", "transition", // Dependencies
+    "io-base", "event-key", "event-valuechange", "redagent-display", "redagent-chat",
     "redagent-pusher", "redagent-controller", function(Y) {
         var bd = Y.one("body"),
             controller = new Y.RedAgent.Controller(), //                        // Pages controller (history, loading, etc.)
@@ -17,7 +17,7 @@ YUI({
             chat = new Y.RedAgent.Chat().render(".scrollview-container");       // Render chat
 
         chat.on("chatEnter", function(e) {                                      // When chat input is entered
-            display.say("You", e.msg);                                          // Show msg in the canvas
+            Crafty('PlayablePC').say(e.msg);                                          // Show msg in the canvas
 
             if (pusher.channel && pusher.channel.members.count > 1) {           // and there are other players in the chat,
                 pusher.trigger("chat", {
@@ -33,7 +33,7 @@ YUI({
                         success: function(tId, e) {
                             var response = Y.JSON.parse(e.responseText);
                             chat.say("Red agent", response.botsay);
-                            display.say("Red agent", response.botsay);
+                            display.say("bot", response.botsay);
                         }
                     }
                 });
@@ -51,8 +51,8 @@ YUI({
 
             pusher.channel.bind('pusher:subscription_succeeded', function(members) {// On connection to the channel,
                 Y.log("Presence channel subscription_succeeded, count: " + members.count);
-                var label = $.cookie("chatname") || "Anonymous " + members.count + " <em>(me)</em>";
-                display.getPlayer("You").label(label);
+                var label = $.cookie("chatname") || "Anonymous " + members.count;
+                Crafty('PlayablePC').label(label);
                 members.each(function(m) {                                      // display all members that are already on the channel
                     if (m.id !== members.myID) {
                         display.addPlayer(m);
@@ -82,9 +82,10 @@ YUI({
                 Y.log("Client-jump", e);
                 var entity = display.getPlayer(e.id);
                 if (!entity.initialized) {
-                    entity.attr({x: e.x, y: e.y}).initialized = true;
+                    entity.attr({x: e.x, y: e.y})
+                        .label(e.name)
+                        .initialized = true;
                     entity.visible = true;
-                    entity.label(e.name);
                 }
             });
 
@@ -106,62 +107,50 @@ YUI({
         var onNavClick = function(e, page) {
             e.halt(true);                                                       // Prevent default event
             controller.showPage(page);
+            updateScroll();
         };
         bd.delegate("click", controller.closePage, ".redagent-closebutton", controller);// Close button click
         bd.delegate("click", onNavClick, "a.redagent-nav-projects", controller, "Projects");// Nav click
         bd.delegate("click", onNavClick, "a.redagent-nav-contact", controller, "Contact");
         bd.delegate("click", onNavClick, "a.redagent-nav-blog", controller, "Blog");
 
-        var isElementInViewport = function(el) {
-            if (typeof jQuery === "function" && el instanceof jQuery) {             //special bonus for those using jQuery
-                el = el[0];
-            }
-            var rect = el.getBoundingClientRect();
-            return rect.top >= 0 && rect.left >= 0 &&
-                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && /*or $(window).height() */
-                rect.right <= (window.innerWidth || document.documentElement.clientWidth) /*or $(window).width() */;
-        },
-            doUpdate = function(pageName) {
-                var target, found = false;
-                Y.all(".redagent-page-" + pageName + " .cf > *[id]").each(function(n) {
-                    if (found) {
-                    } else if (n.get("id") && isElementInViewport(n.getDOMNode())) {
-                        found = true;
-                    } else {
+        var doUpdate = function(pageName) {
+            var target, found = false;
+            Y.all(".redagent-page-" + pageName + " .redagent-spacer").each(function(n) {
+                if (!found) {
+                    if (n.get("id") && Y.one("a[href='#" + n.get("id") + "']")) {
                         target = n.get("id");
                     }
-                });
-                if (target && Y.one("a[href='#" + target + "']")) {
-                    Y.all(".redagent-menu-" + pageName + " .redagent-selected").removeClass("redagent-selected");
-                    Y.one("a[href='#" + target + "']").addClass("redagent-selected");
+                    found = n.getDOMNode().getBoundingClientRect().top > 0;
                 }
-            },
+            });
+            Y.all(".redagent-menu-" + pageName + " .redagent-selected").removeClass("redagent-selected");
+            Y.all("a[href='#" + target + "']").addClass("redagent-selected");
+        },
             updateScroll = function() {
                 doUpdate("projects");
                 doUpdate("blog");
             };
 
         $(window).on('DOMContentLoaded load resize scroll', updateScroll);
-        bd.delegate("click", updateScroll, "a.redagent-nav-projects, a.redagent-nav-blog");
         updateScroll();
 
         if (currentPage !== "Red agent") {
             Crafty.pause();
         }
 
-        var firstmsg = "Welcome on Francois-Xavier's home page.",
+        var firstmsg = "Welcome on Francois-Xavier's home page.", //            // Introduction text by the bot
             secmsg = "It appears there's only the two of us on this page at the moment. Feel free to look around and ask me if you have any question.";
-
         Y.later(2000, this, function() {
             chat.say("Red agent", firstmsg);
-            display.say("Red agent", firstmsg);
+            display.say("bot", firstmsg);
         });
         Y.later(4000, this, function() {
             chat.say("Red agent", secmsg);
-            display.say("Red agent", secmsg);
+            display.say("bot", secmsg);
         });
 
-        $.localScroll({
+        $.localScroll({//                                                       //Set up animated scrolling
             target: 'body',
             duration: 1000,
             hash: true
@@ -173,15 +162,25 @@ require.config({
     baseUrl: 'lib/',
     paths: {
         slick: "slick/slick",
-//        jquery: "jquery-2.1.1.min"
+        tinyMCE: 'tinymce/tinymce.min'
+            //jquery: "jquery-2.1.1.min"
     },
     shim: {
-//        'slick': {
-//            deps: ['jquery'],
-//            exports: 'jQuery.fn.slick'
-//        },
-//        jquery: {
-//            exports: "jQuery"
-//        }
+        tinyMCE: {
+            exports: 'tinyMCE',
+            init: function() {
+                this.tinyMCE.DOM.events.domLoaded = true;
+                this.tinyMCE.baseURL = "lib/tinymce";
+                this.tinyMCE.suffix = ".min";
+                return this.tinyMCE;
+            }
+        }
+        //'slick': {
+        //    deps: ['jquery'],
+        //    exports: 'jQuery.fn.slick'
+        //},
+        //jquery: {
+        //    exports: "jQuery"
+        //}
     }
 });

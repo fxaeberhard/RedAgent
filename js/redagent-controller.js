@@ -28,6 +28,16 @@ YUI.add("redagent-controller", function(Y) {
                 Controller.windowActive = true;
             });
 
+            Y.one(".redagent-search input").on("valuechange", function(e) {     // Search field logic
+                Y.all(".redagent-article").setStyle("max-height", "2000px")
+                    .each(function(n) {
+                        if (e.newVal && n.get("text").toLowerCase().indexOf(e.newVal.toLowerCase()) === -1) {
+//                            n.hide(false);
+                            n.setStyle("max-height", "0");
+                        }
+                    });
+            });
+
             Y.RedAgent.controller = this;
         },
         showPage: function(title) {                                             // Show a page
@@ -116,10 +126,22 @@ YUI.add("redagent-controller", function(Y) {
                 });
             }
 
-            initTinyMce = function() {                                          // Init TinyMCE on blog.html page
-                //tinymce.dom.Event.domLoaded = true;
-                tinyMCE.baseURL = "lib/tinymce";
-                tinyMCE.suffix = ".min";
+            if (Y.one(".page-blog textarea")) {                                 // Init TinyMCE on blog.html page
+                this.initTinyMCE();
+            }
+        },
+        getPath: function() {
+            var loc = window.location.pathname;
+            return loc.substring(0, loc.lastIndexOf('/') + 1);
+        },
+        playNotification: function() {
+            if (!Controller.windowActive) {
+                Y.log("Controller.playNotification()");
+                new Audio('images/Air Plane Ding.mp3').play();
+            }
+        },
+        initTinyMCE: function() {
+            requirejs(['tinyMCE'], function(tinyMCE) {
                 tinyMCE.init({
                     selector: '.page-blog textarea',
                     plugins: "autolink link image code media table contextmenu save emoticons  autoresize",
@@ -129,7 +151,7 @@ YUI.add("redagent-controller", function(Y) {
                     menubar: false,
                     save_enablewhendirty: true,
                     toolbar_items_size: 'small',
-                    forced_root_block: false, // Prevent enter from creating p elements
+                    forced_root_block: false, //                                // Prevent enter from creating p elements
                     autoresize_min_height: 45,
                     autoresize_bottom_margin: 0,
                     save_onsavecallback: function(editor) {
@@ -162,8 +184,8 @@ YUI.add("redagent-controller", function(Y) {
                                 editorNode = $(editor.editorContainer).find('>.mce-container-body >.mce-edit-area');
                             toolbar.detach().insertAfter(editorNode);           // switch the order of the elements
 
-                            $(editor.contentAreaContainer).css("position", "relative");
-                            $(editor.contentAreaContainer).append(placeholder);
+                            $(editor.contentAreaContainer).css("position", "relative")
+                                .append(placeholder);
 
                             $(this.contentAreaContainer.parentElement).find("div.mce-toolbar-grp").hide();
                         });
@@ -172,7 +194,7 @@ YUI.add("redagent-controller", function(Y) {
                             placeholder.hide();
                         });
                         editor.on('blur', function() {
-                            if (this.getContent() == '') {
+                            if (this.getContent() === '') {
                                 $(this.contentAreaContainer.parentElement).find("div.mce-toolbar-grp").hide();
                                 placeholder.show();
                             } else {
@@ -181,24 +203,7 @@ YUI.add("redagent-controller", function(Y) {
                         });
                     }
                 });
-            };
-            if (Y.one(".page-blog textarea")) {
-                if (typeof tinyMCE === "undefined") {
-                    $.getScript('lib/tinymce/tinymce.min.js', initTinyMce);
-                } else {
-                    initTinyMce();
-                }
-            }
-        },
-        getPath: function() {
-            var loc = window.location.pathname;
-            return loc.substring(0, loc.lastIndexOf('/') + 1);
-        },
-        playNotification: function() {
-            if (!Controller.windowActive) {
-                Y.log("Controller.playNotification()");
-                new Audio('images/Air Plane Ding.mp3').play();
-            }
+            });
         }
     });
     Y.namespace("RedAgent").Controller = Controller;

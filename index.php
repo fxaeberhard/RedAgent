@@ -76,6 +76,11 @@ $convoId = get_convo_id();
                         <a href="#arthur" class="redagent-selected">2014</a>
                         <a href="#mariagelaurent" >2013</a>                        
                     </div>
+
+                    <div class="redagent-search">
+                        <i class="fa fa-search"></i>
+                        <input placeholder="Search" />
+                    </div>
                 </div>
             </article>
 
