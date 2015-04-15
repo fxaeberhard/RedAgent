@@ -17,7 +17,7 @@ YUI({
             chat = new Y.RedAgent.Chat().render(".scrollview-container");       // Render chat
 
         chat.on("chatEnter", function(e) {                                      // When chat input is entered
-            Crafty('PlayablePC').say(e.msg);                                          // Show msg in the canvas
+            Crafty('PlayablePC').say(e.msg);                                    // Show msg in the canvas
 
             if (pusher.channel && pusher.channel.members.count > 1) {           // and there are other players in the chat,
                 pusher.trigger("chat", {
@@ -63,14 +63,17 @@ YUI({
 
             pusher.channel.bind('pusher:member_added', function(member) {       // When somebody connect,
                 Y.log("Member added, count: ", pusher.channel.members.count);
-                display.addPlayer(member);                                      // display the newcomer
+                var player = display.addPlayer(member);                         // display the newcomer
+                player.isNewPlayer = true;
                 controller.playNotification();
                 sendJump();                                                     // and send pusher event to update newcomer about current postion
             });
 
             pusher.channel.bind('pusher:member_removed', function(member) {     // When somebody disconnect
                 Y.log("Member removed, count ", pusher.channel.members.count);
-                display.getPlayer(member.id).destroy();
+                var player = display.getPlayer(member.id);
+                chat.notify(player.label() + " has left.");
+                player.destroy();
             });
 
             pusher.channel.bind('client-move', function(e) {                    // When somebody else moves,
@@ -80,12 +83,13 @@ YUI({
 
             pusher.channel.bind('client-jump', function(e) {                    // Postion update event, so players are at the right position at the beginning
                 Y.log("Client-jump", e);
-                var entity = display.getPlayer(e.id);
-                if (!entity.initialized) {
-                    entity.attr({x: e.x, y: e.y})
+                var player = display.getPlayer(e.id);
+                if (!player.initialized) {
+                    player.attr({x: e.x, y: e.y})
                         .label(e.name)
                         .initialized = true;
-                    entity.visible = true;
+                    player.visible = true;
+                    player.isNewPlayer && chat.notify(e.name + " has joined.");
                 }
             });
 
@@ -121,7 +125,7 @@ YUI({
                     if (n.get("id") && Y.one("a[href='#" + n.get("id") + "']")) {
                         target = n.get("id");
                     }
-                    found = n.getDOMNode().getBoundingClientRect().top > 0;
+                    found = n.getDOMNode().getBoundingClientRect().top >= 0;
                 }
             });
             Y.all(".redagent-menu-" + pageName + " .redagent-selected").removeClass("redagent-selected");

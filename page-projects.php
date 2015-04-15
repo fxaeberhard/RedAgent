@@ -14,12 +14,11 @@ function renderGallery($dir) {
 ?>
 <div role="main" class="cf">
 
-    <div style="height:1em">.</div>
 
     <!-- Programming game -->
     <div class="redagent-article">
+        <p class="redagent-spacer" id="proggame" style="border-color:white;margin: 0;margin-bottom: 2.8em;"></p>
         <p class="redagent-cl" ></p>
-        <p class="redagent-spacer" id="proggame" style="border-color:white;margin: 0;margin-top: 2.8em;"></p>
         <div class="redagent-page-img">
             <div class="slideshow" style="min-height: 229px;">
                 <?php
@@ -40,7 +39,7 @@ function renderGallery($dir) {
                 <tr>
                     <td  class="colum-right">Links</td>
                     <td style="font-style: normal">
-                        <a href="http://wegas.albasim.ch/game.html?token=proggame&al=1" target="_blank">Demo</a>
+                        <a href="http://wegas.albasim.ch/game.html?token=proggame&al=1" target="_blank">Play online</a>
                         | <a href="https://github.com/Heigvd/Wegas" target="_blank">Sources</a>
                         | <a rel="shadowbox[proggame]" href="images/projects/proggame/wegas-proggame-1.png">Screenshots</a>
                     </td>
@@ -122,7 +121,7 @@ function renderGallery($dir) {
                 <tr>
                     <td  class="colum-right">Links</td>
                     <td style="font-style: normal">
-                        <a href="http://wegas.albasim.ch" target="_blank">Demo</a>
+                        <a href="http://wegas.albasim.ch" target="_blank">Try online</a>
                         | <a href="https://github.com/Heigvd/Wegas" target="_blank">Sources</a>
                         | <a rel="shadowbox[wegas]" href="images/projects/wegas/wegas-14.05.22-1-Login.jpg">Screenshots</a>
                     </td>

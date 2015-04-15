@@ -144,7 +144,8 @@ html {
 }
 
 /* Contact page */
-.redagent-page-projects {
+.redagent-page-projects, 
+.redagent-page-blog {
     padding-top: 0;
 }
 /** Display style */

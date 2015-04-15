@@ -7,15 +7,13 @@ if ($op === "comment") {
     $file = filter_input(INPUT_POST, 'file');
     $comment = filter_input(INPUT_POST, 'comment');
     $f = fopen($file, "a+");
-    file_put_contents($file, "<div class='blog-comment'><em>" . date("d F y") . "</em><br />$comment</div>", FILE_APPEND);
+    file_put_contents($file, "<aside class='blog-comment redagent-page-text'><em>" . date("d F y") . "</em><br />$comment</aside>", FILE_APPEND);
     fclose($f);
     include $file;
     die();
 }
 ?>
 <div role="main" class="cf page-blog">
-
-    <div style="height:1em">.</div>
 
     <?php
     $path = "blog/";
@@ -28,9 +26,9 @@ if ($op === "comment") {
 
             <div><?php include $entry; ?></div>
 
-            <div class="blog-addcomment">
+            <aside class="blog-addcomment redagent-page-text">
                 <textarea rows="2"  placeholder="My comment"></textarea>
-            </div>
+            </aside>
 
         </div>
     <?php } ?>

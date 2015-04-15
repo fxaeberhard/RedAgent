@@ -211,7 +211,7 @@ YUI.add("redagent-display", function(Y) {
                         });
                     this.attach(this._label);
                 }
-                if (this.has("PlayerCharacter")) {
+                if (this.has("PlayablePC")) {
                     label += LABELSUFFIX;
                 }
                 this._label.text(label);
