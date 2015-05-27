@@ -3,7 +3,9 @@
         <strong>François-Xavier Aeberhard</strong><br>
         <span style="font-size:0.9em">
             User Experience engineer<br>
-            fx (AT) red-agent.com<br/><br/><br/></span>
+            fx (AT) red-agent.com			
+            <!--<a href="http://www.google.com/recaptcha/mailhide/d?k=01tfH_sHi9mCGP6o51PKWzKw==&amp;c=HdWYxKOD7Q96Lcvn1x9vqwD4cNY6Q_wSLuuO2okBISA=" onclick="window.open('http://www.google.com/recaptcha/mailhide/d?k\07501tfH_sHi9mCGP6o51PKWzKw\75\75\46c\75HdWYxKOD7Q96Lcvn1x9vqwD4cNY6Q_wSLuuO2okBISA\075', '', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=500,height=300'); return false;" title="Reveal this e-mail address">f...@red-agent.com</a>-->
+			<br/><br/><br/></span>
     </p>
     <aside class="redagent-page-text" style="width:50%;">
         <strong>Online presence</strong><br/>

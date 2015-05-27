@@ -72,6 +72,7 @@ YUI.add("redagent-controller", function(Y) {
                 this.currentPage = title;                                       // Save current page
 
                 Y.all(".redagent-menu-" + title.toLowerCase()).show(true);      // Show current menu
+                Y.one(".redagent-search").toggleView(title !== "contact");
 
                 if (!Crafty.isPaused())
                     Y.later(1000, Crafty, Crafty.pause());
