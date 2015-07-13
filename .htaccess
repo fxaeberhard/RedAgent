@@ -26,6 +26,11 @@ DirectoryIndex index.php index.html
 	#########################################################
 
 
+	########### red-agent.com -> www.red-agent.com
+	RewriteCond %{HTTP_HOST} ^red-agent.com [nocase]
+	RewriteRule ^(.*) http://www.red-agent.com/$1 [last,redirect=301]
+
+
 	#########################################################
 	Options +FollowSymlinks
 	RewriteEngine On

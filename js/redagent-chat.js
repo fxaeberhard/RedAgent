@@ -1,6 +1,6 @@
 /*
  * Red agent
- * http://www.red-agent.com/wallogram
+ * http://www.red-agent.com/
  *
  * Copyright (c) Francois-Xavier Aeberhard <fx@red-agent.com>
  * Licensed under the MIT License

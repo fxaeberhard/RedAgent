@@ -19,7 +19,7 @@ html {
         height: auto !important;
     }
     .yui3-redagent-display canvas  {
-        width: 100% !important;
+        /*width: 100% !important;*/
         position: relative !important;
     }
     .yui3-redagent-chat {
@@ -40,7 +40,7 @@ html {
     left:0;
     right: 0;
     top: 0;
-    padding: 20px 0 0;
+    padding: 20px 1em 0;
     z-index: 500;
     background: white;
     min-height: 630px;
@@ -62,8 +62,8 @@ html {
 }
 .redagent-page .redagent-spacer {
     line-height: 0em;
-    margin: 2.8em 0 3.3em;
-    border-bottom: 1px solid #EDEDED;
+    margin: 2.8em 0 1.3em;
+    border-bottom: 1px solid transparent;
 }
 .redagent-date {
     margin-bottom: 0;
@@ -76,6 +76,7 @@ html {
 }
 .redagent-page td {
     padding-right: 10px;
+    color: #a0a0a0;
 }
 .redagent-page td a {
     font-style: normal;
@@ -88,7 +89,7 @@ html {
     width:100%;
 }
 .redagent-menu .cf {    
-    padding: 0.6em 0em;
+    padding: 0.6em 1em;
 }
 .redagent-submenu {
     display: inline-block;  
@@ -159,7 +160,7 @@ html {
     widtH: 100%;
 }
 .redagent-sendmail-button .yui3-button {
-    padding: 0.5em 3.7em 0.6em;
+    padding: 0.5em 3em 0.6em;
     max-width: 100%;
     font-size: 1.1em;
     font-weight: bold;
@@ -168,7 +169,9 @@ html {
     /* vertical-align: bottom; */
 }
 .redagent-sendmail-button .yui3-button i {
-    font-size: 1.2em;
+    font-size: 0.9em;
+    margin-right: 0.5em;
+    vertical-align: top;
 }
 /** Display style */
 .yui3-redagent-display #cr-stage {

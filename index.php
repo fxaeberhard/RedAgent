@@ -14,7 +14,7 @@ $convoId = get_convo_id();
         <meta name="author" content="Francois-Xavier Aeberhard" />
         <meta name="contact" content="fx@red-agent.com" />
         <meta name="keywords" content="françois-xavier, aeberhard, gamedesign, webdesign, user experience" />
-        <meta name="description" content="">
+        <meta name="description" content="Francois-Xavier Aeberhard is a user experience engineer, specialized in games and web. Here is his portfolio">
         <meta charset="utf-8" />
         <meta name="robots" content="index, follow" />
         <meta http-equiv="cleartype" content="on" />
@@ -62,7 +62,7 @@ $convoId = get_convo_id();
                     <div class="redagent-closebutton"></div>
 
                     <div class="redagent-submenu redagent-menu-projects" <?php echo ($page !== "projects") ? 'style="display:none;opacity: 0"' : '' ?>>
-                        <a href="#proggame" class="redagent-selected">2014</a>
+                        <a href="#wallogram" class="redagent-selected">2014</a>
                         <a href="#stalker" >2013</a>
                         <a href="#wegas" >2011</a>
                         <a href="#mjte">2010</a>

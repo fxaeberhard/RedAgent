@@ -1,6 +1,6 @@
 /*
  * Red agent
- * http://www.red-agent.com/wallogram
+ * http://www.red-agent.com/
  *
  * Copyright (c) Francois-Xavier Aeberhard <fx@red-agent.com>
  * Licensed under the MIT License
@@ -8,8 +8,8 @@
 YUI({
     useBrowserConsole: true
 }).use("base-build", "widget", "timers", "json-parse", "history", "transition", // Dependencies
-    "io-base", "event-key", "event-valuechange", "redagent-display", "redagent-chat",
-    "redagent-pusher", "redagent-controller", function(Y) {
+    "io-base", "event-key", "event-valuechange", "event-resize", "dom-screen",
+    "redagent-display", "redagent-chat", "redagent-pusher", "redagent-controller", function(Y) {
         var bd = Y.one("body"),
             controller = new Y.RedAgent.Controller(), //                        // Pages controller (history, loading, etc.)
             pusher = new Y.RedAgent.Pusher(), //                                // Websocket facade

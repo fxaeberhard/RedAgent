@@ -1,6 +1,6 @@
 /*
  * Red agent
- * http://www.red-agent.com/wallogram
+ * http://www.red-agent.com/
  *
  * Copyright (c) Francois-Xavier Aeberhard <fx@red-agent.com>
  * Licensed under the MIT License
@@ -21,6 +21,15 @@ YUI.add("redagent-display", function(Y) {
             Crafty.init(WIDTH, HEIGHT);                                         // Init crafty
             Crafty.isometric.size(TILEWIDTH);                                   // Init isometric layout
             Crafty.support.canvas && Crafty.canvas.init();                      // Init canvas if available
+
+            function updateScale() {
+                var ratio = Math.min(1, Y.DOM.winWidth() / WIDTH);
+                Crafty.viewport.scale(ratio);
+                Y.one("canvas").set("width", WIDTH * ratio);
+                Y.one("canvas").set("height", HEIGHT * ratio);
+            }
+            updateScale();
+            Y.on("windowresize", updateScale);
 
             var x, y;
             for (x = 12 * (MAXX + 1); x >= MINX * 12; x--) {                    // Init grid
@@ -369,17 +378,17 @@ YUI.add("redagent-display", function(Y) {
                         HMB = HEIGHT - BORDER, HM2B = HEIGHT - 2 * BORDER;
 
                     if (this.x + 32 > this.screen.x * WM2B + WMB && this.screen.x < MAXX) {
-                        Crafty.viewport.pan(WM2B, 0, 1000);
+                        Crafty.viewport.pan(WM2B * Crafty.viewport._scale, 0, 1000);
                         this.screen.x++;
                     } else if (this.x + 32 < this.screen.x * WM2B + BORDER && this.screen.x > MINX) {
-                        Crafty.viewport.pan(-WM2B, 0, 1000);
+                        Crafty.viewport.pan(-WM2B * Crafty.viewport._scale, 0, 1000);
                         this.screen.x--;
                     }
                     if (this.y + 62 > this.screen.y * HM2B + HMB && this.screen.y < MAXY) {
-                        Crafty.viewport.pan(0, HM2B, 1000);
+                        Crafty.viewport.pan(0, HM2B * Crafty.viewport._scale, 1000);
                         this.screen.y++;
                     } else if (this.y + 62 < this.screen.y * HM2B + BORDER && this.screen.y > MINY) {
-                        Crafty.viewport.pan(0, -HM2B, 1000);
+                        Crafty.viewport.pan(0, -HM2B * Crafty.viewport._scale, 1000);
                         this.screen.y--;
                     }
                 });

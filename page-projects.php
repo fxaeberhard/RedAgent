@@ -14,10 +14,51 @@ function renderGallery($dir) {
 ?>
 <div role="main" class="cf">
 
+    <!-- Wallogram -->
+    <div class="redagent-article">
+        <p class="redagent-cl"></p>
+        <p class="redagent-spacer" id="wallogram" style="border-color:white;margin: 0;margin-bottom: 3.8em;"></p>
+
+        <div class="redagent-page-img">
+            <div class="slideshow">
+                <?php
+                renderGallery("wallogram");
+                ?>
+                <!-- <a rel="shadowbox[wallogram];width=720;height=404;player=flv;" href="wallogram/assets/screenshots/Wallogram-Montage.mp4">
+                    <img src="images/projects/wallogram/mini/Wallogram-Montage.png"/>
+                </a>-->
+            </div>
+        </div>
+        <aside class="redagent-page-text">
+            <p class="redagent-date">September 2014</p>
+            <h1>Wallogram</h1>
+            <h2>Interactive video mapping performance</h2>
+
+            <p class="redagent-content">
+                Wallogram turns our environment in a video game playground. The game is projected on walls 
+                and facades and several players use their mobile phone as a game controller.
+            </p>
+
+            <table>
+                <tr>
+                    <td  class="colum-right">Links</td>
+                    <td style="font-style: normal">
+                        <a href="http://www.wallogram.ch/" target="_blank">Demo</a> | 
+                        <a href="https://github.com/fxaeberhard/Wallogram" target="_blank">Sources</a> | 
+                        <a rel="shadowbox[wallogram]" href="images/projects/wallogram/20140321_124232.jpg">Screenshots</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td  class="colum-right">Technologies</td>
+                    <td>Javascript, Node.js, Websocket</td>
+                </tr>
+            </table>
+        </aside>
+    </div>
 
     <!-- Programming game -->
     <div class="redagent-article">
-        <p class="redagent-spacer" id="proggame" style="border-color:white;margin: 0;margin-bottom: 2.8em;"></p>
+        <p class="redagent-spacer" id="proggame" ></p>
         <p class="redagent-cl" ></p>
         <div class="redagent-page-img">
             <div class="slideshow" style="min-height: 229px;">
@@ -39,7 +80,7 @@ function renderGallery($dir) {
                 <tr>
                     <td  class="colum-right">Links</td>
                     <td style="font-style: normal">
-                        <a href="http://wegas.albasim.ch/game.html?token=proggame&al=1" target="_blank">Play online</a>
+                        <a href="http://wegas.red-agent.com/game.html?token=proggame&al=1" target="_blank">Play online</a>
                         | <a href="https://github.com/Heigvd/Wegas" target="_blank">Sources</a>
                         | <a rel="shadowbox[proggame]" href="images/projects/proggame/wegas-proggame-1.png">Screenshots</a>
                     </td>
@@ -109,7 +150,7 @@ function renderGallery($dir) {
             </div>
         </div>
         <aside class="redagent-page-text">
-            <p class="redagent-date">July 2011</p>
+            <p class="redagent-date">January 2012</p>
             <h1>Wegas</h1>
             <h2>UX Engineer at School for Business & Engineering Vaud (HEIG-Vd)</h2>
 
@@ -121,7 +162,7 @@ function renderGallery($dir) {
                 <tr>
                     <td  class="colum-right">Links</td>
                     <td style="font-style: normal">
-                        <a href="http://wegas.albasim.ch" target="_blank">Try online</a>
+                        <a href="http://wegas.red-agent.com" target="_blank">Try online</a>
                         | <a href="https://github.com/Heigvd/Wegas" target="_blank">Sources</a>
                         | <a rel="shadowbox[wegas]" href="images/projects/wegas/wegas-14.05.22-1-Login.jpg">Screenshots</a>
                     </td>
@@ -133,48 +174,6 @@ function renderGallery($dir) {
                 <tr>
                     <td class="colum-right">Grants</td>
                     <td>RCSO, Western Switzerland School for Applied Science</td>
-                </tr>
-            </table>
-        </aside>
-    </div>
-
-    <!-- Wallogram -->
-    <div class="redagent-article">
-        <p class="redagent-cl"></p>
-        <p class="redagent-spacer" id="wallogram"></p>
-
-        <div class="redagent-page-img">
-            <div class="slideshow">
-                <?php
-                renderGallery("wallogram");
-                ?>
-                <a rel="shadowbox[Wallo];width=720;height=404;player=flv;" href="wallogram/assets/screenshots/Wallogram-Montage.mp4">
-                    <img src="images/projects/wallogram/mini/Wallogram-Montage.png"/>
-                </a>
-            </div>
-        </div>
-        <aside class="redagent-page-text">
-            <p class="redagent-date">January 2011</p>
-            <h1>Wallogram</h1>
-            <h2>Interactive video mapping performance</h2>
-
-            <p class="redagent-content">
-                Wallogram turns our environment in a video game playground. To do so the game is projected on walls 
-                and facades and several players use their mobile phone as a game controller.
-            </p>
-
-            <table>
-                <tr>
-                    <td  class="colum-right">Links</td>
-                    <td style="font-style: normal">
-                        <a href="http://www.red-agent.com/wallogram/" target="_blank">Demo</a> | 
-                        <a href="https://github.com/fxaeberhard/Wallogram" target="_blank">Sources</a> | 
-                        <a rel="shadowbox[Wallo]" href="images/projects/wallogram/20140321_124232.jpg">Screenshots</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td  class="colum-right">Technologies</td>
-                    <td>Javascript, Websocket</td>
                 </tr>
             </table>
         </aside>

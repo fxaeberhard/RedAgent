@@ -55,8 +55,8 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 /* 2. ROOT
 ----------------------------------------------------------------------------------------*/
 html {
-    overflow-y: scroll;
-    background: #FFF;
+    /* overflow-y: scroll; */
+    /* background: #FFF; */
 }
 
 /* /ht Ethan Marcotte - http://front.ie/l8rJaA */
@@ -180,7 +180,7 @@ h2 {
 h3 { text-transform:uppercase; letter-spacing:0.12em; }
 h3, h4, h5, h6 { font-weight: bold; }
 
-p.intro { margin-bottom: 0; }
+.intro { margin-bottom: 0; }
 
 .redagent-page  {
     padding: 0.809em;
@@ -190,6 +190,9 @@ p.intro { margin-bottom: 0; }
 }
 .redagent-menu {
     /*margin-left: -0.809em;*/
+}
+.redagent-page-img {
+    margin-bottom:1em;  
 }
 
 footer {
