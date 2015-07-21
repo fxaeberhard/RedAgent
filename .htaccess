@@ -25,6 +25,8 @@ DirectoryIndex index.php index.html
 	RewriteRule ^([^/]+)(.+)$ /~$1/$2 [L]
 	#########################################################
 
+    # Image miniatures
+    RewriteRule ^imgp/(.*)$        imgp.php?src=$1 [QSA,NC,L]
 
 	########### red-agent.com -> www.red-agent.com
 	RewriteCond %{HTTP_HOST} ^red-agent.com [nocase]

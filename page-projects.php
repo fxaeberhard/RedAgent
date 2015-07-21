@@ -1,13 +1,16 @@
 <?php
 require_once 'php/Tools.php';
 
-function renderGallery($dir) {
+function renderGallery($dir, $options = "") {
     $path = "images/projects/" . $dir . "/";
     $files = listdir($path);
     sort($files, SORT_LOCALE_STRING);
     foreach ($files as $entry) {
-        echo '<div><a rel="shadowbox[' . $dir . ']" href="' . $entry . '">'
-        . '<img data-lazy="' . str_replace($path, $path . "/mini", $entry) . '"/>'
+        echo '<div><a class="fancybox" rel="' . $dir . '" href="' . $entry . '" data-thumbnail="imgp.php?src=' . $entry . '&h=80&w=80&crop-to-fit">'
+//        echo '<div><a class="fancybox" rel="' . $dir . '" href="' . $entry . '" data-thumbnail="imgp/' . $entry . '?h=80&w=80&crop-to-fit">'
+//        . '<img data-lazy="imgp/' . $entry . '?w=420&' . $options . '"/>'
+        . '<img data-lazy="imgp.php?src=' . $entry . '&w=420&' . $options . '"/>'
+        . '<div class="play-button"></div>'
         . '</a></div>';
     }
 }
@@ -20,17 +23,27 @@ function renderGallery($dir) {
         <p class="redagent-spacer" id="wallogram" style="border-color:white;margin: 0;margin-bottom: 3.8em;"></p>
 
         <div class="redagent-page-img">
-            <div class="slideshow">
-                <?php
-                renderGallery("wallogram");
-                ?>
-                <!-- <a rel="shadowbox[wallogram];width=720;height=404;player=flv;" href="wallogram/assets/screenshots/Wallogram-Montage.mp4">
-                    <img src="images/projects/wallogram/mini/Wallogram-Montage.png"/>
-                </a>-->
+            <div class="youtube-container">
+                <div class="youtube-player" data-id="W1kdVlAAzcQ">
+                    <img class="youtube-thumb" src="//i.ytimg.com/vi/W1kdVlAAzcQ/hqdefault.jpg"/>
+                    <div class="play-button"></div>                        
+                </div>
             </div>
         </div>
+        <div style="display:none">
+            <?php
+                $files = listdir("images/projects/wallogram/");
+                sort($files, SORT_LOCALE_STRING);
+                foreach ($files as $entry) {
+                    echo '<a class="fancybox" rel="wallogram" href="' . $entry . '" data-thumbnail="imgp.php?src=' . $entry . '&h=80&w=80&crop-to-fit" style="display:none"></a>';
+                }
+            ?>
+            <!--<a class="fancybox" rel="fancybox[wallogram];width=720;height=404;player=flv;" href="wallogram/assets/screenshots/Wallogram-Montage.mp4">
+                <img src="images/projects/wallogram/mini/Wallogram-Montage.png"/><div class="play-button"></div>
+            </a>-->
+        </div>
         <aside class="redagent-page-text">
-            <p class="redagent-date">September 2014</p>
+            <p class="redagent-date">January 2015</p>
             <h1>Wallogram</h1>
             <h2>Interactive video mapping performance</h2>
 
@@ -43,14 +56,15 @@ function renderGallery($dir) {
                 <tr>
                     <td  class="colum-right">Links</td>
                     <td style="font-style: normal">
-                        <a href="http://www.wallogram.ch/" target="_blank">Demo</a> | 
-                        <a href="https://github.com/fxaeberhard/Wallogram" target="_blank">Sources</a> | 
-                        <a rel="shadowbox[wallogram]" href="images/projects/wallogram/20140321_124232.jpg">Screenshots</a>
+                        <!--<a href="http://www.wallogram.ch/" target="_blank">Try it</a> |--> 
+                        <a href="http://www.wallogram.ch/" target="_blank">Website</a> | 
+                        <a onclick="$(this).closest('.redagent-article').find('.fancybox').eq(0).click();" href="javascript:;">Pictures</a> | 
+                        <a href="https://github.com/fxaeberhard/Wallogram" target="_blank">Sources</a>
                     </td>
                 </tr>
                 <tr>
                     <td  class="colum-right">Technologies</td>
-                    <td>Javascript, Node.js, Websocket</td>
+                    <td>JavaScript, Node.js, Websocket</td>
                 </tr>
             </table>
         </aside>
@@ -68,12 +82,12 @@ function renderGallery($dir) {
             </div>
         </div>
         <aside class="redagent-page-text">
-            <p class="redagent-date">January 2014</p>
+            <p class="redagent-date">March 2014</p>
             <h1>Programming game</h1>
             <h2>UX Engineer at School for Business & Engineering Vaud (Heig-vd)</h2>
 
             <p class="redagent-content">
-                Teach yourself Javascript programming with fun in this web game.
+                Teach yourself JavaScript programming with fun in this web game.
             </p>
 
             <table>
@@ -81,13 +95,13 @@ function renderGallery($dir) {
                     <td  class="colum-right">Links</td>
                     <td style="font-style: normal">
                         <a href="http://wegas.red-agent.com/game.html?token=proggame&al=1" target="_blank">Play online</a>
+                        | <a onclick="$(this).closest('.redagent-article').find('.fancybox').eq(0).click();" href="javascript:;">Screenshots</a>
                         | <a href="https://github.com/Heigvd/Wegas" target="_blank">Sources</a>
-                        | <a rel="shadowbox[proggame]" href="images/projects/proggame/wegas-proggame-1.png">Screenshots</a>
                     </td>
                 </tr>
                 <tr>
                     <td  class="colum-right">Technologies</td>
-                    <td>JavaEE <em>(Glassfish 3)</em>, Javascript<em>(YUI 3)</em>, Canvas <em>(Crafty)</em></td>
+                    <td>JavaEE <em>(Glassfish 3)</em>, JavaScript<em>(YUI 3)</em>, Canvas <em>(Crafty)</em></td>
                 </tr>
                 <tr>
                     <td class="colum-right">Grants</td>
@@ -105,7 +119,7 @@ function renderGallery($dir) {
         <div class="redagent-page-img">
             <div class="slideshow" style="min-height:280px;">
                 <?php
-                renderGallery("stalker");
+                    renderGallery("stalker", "&h=280&crop-to-fit");
                 ?>
             </div>
         </div>
@@ -126,12 +140,12 @@ function renderGallery($dir) {
                     <td style="font-style: normal">
                         <a href="http://www.ailleurs.ch/en/expositions/archives/exposition-stalker-experimenter-la-zone/#" target="_blank">Website</a>
                         | 
-                        <a rel="shadowbox[stalker]" href="images/projects/stalker/IMG_4522RE.jpg">Pictures</a>
+                        <a onclick="$(this).closest('.redagent-article').find('.fancybox').eq(0).click();" href="javascript:;">Pictures</a>
                     </td>
                 </tr>
                 <tr>
                     <td  class="colum-right">Technologies</td>
-                    <td>Javascript, Websocket, WebGL</td>
+                    <td>JavaScript, Websocket, WebGL</td>
                 </tr>
             </table>
         </aside>
@@ -145,7 +159,7 @@ function renderGallery($dir) {
         <div class="redagent-page-img">
             <div class="slideshow" style="min-height: 229px;">
                 <?php
-                renderGallery("wegas");
+                    renderGallery("wegas");
                 ?>
             </div>
         </div>
@@ -163,13 +177,13 @@ function renderGallery($dir) {
                     <td  class="colum-right">Links</td>
                     <td style="font-style: normal">
                         <a href="http://wegas.red-agent.com" target="_blank">Try online</a>
+                        | <a onclick="$(this).closest('.redagent-article').find('.fancybox').eq(0).click();" href="javascript:;">Screenshots</a>
                         | <a href="https://github.com/Heigvd/Wegas" target="_blank">Sources</a>
-                        | <a rel="shadowbox[wegas]" href="images/projects/wegas/wegas-14.05.22-1-Login.jpg">Screenshots</a>
                     </td>
                 </tr>
                 <tr>
                     <td class="colum-right">Technologies</td>
-                    <td>JavaEE <em>(Glassfish 3)</em>, Javascript<em>(YUI 3)</em></td>
+                    <td>JavaEE <em>(Glassfish 3)</em>, JavaScript<em>(YUI 3)</em></td>
                 </tr>
                 <tr>
                     <td class="colum-right">Grants</td>
@@ -183,9 +197,14 @@ function renderGallery($dir) {
     <div class="redagent-article">
         <p class="redagent-cl "></p>
         <p class="redagent-spacer" id="mjte"></p>
-        <p class="redagent-page-img">
-            <iframe title="YouTube video player" width="420" height="266" src="http://www.youtube.com/embed/EKI3U_uFv7Y?rel=0&controls=1&autohide=1&color2=580000&showinfo=0&modestbranding=1&rel=0" frameborder="0" allowfullscreen="1"></iframe>
-        </p>
+        <div class="redagent-page-img">
+           <div class="youtube-container">
+               <div class="youtube-player" data-id="EKI3U_uFv7Y">
+                    <img class="youtube-thumb" src="//i.ytimg.com/vi/EKI3U_uFv7Y/hqdefault.jpg"/>
+                    <div class="play-button"></div>        
+               </div>
+            </div>
+        </div>
         <aside class="redagent-page-text">
             <p class="redagent-date">August 2010</p>
             <h1>Michael Jackson: The Exerience - Wii</h1>
@@ -214,12 +233,13 @@ function renderGallery($dir) {
 
     <!--  MJTE Web game-->
     <div class="redagent-article">
-        <p class="redagent-page-img">
+        <div class="redagent-page-img">
             <a href="http://apps.facebook.com/mjte_minigame/" target="_blank">
                 <!--<img class="redagent-image" data-src="images/projects/mjte_minigame_420.jpg" />-->
                 <img src="images/projects/mjte_minigame_420.jpg" />
+                <div class="play-button"></div>
             </a>
-        </p>
+        </div>
         <aside class="redagent-page-text">
             <p class="redagent-date">August 2010</p>
             <h1>
@@ -250,10 +270,14 @@ function renderGallery($dir) {
     <div class="redagent-article">
         <p class="redagent-cl"></p>
         <p class="redagent-spacer"></p>
-        <p class="redagent-page-img">
-            <!--<iframe width="420" height="266" src="//www.youtube.com/embed/S6FgI2CR9I4" frameborder="0" allowfullscreen></iframe>-->
-            <iframe title="YouTube video player" width="420" height="266" src="http://www.youtube.com/embed/S6FgI2CR9I4?rel=0&controls=1&autohide=1&color2=580000&showinfo=0&modestbranding=1&rel=0" frameborder="0" allowfullscreen></iframe>
-        </p>
+        <div class="redagent-page-img">
+           <div class="youtube-container">
+               <div class="youtube-player" data-id="S6FgI2CR9I4">
+                    <img class="youtube-thumb" src="//i.ytimg.com/vi/S6FgI2CR9I4/hqdefault.jpg"/>
+                    <div class="play-button"></div>        
+               </div>
+            </div>
+        </div>
         <aside class="redagent-page-text">
             <p class="redagent-date">February 2010</p>
             <h1>Just Dance 2 - Wii</h1>
@@ -284,9 +308,9 @@ function renderGallery($dir) {
         <p class="redagent-cl"></p>
         <p class="redagent-spacer" id="3dblogosphere"></p>
         <div class="redagent-page-img">
-            <div class="slideshow">   
+            <div class="slideshow" style=" max-height: 310px;">   
                 <?php
-                renderGallery("3DBlogosphere");
+                renderGallery("3DBlogosphere", "fill-to-fit=000000&h=280");
                 ?>
             </div>
         </div>
@@ -307,7 +331,7 @@ function renderGallery($dir) {
                 </tr>
                 <tr>
                     <td  class="colum-right">Technologies</td>
-                    <td>J2SE <em>(JMonkey)</em>, J2EE <em>(Project Wonderland, Darkstar & Glassfish)</em>, XSLT, Javascript</td>
+                    <td>J2SE <em>(JMonkey)</em>, J2EE <em>(Project Wonderland, Darkstar & Glassfish)</em>, XSLT, JavaScript</td>
                 </tr>
             </table>
         </aside>
@@ -317,10 +341,16 @@ function renderGallery($dir) {
     <div class="redagent-article">
         <p class="redagent-cl"></p>
         <p class="redagent-spacer" id="dtouch"></p>
-        <p class="redagent-page-img" >
-            <!--<img class="redagent-image" data-src="images/projects/dtouch_420.jpg" />-->
-            <img src="images/projects/dtouch_420.jpg" />
-        </p>
+        <div class="redagent-page-img">
+            <div class="youtube-container">
+                <div class="youtube-player youtube-player-43" data-id="tPcI2RbFaSM">
+                    <img class="youtube-thumb" src="//i.ytimg.com/vi/tPcI2RbFaSM/hqdefault.jpg"/>
+                    <div class="play-button"></div>
+                </div>
+                <!--<img class="redagent-image" data-src="images/projects/dtouch_420.jpg" />-->
+                <!--<img src="images/projects/dtouch_420.jpg" />-->
+            </div>
+        </div>
         <aside class="redagent-page-text">
             <p class="redagent-date">February 2009</p>
             <h1>Audio D-Touch</h1>
@@ -333,7 +363,7 @@ function renderGallery($dir) {
                 <tr>
                     <td  class="colum-right">Links</td>
                     <td style="font-style: normal">
-                        <a href="http://www.d-touch.org/audio/" target="_blank" >Project homepage</a>
+                        <a href="http://www.d-touch.org/audio/" target="_blank" >Website</a>
                     </td>
                 </tr>
                 <tr>
@@ -350,17 +380,17 @@ function renderGallery($dir) {
         <p class="redagent-spacer" id="redcms"></p>
         <div class="redagent-page-img" >
             <div class="slideshow">
-                <a href="http://redcms.red-agent.com" target="_blank">
-                    <!--<img class="redagent-image" data-src="images/projects/redcms-logo.jpg" />-->
+                <!--<a href="http://redcms.red-agent.com" target="_blank">
+                    <img class="redagent-image" data-src="images/projects/redcms-logo.jpg" />
                     <img src="images/projects/redcms-logo.jpg" />
-                </a>
+                </a>-->
                 <?php
-                renderGallery("webdesign");
+                    renderGallery("webdesign", "h=320");
                 ?>
             </div>
         </div>
         <aside class="redagent-page-text">
-            <p class="redagent-date" >January 2005 - August 2009</p>
+            <p class="redagent-date" >January 2006 - August 2009</p>
             <h1><a href="http://redcms.red-agent.com" target="_blank">RedCMS</a></h1>
             <h2>Freelance web designer</h2>
 
@@ -373,14 +403,14 @@ function renderGallery($dir) {
                 <tr>
                     <td  class="colum-right">Links</td>
                     <td style="font-style: normal">
-                        <a href="http://redcms.red-agent.com" target="_blank" >Website</a> |
-                        <a href="https://github.com/fxaeberhard/RedCMS" target="_blank">Sources</a> | 
-                        <a rel="shadowbox[Webdesign]" href="images/projects/webdesign/Prodoli-04.jpg">Screenshots</a>
+                        <a href="http://redcms.red-agent.com" target="_blank" >Website</a>
+                        | <a onclick="$(this).closest('.redagent-article').find('.fancybox').eq(0).click();" href="javascript:;">Screenshots</a>
+                        | <a href="https://github.com/fxaeberhard/RedCMS" target="_blank">Sources</a>
                     </td>
                 </tr>
                 <tr>
                     <td  class="colum-right">Technologies</td>
-                    <td>Javascript <em>(YUI 3)</em>, PHP 5, Smarty, HTML, CSS</td>
+                    <td>JavaScript <em>(YUI 3)</em>, PHP, Smarty, HTML, CSS</td>
                 </tr>
                 <tr>
                     <td class="colum-right">Sites created</td>
@@ -391,13 +421,13 @@ function renderGallery($dir) {
                         <a target="_blank" href="http://www.smagonline.ch">smagonline.ch</a>,
                         <a target="_blank" href="http://www.one-appointment.com">one-appointment.com</a>,
                         <a target="_blank" href="http://www.velo-migrateur.com">velo-migrateur.com</a>,
-                        <a rel="shadowbox" href="images/projects/webdesign/wEspaceEstOuest--01.jpg">espace-est-ouest.com</a>,
-                        <a rel="shadowbox" href="images/projects/webdesign/web-fresh.jpg">freshprod.com</a>,
-                        <a rel="shadowbox" href="images/projects/webdesign/fiduswiss.png">fiduswiss.ch</a>,
+                        <a class="fancybox" rel="fancybox" href="images/projects/webdesign/wEspaceEstOuest--01.jpg">espace-est-ouest.com</a>,
+                        <a class="fancybox" rel="fancybox" href="images/projects/webdesign/web-fresh.jpg">freshprod.com</a>,
+                        <a class="fancybox" rel="fancybox" href="images/projects/webdesign/wfiduswiss.png">fiduswiss.ch</a>,
                         <a href="#">ultra-son.ch</a>,
-                        <a rel="shadowbox" href="images/projects/webdesign/micronarc.png">micronarc.ch</a>,
+                        <a class="fancybox" rel="fancybox" href="images/projects/webdesign/micronarc.png">micronarc.ch</a>,
                         <a href="#">fag-avenches.ch</a>,
-                        <a rel="shadowbox" href="images/projects/webdesign/Timetotime-v2-02.jpg" >timetotime.com</a>
+                        <a class="fancybox" rel="fancybox" href="images/projects/webdesign/Timetotime-v2-02.jpg" >timetotime.com</a>
                 </tr>
             </table>
         </aside>
@@ -407,9 +437,26 @@ function renderGallery($dir) {
     <div class="redagent-article">
         <p class="redagent-cl"></p>
         <p class="redagent-spacer" id="schlempf"></p>
-        <p class="redagent-page-img">
-            <iframe src="http://www.slideshare.net/slideshow/embed_code/4800011?rel=0" width="420" height="350" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px 1px 0; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> 
-        </p>
+        <div class="redagent-page-img">
+            <!--<iframe src="http://www.slideshare.net/slideshow/embed_code/4800011?rel=0" width="420" height="350" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px 1px 0; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>--> 
+            
+            <?php
+                $files = listdir("images/projects/schlempf/");
+                sort($files, SORT_LOCALE_STRING);
+                $first = true;
+                foreach ($files as $entry) {
+                    if ($first) {
+                        echo '<div><a class="fancybox" rel="schlempf" href="' . $entry . '">'
+                            . '<img src="imgp.php?src='.$entry.'&w=420"/>'
+                            . '<div class="play-button"></div>'
+                            . '</a></div>';
+                        $first = false;                        
+                    } else {
+                        echo '<a class="fancybox" rel="schlempf" href="' . $entry . '" data-thumbnail="imgp.php?src=' . $entry . '?h=80&w=80&crop-to-fit" style="display:none"></a>';
+                    }
+                }
+            ?>
+        </div>
 
         <aside class="redagent-page-text">
             <p class="redagent-date">June 2004</p>
@@ -443,13 +490,14 @@ function renderGallery($dir) {
         <p class="redagent-cl"></p>
         <p class="redagent-spacer" id="yuimyadmin"></p>
 
-        <p class="redagent-page-img">
+        <div class="redagent-page-img">
 
-            <a href="http://yuimyadmin.sourceforge.net/" target="_blank">
+            <!--<a href="http://yuimyadmin.sourceforge.net/" target="_blank">-->
                 <!--<img class="redagent-image" data-src="images/projects/yuimyadmin.png" />-->
                 <img src="images/projects/yuimyadmin.png" />
-            </a>
-        </p>
+                <!--<div class="play-button"></div>-->
+            <!--</a>-->
+        </div>
         <aside class="redagent-page-text">
             <p class="redagent-date">March 2003</p>
             <h1><a href="http://yuimyadmin.sourceforge.net/" target="_blank">YuiMyAdmin</a></h1>
@@ -465,14 +513,14 @@ function renderGallery($dir) {
                 <tr>
                     <td  class="colum-right">Links</td>
                     <td style="font-style: normal">
-                        <a href="http://yuimyadmin.sourceforge.net/yuimyadmin/" target="_blank">Demo</a> |
+                        <a href="http://yuimyadmin.sourceforge.net/yuimyadmin/" target="_blank">Try online</a> |
                         <a href="http://yuimyadmin.sourceforge.net/" target="_blank">Website</a> |
                         <a href="https://sourceforge.net/projects/yuimyadmin/files/" target="_blank">Sources</a>
                     </td>
                 </tr>
                 <tr>
                     <td  class="colum-right">Technologies</td>
-                    <td>Javascript <em>(YUI 2)</em>, PHP, HTML, CSS</td>
+                    <td>JavaScript <em>(YUI 2)</em>, PHP, HTML, CSS</td>
                 </tr>
             </table>
         </aside>

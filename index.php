@@ -10,20 +10,21 @@ $convoId = get_convo_id();
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title><?php echo ucfirst($page) ?> - Francois-Xavier Aeberhard</title>
         <meta name="author" content="Francois-Xavier Aeberhard" />
         <meta name="contact" content="fx@red-agent.com" />
         <meta name="keywords" content="françois-xavier, aeberhard, gamedesign, webdesign, user experience" />
         <meta name="description" content="Francois-Xavier Aeberhard is a user experience engineer, specialized in games and web. Here is his portfolio">
-        <meta charset="utf-8" />
         <meta name="robots" content="index, follow" />
         <meta http-equiv="cleartype" content="on" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="shortcut icon" href="favicon.ico" />
 
         <!-- CSS Libraries (shadobox, fontawesome) -->
-        <!--<link rel="stylesheet" href="lib/shadowbox/shadowbox.css" />
+        <!--<link rel="stylesheet" href="lib/fancybox/source/jquery.fancybox.min.css" />
+        <link rel="stylesheet" href="lib/fancybox/source/helpers/jquery.fancybox-thumbs.css" />
         <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css" />
         <link rel="stylesheet" href="lib/perfect-scrollbar/css/perfect-scrollbar.min.css" />
         <link rel="stylesheet" type="text/css" href="lib/slick/slick.css"/>-->
@@ -35,7 +36,7 @@ $convoId = get_convo_id();
         <link rel="stylesheet" href="css/redagent.css" media="all" />-->
 
         <!-- Combine -->
-        <link rel="stylesheet" type="text/css" href="php/min/?f=lib/shadowbox/shadowbox.css,lib/font-awesome/css/font-awesome.min.css,lib/perfect-scrollbar/css/perfect-scrollbar.min.css,lib/slick/slick.css,css/global.css,css/layout.css,css/redagent.css"/>
+        <link rel="stylesheet" type="text/css" href="php/min/?f=lib/fancybox/source/jquery.fancybox.min.css,lib/fancybox/source/helpers/jquery.fancybox-thumbs.css,lib/font-awesome/css/font-awesome.min.css,lib/perfect-scrollbar/css/perfect-scrollbar.min.css,lib/slick/slick.css,css/global.css,css/layout.css,css/redagent.css"/>
 
     </head>
 
@@ -59,15 +60,16 @@ $convoId = get_convo_id();
             <!-- Menu -->
             <article class="redagent-menu" <?php echo ($page === "Red agent") ? 'style="display:none;opacity: 0"' : '' ?>>
                 <div role="main" class="cf">
-                    <div class="redagent-closebutton"></div>
+                    <div class="redagent-closebutton"><i class="fa fa-reply"></i></div>
 
                     <div class="redagent-submenu redagent-menu-projects" <?php echo ($page !== "projects") ? 'style="display:none;opacity: 0"' : '' ?>>
-                        <a href="#wallogram" class="redagent-selected">2014</a>
+                        <a href="#wallogram" class="redagent-selected">2015</a>
+                        <a href="#proggame">2014</a>
                         <a href="#stalker" >2013</a>
                         <a href="#wegas" >2011</a>
                         <a href="#mjte">2010</a>
                         <a href="#3dblogosphere">2009</a>
-                        <a href="#redcms">2005</a>
+                        <a href="#redcms">2006</a>
                         <a href="#schlempf">2004</a>
                         <!--<a href="#yuimyadmin">2003</a>-->
                     </div>
@@ -118,7 +120,7 @@ $convoId = get_convo_id();
         <script type="text/javascript" src="http://js.pusher.com/2.2/pusher.min.js"></script>
 
         <!-- Libraries (Crafty, shadowbox, jQuery, Modernizer) -->
-        <!--<script type="text/javascript" src="php/min/f=lib/modernizr-1.7.min.js,lib/shadowbox/shadowbox.js,lib/jquery-2.1.1.min.js,lib/jquery.scrollTo/jquery.scrollTo.min.js,lib/jquery.localScroll/jquery.localScroll.min.js,lib/jquery.jeditable.mini.js,lib/crafty-mod.js,lib/perfect-scrollbar/js/min/perfect-scrollbar.jquery.min.js,lib/jquery.cookie.js,lib/require.js"></script>-->
+        <!--<script type="text/javascript" src="php/min/f=lib/modernizr-1.7.min.jslib/jquery-2.1.1.min.js,lib/fancybox/source/jquery.fancybox.pack.js,lib/fancybox/source/helpers/jquery.fancybox-thumbs.js,lib/jquery.scrollTo/jquery.scrollTo.min.js,lib/jquery.localScroll/jquery.localScroll.min.js,lib/jquery.jeditable.mini.js,lib/crafty-mod.js,lib/perfect-scrollbar/js/min/perfect-scrollbar.jquery.min.js,lib/jquery.cookie.js,lib/require.js"></script>-->
 
         <!-- Variables -->
         <script type="text/javascript" >
@@ -134,7 +136,7 @@ $convoId = get_convo_id();
         <script type="text/javascript" src="js/redagent.js"></script>-->
 
         <!-- Combine -->
-        <script type="text/javascript" src="php/min/f=lib/modernizr-1.7.min.js,lib/shadowbox/shadowbox.js,lib/jquery-2.1.1.min.js,lib/jquery.scrollTo/jquery.scrollTo.min.js,lib/jquery.localScroll/jquery.localScroll.min.js,lib/jquery.jeditable.mini.js,lib/crafty-mod.js,lib/perfect-scrollbar/js/min/perfect-scrollbar.jquery.min.js,lib/jquery.cookie.js,js/redagent-chat.js,lib/require.js,js/redagent-display.js,js/redagent-pusher.js,js/redagent-controller.js,js/redagent.js"></script>
+        <script type="text/javascript" src="php/min/f=lib/modernizr-1.7.min.js,lib/jquery-2.1.1.min.js,lib/fancybox/source/jquery.fancybox.pack.js,lib/fancybox/source/helpers/jquery.fancybox-thumbs.js,lib/jquery.scrollTo/jquery.scrollTo.min.js,lib/jquery.localScroll/jquery.localScroll.min.js,lib/jquery.jeditable.mini.js,lib/crafty-mod.js,lib/perfect-scrollbar/js/min/perfect-scrollbar.jquery.min.js,lib/jquery.cookie.js,js/redagent-chat.js,lib/require.js,js/redagent-display.js,js/redagent-pusher.js,js/redagent-controller.js,js/redagent.js"></script>
 
         <!-- Google analytics -->
         <script type="text/javascript">

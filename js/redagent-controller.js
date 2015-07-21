@@ -17,8 +17,6 @@ YUI.add("redagent-controller", function(Y) {
             });                                                                 // Init history manager
             this.history.on('pageChange', this.onPageChange, this);             // Watch page changes
 
-            Shadowbox.init();                                                   // Init Shadow box
-
             this.sync();
 
             $(window).blur(function() {
@@ -32,7 +30,6 @@ YUI.add("redagent-controller", function(Y) {
                 Y.all(".redagent-article").setStyle("max-height", "2000px")
                     .each(function(n) {
                         if (e.newVal && n.get("text").toLowerCase().indexOf(e.newVal.toLowerCase()) === -1) {
-//                            n.hide(false);
                             n.setStyle("max-height", "0");
                         }
                     });
@@ -90,8 +87,28 @@ YUI.add("redagent-controller", function(Y) {
             }
         },
         sync: function() {
-            Shadowbox.clearCache();                                             // Update shadowbox links
-            Shadowbox.setup();
+            $(".fancybox").fancybox({//                                         // Update fancybox links
+                padding: 0,
+                autoPlay: true,
+//                prevEffect: 'none',
+//                nextEffect: 'none',
+                helpers: {
+                    title: {
+//                        type: 'outside'
+                    },
+                    thumbs: {
+                        width: 80,
+                        height: 80,
+                        source: function(current) {
+                            var e = $(current.element);
+                            if (e.data('thumbnail'))
+                                return $(current.element).data('thumbnail');
+                            else
+                                return e.find("img").attr("src");
+                        }
+                    }
+                }
+            });
 
             if (Y.one(".slideshow")) {
                 require(["slick"], function() {
@@ -99,7 +116,7 @@ YUI.add("redagent-controller", function(Y) {
                         lazyLoad: "ondemand",
                         infinite: true,
                         autoplay: true,
-                        autoplaySpeed: 6000,
+                        autoplaySpeed: 3000,
                         fade: true,
                         arrows: false
                             // adaptiveHeight: true, vertical: true, slidesToShow: 1, speed: 300, dots: true, cssEase: 'linear',
@@ -130,6 +147,13 @@ YUI.add("redagent-controller", function(Y) {
             if (Y.one(".page-blog textarea")) {                                 // Init TinyMCE on blog.html page
                 this.initTinyMCE();
             }
+
+            $(".youtube-player").click(function() {                             // Youtube video lazy load  width="420" height="236" 
+                $(this).html('<iframe class="youtube-iframe" title="YouTube video player" src="http://www.youtube.com/embed/' + $(this).data("id") + '?autoplay=1&rel=0&controls=1&autohide=1&color2=580000&showinfo=0&modestbranding=1&rel=0" frameborder="0" allowfullscreen></iframe>');
+            });
+            //.each(function() {
+            //    $(this).append('<img class="youtube-thumb" src="//i.ytimg.com/vi/' + $(this).data("id") + '/hqdefault.jpg"><div class="play-button"></div>');
+            //});
         },
         getPath: function() {
             var loc = window.location.pathname;

@@ -139,7 +139,7 @@ This file contains the unique styles  which do not appear in /css/global.css
     font-family: "Din";
     font-style: normal;
     font-weight: bold;
-    src: url("../fonts/DINB.ttf");
+    src: url("../fonts/DINB.TTF");
 }
 
 html {
@@ -172,9 +172,9 @@ h1 a {
     text-decoration: none;
 }
 h2 {
-    margin-bottom: 1.68em;
-    margin-top: 0.2em;
-    font-style: italic;
+    margin-bottom: 0.38em;
+    margin-top: 0em;
+    /* font-style: italic; */
     font-size: 1.2em;
 }
 h3 { text-transform:uppercase; letter-spacing:0.12em; }
@@ -193,6 +193,7 @@ h3, h4, h5, h6 { font-weight: bold; }
 }
 .redagent-page-img {
     margin-bottom:1em;  
+    position: relative;
 }
 
 footer {

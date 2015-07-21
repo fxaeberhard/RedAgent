@@ -52,26 +52,31 @@ html {
 .redagent-article {
     overflow: hidden;
     transition: max-height 1s;
-/*    -o-transition: max-height 0.15s;
-    -moz-transition: max-height 0.15s;
-    -ms-transition: max-height 0.15s;
-    -webkit-transition: max-height 0.15s;*/
+    /*    -o-transition: max-height 0.15s;
+        -moz-transition: max-height 0.15s;
+        -ms-transition: max-height 0.15s;
+        -webkit-transition: max-height 0.15s;*/
 }
 .redagent-cl {
     clear: both;
 }
 .redagent-page .redagent-spacer {
     line-height: 0em;
-    margin: 2.8em 0 1.3em;
+    margin: 4.2em 0 1.3em;
     border-bottom: 1px solid transparent;
 }
 .redagent-date {
-    margin-bottom: 0;
-    font-weight: bold;
+    margin-bottom: 0.3em;
+    /* font-weight: bold; */
     line-height: 0.9em;
+    font-style: italic;    
+    font-size: 1em;
+    /* float: right; */
+    margin-top: 0;
+    /* color: #a0a0a0; */
 }
 .redagent-content {
-    margin-top: 2em;
+    margin-top: 1.5em;
     margin-bottom: 2em;
 }
 .redagent-page td {
@@ -121,6 +126,14 @@ html {
     background: #580000 url(../images/back-22.png) center no-repeat;
     cursor: pointer;        
     float: left;
+    background: #580000;
+    color: white;
+    text-align: center;
+    font-size: 18px;
+}
+.redagent-menu .redagent-closebutton i {
+    margin-top: 6px;
+    /* display: inline-block; */
 }
 .redagent-menu .redagent-closebutton:hover {
     background-color: darkgray;
@@ -290,4 +303,74 @@ html {
 }
 .page-blog textarea {
     border-color: lightgray;
+}
+.youtube-container { 
+    display: block;
+    margin: 0 auto;  
+    width: 100%; 
+    max-width: 600px;
+}
+.youtube-player { 
+    display: block; 
+    width: 100%; /* assuming that the video has a 16:9 ratio */ 
+    padding-bottom: 56.25%; 
+    padding-bottom: 61.25%; 
+    overflow: hidden; 
+    position: relative; 
+    width: 100%; 
+    height: 100%;
+    cursor: pointer;
+    display: block; 
+}
+
+.youtube-player-43 {
+    padding-bottom: 75%;
+    padding-bottom: 65%;
+}
+img.youtube-thumb {
+    bottom: 0; 
+    display: block; 
+    left: 0; 
+    margin: auto; 
+    max-width: 100%; 
+    width: 100%; 
+    position: absolute; 
+    right: 0; 
+    top: 0; 
+    height: auto;
+}
+div.play-button { 
+    height: 56px; 
+    width: 80px; 
+    left: 50%; 
+    top: 50%; 
+    margin-left: -40px; 
+    margin-top: -28px;
+    position: absolute; 
+    background: url("../images/icon-youtube-80.png") no-repeat; 
+}
+
+a:hover div.play-button,
+.youtube-player:hover div.play-button {
+    background-position: 0px -57px;
+}
+.youtube-iframe { 
+    width: 100%;
+    height: 100%; 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+}
+
+/*overrrid slick loader */ 
+.slick-slider {
+    margin-bottom: 0;
+}
+.slick-loading .slick-list{
+    background: #fff url(../images/loading.gif) center center no-repeat;
+}
+
+/* Fancybox */
+#fancybox-loading div {
+	background: url(../images/loading.gif) center center no-repeat;
 }
