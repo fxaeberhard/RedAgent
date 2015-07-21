@@ -6,10 +6,8 @@ function renderGallery($dir, $options = "") {
     $files = listdir($path);
     sort($files, SORT_LOCALE_STRING);
     foreach ($files as $entry) {
-        echo '<div><a class="fancybox" rel="' . $dir . '" href="' . $entry . '" data-thumbnail="imgp.php?src=' . $entry . '&h=80&w=80&crop-to-fit">'
-//        echo '<div><a class="fancybox" rel="' . $dir . '" href="' . $entry . '" data-thumbnail="imgp/' . $entry . '?h=80&w=80&crop-to-fit">'
-//        . '<img data-lazy="imgp/' . $entry . '?w=420&' . $options . '"/>'
-        . '<img data-lazy="imgp.php?src=' . $entry . '&w=420&' . $options . '"/>'
+        echo '<div><a class="fancybox" rel="' . $dir . '" href="' . $entry . '" data-thumbnail="imgpp/' . $entry . '?h=80&w=80&crop-to-fit&sa=jpg">'
+        . '<img data-lazy="imgpp/' . $entry . '?w=420&sa=jpg&' . $options . '"/>'
         . '<div class="play-button"></div>'
         . '</a></div>';
     }
@@ -35,7 +33,7 @@ function renderGallery($dir, $options = "") {
                 $files = listdir("images/projects/wallogram/");
                 sort($files, SORT_LOCALE_STRING);
                 foreach ($files as $entry) {
-                    echo '<a class="fancybox" rel="wallogram" href="' . $entry . '" data-thumbnail="imgp.php?src=' . $entry . '&h=80&w=80&crop-to-fit" style="display:none"></a>';
+                    echo '<a class="fancybox" rel="wallogram" href="' . $entry . '" data-thumbnail="imgpp/' . $entry . '?h=80&w=80&crop-to-fit&sa=jpg&" style="display:none"></a>';
                 }
             ?>
             <!--<a class="fancybox" rel="fancybox[wallogram];width=720;height=404;player=flv;" href="wallogram/assets/screenshots/Wallogram-Montage.mp4">
@@ -447,12 +445,12 @@ function renderGallery($dir, $options = "") {
                 foreach ($files as $entry) {
                     if ($first) {
                         echo '<div><a class="fancybox" rel="schlempf" href="' . $entry . '">'
-                            . '<img src="imgp.php?src='.$entry.'&w=420"/>'
+                            . '<img src="imgpp/'.$entry.'?w=420&sa=jpg"/>'
                             . '<div class="play-button"></div>'
                             . '</a></div>';
                         $first = false;                        
                     } else {
-                        echo '<a class="fancybox" rel="schlempf" href="' . $entry . '" data-thumbnail="imgp.php?src=' . $entry . '?h=80&w=80&crop-to-fit" style="display:none"></a>';
+                        echo '<a class="fancybox" rel="schlempf" href="' . $entry . '" data-thumbnail="imgpp/' . $entry . '?h=80&w=80&crop-to-fit&sa=jpg" style="display:none"></a>';
                     }
                 }
             ?>

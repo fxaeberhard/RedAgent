@@ -13,6 +13,12 @@ DirectoryIndex index.php index.html
 <IfModule mod_rewrite.c>
 
 
+    RewriteEngine on
+    RewriteBase /
+    DirectorySlash Off
+    ########### Image miniatures
+    RewriteRule ^imgpp/(.*)$        imgp.php?src=$1 [QSA,NC,L]
+
 	########## Howto map /~user to /user ####################
 	RewriteEngine On
 	RewriteCond %{REQUEST_URI} ^/([^/]+)$
@@ -23,10 +29,6 @@ DirectoryIndex index.php index.html
 	RewriteCond %{DOCUMENT_ROOT}/%1 !-d
 	RewriteCond /home/sites/%{SERVER_NAME}/users/%1 -d
 	RewriteRule ^([^/]+)(.+)$ /~$1/$2 [L]
-	#########################################################
-
-    # Image miniatures
-    RewriteRule ^imgp/(.*)$        imgp.php?src=$1 [QSA,NC,L]
 
 	########### red-agent.com -> www.red-agent.com
 	RewriteCond %{HTTP_HOST} ^red-agent.com [nocase]

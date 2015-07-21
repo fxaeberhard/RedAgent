@@ -225,7 +225,7 @@ YUI.add("redagent-display", function(Y) {
                 }
                 this._label.text(label);
             } else {
-                return this._label.text().replace(LABELSUFFIX, "");
+                return this._label ? this._label.text().replace(LABELSUFFIX, "") : "";
             }
             return this;
         },
