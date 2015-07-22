@@ -70,7 +70,7 @@ $convoId = get_convo_id();
                         <a href="#mjte">2010</a>
                         <a href="#3dblogosphere">2009</a>
                         <a href="#redcms">2006</a>
-                        <a href="#schlempf">2004</a>
+                        <a href="#schlempf">2005</a>
                         <!--<a href="#yuimyadmin">2003</a>-->
                     </div>
 

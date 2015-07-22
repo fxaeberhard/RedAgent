@@ -73,7 +73,7 @@ function renderGallery($dir, $options = "") {
         <p class="redagent-spacer" id="proggame" ></p>
         <p class="redagent-cl" ></p>
         <div class="redagent-page-img">
-            <div class="slideshow" style="min-height: 229px;">
+            <div class="slideshow">
                 <?php
                 renderGallery("proggame");
                 ?>
@@ -115,7 +115,7 @@ function renderGallery($dir, $options = "") {
         <p class="redagent-spacer" id="stalker"></p>
 
         <div class="redagent-page-img">
-            <div class="slideshow" style="min-height:280px;">
+            <div class="slideshow">
                 <?php
                     renderGallery("stalker", "&h=280&crop-to-fit");
                 ?>
@@ -155,7 +155,7 @@ function renderGallery($dir, $options = "") {
         <p class="redagent-spacer" id="wegas"></p>
 
         <div class="redagent-page-img">
-            <div class="slideshow" style="min-height: 229px;">
+            <div class="slideshow">
                 <?php
                     renderGallery("wegas");
                 ?>
@@ -306,7 +306,7 @@ function renderGallery($dir, $options = "") {
         <p class="redagent-cl"></p>
         <p class="redagent-spacer" id="3dblogosphere"></p>
         <div class="redagent-page-img">
-            <div class="slideshow" style=" max-height: 310px;">   
+            <div class="slideshow">   
                 <?php
                 renderGallery("3DBlogosphere", "fill-to-fit=000000&h=280");
                 ?>
@@ -457,7 +457,7 @@ function renderGallery($dir, $options = "") {
         </div>
 
         <aside class="redagent-page-text">
-            <p class="redagent-date">June 2004</p>
+            <p class="redagent-date">June 2005</p>
 
             <h1>Schlempf</h1>
             <h2>Student game contest</h2>
@@ -478,6 +478,43 @@ function renderGallery($dir, $options = "") {
                 <tr>
                     <td  class="colum-right">Technologies</td>
                     <td>Java 2 Mobile Edition <em>(J2ME)</em></td>
+                </tr>
+            </table>
+        </aside>
+    </div>
+    
+    <!-- EyeKidz -->
+    <div class="redagent-article">
+        <p class="redagent-cl"></p>
+        <p class="redagent-spacer" id="eyekidz"></p>
+        <div class="redagent-page-img">
+            <div class="slideshow">
+                <?php
+                   renderGallery("eyekidz", "crop-to-fit&h=280");
+                ?>
+            </div>
+        </div>
+
+        <aside class="redagent-page-text">
+            <p class="redagent-date">March 2005</p>
+
+            <h1>EyeKidz</h1>
+            <h2>User interface designer at EverMore Innovation</h2>
+
+            <p class="redagent-content">
+                User interface design & implementation on EyeKidz, a browser for children as a part time job during my studies.
+            </p>
+
+            <table>
+                <tr>
+                    <td  class="colum-right">Links</td>
+                    <td style="font-style: normal">
+                        <a href="http://www.commentcamarche.net/download/telecharger-34055037-eye-kidz" target="_blank">Download</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td  class="colum-right">Technologies</td>
+                    <td>ActionScript</td>
                 </tr>
             </table>
         </aside>
