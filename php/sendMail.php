@@ -32,7 +32,7 @@ $mail->setFrom($_REQUEST["from"]);
 //Set who the message is to be sent to
 $mail->addAddress('fx@red-agent.com');
 //Set the subject line
-$mail->Subject = 'Redagent - Contact form sent';
+$mail->Subject = 'Redagent - Contact form sent from ' . $_REQUEST["from"];
 //Read an HTML message body from an external file, convert referenced images to embedded,
 //convert HTML into a basic plain-text alternative body
 $mail->msgHTML(nl2br($_REQUEST["msg"]));
