@@ -1,158 +1,180 @@
-<?php
-require_once 'php/Tools.php';
-
-$page = filter_input(INPUT_GET, 'page');
-if (!isset($page)) {
-    $page = "Red agent";
-}
-$convoId = get_convo_id();
-?>
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title><?php echo ucfirst($page) ?> - Francois-Xavier Aeberhard</title>
-        <meta name="author" content="Francois-Xavier Aeberhard" />
-        <meta name="contact" content="fx@red-agent.com" />
-        <meta name="keywords" content="françois-xavier, aeberhard, gamedesign, webdesign, user experience" />
-        <meta name="description" content="Francois-Xavier Aeberhard is a user experience engineer, specialized in games and web. Here is his portfolio">
-        <meta name="robots" content="index, follow" />
-        <meta http-equiv="cleartype" content="on" />
-        <link rel="shortcut icon" href="favicon.ico" />
 
-        <!-- CSS Libraries (shadobox, fontawesome) -->
-        <!--<link rel="stylesheet" href="lib/fancybox/source/jquery.fancybox.min.css" />
-        <link rel="stylesheet" href="lib/fancybox/source/helpers/jquery.fancybox-thumbs.css" />
-        <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css" />
-        <link rel="stylesheet" href="lib/perfect-scrollbar/css/perfect-scrollbar.min.css" />
-        <link rel="stylesheet" type="text/css" href="lib/slick/slick.css"/>-->
-        <!--<link rel="stylesheet" type="text/css" href="lib/slick/slick-theme.css"/>-->
+<?php
+require_once 'php/Tools.php';
+$page = filter_input(INPUT_GET, 'page');
+$convoId = get_convo_id();
+?>
 
-        <!-- Site styles -->
-        <!--<link rel="stylesheet" href="css/global.css" media="all" />
-        <link rel="stylesheet" href="css/layout.css" media="all and (min-width: 53.236em)" />
-        <link rel="stylesheet" href="css/redagent.css" media="all" />-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Francois-Xavier Aeberhard">
+    <link rel="author" href="https://plus.google.com/+FrancoisXavierAeberhardRed" />
+    <meta name="contact" content="fx@red-agent.com">
+    <meta name="keywords" content="françois-xavier, aeberhard, gamedesign, webdesign,fdi user experience">
+    <meta name="description" content="Francois-Xavier Aeberhard is a user experience engineer, specialized in games and web. This is his portfolio.">
 
-        <!-- Combine -->
-        <link rel="stylesheet" type="text/css" href="php/min/?f=lib/fancybox/source/jquery.fancybox.min.css,lib/fancybox/source/helpers/jquery.fancybox-thumbs.css,lib/font-awesome/css/font-awesome.min.css,lib/perfect-scrollbar/css/perfect-scrollbar.min.css,lib/slick/slick.css,css/global.css,css/layout.css,css/redagent.css"/>
+    <title>
+      <?php echo $page ? ucfirst($page) : 'Red Agent' ?> - Francois-Xavier Aeberhard</title>
 
-    </head>
+    <!-- Fb -->
+    <!-- <meta property="og:url" content="{{pageUrl}}">
+    <meta property="og:image" content="{{imageUrl}}">
+    <meta property="og:description" content="{{description}}">
+    <meta property="og:title" content="{{pageTitle}}">
+    <meta property="og:site_name" content="{{siteTitle}}">
+    <meta property="og:see_also" content="{{homepageUrl}}">
+    <meta property="fb:admins" content="USER_ID" /> -->
 
-    <body class="yui3-skin-sam redagent-loading">
+    <!-- G+ -->
+    <!-- <meta itemprop="name" content="{{pageTitle}}">
+    <meta itemprop="description" content="{{description}}">
+    <meta itemprop="image" content="{{imageUrl}}"> -->
 
-        <div id="container" class="cf">
+    <!-- Twitter metas -->
+    <!-- <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="{{pageUrl}}">
+    <meta name="twitter:title" content="{{pageTitle}}">
+    <meta name="twitter:description" content="{{description}}">
+    <meta name="twitter:image" content="{{imageUrl}}"> -->
 
-            <?php
-            $pages = array("contact", "projects", "blog");
-            foreach ($pages as $p) {
-                ?>
-                <article class="redagent-page redagent-page-<?php echo $p ?>" <?php echo ($page !== $p) ? 'style="display:none;opacity: 0"' : '' ?> >
-                    <?php
-                    if ($page === $p) {
-                        include "page-$p.php";
-                    }
-                    ?>
-                </article>
-            <?php } ?>
+    <!-- Favicon -->
 
-            <!-- Menu -->
-            <article class="redagent-menu" <?php echo ($page === "Red agent") ? 'style="display:none;opacity: 0"' : '' ?>>
-                <div role="main" class="cf">
-                    <div class="redagent-closebutton"><i class="fa fa-reply"></i></div>
+    <link rel="apple-touch-icon" href="/images/icon/apple.png">
+    <link rel="apple-touch-icon" sizes="57x57" href="/images/icon/apple-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/images/icon/apple-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/images/icon/apple-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/images/icon/apple-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/images/icon/apple-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/images/icon/apple-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/images/icon/apple-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/images/icon/apple-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/icon/apple-180x180.png">
+    <link rel="icon" type="image/png" href="/images/icon/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/images/icon/favicon-194x194.png" sizes="194x194">
+    <link rel="icon" type="image/png" href="/images/icon/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/images/icon/andro-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/images/icon/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="/images/icon/manifest.json">
+    <link rel="mask-icon" href="/images/icon/safari-pinned-tab.svg" color="#580000">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/images/icon/mstile-144x144.png">
+    <meta name="theme-color" content="#ffffff">
 
-                    <div class="redagent-submenu redagent-menu-projects" <?php echo ($page !== "projects") ? 'style="display:none;opacity: 0"' : '' ?>>
-                        <a href="#wallogram" class="redagent-selected">2015</a>
-                        <a href="#proggame">2014</a>
-                        <a href="#stalker" >2013</a>
-                        <a href="#wegas" >2011</a>
-                        <a href="#mjte">2010</a>
-                        <a href="#3dblogosphere">2009</a>
-                        <a href="#redcms">2006</a>
-                        <a href="#schlempf">2005</a>
-                        <!--<a href="#yuimyadmin">2003</a>-->
-                    </div>
+    <!-- build:css css/styles.css -->
+    <!-- Libraries -->
+    <link rel="stylesheet" href="bower_components/perfect-scrollbar/css/perfect-scrollbar.min.css" />
+    <link rel="stylesheet" href="bower_components/slick-carousel/slick/slick.css" />
+    <link rel="stylesheet" href="bower_components/photoswipe/dist/photoswipe.css">
+    <!-- <link rel="stylesheet" href="bower_components/photoswipe/dist/default-skin/default-skin.css"> -->
+    <!-- <link rel="stylesheet" href="bower_components/slick-carousel/slick/slick-theme.css" /> -->
 
-                    <div class="redagent-submenu redagent-menu-blog" <?php echo ($page !== "blog") ? 'style="display:none;opacity: 0"' : '' ?>>
-                        <a href="#arthur" class="redagent-selected">2014</a>
-                        <a href="#mariagelaurent" >2013</a>                        
-                    </div>
+    <!-- Custom styles -->
+    <link href="css/redagent.css" rel="stylesheet" />
+    <!--endbuild-->
+  </head>
 
-                    <div class="redagent-search">
-                        <i class="fa fa-search"></i>
-                        <input placeholder="Search" />
-                    </div>
-                </div>
-            </article>
+  <body>
 
-            <!-- Main page -->
-            <article>
-                <div id="main" role="main" class="cf">
+    <!-- Pages -->
+    <section class="page">
+      <?php if ($page) include "$page.php"; ?>
+    </section>
 
-                    <!-- Crafty stage -->
-                    <p class="intro cr"></p>
-
-                    <!-- Chat -->
-                    <aside>
-                        <div class="scrollview-container"></div>
-                    </aside>
-                    <div style="clear:both"></div>
-
-                    <footer class="cf">
-                        <?php include 'php/footer.php'; ?>
-                    </footer>
-
-                </div>
-            </article>
+    <!-- Game -->
+    <section class="game">
+      <div>
+        <div>
+          <div id="cr-stage" class="stage"></div>
+          <div class="chat">
+            <div class="chat-msgs"></div>
+            <div>
+              <textarea placeholder="Type here to chat"></textarea>
+            </div>
+          </div>
         </div>
 
-        <!-- Media queries for IE < 9 -->
-        <!--[if lt IE 9]>
-                <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
-        <![endif]-->
+        <?php footer() ?>
 
-        <!-- YUI3 -->
-        <script type="text/javascript" src="http://yui.yahooapis.com/3.18.1/build/yui/yui-min.js"></script>
-        <!--<script type="text/javascript" src="lib/yui3/build/yui/yui-min.js"></script>-->
+      </div>
+    </section>
 
-        <!-- Pusher -->
-        <script type="text/javascript" src="http://js.pusher.com/2.2/pusher.min.js"></script>
+    <!-- Loader -->
+    <div class="loader" <?php if ($page) { echo 'style="visibility:hidden"'; } ?>>
+      <div></div>
+    </div>
 
-        <!-- Libraries (Crafty, shadowbox, jQuery, Modernizer) -->
-        <!--<script type="text/javascript" src="php/min/f=lib/modernizr-1.7.min.jslib/jquery-2.1.1.min.js,lib/fancybox/source/jquery.fancybox.pack.js,lib/fancybox/source/helpers/jquery.fancybox-thumbs.js,lib/jquery.scrollTo/jquery.scrollTo.min.js,lib/jquery.localScroll/jquery.localScroll.min.js,lib/jquery.jeditable.mini.js,lib/crafty-mod.js,lib/perfect-scrollbar/js/min/perfect-scrollbar.jquery.min.js,lib/jquery.cookie.js,lib/require.js"></script>-->
+    <!-- Photoswipe -->
+    <?php include 'php/photoswipe.html'; ?>
 
-        <!-- Variables -->
-        <script type="text/javascript" >
-            var currentPage = "<?php echo $page; ?>",
-                convoId = "<?php echo $convoId; ?>";
-        </script>
+    <!-- Variables -->
+    <script type="text/javascript">
+    var currentPage = "<?php echo $page; ?>",
+      convoId = "<?php echo $convoId; ?>";
+    </script>
 
-        <!-- Scripts -->
-        <!--<script type="text/javascript" src="js/redagent-chat.js"></script>
-        <script type="text/javascript" src="js/redagent-display.js"></script>
-        <script type="text/javascript" src="js/redagent-pusher.js"></script>
-        <script type="text/javascript" src="js/redagent-controller.js"></script>
-        <script type="text/javascript" src="js/redagent.js"></script>-->
+    <!-- build:js js/scripts.js -->
+    <!-- Libraries -->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/svg4everybody/dist/svg4everybody.legacy.min.js"></script>
+    <script src="bower_components/tether/dist/js/tether.min.js"></script>
+    <script src="bower_components/bootstrap/js/dist/util.js"></script>
+    <script src="bower_components/bootstrap/js/dist/tooltip.js"></script>
+    <script src="bower_components/perfect-scrollbar/js/min/perfect-scrollbar.jquery.min.js"></script>
+    <script src="bower_components/jquery.cookie/jquery.cookie.js"></script>
+    <script src="bower_components/crafty/dist/crafty-min.js"></script>
+    <script src="bower_components/photoswipe/dist/photoswipe.min.js"></script>
+    <script src="bower_components/photoswipe/dist/photoswipe-ui-default.min.js"></script>
+    <script src="bower_components/pusher/dist/pusher.min.js"></script>
+    <script src="bower_components/webfontloader/webfontloader.js"></script>
+    <script src="js/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    <script src="js/scrollspy.js"></script>
+    <script src="js/slick.js"></script>
+    <!-- <script src="bower_components/slick-carousel/slick/slick.min.js"></script> -->
+    <!-- <script src="bower_components/requirejs/require.js"></script> -->
 
-        <!-- Combine -->
-        <script type="text/javascript" src="php/min/f=lib/modernizr-1.7.min.js,lib/jquery-2.1.1.min.js,lib/fancybox/source/jquery.fancybox.pack.js,lib/fancybox/source/helpers/jquery.fancybox-thumbs.js,lib/jquery.scrollTo/jquery.scrollTo.min.js,lib/jquery.localScroll/jquery.localScroll.min.js,lib/jquery.jeditable.mini.js,lib/crafty-mod.js,lib/perfect-scrollbar/js/min/perfect-scrollbar.jquery.min.js,lib/jquery.cookie.js,js/redagent-chat.js,lib/require.js,js/redagent-display.js,js/redagent-pusher.js,js/redagent-controller.js,js/redagent.js"></script>
+    <!-- Scripts -->
+    <script src="js/redagent-game.js"></script>
+    <script src="js/redagent-net.js"></script>
+    <script src="js/redagent.js"></script>
+    <!-- endbuild -->
 
-        <!-- Google analytics -->
-        <script type="text/javascript">
-            var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', 'UA-12224039-1']);
-            _gaq.push(['_trackPageview']);
+    <!-- Google analytics -->
+    <script>
+    (function(i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function() {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-12224039-1', 'auto');
+    ga('send', 'pageview');
+    </script>
 
-            (function() {
-                var ga = document.createElement('script');
-                ga.type = 'text/javascript';
-                ga.async = true;
-                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                var s = document.getElementsByTagName('script')[0];
-                s.parentNode.insertBefore(ga, s);
-            })();
-        </script>
+    <!-- Google Knowledge Graph -->
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "Francois-Xavier Aeberhard",
+      "url": "http://www.red-agent.com",
+      "sameAs": [
+        "https://plus.google.com/+FrancoisXavierAeberhardRed",
+        "https://www.youtube.com/c/FrancoisXavierAeberhardRed",
+        "http://www.linkedin.com/in/francoisxavieraeberhard"
+      ]
+    }
+    </script>
 
-    </body>
+
+  </body>
+
 </html>

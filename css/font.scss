@@ -1,0 +1,38 @@
+// @font-face {
+//   font-family: "Din";
+//   font-style: normal;
+//   font-weight: normal;
+//   src: url('../fonts/din-regular-webfont.eot');
+//   src: url('../fonts/din-regular-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/din-regular-webfont.woff') format('woff'), url('../fonts/din-regular-webfont.ttf') format('truetype'), url('../fonts/din-regular-webfont.svg#dinregular') format('svg');
+// }
+@font-face {
+  font-family: "Din";
+  font-style: normal;
+  font-weight: 300;
+  src: url('../fonts/din-light-webfont.eot');
+  src: url('../fonts/din-light-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/din-light-webfont.woff') format('woff'), url('../fonts/din-light-webfont.ttf') format('truetype'), url('../fonts/din-light-webfont.svg#din_lightregular') format('svg');
+}
+
+@font-face {
+  font-family: "Din";
+  font-style: normal;
+  font-weight: bold;
+  src: url('../fonts/din-bold-webfont.eot');
+  src: url('../fonts/din-bold-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/din-bold-webfont.woff') format('woff'), url('../fonts/din-bold-webfont.ttf') format('truetype'), url('../fonts/din-bold-webfont.svg#dinbold') format('svg');
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 300;
+  src: url('../fonts/OpenSans-Light-webfont.eot');
+  src: url('../fonts/OpenSans-Light-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/OpenSans-Light-webfont.woff') format('woff'), url('../fonts/OpenSans-Light-webfont.ttf') format('truetype'), url('../fonts/OpenSans-Light-webfont.svg#open_sanslight') format('svg');
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/OpenSans-Regular-webfont.eot');
+  src: url('../fonts/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/OpenSans-Regular-webfont.woff') format('woff'), url('../fonts/OpenSans-Regular-webfont.ttf') format('truetype'), url('../fonts/OpenSans-Regular-webfont.svg#open_sansregular') format('svg');
+}

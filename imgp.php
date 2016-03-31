@@ -3,7 +3,7 @@
  * Resize and crop images on the fly, store generated images in a cache.
  *
  * This version is a all-in-one version of img.php, it is not dependant an any other file
- * so you can simply copy it to any place you want it. 
+ * so you can simply copy it to any place you want it.
  *
  * @author  Mikael Roos mos@dbwebb.se
  * @example http://dbwebb.se/opensource/cimage
@@ -14,9 +14,9 @@
 
 /**
  * Change configuration details in the array below or create a separate file
- * where you store the configuration details. 
+ * where you store the configuration details.
  *
- * The configuration file should be named the same name as this file and then 
+ * The configuration file should be named the same name as this file and then
  * add '_config.php'. If this file is named 'img.php' then name the
  * config file should be named 'img_config.php'.
  *
@@ -26,13 +26,46 @@
 $config = array(
 
     //'mode'         => 'production',               // 'production', 'development', 'strict'
-    'image_path'   =>  __DIR__ . '/',
-    'cache_path'   =>  __DIR__ . '/cache/',
-    "valid_filename" => "#^.+$#"
+    //'image_path'   =>  __DIR__ . '/img/',
+    //'cache_path'   =>  __DIR__ . '/../cache/',
     //'alias_path'   =>  __DIR__ . '/img/alias/',
     //'remote_allow' => true,
     //'password'     => false,                      // "secret-password",
 
+);
+
+$config = array(
+
+    'mode'         => 'production',               // 'production', 'development', 'strict'
+    'image_path'   =>  __DIR__ . '/images/',
+    'cache_path'   =>  __DIR__ . '/cache/',
+    // "valid_filename" => "#^.+$#"
+    //'image_path'   =>  __DIR__ . '/img/',
+    //'cache_path'   =>  __DIR__ . '/../cache/',
+    //'alias_path'   =>  __DIR__ . '/img/alias/',
+    //'remote_allow' => true,
+    //'password'     => false,                      
+    // "secret-password",
+
+    
+    // 'postprocessing' => array(
+    //     'png_filter'        => true,
+    //     'png_filter_cmd'    => '/usr/local/bin/optipng -q',
+
+    //     'png_deflate'       => true,
+    //     'png_deflate_cmd'   => '/usr/local/bin/pngout -q',
+
+        // 'jpeg_optimize'     => true,    
+    //     'jpeg_optimize_cmd' => '/usr/local/bin/jpegtran -copy none -optimize',
+    // ),
+    
+    // 'background_color' => "0000000",
+    'background_color' => "F8FEF200",
+    'max_width'     => 4000,
+    'max_height'    => 4000,
+    // //'cache_control' => "max-age=86400",
+    'jpg_quality'  => 90,
+    'png_compression' => 1
 );
 
 
@@ -60,6 +93,33 @@ class CHttpGet
 
 
     /**
+     * Build an encoded url.
+     *
+     * @param string $baseUrl This is the original url which will be merged.
+     * @param string $merge   Thse parts should be merged into the baseUrl,
+     *                        the format is as parse_url.
+     *
+     * @return string $url as the modified url.
+     */
+    public function buildUrl($baseUrl, $merge)
+    {
+        $parts = parse_url($baseUrl);
+        $parts = array_merge($parts, $merge);
+
+        $url  = $parts['scheme'];
+        $url .= "://";
+        $url .= $parts['host'];
+        $url .= isset($parts['port'])
+            ? ":" . $parts['port']
+            : "" ;
+        $url .= $parts['path'];
+
+        return $url;
+    }
+
+
+
+    /**
      * Set the url for the request.
      *
      * @param string $url
@@ -68,6 +128,18 @@ class CHttpGet
      */
     public function setUrl($url)
     {
+        $parts = parse_url($url);
+        
+        $path = "";
+        if (isset($parts['path'])) {
+            $pathParts = explode('/', $parts['path']);
+            unset($pathParts[0]);
+            foreach ($pathParts as $value) {
+                $path .= "/" . rawurlencode($value);
+            }
+        }
+        $url = $this->buildUrl($url, array("path" => $path));
+
         $this->request['url'] = $url;
         return $this;
     }
@@ -100,7 +172,14 @@ class CHttpGet
      */
     public function parseHeader()
     {
-        $header = explode("\r\n", rtrim($this->response['headerRaw'], "\r\n"));
+        //$header = explode("\r\n", rtrim($this->response['headerRaw'], "\r\n"));
+        
+        $rawHeaders = rtrim($this->response['headerRaw'], "\r\n");
+        # Handle multiple responses e.g. with redirections (proxies too)
+        $headerGroups = explode("\r\n\r\n", $rawHeaders);
+        # We're only interested in the last one
+        $header = explode("\r\n", end($headerGroups));
+
         $output = array();
 
         if ('HTTP' === substr($header[0], 0, 4)) {
@@ -124,6 +203,8 @@ class CHttpGet
      *
      * @param boolean $debug set to true to dump headers.
      *
+     * @throws Exception when curl fails to retrieve url.
+     *
      * @return boolean
      */
     public function doGet($debug = false)
@@ -137,6 +218,8 @@ class CHttpGet
             CURLINFO_HEADER_OUT     => $debug,
             CURLOPT_CONNECTTIMEOUT  => 5,
             CURLOPT_TIMEOUT         => 5,
+            CURLOPT_FOLLOWLOCATION  => true,
+            CURLOPT_MAXREDIRS       => 2,
         );
 
         $ch = curl_init();
@@ -144,7 +227,7 @@ class CHttpGet
         $response = curl_exec($ch);
 
         if (!$response) {
-            return false;
+            throw new Exception("Failed retrieving url, details follows: " . curl_error($ch));
         }
 
         $headerSize = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
@@ -328,7 +411,7 @@ class CRemoteImage
 
 
     /**
-     * Base name of cache file for downloaded item.
+     * Base name of cache file for downloaded item and name of image.
      */
     private $fileName;
 
@@ -342,27 +425,10 @@ class CRemoteImage
 
 
     /**
-     * Filename for image-file.
-     */
-    private $fileImage;
-
-
-
-    /**
      * Cache details loaded from file.
      */
     private $cache;
 
-
-
-    /**
-     * Constructor
-     *
-     */
-    public function __construct()
-    {
-        ;
-    }
 
 
     /**
@@ -398,7 +464,7 @@ class CRemoteImage
      */
     public function setCache($path)
     {
-        $this->saveFolder = $path;
+        $this->saveFolder = rtrim($path, "/") . "/";
         return $this;
     }
 
@@ -438,33 +504,18 @@ class CRemoteImage
 
 
     /**
-     * Translate a content type to a file extension.
-     *
-     * @param string $type a valid content type.
-     *
-     * @return string as file extension or false if no match.
-     */
-    function contentTypeToFileExtension($type) {
-        $extension = array(
-            'image/jpeg' => 'jpg',
-            'image/png'  => 'png',
-            'image/gif'  => 'gif',
-        );
-
-        return isset($extension[$type])
-        ? $extension[$type]
-        : false;
-    }
-
-
-
-    /**
      * Set header fields.
      *
      * @return $this
      */
-    function setHeaderFields() {
-        $this->http->setHeader("User-Agent", "CImage/0.6 (PHP/". phpversion() . " cURL)");
+    public function setHeaderFields()
+    {
+        $cimageVersion = "CImage";
+        if (defined("CIMAGE_USER_AGENT")) {
+            $cimageVersion = CIMAGE_USER_AGENT;
+        }
+        
+        $this->http->setHeader("User-Agent", "$cimageVersion (PHP/". phpversion() . " cURL)");
         $this->http->setHeader("Accept", "image/jpeg,image/png,image/gif");
 
         if ($this->useCache) {
@@ -482,37 +533,31 @@ class CRemoteImage
      *
      * @return string as path to saved file or false if not saved.
      */
-    function save() {
-
+    public function save()
+    {
         $this->cache = array();
         $date         = $this->http->getDate(time());
         $maxAge       = $this->http->getMaxAge($this->defaultMaxAge);
         $lastModified = $this->http->getLastModified();
         $type         = $this->http->getContentType();
-        $extension    = $this->contentTypeToFileExtension($type);
 
         $this->cache['Date']           = gmdate("D, d M Y H:i:s T", $date);
         $this->cache['Max-Age']        = $maxAge;
         $this->cache['Content-Type']   = $type;
-        $this->cache['File-Extension'] = $extension;
+        $this->cache['Url']            = $this->url;
 
         if ($lastModified) {
             $this->cache['Last-Modified'] = gmdate("D, d M Y H:i:s T", $lastModified);
         }
 
-        if ($extension) {
+        // Save only if body is a valid image
+        $body = $this->http->getBody();
+        $img = imagecreatefromstring($body);
 
-            $this->fileImage = $this->fileName . "." . $extension;
-
-            // Save only if body is a valid image
-            $body = $this->http->getBody();
-            $img = imagecreatefromstring($body);
-
-            if ($img !== false) {
-                file_put_contents($this->fileImage, $body);
-                file_put_contents($this->fileJson, json_encode($this->cache));
-                return $this->fileImage;
-            }
+        if ($img !== false) {
+            file_put_contents($this->fileName, $body);
+            file_put_contents($this->fileJson, json_encode($this->cache));
+            return $this->fileName;
         }
 
         return false;
@@ -525,21 +570,21 @@ class CRemoteImage
      *
      * @return string as path to cached file.
      */
-    function updateCacheDetails() {
-
+    public function updateCacheDetails()
+    {
         $date         = $this->http->getDate(time());
         $maxAge       = $this->http->getMaxAge($this->defaultMaxAge);
         $lastModified = $this->http->getLastModified();
 
-        $this->cache['Date']     = gmdate("D, d M Y H:i:s T", $date);
-        $this->cache['Max-Age']  = $maxAge;
+        $this->cache['Date']    = gmdate("D, d M Y H:i:s T", $date);
+        $this->cache['Max-Age'] = $maxAge;
 
         if ($lastModified) {
             $this->cache['Last-Modified'] = gmdate("D, d M Y H:i:s T", $lastModified);
         }
 
         file_put_contents($this->fileJson, json_encode($this->cache));
-        return $this->fileImage;
+        return $this->fileName;
     }
 
 
@@ -549,10 +594,12 @@ class CRemoteImage
      *
      * @param string $url a remote url.
      *
+     * @throws Exception when status code does not match 200 or 304.
+     *
      * @return string as path to downloaded file or false if failed.
      */
-    function download($url) {
-
+    public function download($url)
+    {
         $this->http = new CHttpGet();
         $this->url = $url;
 
@@ -576,12 +623,12 @@ class CRemoteImage
         if ($this->status === 200) {
             $this->isCacheWritable();
             return $this->save();
-        } else if ($this->status === 304) {
+        } elseif ($this->status === 304) {
             $this->isCacheWritable();
             return $this->updateCacheDetails();
         }
 
-        return false;
+        throw new Exception("Unknown statuscode when downloading remote image: " . $this->status);
     }
 
 
@@ -593,7 +640,7 @@ class CRemoteImage
      */
     public function loadCacheDetails()
     {
-        $cacheFile = str_replace(array("/", ":", "#", ".", "?"), "-", $this->url);
+        $cacheFile = md5($this->url);
         $this->fileName = $this->saveFolder . $cacheFile;
         $this->fileJson = $this->fileName . ".json";
         if (is_readable($this->fileJson)) {
@@ -610,15 +657,15 @@ class CRemoteImage
      */
     public function getCachedSource()
     {
-        $this->fileImage = $this->fileName . "." . $this->cache['File-Extension'];
-        $imageExists = is_readable($this->fileImage);
+        $imageExists = is_readable($this->fileName);
 
         // Is cache valid?
         $date   = strtotime($this->cache['Date']);
         $maxAge = $this->cache['Max-Age'];
-        $now = time();
+        $now    = time();
+        
         if ($imageExists && $date + $maxAge > $now) {
-            return $this->fileImage;
+            return $this->fileName;
         }
 
         // Prepare for a 304 if available
@@ -627,6 +674,284 @@ class CRemoteImage
         }
 
         return false;
+    }
+}
+
+
+
+/**
+ * Act as whitelist (or blacklist).
+ *
+ */
+class CWhitelist
+{
+    /**
+     * Array to contain the whitelist options.
+     */
+    private $whitelist = array();
+
+
+
+    /**
+     * Set the whitelist from an array of strings, each item in the
+     * whitelist should be a regexp without the surrounding / or #.
+     *
+     * @param array $whitelist with all valid options,
+     *                         default is to clear the whitelist.
+     *
+     * @return $this
+     */
+    public function set($whitelist = array())
+    {
+        if (!is_array($whitelist)) {
+            throw new Exception("Whitelist is not of a supported format.");
+        }
+
+        $this->whitelist = $whitelist;
+        return $this;
+    }
+
+
+
+    /**
+     * Check if item exists in the whitelist.
+     *
+     * @param string $item      string to check.
+     * @param array  $whitelist optional with all valid options, default is null.
+     *
+     * @return boolean true if item is in whitelist, else false.
+     */
+    public function check($item, $whitelist = null)
+    {
+        if ($whitelist !== null) {
+            $this->set($whitelist);
+        }
+        
+        if (empty($item) or empty($this->whitelist)) {
+            return false;
+        }
+        
+        foreach ($this->whitelist as $regexp) {
+            if (preg_match("#$regexp#", $item)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+}
+
+
+
+/**
+ * Create an ASCII version of an image.
+ *
+ */
+class CAsciiArt
+{
+    /**
+     * Character set to use.
+     */
+    private $characterSet = array(
+        'one' => "#0XT|:,.' ",
+        'two' => "@%#*+=-:. ",
+        'three' => "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+~<>i!lI;:,\"^`'. "
+    );
+
+
+
+    /**
+     * Current character set.
+     */
+    private $characters = null;
+
+
+
+    /**
+     * Length of current character set.
+     */
+    private $charCount = null;
+
+
+
+    /**
+     * Scale of the area to swap to a character.
+     */
+    private $scale = null;
+
+
+
+    /**
+     * Strategy to calculate luminance.
+     */
+    private $luminanceStrategy = null;
+
+
+
+    /**
+     * Constructor which sets default options.
+     */
+    public function __construct()
+    {
+        $this->setOptions();
+    }
+
+
+
+    /**
+     * Add a custom character set.
+     *
+     * @param string $key   for the character set.
+     * @param string $value for the character set.
+     *
+     * @return $this
+     */
+    public function addCharacterSet($key, $value)
+    {
+        $this->characterSet[$key] = $value;
+        return $this;
+    }
+
+
+
+    /**
+     * Set options for processing, defaults are available.
+     *
+     * @param array $options to use as default settings.
+     *
+     * @return $this
+     */
+    public function setOptions($options = array())
+    {
+        $default = array(
+            "characterSet" => 'two',
+            "scale" => 14,
+            "luminanceStrategy" => 3,
+            "customCharacterSet" => null,
+        );
+        $default = array_merge($default, $options);
+        
+        if (!is_null($default['customCharacterSet'])) {
+            $this->addCharacterSet('custom', $default['customCharacterSet']);
+            $default['characterSet'] = 'custom';
+        }
+        
+        $this->scale = $default['scale'];
+        $this->characters = $this->characterSet[$default['characterSet']];
+        $this->charCount = strlen($this->characters);
+        $this->luminanceStrategy = $default['luminanceStrategy'];
+        
+        return $this;
+    }
+
+
+
+    /**
+     * Create an Ascii image from an image file.
+     *
+     * @param string $filename of the image to use.
+     *
+     * @return string $ascii with the ASCII image.
+     */
+    public function createFromFile($filename)
+    {
+        $img = imagecreatefromstring(file_get_contents($filename));
+        list($width, $height) = getimagesize($filename);
+
+        $ascii = null;
+        $incY = $this->scale;
+        $incX = $this->scale / 2;
+        
+        for ($y = 0; $y < $height - 1; $y += $incY) {
+            for ($x = 0; $x < $width - 1; $x += $incX) {
+                $toX = min($x + $this->scale / 2, $width - 1);
+                $toY = min($y + $this->scale, $height - 1);
+                $luminance = $this->luminanceAreaAverage($img, $x, $y, $toX, $toY);
+                $ascii .= $this->luminance2character($luminance);
+            }
+            $ascii .= PHP_EOL;
+        }
+
+        return $ascii;
+    }
+
+
+
+    /**
+     * Get the luminance from a region of an image using average color value.
+     *
+     * @param string  $img the image.
+     * @param integer $x1  the area to get pixels from.
+     * @param integer $y1  the area to get pixels from.
+     * @param integer $x2  the area to get pixels from.
+     * @param integer $y2  the area to get pixels from.
+     *
+     * @return integer $luminance with a value between 0 and 100.
+     */
+    public function luminanceAreaAverage($img, $x1, $y1, $x2, $y2)
+    {
+        $numPixels = ($x2 - $x1 + 1) * ($y2 - $y1 + 1);
+        $luminance = 0;
+        
+        for ($x = $x1; $x <= $x2; $x++) {
+            for ($y = $y1; $y <= $y2; $y++) {
+                $rgb   = imagecolorat($img, $x, $y);
+                $red   = (($rgb >> 16) & 0xFF);
+                $green = (($rgb >> 8) & 0xFF);
+                $blue  = ($rgb & 0xFF);
+                $luminance += $this->getLuminance($red, $green, $blue);
+            }
+        }
+        
+        return $luminance / $numPixels;
+    }
+
+
+
+    /**
+     * Calculate luminance value with different strategies.
+     *
+     * @param integer $red   The color red.
+     * @param integer $green The color green.
+     * @param integer $blue  The color blue.
+     *
+     * @return float $luminance with a value between 0 and 1.
+     */
+    public function getLuminance($red, $green, $blue)
+    {
+        switch ($this->luminanceStrategy) {
+            case 1:
+                $luminance = ($red * 0.2126 + $green * 0.7152 + $blue * 0.0722) / 255;
+                break;
+            case 2:
+                $luminance = ($red * 0.299 + $green * 0.587 + $blue * 0.114) / 255;
+                break;
+            case 3:
+                $luminance = sqrt(0.299 * pow($red, 2) + 0.587 * pow($green, 2) + 0.114 * pow($blue, 2)) / 255;
+                break;
+            case 0:
+            default:
+                $luminance = ($red + $green + $blue) / (255 * 3);
+        }
+
+        return $luminance;
+    }
+
+
+
+    /**
+     * Translate the luminance value to a character.
+     *
+     * @param string $position a value between 0-100 representing the
+     *                         luminance.
+     *
+     * @return string with the ascii character.
+     */
+    public function luminance2character($luminance)
+    {
+        $position = (int) round($luminance * ($this->charCount - 1));
+        $char = $this->characters[$position];
+        return $char;
     }
 }
 
@@ -697,6 +1022,13 @@ class CImage
 
 
     /**
+     * Add HTTP headers for outputing image.
+     */
+    private $HTTPHeader = array();
+
+
+
+    /**
      * Default background color, red, green, blue, alpha.
      *
      * @todo remake when upgrading to PHP 5.5
@@ -747,13 +1079,6 @@ class CImage
 
 
     /**
-     * The root folder of images (only used in constructor to create $pathToImage?).
-     */
-    private $imageFolder;
-
-
-
-    /**
      * Image filename, may include subdirectory, relative from $imageFolder
      */
     private $imageSrc;
@@ -768,9 +1093,9 @@ class CImage
 
 
     /**
-     * Original file extension
+     * File type for source image, as provided by getimagesize()
      */
-    private $fileExtension;
+    private $fileType;
 
 
 
@@ -826,6 +1151,7 @@ class CImage
      * Path to command for filter optimize, for example optipng or null.
      */
     private $pngFilter;
+    private $pngFilterCmd;
 
 
 
@@ -833,13 +1159,16 @@ class CImage
      * Path to command for deflate optimize, for example pngout or null.
      */
     private $pngDeflate;
+    private $pngDeflateCmd;
 
 
 
     /**
      * Path to command to optimize jpeg images, for example jpegtran or null.
      */
-    private $jpegOptimize;
+     private $jpegOptimize;
+     private $jpegOptimizeCmd;
+
 
 
     /**
@@ -915,6 +1244,56 @@ class CImage
     private $fillToFit;
 
 
+
+    /**
+     * To store value for option scale.
+     */
+    private $scale;
+
+
+
+    /**
+     * To store value for option.
+     */
+    private $rotateBefore;
+
+
+
+    /**
+     * To store value for option.
+     */
+    private $rotateAfter;
+
+
+
+    /**
+     * To store value for option.
+     */
+    private $autoRotate;
+
+
+
+    /**
+     * To store value for option.
+     */
+    private $sharpen;
+
+
+
+    /**
+     * To store value for option.
+     */
+    private $emboss;
+
+
+
+    /**
+     * To store value for option.
+     */
+    private $blur;
+
+
+
     /**
      * Used with option area to set which parts of the image to use.
      */
@@ -923,17 +1302,24 @@ class CImage
 
 
     /**
-    * Calculate target dimension for image when using fill-to-fit resize strategy.
-    */
+     * Calculate target dimension for image when using fill-to-fit resize strategy.
+     */
     private $fillWidth;
     private $fillHeight;
 
 
 
     /**
-    * Allow remote file download, default is to disallow remote file download.
-    */
+     * Allow remote file download, default is to disallow remote file download.
+     */
     private $allowRemote = false;
+
+
+
+    /**
+     * Path to cache for remote download.
+     */
+    private $remoteCache;
 
 
 
@@ -951,6 +1337,38 @@ class CImage
     private $useCache = true;
 
 
+
+    /*
+     * Set whitelist for valid hostnames from where remote source can be
+     * downloaded.
+     */
+    private $remoteHostWhitelist = null;
+
+
+
+    /*
+     * Do verbose logging to file by setting this to a filename.
+     */
+    private $verboseFileName = null;
+
+
+
+    /*
+     * Output to ascii can take som options as an array.
+     */
+    private $asciiOptions = array();
+
+
+
+    /*
+     * Image copy strategy, defaults to RESAMPLE.
+     */
+     const RESIZE = 1;
+     const RESAMPLE = 2;
+     private $copyStrategy = NULL;
+
+
+
     /**
      * Properties, the class is mutable and the method setOptions()
      * decides (partly) what properties are created.
@@ -965,9 +1383,7 @@ class CImage
     public $crop_x;
     public $crop_y;
     public $filters;
-    private $type; // Calculated from source image
     private $attr; // Calculated from source image
-    private $useOriginal; // Use original image if possible
 
 
 
@@ -1024,9 +1440,7 @@ class CImage
     /**
      * Use cache or not.
      *
-     * @todo clean up how $this->noCache is used in other methods.
-     *
-     * @param string $use true or false to use cache.
+     * @param boolean $use true or false to use cache.
      *
      * @return $this
      */
@@ -1039,22 +1453,47 @@ class CImage
 
 
     /**
+     * Create and save a dummy image. Use dimensions as stated in
+     * $this->newWidth, or $width or default to 100 (same for height.
+     *
+     * @param integer $width  use specified width for image dimension.
+     * @param integer $height use specified width for image dimension.
+     *
+     * @return $this
+     */
+    public function createDummyImage($width = null, $height = null)
+    {
+        $this->newWidth  = $this->newWidth  ?: $width  ?: 100;
+        $this->newHeight = $this->newHeight ?: $height ?: 100;
+
+        $this->image = $this->CreateImageKeepTransparency($this->newWidth, $this->newHeight);
+
+        return $this;
+    }
+
+
+
+    /**
      * Allow or disallow remote image download.
      *
      * @param boolean $allow   true or false to enable and disable.
+     * @param string  $cache   path to cache dir.
      * @param string  $pattern to use to detect if its a remote file.
      *
      * @return $this
      */
-    public function setRemoteDownload($allow, $pattern = null)
+    public function setRemoteDownload($allow, $cache, $pattern = null)
     {
         $this->allowRemote = $allow;
-        $this->remotePattern = $pattern ? $pattern : $this->remotePattern;
+        $this->remoteCache = $cache;
+        $this->remotePattern = is_null($pattern) ? $this->remotePattern : $pattern;
 
-        $this->log("Set remote download to: "
+        $this->log(
+            "Set remote download to: "
             . ($this->allowRemote ? "true" : "false")
             . " using pattern "
-            . $this->remotePattern);
+            . $this->remotePattern
+        );
 
         return $this;
     }
@@ -1072,7 +1511,55 @@ class CImage
     {
         $remote = preg_match($this->remotePattern, $src);
         $this->log("Detected remote image: " . ($remote ? "true" : "false"));
-        return $remote;
+        return !!$remote;
+    }
+
+
+
+    /**
+     * Set whitelist for valid hostnames from where remote source can be
+     * downloaded.
+     *
+     * @param array $whitelist with regexp hostnames to allow download from.
+     *
+     * @return $this
+     */
+    public function setRemoteHostWhitelist($whitelist = null)
+    {
+        $this->remoteHostWhitelist = $whitelist;
+        $this->log(
+            "Setting remote host whitelist to: "
+            . (is_null($whitelist) ? "null" : print_r($whitelist, 1))
+        );
+        return $this;
+    }
+
+
+
+    /**
+     * Check if the hostname for the remote image, is on a whitelist,
+     * if the whitelist is defined.
+     *
+     * @param string $src the remote source.
+     *
+     * @return boolean true if hostname on $src is in the whitelist, else false.
+     */
+    public function isRemoteSourceOnWhitelist($src)
+    {
+        if (is_null($this->remoteHostWhitelist)) {
+            $this->log("Remote host on whitelist not configured - allowing.");
+            return true;
+        }
+
+        $whitelist = new CWhitelist();
+        $hostname = parse_url($src, PHP_URL_HOST);
+        $allow = $whitelist->check($hostname, $this->remoteHostWhitelist);
+
+        $this->log(
+            "Remote host is on whitelist: "
+            . ($allow ? "true" : "false")
+        );
+        return $allow;
     }
 
 
@@ -1097,6 +1584,26 @@ class CImage
 
 
     /**
+     * Normalize the file extension.
+     *
+     * @param string $extension of image file or skip to use internal.
+     *
+     * @return string $extension as a normalized file extension.
+     */
+    private function normalizeFileExtension($extension = null)
+    {
+        $extension = strtolower($extension ? $extension : $this->extension);
+
+        if ($extension == 'jpeg') {
+                $extension = 'jpg';
+            }
+
+        return $extension;
+    }
+
+
+
+    /**
      * Download a remote image and return path to its local copy.
      *
      * @param string $src remote path to image.
@@ -1105,27 +1612,22 @@ class CImage
      */
     public function downloadRemoteSource($src)
     {
-        $remote = new CRemoteImage();
-        $cache  = $this->saveFolder . "/remote/";
-
-        if (!is_dir($cache)) {
-            if (!is_writable($this->saveFolder)) {
-                throw new Exception("Can not create remote cache, cachefolder not writable.");
-            }
-            mkdir($cache);
-            $this->log("The remote cache does not exists, creating it.");
+        if (!$this->isRemoteSourceOnWhitelist($src)) {
+            throw new Exception("Hostname is not on whitelist for remote sources.");
         }
 
-        if (!is_writable($cache)) {
+        $remote = new CRemoteImage();
+
+        if (!is_writable($this->remoteCache)) {
             $this->log("The remote cache is not writable.");
         }
 
-        $remote->setCache($cache);
+        $remote->setCache($this->remoteCache);
         $remote->useCache($this->useCache);
         $src = $remote->download($src);
 
         $this->log("Remote HTTP status: " . $remote->getStatus());
-        $this->log("Remote item has local cached file: $src");
+        $this->log("Remote item is in local cache: $src");
         $this->log("Remote details on cache:" . print_r($remote->getDetails(), true));
 
         return $src;
@@ -1134,16 +1636,18 @@ class CImage
 
 
     /**
-     * Set src file.
+     * Set source file to use as image source.
      *
      * @param string $src of image.
-     * @param string $dir as base directory where images are.
+     * @param string $dir as optional base directory where images are.
      *
      * @return $this
      */
     public function setSource($src, $dir = null)
     {
         if (!isset($src)) {
+            $this->imageSrc = null;
+            $this->pathToImage = null;
             return $this;
         }
 
@@ -1157,13 +1661,9 @@ class CImage
             $src = basename($src);
         }
 
-        $this->imageSrc       = ltrim($src, '/');
-        $this->imageFolder    = rtrim($dir, '/');
-        $this->pathToImage    = $this->imageFolder . '/' . $this->imageSrc;
-        $this->fileExtension  = strtolower(pathinfo($this->pathToImage, PATHINFO_EXTENSION));
-        //$this->extension      = $this->fileExtension;
-
-        $this->checkFileExtension($this->fileExtension);
+        $this->imageSrc     = ltrim($src, '/');
+        $imageFolder        = rtrim($dir, '/');
+        $this->pathToImage  = $imageFolder . '/' . $this->imageSrc;
 
         return $this;
     }
@@ -1174,29 +1674,41 @@ class CImage
      * Set target file.
      *
      * @param string $src of target image.
-     * @param string $dir as base directory where images are stored.
+     * @param string $dir as optional base directory where images are stored.
+     *                    Uses $this->saveFolder if null.
      *
      * @return $this
      */
     public function setTarget($src = null, $dir = null)
     {
-        if (!(isset($src) && isset($dir))) {
+        if (!isset($src)) {
+            $this->cacheFileName = null;
             return $this;
         }
 
-        $this->saveFolder     = $dir;
-        $this->cacheFileName  = $dir . '/' . $src;
+        if (isset($dir)) {
+            $this->saveFolder = rtrim($dir, '/');
+        }
 
-        /* Allow readonly cache
-        is_writable($this->saveFolder)
-            or $this->raiseError('Target directory is not writable.');
-        */
+        $this->cacheFileName  = $this->saveFolder . '/' . $src;
 
         // Sanitize filename
         $this->cacheFileName = preg_replace('/^a-zA-Z0-9\.-_/', '', $this->cacheFileName);
         $this->log("The cache file name is: " . $this->cacheFileName);
 
         return $this;
+    }
+
+
+
+    /**
+     * Get filename of target file.
+     *
+     * @return Boolean|String as filename of target or false if not set.
+     */
+    public function getTarget()
+    {
+        return $this->cacheFileName;
     }
 
 
@@ -1248,11 +1760,6 @@ class CImage
             // Output format
             'outputFormat' => null,
             'dpr'          => 1,
-
-            // Options for saving
-            //'quality'     => null,
-            //'compress'    => null,
-            //'saveAs'      => null,
         );
 
         // Convert crop settings from string to array
@@ -1368,13 +1875,16 @@ class CImage
             or $this->raiseError('Image file does not exist.');
 
         // Get details on image
-        $info = list($this->width, $this->height, $this->type, $this->attr) = getimagesize($file);
-        !empty($info) or $this->raiseError("The file doesn't seem to be an image.");
+        $info = list($this->width, $this->height, $this->fileType, $this->attr) = getimagesize($file);
+        if (empty($info)) {
+            throw new Exception("The file doesn't seem to be a valid image.");
+        }
 
         if ($this->verbose) {
-            $this->log("Image file: {$file}");
-            $this->log("Image width x height (type): {$this->width} x {$this->height} ({$this->type}).");
-            $this->log("Image filesize: " . filesize($file) . " bytes.");
+            $this->log("Loading image details for: {$file}");
+            $this->log(" Image width x height (type): {$this->width} x {$this->height} ({$this->fileType}).");
+            $this->log(" Image filesize: " . filesize($file) . " bytes.");
+            $this->log(" Image mimetype: " . image_type_to_mime_type($this->fileType));
         }
 
         return $this;
@@ -1565,7 +2075,7 @@ class CImage
                     $this->cropHeight = round($height / $ratio);
                     $this->log("Crop width, height, ratio: $this->cropWidth x $this->cropHeight ($ratio).");
 
-                } else if ($this->fillToFit) {
+                } elseif ($this->fillToFit) {
 
                     // Use newWidth and newHeigh as defined width/height,
                     // image should fit the area.
@@ -1639,7 +2149,7 @@ class CImage
             $this->extension = $saveAs;
         }
 
-        $this->log("Prepare to save image using as: " . $this->extension);
+        $this->log("Prepare to save image as: " . $this->extension);
 
         return $this;
     }
@@ -1743,13 +2253,16 @@ class CImage
     /**
      * Generate filename to save file in cache.
      *
-     * @param string $base as basepath for storing file.
+     * @param string  $base      as optional basepath for storing file.
+     * @param boolean $useSubdir use or skip the subdir part when creating the
+     *                           filename.
+     * @param string  $prefix    to add as part of filename
      *
      * @return $this
      */
-    public function generateFilename($base)
+    public function generateFilename($base = null, $useSubdir = true, $prefix = null)
     {
-        $parts        = pathinfo($this->pathToImage);
+        $filename     = basename($this->pathToImage);
         $cropToFit    = $this->cropToFit    ? '_cf'                      : null;
         $fillToFit    = $this->fillToFit    ? '_ff'                      : null;
         $crop_x       = $this->crop_x       ? "_x{$this->crop_x}"        : null;
@@ -1761,8 +2274,16 @@ class CImage
         $rotateBefore = $this->rotateBefore ? "_rb{$this->rotateBefore}" : null;
         $rotateAfter  = $this->rotateAfter  ? "_ra{$this->rotateAfter}"  : null;
 
-        $width  = $this->newWidth;
-        $height = $this->newHeight;
+        $saveAs = $this->normalizeFileExtension();
+        $saveAs = $saveAs ? "_$saveAs" : null;
+
+        $copyStrat = null;
+        if ($this->copyStrategy === self::RESIZE) {
+            $copyStrat = "_rs";
+        }
+
+        $width  = $this->newWidth  ? '_' . $this->newWidth  : null;
+        $height = $this->newHeight ? '_' . $this->newHeight : null;
 
         $offset = isset($this->offset)
             ? '_o' . $this->offset['top'] . '-' . $this->offset['right'] . '-' . $this->offset['bottom'] . '-' . $this->offset['left']
@@ -1778,7 +2299,7 @@ class CImage
                 if (is_array($filter)) {
                     $filters .= "_f{$filter['id']}";
                     for ($i=1; $i<=$filter['argc']; $i++) {
-                        $filters .= ":".$filter["arg{$i}"];
+                        $filters .= "-".$filter["arg{$i}"];
                     }
                 }
             }
@@ -1791,17 +2312,9 @@ class CImage
 
         $autoRotate = $this->autoRotate ? 'ar' : null;
 
-        $this->extension = isset($this->extension)
-            ? $this->extension
-            : $parts['extension'];
-
-        $optimize = null;
-        if ($this->extension == 'jpeg' || $this->extension == 'jpg') {
-            $optimize = $this->jpegOptimize ? 'o' : null;
-        } elseif ($this->extension == 'png') {
-            $optimize .= $this->pngFilter  ? 'f' : null;
-            $optimize .= $this->pngDeflate ? 'd' : null;
-        }
+        $optimize  = $this->jpegOptimize ? 'o' : null;
+        $optimize .= $this->pngFilter    ? 'f' : null;
+        $optimize .= $this->pngDeflate   ? 'd' : null;
 
         $convolve = null;
         if ($this->convolve) {
@@ -1813,14 +2326,20 @@ class CImage
             $upscale = '_nu';
         }
 
-        $subdir = str_replace('/', '-', dirname($this->imageSrc));
-        $subdir = ($subdir == '.') ? '_.' : $subdir;
-        $file = $subdir . '_' . $parts['filename'] . '_' . $width . '_'
-            . $height . $offset . $crop . $cropToFit . $fillToFit
+        $subdir = null;
+        if ($useSubdir === true) {
+            $subdir = str_replace('/', '-', dirname($this->imageSrc));
+            $subdir = ($subdir == '.') ? '_.' : $subdir;
+            $subdir .= '_';
+        }
+
+        $file = $prefix . $subdir . $filename . $width . $height
+            . $offset . $crop . $cropToFit . $fillToFit
             . $crop_x . $crop_y . $upscale
-            . $quality . $filters . $sharpen . $emboss . $blur . $palette . $optimize
-            . $scale . $rotateBefore . $rotateAfter . $autoRotate . $bgColor . $convolve
-            . '.' . $this->extension;
+            . $quality . $filters . $sharpen . $emboss . $blur . $palette
+            . $optimize . $compress
+            . $scale . $rotateBefore . $rotateAfter . $autoRotate . $bgColor
+            . $convolve . $copyStrat . $saveAs;
 
         return $this->setTarget($file, $base);
     }
@@ -1863,38 +2382,8 @@ class CImage
 
 
     /**
-     * Error message when failing to load somehow corrupt image.
-     *
-     * @return void
-     *
-     */
-    public function failedToLoad()
-    {
-        header("HTTP/1.0 404 Not Found");
-        echo("CImage.php says 404: Fatal error when opening image.<br>");
-
-        switch ($this->fileExtension) {
-            case 'jpg':
-            case 'jpeg':
-                $this->image = imagecreatefromjpeg($this->pathToImage);
-                break;
-
-            case 'gif':
-                $this->image = imagecreatefromgif($this->pathToImage);
-                break;
-
-            case 'png':
-                $this->image = imagecreatefrompng($this->pathToImage);
-                break;
-        }
-
-        exit();
-    }
-
-
-
-    /**
-     * Load image from disk.
+     * Load image from disk. Try to load image without verbose error message,
+     * if fail, load again and display error messages.
      *
      * @param string $src of image.
      * @param string $dir as base directory where images are.
@@ -1908,46 +2397,34 @@ class CImage
             $this->setSource($src, $dir);
         }
 
-        $this->log("Opening file as {$this->fileExtension}.");
+        $this->loadImageDetails($this->pathToImage);
 
-        switch ($this->fileExtension) {
-            case 'jpg':
-            case 'jpeg':
-                $this->image = @imagecreatefromjpeg($this->pathToImage);
-                $this->image or $this->failedToLoad();
-                break;
-
-            case 'gif':
-                $this->image = @imagecreatefromgif($this->pathToImage);
-                $this->image or $this->failedToLoad();
-                break;
-
-            case 'png':
-                $this->image = @imagecreatefrompng($this->pathToImage);
-                $this->image or $this->failedToLoad();
-
-                $type = $this->getPngType();
-                $hasFewColors = imagecolorstotal($this->image);
-
-                if ($type == self::PNG_RGB_PALETTE || ($hasFewColors > 0 && $hasFewColors <= 256)) {
-                    if ($this->verbose) {
-                        $this->log("Handle this image as a palette image.");
-                    }
-                    $this->palette = true;
-                }
-                break;
-
-            default:
-                $this->image = false;
-                throw new Exception('No support for this file extension.');
+        $this->image = imagecreatefromstring(file_get_contents($this->pathToImage));
+        if ($this->image === false) {
+            throw new Exception("Could not load image.");
         }
 
+        /* Removed v0.7.7
+        if (image_type_to_mime_type($this->fileType) == 'image/png') {
+            $type = $this->getPngType();
+            $hasFewColors = imagecolorstotal($this->image);
+
+            if ($type == self::PNG_RGB_PALETTE || ($hasFewColors > 0 && $hasFewColors <= 256)) {
+                if ($this->verbose) {
+                    $this->log("Handle this image as a palette image.");
+                }
+                $this->palette = true;
+            }
+        }
+        */
+
         if ($this->verbose) {
-            $this->log("imageistruecolor() : " . (imageistruecolor($this->image) ? 'true' : 'false'));
-            $this->log("imagecolorstotal() : " . imagecolorstotal($this->image));
-            $this->log("Number of colors in image = " . $this->colorsTotal($this->image));
+            $this->log("### Image successfully loaded from file.");
+            $this->log(" imageistruecolor() : " . (imageistruecolor($this->image) ? 'true' : 'false'));
+            $this->log(" imagecolorstotal() : " . imagecolorstotal($this->image));
+            $this->log(" Number of colors in image = " . $this->colorsTotal($this->image));
             $index = imagecolortransparent($this->image);
-            $this->log("Detected transparent color = " . ($index > 0 ? implode(", ", imagecolorsforindex($this->image, $index)) : "NONE") . " at index = $index");
+            $this->log(" Detected transparent color = " . ($index >= 0 ? implode(", ", imagecolorsforindex($this->image, $index)) : "NONE") . " at index = $index");
         }
 
         return $this;
@@ -1958,41 +2435,77 @@ class CImage
     /**
      * Get the type of PNG image.
      *
+     * @param string $filename to use instead of default.
+     *
      * @return int as the type of the png-image
      *
      */
-    private function getPngType()
+    public function getPngType($filename = null)
     {
-        $pngType = ord(file_get_contents($this->pathToImage, false, null, 25, 1));
+        $filename = $filename ? $filename : $this->pathToImage;
 
-        switch ($pngType) {
+        $pngType = ord(file_get_contents($filename, false, null, 25, 1));
 
-            case self::PNG_GREYSCALE:
-                $this->log("PNG is type 0, Greyscale.");
-                break;
-
-            case self::PNG_RGB:
-                $this->log("PNG is type 2, RGB");
-                break;
-
-            case self::PNG_RGB_PALETTE:
-                $this->log("PNG is type 3, RGB with palette");
-                break;
-
-            case self::PNG_GREYSCALE_ALPHA:
-                $this->Log("PNG is type 4, Greyscale with alpha channel");
-                break;
-
-            case self::PNG_RGB_ALPHA:
-                $this->Log("PNG is type 6, RGB with alpha channel (PNG 32-bit)");
-                break;
-
-            default:
-                $this->Log("PNG is UNKNOWN type, is it really a PNG image?");
+        if ($this->verbose) {
+            $this->log("Checking png type of: " . $filename);
+            $this->log($this->getPngTypeAsString($pngType));
         }
 
         return $pngType;
     }
+
+
+
+    /**
+     * Get the type of PNG image as a verbose string.
+     *
+     * @param integer $type     to use, default is to check the type.
+     * @param string  $filename to use instead of default.
+     *
+     * @return int as the type of the png-image
+     *
+     */
+    private function getPngTypeAsString($pngType = null, $filename = null)
+    {
+        if ($filename || !$pngType) {
+            $pngType = $this->getPngType($filename);
+        }
+
+        $index = imagecolortransparent($this->image);
+        $transparent = null;
+        if ($index != -1) {
+            $transparent = " (transparent)";
+        }
+
+        switch ($pngType) {
+
+            case self::PNG_GREYSCALE:
+                $text = "PNG is type 0, Greyscale$transparent";
+                break;
+
+            case self::PNG_RGB:
+                $text = "PNG is type 2, RGB$transparent";
+                break;
+
+            case self::PNG_RGB_PALETTE:
+                $text = "PNG is type 3, RGB with palette$transparent";
+                break;
+
+            case self::PNG_GREYSCALE_ALPHA:
+                $text = "PNG is type 4, Greyscale with alpha channel";
+                break;
+
+            case self::PNG_RGB_ALPHA:
+                $text = "PNG is type 6, RGB with alpha channel (PNG 32-bit)";
+                break;
+
+            default:
+                $text = "PNG is UNKNOWN type, is it really a PNG image?";
+        }
+
+        return $text;
+    }
+
 
 
 
@@ -2031,7 +2544,7 @@ class CImage
      */
     public function preResize()
     {
-        $this->log("Pre-process before resizing");
+        $this->log("### Pre-process before resizing");
 
         // Rotate image
         if ($this->rotateBefore) {
@@ -2065,6 +2578,39 @@ class CImage
 
 
     /**
+     * Resize or resample the image while resizing.
+     *
+     * @param int $strategy as CImage::RESIZE or CImage::RESAMPLE
+     *
+     * @return $this
+     */
+     public function setCopyResizeStrategy($strategy)
+     {
+         $this->copyStrategy = $strategy;
+         return $this;
+     }
+
+
+
+    /**
+     * Resize and or crop the image.
+     *
+     * @return void
+     */
+    public function imageCopyResampled($dst_image, $src_image, $dst_x, $dst_y, $src_x, $src_y, $dst_w, $dst_h, $src_w, $src_h)
+    {
+        if($this->copyStrategy == self::RESIZE) {
+            $this->log("Copy by resize");
+            imagecopyresized($dst_image, $src_image, $dst_x, $dst_y, $src_x, $src_y, $dst_w, $dst_h, $src_w, $src_h);
+        } else {
+            $this->log("Copy by resample");
+            imagecopyresampled($dst_image, $src_image, $dst_x, $dst_y, $src_x, $src_y, $dst_w, $dst_h, $src_w, $src_h);
+        }
+    }
+
+
+
+    /**
      * Resize and or crop the image.
      *
      * @return $this
@@ -2072,7 +2618,7 @@ class CImage
     public function resize()
     {
 
-        $this->log("Starting to Resize()");
+        $this->log("### Starting to Resize()");
         $this->log("Upscale = '$this->upscale'");
 
         // Only use a specified area of the image, $this->offset is defining the area to use
@@ -2132,7 +2678,7 @@ class CImage
                 $cropY = round(($this->cropHeight/2) - ($this->newHeight/2));
                 $imgPreCrop   = $this->CreateImageKeepTransparency($this->cropWidth, $this->cropHeight);
                 $imageResized = $this->CreateImageKeepTransparency($this->newWidth, $this->newHeight);
-                imagecopyresampled($imgPreCrop, $this->image, 0, 0, 0, 0, $this->cropWidth, $this->cropHeight, $this->width, $this->height);
+                $this->imageCopyResampled($imgPreCrop, $this->image, 0, 0, 0, 0, $this->cropWidth, $this->cropHeight, $this->width, $this->height);
                 imagecopy($imageResized, $imgPreCrop, 0, 0, $cropX, $cropY, $this->newWidth, $this->newHeight);
             }
 
@@ -2140,7 +2686,7 @@ class CImage
             $this->width = $this->newWidth;
             $this->height = $this->newHeight;
 
-        } else if ($this->fillToFit) {
+        } elseif ($this->fillToFit) {
 
             // Resize by fill to fit
             $this->log("Resizing using strategy - Fill to fit");
@@ -2171,7 +2717,7 @@ class CImage
             } else {
                 $imgPreFill   = $this->CreateImageKeepTransparency($this->fillWidth, $this->fillHeight);
                 $imageResized = $this->CreateImageKeepTransparency($this->newWidth, $this->newHeight);
-                imagecopyresampled($imgPreFill, $this->image, 0, 0, 0, 0, $this->fillWidth, $this->fillHeight, $this->width, $this->height);
+                $this->imageCopyResampled($imgPreFill, $this->image, 0, 0, 0, 0, $this->fillWidth, $this->fillHeight, $this->width, $this->height);
                 imagecopy($imageResized, $imgPreFill, $posX, $posY, 0, 0, $this->fillWidth, $this->fillHeight);
             }
 
@@ -2179,7 +2725,7 @@ class CImage
             $this->width = $this->newWidth;
             $this->height = $this->newHeight;
 
-        } else if (!($this->newWidth == $this->width && $this->newHeight == $this->height)) {
+        } elseif (!($this->newWidth == $this->width && $this->newHeight == $this->height)) {
 
             // Resize it
             $this->log("Resizing, new height and/or width");
@@ -2200,10 +2746,10 @@ class CImage
                     if ($this->newWidth > $this->width && $this->newHeight > $this->height) {
                         $posX = round(($this->newWidth - $this->width) / 2);
                         $posY = round(($this->newHeight - $this->height) / 2);
-                    } else if ($this->newWidth > $this->width) {
+                    } elseif ($this->newWidth > $this->width) {
                         $posX = round(($this->newWidth - $this->width) / 2);
                         $cropY = round(($this->height - $this->newHeight) / 2);
-                    } else if ($this->newHeight > $this->height) {
+                    } elseif ($this->newHeight > $this->height) {
                         $posY = round(($this->newHeight - $this->height) / 2);
                         $cropX = round(($this->width - $this->newWidth) / 2);
                     }
@@ -2217,7 +2763,7 @@ class CImage
                 }
             } else {
                 $imageResized = $this->CreateImageKeepTransparency($this->newWidth, $this->newHeight);
-                imagecopyresampled($imageResized, $this->image, 0, 0, 0, 0, $this->newWidth, $this->newHeight, $this->width, $this->height);
+                $this->imageCopyResampled($imageResized, $this->image, 0, 0, 0, 0, $this->newWidth, $this->newHeight, $this->width, $this->height);
                 $this->image = $imageResized;
                 $this->width = $this->newWidth;
                 $this->height = $this->newHeight;
@@ -2236,7 +2782,7 @@ class CImage
      */
     public function postResize()
     {
-        $this->log("Post-process after resizing");
+        $this->log("### Post-process after resizing");
 
         // Rotate image
         if ($this->rotateAfter) {
@@ -2342,7 +2888,7 @@ class CImage
      */
     public function rotateExif()
     {
-        if (!in_array($this->fileExtension, array('jpg', 'jpeg'))) {
+        if (!in_array($this->fileType, array(IMAGETYPE_JPEG, IMAGETYPE_TIFF_II, IMAGETYPE_TIFF_MM))) {
             $this->log("Autorotate ignored, EXIF not supported by this filetype.");
             return $this;
         }
@@ -2632,7 +3178,10 @@ class CImage
         imagealphablending($img, false);
         imagesavealpha($img, true);
 
-        $index = imagecolortransparent($this->image);
+        $index = $this->image
+            ? imagecolortransparent($this->image)
+            : -1;
+
         if ($index != -1) {
 
             imagealphablending($img, true);
@@ -2687,23 +3236,48 @@ class CImage
 
 
     /**
+     * Find out the type (file extension) for the image to be saved.
+     *
+     * @return string as image extension.
+     */
+    protected function getTargetImageExtension()
+    {
+        // switch on mimetype
+        if (isset($this->extension)) {
+            return strtolower($this->extension);
+        } else {
+            return substr(image_type_to_extension($this->fileType), 1);
+        }
+    }
+
+
+
+    /**
      * Save image.
      *
-     * @param string $src  as target filename.
-     * @param string $base as base directory where to store images.
+     * @param string  $src       as target filename.
+     * @param string  $base      as base directory where to store images.
+     * @param boolean $overwrite or not, default to always overwrite file.
      *
      * @return $this or false if no folder is set.
      */
-    public function save($src = null, $base = null)
+    public function save($src = null, $base = null, $overwrite = true)
     {
         if (isset($src)) {
             $this->setTarget($src, $base);
         }
 
+        if ($overwrite === false && is_file($this->cacheFileName)) {
+            $this->Log("Not overwriting file since its already exists and \$overwrite if false.");
+            return;
+        }
+
         is_writable($this->saveFolder)
             or $this->raiseError('Target directory is not writable.');
 
-        switch(strtolower($this->extension)) {
+        $type = $this->getTargetImageExtension();
+        $this->Log("Saving image as " . $type);
+        switch($type) {
 
             case 'jpeg':
             case 'jpg':
@@ -2730,6 +3304,7 @@ class CImage
                 break;
 
             case 'png':
+            default:
                 $this->Log("Saving image as PNG to cache using compression = {$this->compress}.");
 
                 // Turn off alpha blending and set alpha flag
@@ -2763,23 +3338,88 @@ class CImage
                     $this->Log($res);
                 }
                 break;
-
-            default:
-                $this->RaiseError('No support for this file extension.');
-                break;
         }
 
         if ($this->verbose) {
             clearstatcache();
-            $this->log("Cached image filesize: " . filesize($this->cacheFileName) . " bytes.");
-            $this->log("imageistruecolor() : " . (imageistruecolor($this->image) ? 'true' : 'false'));
-            $this->log("imagecolorstotal() : " . imagecolorstotal($this->image));
-            $this->log("Number of colors in image = " . $this->ColorsTotal($this->image));
+            $this->log("Saved image to cache.");
+            $this->log(" Cached image filesize: " . filesize($this->cacheFileName) . " bytes.");
+            $this->log(" imageistruecolor() : " . (imageistruecolor($this->image) ? 'true' : 'false'));
+            $this->log(" imagecolorstotal() : " . imagecolorstotal($this->image));
+            $this->log(" Number of colors in image = " . $this->ColorsTotal($this->image));
             $index = imagecolortransparent($this->image);
-            $this->log("Detected transparent color = " . ($index > 0 ? implode(", ", imagecolorsforindex($this->image, $index)) : "NONE") . " at index = $index");
+            $this->log(" Detected transparent color = " . ($index > 0 ? implode(", ", imagecolorsforindex($this->image, $index)) : "NONE") . " at index = $index");
         }
 
         return $this;
+    }
+
+
+
+    /**
+     * Convert image from one colorpsace/color profile to sRGB without
+     * color profile.
+     *
+     * @param string  $src      of image.
+     * @param string  $dir      as base directory where images are.
+     * @param string  $cache    as base directory where to store images.
+     * @param string  $iccFile  filename of colorprofile.
+     * @param boolean $useCache or not, default to always use cache.
+     *
+     * @return string | boolean false if no conversion else the converted
+     *                          filename.
+     */
+    public function convert2sRGBColorSpace($src, $dir, $cache, $iccFile, $useCache = true)
+    {
+        if ($this->verbose) {
+            $this->log("# Converting image to sRGB colorspace.");
+        }
+
+        if (!class_exists("Imagick")) {
+            $this->log(" Ignoring since Imagemagick is not installed.");
+            return false;
+        }
+
+        // Prepare
+        $this->setSaveFolder($cache)
+             ->setSource($src, $dir)
+             ->generateFilename(null, false, 'srgb_');
+
+        // Check if the cached version is accurate.
+        if ($useCache && is_readable($this->cacheFileName)) {
+            $fileTime  = filemtime($this->pathToImage);
+            $cacheTime = filemtime($this->cacheFileName);
+
+            if ($fileTime <= $cacheTime) {
+                $this->log(" Using cached version: " . $this->cacheFileName);
+                return $this->cacheFileName;
+            }
+        }
+
+        // Only covert if cachedir is writable
+        if (is_writable($this->saveFolder)) {
+            // Load file and check if conversion is needed
+            $image      = new Imagick($this->pathToImage);
+            $colorspace = $image->getImageColorspace();
+            $this->log(" Current colorspace: " . $colorspace);
+
+            $profiles      = $image->getImageProfiles('*', false);
+            $hasICCProfile = (array_search('icc', $profiles) !== false);
+            $this->log(" Has ICC color profile: " . ($hasICCProfile ? "YES" : "NO"));
+
+            if ($colorspace != Imagick::COLORSPACE_SRGB || $hasICCProfile) {
+                $this->log(" Converting to sRGB.");
+
+                $sRGBicc = file_get_contents($iccFile);
+                $image->profileImage('icc', $sRGBicc);
+
+                $image->transformImageColorspace(Imagick::COLORSPACE_SRGB);
+                $image->writeImage($this->cacheFileName);
+                return $this->cacheFileName;
+            }
+        }
+
+        return false;
     }
 
 
@@ -2799,8 +3439,6 @@ class CImage
             return $this;
         }
 
-        $alias = $alias . "." . $this->extension;
-
         if (is_readable($alias)) {
             unlink($alias);
         }
@@ -2819,10 +3457,27 @@ class CImage
 
 
     /**
+     * Add HTTP header for putputting together with image.
+     *
+     * @param string $type  the header type such as "Cache-Control"
+     * @param string $value the value to use
+     *
+     * @return void
+     */
+    public function addHTTPHeader($type, $value)
+    {
+        $this->HTTPHeader[$type] = $value;
+    }
+
+
+
+    /**
      * Output image to browser using caching.
      *
-     * @param string $file   to read and output, default is to use $this->cacheFileName
-     * @param string $format set to json to output file as json object with details
+     * @param string $file   to read and output, default is to
+     *                       use $this->cacheFileName
+     * @param string $format set to json to output file as json
+     *                       object with details
      *
      * @return void
      */
@@ -2842,6 +3497,10 @@ class CImage
             header('Content-type: application/json');
             echo $this->json($file);
             exit;
+        } elseif ($format == 'ascii') {
+            header('Content-type: text/plain');
+            echo $this->ascii($file);
+            exit;
         }
 
         $this->log("Outputting image: $file");
@@ -2853,6 +3512,10 @@ class CImage
 
         if (!$this->verbose) {
             header('Last-Modified: ' . $gmdate . " GMT");
+        }
+
+        foreach($this->HTTPHeader as $key => $val) {
+            header("$key: $val");
         }
 
         if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) == $lastModified) {
@@ -2867,18 +3530,25 @@ class CImage
 
         } else {
 
-            if ($this->verbose) {
-                $this->log("Last modified: " . $gmdate . " GMT");
-                $this->verboseOutput();
-                exit;
-            }
-
             // Get details on image
             $info = getimagesize($file);
             !empty($info) or $this->raiseError("The file doesn't seem to be an image.");
             $mime = $info['mime'];
+            $size = filesize($file);
 
-            header('Content-type: ' . $mime);
+            if ($this->verbose) {
+                $this->log("Last-Modified: " . $gmdate . " GMT");
+                $this->log("Content-type: " . $mime);
+                $this->log("Content-length: " . $size);
+                $this->verboseOutput();
+
+                if (is_null($this->verboseFileName)) {
+                    exit;
+                }
+            }
+
+            header("Content-type: $mime");
+            header("Content-length: $size");
             readfile($file);
         }
 
@@ -2902,24 +3572,35 @@ class CImage
 
         clearstatcache();
 
-        $details['src']        = $this->imageSrc;
-        $lastModified          = filemtime($this->pathToImage);
+        $details['src']       = $this->imageSrc;
+        $lastModified         = filemtime($this->pathToImage);
         $details['srcGmdate'] = gmdate("D, d M Y H:i:s", $lastModified);
 
-        $details['cache']        = basename($this->cacheFileName);
-        $lastModified            = filemtime($this->cacheFileName);
+        $details['cache']       = basename($this->cacheFileName);
+        $lastModified           = filemtime($this->cacheFileName);
         $details['cacheGmdate'] = gmdate("D, d M Y H:i:s", $lastModified);
 
-        $this->loadImageDetails($file);
-
-        $details['filename'] = basename($file);
-        $details['width']  = $this->width;
-        $details['height'] = $this->height;
-        $details['aspectRatio'] = round($this->width / $this->height, 3);
-        $details['size'] = filesize($file);
-
         $this->load($file);
+
+        $details['filename']    = basename($file);
+        $details['mimeType']    = image_type_to_mime_type($this->fileType);
+        $details['width']       = $this->width;
+        $details['height']      = $this->height;
+        $details['aspectRatio'] = round($this->width / $this->height, 3);
+        $details['size']        = filesize($file);
         $details['colors'] = $this->colorsTotal($this->image);
+        $details['includedFiles'] = count(get_included_files());
+        $details['memoryPeek'] = round(memory_get_peak_usage()/1024/1024, 3) . " MB" ;
+        $details['memoryCurrent'] = round(memory_get_usage()/1024/1024, 3) . " MB";
+        $details['memoryLimit'] = ini_get('memory_limit');
+
+        if (isset($_SERVER['REQUEST_TIME_FLOAT'])) {
+            $details['loadTime'] = (string) round((microtime(true) - $_SERVER['REQUEST_TIME_FLOAT']), 3) . "s";
+        }
+
+        if ($details['mimeType'] == 'image/png') {
+            $details['pngType'] = $this->getPngTypeAsString(null, $file);
+        }
 
         $options = null;
         if (defined("JSON_PRETTY_PRINT") && defined("JSON_UNESCAPED_SLASHES")) {
@@ -2927,6 +3608,38 @@ class CImage
         }
 
         return json_encode($details, $options);
+    }
+
+
+
+    /**
+     * Set options for creating ascii version of image.
+     *
+     * @param array $options empty to use default or set options to change.
+     *
+     * @return void.
+     */
+    public function setAsciiOptions($options = array())
+    {
+        $this->asciiOptions = $options;
+    }
+
+
+
+    /**
+     * Create an ASCII version from the image details.
+     *
+     * @param string $file the file to output.
+     *
+     * @return string ASCII representation of the image.
+     */
+    public function ascii($file = null)
+    {
+        $file = $file ? $file : $this->cacheFileName;
+
+        $asciiArt = new CAsciiArt();
+        $asciiArt->setOptions($this->asciiOptions);
+        return $asciiArt->createFromFile($file);
     }
 
 
@@ -2945,6 +3658,21 @@ class CImage
         }
 
         return $this;
+    }
+
+
+
+    /**
+     * Do verbose output to a file.
+     *
+     * @param string $fileName where to write the verbose output.
+     *
+     * @return void
+     */
+    public function setVerboseToFile($fileName)
+    {
+        $this->log("Setting verbose output to file.");
+        $this->verboseFileName = $fileName;
     }
 
 
@@ -2974,15 +3702,17 @@ class CImage
             }
         }
 
-        echo <<<EOD
-<!doctype html>
-<html lang=en>
-<meta charset=utf-8>
-<title>CImage verbose output</title>
-<style>body{background-color: #ddd}</style>
+        if (!is_null($this->verboseFileName)) {
+            file_put_contents(
+                $this->verboseFileName,
+                str_replace("<br/>", "\n", $log)
+            );
+        } else {
+            echo <<<EOD
 <h1>CImage Verbose Output</h1>
 <pre>{$log}</pre>
 EOD;
+        }
     }
 
 
@@ -3004,6 +3734,115 @@ EOD;
 
 
 /**
+ * Deal with the cache directory and cached items.
+ *
+ */
+class CCache
+{
+    /**
+     * Path to the cache directory.
+     */
+    private $path;
+
+
+
+    /**
+     * Set the path to the cache dir which must exist.
+     *
+     * @param string path to the cache dir.
+     *
+     * @throws Exception when $path is not a directory.
+     *
+     * @return $this
+     */
+    public function setDir($path)
+    {
+        if (!is_dir($path)) {
+            throw new Exception("Cachedir is not a directory.");
+        }
+
+        $this->path = $path;
+
+        return $this;
+    }
+
+
+
+    /**
+     * Get the path to the cache subdir and try to create it if its not there.
+     *
+     * @param string $subdir name of subdir
+     * @param array  $create default is to try to create the subdir
+     *
+     * @return string | boolean as real path to the subdir or
+     *                          false if it does not exists
+     */
+    public function getPathToSubdir($subdir, $create = true)
+    {
+        $path = realpath($this->path . "/" . $subdir);
+
+        if (is_dir($path)) {
+            return $path;
+        }
+
+        if ($create && is_writable($this->path)) {
+            $path = $this->path . "/" . $subdir;
+
+            if (mkdir($path)) {
+                return realpath($path);
+            }
+        }
+
+        return false;
+    }
+
+
+
+    /**
+     * Get status of the cache subdir.
+     *
+     * @param string $subdir name of subdir
+     *
+     * @return string with status
+     */
+    public function getStatusOfSubdir($subdir)
+    {
+        $path = realpath($this->path . "/" . $subdir);
+
+        $exists = is_dir($path);
+        $res  = $exists ? "exists" : "does not exist";
+        
+        if ($exists) {
+            $res .= is_writable($path) ? ", writable" : ", not writable";
+        }
+
+        return $res;
+    }
+
+
+
+    /**
+     * Remove the cache subdir.
+     *
+     * @param string $subdir name of subdir
+     *
+     * @return null | boolean true if success else false, null if no operation
+     */
+    public function removeSubdir($subdir)
+    {
+        $path = realpath($this->path . "/" . $subdir);
+
+        if (is_dir($path)) {
+            return rmdir($path);
+        }
+
+        return null;
+    }
+}
+
+
+
+/**
  * Resize and crop images on the fly, store generated images in a cache.
  *
  * @author  Mikael Roos mos@dbwebb.se
@@ -3012,29 +3851,48 @@ EOD;
  *
  */
 
-$version = "v0.7.0 (2015-02-10)";
+$version = "v0.7.9* (2015-12-07)";
+
+// For CRemoteImage
+define("CIMAGE_USER_AGENT", "CImage/$version");
 
 
 
 /**
- * Default configuration options, can be overridden in own config-file.
+ * Display error message.
  *
  * @param string $msg to display.
+ * @param int $type of HTTP error to display.
  *
  * @return void
  */
-function errorPage($msg)
+function errorPage($msg, $type = 500)
 {
     global $mode;
 
-    header("HTTP/1.0 500 Internal Server Error");
-
-    if ($mode == 'development') {
-        die("[img.php] $msg");
-    } else {
-        error_log("[img.php] $msg");
-        die("HTTP/1.0 500 Internal Server Error");
+    switch ($type) {
+        case 403:
+            $header = "403 Forbidden";
+            break;
+        case 404:
+            $header = "404 Not Found";
+            break;
+        default:
+            $header = "500 Internal Server Error";
     }
+
+    if ($mode == "strict") {
+        $header = "404 Not Found";
+    }
+
+    header("HTTP/1.0 $header");
+
+    if ($mode == "development") {
+        die("[img.php] $msg");
+    }
+
+    error_log("[img.php] $msg");
+    die("HTTP/1.0 $header");
 }
 
 
@@ -3043,7 +3901,14 @@ function errorPage($msg)
  * Custom exception handler.
  */
 set_exception_handler(function ($exception) {
-    errorPage("<p><b>img.php: Uncaught exception:</b> <p>" . $exception->getMessage() . "</p><pre>" . $exception->getTraceAsString(), "</pre>");
+    errorPage(
+        "<p><b>img.php: Uncaught exception:</b> <p>"
+        . $exception->getMessage()
+        . "</p><pre>"
+        . $exception->getTraceAsString()
+        . "</pre>",
+        500
+    );
 });
 
 
@@ -3115,10 +3980,10 @@ function getConfig($key, $default)
  */
 function verbose($msg = null)
 {
-    global $verbose;
+    global $verbose, $verboseFile;
     static $log = array();
 
-    if (!$verbose) {
+    if (!($verbose || $verboseFile)) {
         return;
     }
 
@@ -3139,7 +4004,7 @@ $configFile = __DIR__.'/'.basename(__FILE__, '.php').'_config.php';
 
 if (is_file($configFile)) {
     $config = require $configFile;
-} else if (!isset($config)) {
+} elseif (!isset($config)) {
     $config = array();
 }
 
@@ -3147,9 +4012,18 @@ if (is_file($configFile)) {
 
 /**
 * verbose, v - do a verbose dump of what happens
+* vf - do verbose dump to file
 */
 $verbose = getDefined(array('verbose', 'v'), true, false);
+$verboseFile = getDefined('vf', true, false);
 verbose("img.php version = $version");
+
+
+
+/**
+* status - do a verbose dump of the configuration
+*/
+$status = getDefined('status', true, false);
 
 
 
@@ -3160,11 +4034,11 @@ verbose("img.php version = $version");
 $mode = getConfig('mode', 'production');
 
 // Settings for any mode
-@set_time_limit(20);
+set_time_limit(20);
 ini_set('gd.jpeg_ignore_warning', 1);
 
 if (!extension_loaded('gd')) {
-    errorPage("Extension gd is nod loaded.");
+    errorPage("Extension gd is not loaded.", 500);
 }
 
 // Specific settings for each mode
@@ -3174,22 +4048,33 @@ if ($mode == 'strict') {
     ini_set('display_errors', 0);
     ini_set('log_errors', 1);
     $verbose = false;
+    $status = false;
+    $verboseFile = false;
 
-} else if ($mode == 'production') {
+} elseif ($mode == 'production') {
 
     error_reporting(-1);
     ini_set('display_errors', 0);
     ini_set('log_errors', 1);
     $verbose = false;
+    $status = false;
+    $verboseFile = false;
 
-} else if ($mode == 'development') {
+} elseif ($mode == 'development') {
+
+    error_reporting(-1);
+    ini_set('display_errors', 1);
+    ini_set('log_errors', 0);
+    $verboseFile = false;
+
+} elseif ($mode == 'test') {
 
     error_reporting(-1);
     ini_set('display_errors', 1);
     ini_set('log_errors', 0);
 
 } else {
-    errorPage("Unknown mode: $mode");
+    errorPage("Unknown mode: $mode", 500);
 }
 
 verbose("mode = $mode");
@@ -3204,7 +4089,7 @@ $defaultTimezone = getConfig('default_timezone', null);
 
 if ($defaultTimezone) {
     date_default_timezone_set($defaultTimezone);
-} else if (!ini_get('default_timezone')) {
+} elseif (!ini_get('default_timezone')) {
     date_default_timezone_set('UTC');
 }
 
@@ -3216,20 +4101,29 @@ if ($defaultTimezone) {
  */
 $pwdConfig   = getConfig('password', false);
 $pwdAlways   = getConfig('password_always', false);
+$pwdType     = getConfig('password_type', 'text');
 $pwd         = get(array('password', 'pwd'), null);
 
 // Check if passwords match, if configured to use passwords
 $passwordMatch = null;
-if ($pwdAlways) {
-
-    $passwordMatch = ($pwdConfig === $pwd);
-    if (!$passwordMatch) {
-        errorPage("Password required and does not match or exists.");
+if ($pwd) {
+    switch ($pwdType) {
+        case 'md5':
+            $passwordMatch = ($pwdConfig === md5($pwd));
+            break;
+        case 'hash':
+            $passwordMatch = password_verify($pwd, $pwdConfig);
+            break;
+        case 'text':
+            $passwordMatch = ($pwdConfig === $pwd);
+            break;
+        default:
+            $passwordMatch = false;
     }
+}
 
-} elseif ($pwdConfig && $pwd) {
-
-    $passwordMatch = ($pwdConfig === $pwd);
+if ($pwdAlways && $passwordMatch !== true) {
+    errorPage("Password required and does not match or exists.", 403);
 }
 
 verbose("password match = $passwordMatch");
@@ -3251,27 +4145,26 @@ $refererHost = parse_url($referer, PHP_URL_HOST);
 if (!$allowHotlinking) {
     if ($passwordMatch) {
         ; // Always allow when password match
-    } else if ($passwordMatch === false) {
-        errorPage("Hotlinking/leeching not allowed when password missmatch.");
-    } else if (!$referer) {
-        errorPage("Hotlinking/leeching not allowed and referer is missing.");
-    } else if (strcmp($serverName, $refererHost) == 0) {
+        verbose("Hotlinking since passwordmatch");
+    } elseif ($passwordMatch === false) {
+        errorPage("Hotlinking/leeching not allowed when password missmatch.", 403);
+    } elseif (!$referer) {
+        errorPage("Hotlinking/leeching not allowed and referer is missing.", 403);
+    } elseif (strcmp($serverName, $refererHost) == 0) {
         ; // Allow when serverName matches refererHost
-    } else if (!empty($hotlinkingWhitelist)) {
+        verbose("Hotlinking disallowed but serverName matches refererHost.");
+    } elseif (!empty($hotlinkingWhitelist)) {
+        $whitelist = new CWhitelist();
+        $allowedByWhitelist = $whitelist->check($refererHost, $hotlinkingWhitelist);
 
-        $allowedByWhitelist = false;
-        foreach ($hotlinkingWhitelist as $val) {
-            if (preg_match($val, $refererHost)) {
-                $allowedByWhitelist = true;
-            }
-        }
-
-        if (!$allowedByWhitelist) {
-            errorPage("Hotlinking/leeching not allowed by whitelist.");
+        if ($allowedByWhitelist) {
+            verbose("Hotlinking/leeching allowed by whitelist.");
+        } else {
+            errorPage("Hotlinking/leeching not allowed by whitelist. Referer: $referer.", 403);
         }
 
     } else {
-        errorPage("Hotlinking/leeching not allowed.");
+        errorPage("Hotlinking/leeching not allowed.", 403);
     }
 }
 
@@ -3289,7 +4182,7 @@ $cimageClass = getConfig('cimage_class', false);
 
 if ($autoloader) {
     require $autoloader;
-} else if ($cimageClass) {
+} elseif ($cimageClass) {
     require $cimageClass;
 }
 
@@ -3299,7 +4192,17 @@ if ($autoloader) {
  * Create the class for the image.
  */
 $img = new CImage();
-$img->setVerbose($verbose);
+$img->setVerbose($verbose || $verboseFile);
+
+
+
+/**
+ * Get the cachepath from config.
+ */
+$cachePath = getConfig('cache_path', __DIR__ . '/../cache/');
+$cache = new CCache();
+$cache->setDir($cachePath);
+
 
 
 
@@ -3311,8 +4214,13 @@ $img->setVerbose($verbose);
 $allowRemote = getConfig('remote_allow', false);
 
 if ($allowRemote && $passwordMatch !== false) {
+    $cacheRemote = $cache->getPathToSubdir("remote");
+    
     $pattern = getConfig('remote_pattern', null);
-    $img->setRemoteDownload($allowRemote, $pattern);
+    $img->setRemoteDownload($allowRemote, $cacheRemote, $pattern);
+
+    $whitelist = getConfig('remote_whitelist', null);
+    $img->setRemoteHostWhitelist($whitelist);
 }
 
 
@@ -3341,22 +4249,32 @@ if (isset($shortcut)
 /**
  * src - the source image file.
  */
-$srcImage = utf8_decode(get('src'))
-    or errorPage('Must set src-attribute.');
+$srcImage = urldecode(get('src'))
+    or errorPage('Must set src-attribute.', 404);
 
 // Check for valid/invalid characters
 $imagePath           = getConfig('image_path', __DIR__ . '/img/');
 $imagePathConstraint = getConfig('image_path_constraint', true);
-$validFilename       = getConfig('valid_filename', '#^[a-z0-9A-Z-/_\.:]+$#');
+$validFilename       = getConfig('valid_filename', '#^[a-z0-9A-Z-/_ \.:]+$#');
+
+// Dummy image feature
+$dummyEnabled  = getConfig('dummy_enabled', true);
+$dummyFilename = getConfig('dummy_filename', 'dummy');
+$dummyImage = false;
 
 preg_match($validFilename, $srcImage)
-    or errorPage('Filename contains invalid characters.');
+    or errorPage('Filename contains invalid characters.', 404);
 
-if ($allowRemote && $img->isRemoteSource($srcImage)) {
+if ($dummyEnabled && $srcImage === $dummyFilename) {
+
+    // Prepare to create a dummy image and use it as the source image.
+    $dummyImage = true;
+
+} elseif ($allowRemote && $img->isRemoteSource($srcImage)) {
 
     // If source is a remote file, ignore local file checks.
 
-} else if ($imagePathConstraint) {
+} elseif ($imagePathConstraint) {
 
     // Check that the image is a file below the directory 'image_path'.
     $pathToImage = realpath($imagePath . $srcImage);
@@ -3365,13 +4283,15 @@ if ($allowRemote && $img->isRemoteSource($srcImage)) {
     is_file($pathToImage)
         or errorPage(
             'Source image is not a valid file, check the filename and that a
-            matching file exists on the filesystem.'
+            matching file exists on the filesystem.',
+            404
         );
 
     substr_compare($imageDir, $pathToImage, 0, strlen($imageDir)) == 0
         or errorPage(
             'Security constraint: Source image is not below the directory "image_path"
-            as specified in the config file img_config.php.'
+            as specified in the config file img_config.php.',
+            404
         );
 }
 
@@ -3421,11 +4341,11 @@ if (isset($sizes[$newWidth])) {
 // Support width as % of original width
 if ($newWidth[strlen($newWidth)-1] == '%') {
     is_numeric(substr($newWidth, 0, -1))
-        or errorPage('Width % not numeric.');
+        or errorPage('Width % not numeric.', 404);
 } else {
     is_null($newWidth)
         or ($newWidth > 10 && $newWidth <= $maxWidth)
-        or errorPage('Width out of range.');
+        or errorPage('Width out of range.', 404);
 }
 
 verbose("new width = $newWidth");
@@ -3446,11 +4366,11 @@ if (isset($sizes[$newHeight])) {
 // height
 if ($newHeight[strlen($newHeight)-1] == '%') {
     is_numeric(substr($newHeight, 0, -1))
-        or errorPage('Height % out of range.');
+        or errorPage('Height % out of range.', 404);
 } else {
     is_null($newHeight)
         or ($newHeight > 10 && $newHeight <= $maxHeight)
-        or errorPage('Hight out of range.');
+        or errorPage('Height out of range.', 404);
 }
 
 verbose("new height = $newHeight");
@@ -3488,7 +4408,7 @@ if ($negateAspectRatio) {
 
 is_null($aspectRatio)
     or is_numeric($aspectRatio)
-    or errorPage('Aspect ratio out of range');
+    or errorPage('Aspect ratio out of range', 404);
 
 verbose("aspect ratio = $aspectRatio");
 
@@ -3521,6 +4441,19 @@ if ($backgroundColor) {
 $bgColor = get(array('bgColor', 'bg-color', 'bgc'), null);
 
 verbose("bgColor = $bgColor");
+
+
+
+/**
+ * Do or do not resample image when resizing.
+ */
+$resizeStrategy = getDefined(array('no-resample'), true, false);
+
+if ($resizeStrategy) {
+    $img->setCopyResizeStrategy($img::RESIZE);
+    verbose("Setting = Resize instead of resample");
+}
+
 
 
 
@@ -3575,6 +4508,12 @@ verbose("area = $area");
  * skip-original, so - skip the original image and always process a new image
  */
 $useOriginal = getDefined(array('skip-original', 'so'), false, true);
+$useOriginalDefault = getConfig('skip_original', false);
+
+if ($useOriginalDefault === true) {
+    verbose("use original is default ON");
+    $useOriginal = true;
+}
 
 verbose("use original = $useOriginal");
 
@@ -3593,10 +4532,15 @@ verbose("use cache = $useCache");
  * quality, q - set level of quality for jpeg images
  */
 $quality = get(array('quality', 'q'));
+$qualityDefault = getConfig('jpg_quality', null);
 
 is_null($quality)
     or ($quality > 0 and $quality <= 100)
-    or errorPage('Quality out of range');
+    or errorPage('Quality out of range', 404);
+
+if (is_null($quality) && !is_null($qualityDefault)) {
+    $quality = $qualityDefault;
+}
 
 verbose("quality = $quality");
 
@@ -3606,11 +4550,15 @@ verbose("quality = $quality");
  * compress, co - what strategy to use when compressing png images
  */
 $compress = get(array('compress', 'co'));
-
+$compressDefault = getConfig('png_compression', null);
 
 is_null($compress)
     or ($compress > 0 and $compress <= 9)
-    or errorPage('Compress out of range');
+    or errorPage('Compress out of range', 404);
+
+if (is_null($compress) && !is_null($compressDefault)) {
+    $compress = $compressDefault;
+}
 
 verbose("compress = $compress");
 
@@ -3632,7 +4580,7 @@ $scale = get(array('scale', 's'));
 
 is_null($scale)
     or ($scale >= 0 and $scale <= 400)
-    or errorPage('Scale out of range');
+    or errorPage('Scale out of range', 404);
 
 verbose("scale = $scale");
 
@@ -3681,7 +4629,7 @@ $rotateBefore = get(array('rotateBefore', 'rotate-before', 'rb'));
 
 is_null($rotateBefore)
     or ($rotateBefore >= -360 and $rotateBefore <= 360)
-    or errorPage('RotateBefore out of range');
+    or errorPage('RotateBefore out of range', 404);
 
 verbose("rotateBefore = $rotateBefore");
 
@@ -3694,7 +4642,7 @@ $rotateAfter = get(array('rotateAfter', 'rotate-after', 'ra', 'rotate', 'r'));
 
 is_null($rotateAfter)
     or ($rotateAfter >= -360 and $rotateAfter <= 360)
-    or errorPage('RotateBefore out of range');
+    or errorPage('RotateBefore out of range', 404);
 
 verbose("rotateAfter = $rotateAfter");
 
@@ -3730,11 +4678,51 @@ verbose("filters = " . print_r($filters, 1));
 
 
 /**
- * json - output the image as a JSON object with details on the image.
+* json -  output the image as a JSON object with details on the image.
+* ascii - output the image as ASCII art.
  */
 $outputFormat = getDefined('json', 'json', null);
+$outputFormat = getDefined('ascii', 'ascii', $outputFormat);
 
-verbose("json = $outputFormat");
+verbose("outputformat = $outputFormat");
+
+if ($outputFormat == 'ascii') {
+    $defaultOptions = getConfig(
+        'ascii-options',
+        array(
+            "characterSet" => 'two',
+            "scale" => 14,
+            "luminanceStrategy" => 3,
+            "customCharacterSet" => null,
+        )
+    );
+    $options = get('ascii');
+    $options = explode(',', $options);
+
+    if (isset($options[0]) && !empty($options[0])) {
+        $defaultOptions['characterSet'] = $options[0];
+    }
+
+    if (isset($options[1]) && !empty($options[1])) {
+        $defaultOptions['scale'] = $options[1];
+    }
+
+    if (isset($options[2]) && !empty($options[2])) {
+        $defaultOptions['luminanceStrategy'] = $options[2];
+    }
+
+    if (count($options) > 3) {
+        // Last option is custom character string
+        unset($options[0]);
+        unset($options[1]);
+        unset($options[2]);
+        $characterString = implode($options);
+        $defaultOptions['customCharacterSet'] = $characterString;
+    }
+
+    $img->setAsciiOptions($defaultOptions);
+}
+
 
 
 
@@ -3803,16 +4791,195 @@ if ($alias && $aliasPath && $passwordMatch) {
     $useCache    = false;
 
     is_writable($aliasPath)
-        or errorPage("Directory for alias is not writable.");
+        or errorPage("Directory for alias is not writable.", 403);
 
     preg_match($validAliasname, $alias)
-        or errorPage('Filename for alias contains invalid characters. Do not add extension.');
+        or errorPage('Filename for alias contains invalid characters. Do not add extension.', 404);
 
-} else if ($alias) {
-    errorPage('Alias is not enabled in the config file or password not matching.');
+} elseif ($alias) {
+    errorPage('Alias is not enabled in the config file or password not matching.', 403);
 }
 
 verbose("alias = $alias");
+
+
+
+/**
+ * Add cache control HTTP header.
+ */
+$cacheControl = getConfig('cache_control', null);
+
+if ($cacheControl) {
+    verbose("cacheControl = $cacheControl");
+    $img->addHTTPHeader("Cache-Control", $cacheControl);
+}
+
+
+
+/**
+ * Prepare a dummy image and use it as source image.
+ */
+if ($dummyImage === true) {
+    $dummyDir = $cache->getPathToSubdir("dummy");
+
+    $img->setSaveFolder($dummyDir)
+        ->setSource($dummyFilename, $dummyDir)
+        ->setOptions(
+            array(
+                'newWidth'  => $newWidth,
+                'newHeight' => $newHeight,
+                'bgColor'   => $bgColor,
+            )
+        )
+        ->setJpegQuality($quality)
+        ->setPngCompression($compress)
+        ->createDummyImage()
+        ->generateFilename(null, false)
+        ->save(null, null, false);
+
+    $srcImage = $img->getTarget();
+    $imagePath = null;
+
+    verbose("src (updated) = $srcImage");
+}
+
+
+
+/**
+ * Prepare a sRGB version of the image and use it as source image.
+ */
+$srgbDefault = getConfig('srgb_default', false);
+$srgbColorProfile = getConfig('srgb_colorprofile', __DIR__ . '/../icc/sRGB_IEC61966-2-1_black_scaled.icc');
+$srgb = getDefined('srgb', true, null);
+
+if ($srgb || $srgbDefault) {
+
+    $filename = $img->convert2sRGBColorSpace(
+        $srcImage,
+        $imagePath,
+        $cache->getPathToSubdir("srgb"),
+        $srgbColorProfile,
+        $useCache
+    );
+
+    if ($filename) {
+        $srcImage = $img->getTarget();
+        $imagePath = null;
+        verbose("srgb conversion and saved to cache = $srcImage");
+    } else {
+        verbose("srgb not op");
+    }
+}
+
+
+
+/**
+ * Display status
+ */
+if ($status) {
+    $text  = "img.php version = $version\n";
+    $text .= "PHP version = " . PHP_VERSION . "\n";
+    $text .= "Running on: " . $_SERVER['SERVER_SOFTWARE'] . "\n";
+    $text .= "Allow remote images = $allowRemote\n";
+
+    $res = $cache->getStatusOfSubdir("");
+    $text .= "Cache $res\n";
+
+    $res = $cache->getStatusOfSubdir("remote");
+    $text .= "Cache remote $res\n";
+
+    $res = $cache->getStatusOfSubdir("dummy");
+    $text .= "Cache dummy $res\n";
+
+    $res = $cache->getStatusOfSubdir("srgb");
+    $text .= "Cache srgb $res\n";
+
+    $text .= "Alias path writable = " . is_writable($aliasPath) . "\n";
+
+    $no = extension_loaded('exif') ? null : 'NOT';
+    $text .= "Extension exif is $no loaded.<br>";
+
+    $no = extension_loaded('curl') ? null : 'NOT';
+    $text .= "Extension curl is $no loaded.<br>";
+
+    $no = extension_loaded('imagick') ? null : 'NOT';
+    $text .= "Extension imagick is $no loaded.<br>";
+
+    $no = extension_loaded('gd') ? null : 'NOT';
+    $text .= "Extension gd is $no loaded.<br>";
+
+    if (!$no) {
+        $text .= print_r(gd_info(), 1);
+    }
+
+    echo <<<EOD
+<!doctype html>
+<html lang=en>
+<meta charset=utf-8>
+<title>CImage status</title>
+<pre>$text</pre>
+EOD;
+    exit;
+}
+
+
+
+/**
+ * Log verbose details to file
+ */
+if ($verboseFile) {
+    $img->setVerboseToFile("$cachePath/log.txt");
+}
+
+
+
+/**
+ * Hook after img.php configuration and before processing with CImage
+ */
+$hookBeforeCImage = getConfig('hook_before_CImage', null);
+
+if (is_callable($hookBeforeCImage)) {
+    verbose("hookBeforeCImage activated");
+
+    $allConfig = $hookBeforeCImage($img, array(
+            // Options for calculate dimensions
+            'newWidth'  => $newWidth,
+            'newHeight' => $newHeight,
+            'aspectRatio' => $aspectRatio,
+            'keepRatio' => $keepRatio,
+            'cropToFit' => $cropToFit,
+            'fillToFit' => $fillToFit,
+            'crop'      => $crop,
+            'area'      => $area,
+            'upscale'   => $upscale,
+
+            // Pre-processing, before resizing is done
+            'scale'        => $scale,
+            'rotateBefore' => $rotateBefore,
+            'autoRotate'   => $autoRotate,
+
+            // General processing options
+            'bgColor'    => $bgColor,
+
+            // Post-processing, after resizing is done
+            'palette'   => $palette,
+            'filters'   => $filters,
+            'sharpen'   => $sharpen,
+            'emboss'    => $emboss,
+            'blur'      => $blur,
+            'convolve'  => $convolve,
+            'rotateAfter' => $rotateAfter,
+
+            // Output format
+            'outputFormat' => $outputFormat,
+            'dpr'          => $dpr,
+
+            // Other
+            'postProcessing' => $postProcessing,
+    ));
+    verbose(print_r($allConfig, 1));
+    extract($allConfig);
+}
 
 
 
@@ -3830,6 +4997,11 @@ if ($verbose) {
     $url1 = '?' . htmlentities(urldecode(http_build_query($query)));
     $url2 = '?' . urldecode(http_build_query($query));
     echo <<<EOD
+<!doctype html>
+<html lang=en>
+<meta charset=utf-8>
+<title>CImage verbose output</title>
+<style>body{background-color: #ddd}</style>
 <a href=$url1><code>$url1</code></a><br>
 <img src='{$url1}' />
 <pre id="json"></pre>
@@ -3838,20 +5010,13 @@ if ($verbose) {
 window.getDetails = function (url, id) {
   $.getJSON(url, function(data) {
     element = document.getElementById(id);
-    element.innerHTML = "filename: " + data.filename + "\\ncolors: " + data.colors + "\\nsize: " + data.size + "\\nwidth: " + data.width + "\\nheigh: " + data.height + "\\naspect-ratio: " + data.aspectRatio;
+    element.innerHTML = "filename: " + data.filename + "\\nmime type: " + data.mimeType + "\\ncolors: " + data.colors + "\\nsize: " + data.size + "\\nwidth: " + data.width + "\\nheigh: " + data.height + "\\naspect-ratio: " + data.aspectRatio + ( data.pngType ? "\\npng-type: " + data.pngType : '');
   });
 }
 </script>
 <script type="text/javascript">window.getDetails("{$url2}&json", "json")</script>
 EOD;
 }
-
-
-
-/**
- * Get the cachepath from config.
- */
-$cachePath = getConfig('cache_path', __DIR__ . '/../cache/');
 
 
 
@@ -3914,6 +5079,3 @@ $img->log("Incoming arguments: " . print_r(verbose(), 1))
     ->save()
     ->linkToCacheFile($aliasTarget)
     ->output();
-
-
-

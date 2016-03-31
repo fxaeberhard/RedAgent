@@ -1,0 +1,24 @@
+{
+  "name": "RedAgent",
+  "homepage": "www.red-agent.com",
+  "authors": [
+    "Francois-Xavier Aeberhard <fx@red-agent.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "v4.0.0-alpha.2",
+    "jquery.cookie": "jquery-cookie#~1.4.1",
+    "perfect-scrollbar": "~0.6.8",
+    "tether": "^1.2.0",
+    "svg4everybody": "^2.0.3",
+    "slick-carousel": "^1.5.9",
+    "crafty": "^0.7.1",
+    "photoswipe": "^4.1.1",
+    "pusher": "^3.0.0",
+    "webfontloader": "^1.6.24"
+  }
+}
