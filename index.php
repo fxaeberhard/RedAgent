@@ -15,7 +15,7 @@ $convoId = get_convo_id();
     <link rel="author" href="https://plus.google.com/+FrancoisXavierAeberhardRed" />
     <meta name="contact" content="fx@red-agent.com">
     <meta name="keywords" content="françois-xavier, aeberhard, gamedesign, webdesign,fdi user experience">
-    <meta name="description" content="Francois-Xavier Aeberhard is a user experience engineer, specialized in games and web. This is his portfolio.">
+    <meta name="description" content="<?php description($page)?>">
 
     <title>
       <?php echo $page ? ucfirst($page) : 'Red Agent' ?> - Francois-Xavier Aeberhard</title>
@@ -42,7 +42,6 @@ $convoId = get_convo_id();
     <meta name="twitter:image" content="{{imageUrl}}"> -->
 
     <!-- Favicon -->
-
     <link rel="apple-touch-icon" href="/images/icon/apple.png">
     <link rel="apple-touch-icon" sizes="57x57" href="/images/icon/apple-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="/images/icon/apple-60x60.png">
@@ -85,10 +84,16 @@ $convoId = get_convo_id();
     </section>
 
     <!-- Game -->
-    <section class="game">
+    <section class="game" <?php if ($page) { echo 'style="visibility:hidden"'; } ?>>
       <div>
         <div>
-          <div id="cr-stage" class="stage"></div>
+          <div class="embed">
+            <div id="cr-stage" class="stage">
+              <div class="loader">
+                <div></div>
+              </div>
+            </div>
+          </div>
           <div class="chat">
             <div class="chat-msgs"></div>
             <div>
@@ -103,7 +108,7 @@ $convoId = get_convo_id();
     </section>
 
     <!-- Loader -->
-    <div class="loader" <?php if ($page) { echo 'style="visibility:hidden"'; } ?>>
+    <div class="loader" style="display:none;">
       <div></div>
     </div>
 

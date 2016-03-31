@@ -1,4 +1,15 @@
 <?php
+global $pages;
+$pages = array(
+    "" => array("description" => "My name is Francois-Xavier Aeberhard, I'm an user experience enginee and this is my portfolio."),
+    "projects" => array("description" => "Discover my work: Wallogram, Programming game, Michael Jackson the experiene and much more."),
+    "blog" => array("description" => "Drawings, movies or small games, this is what i do in my free time and I want to keep a trace of."),
+    "contact" => array("description" => "Francois-Xavier Aeberhard, Level 110 User experience engineer"));
+
+function description($page = "") {
+    global $pages;
+    echo $pages[$page]["description"];
+}
 
 function file_extension($filename) {
     return strtolower(end(explode(".", $filename)));

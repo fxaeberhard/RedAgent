@@ -35,7 +35,7 @@ jQuery(function($) {
       function updateScale() {
         var ratio = Math.min(1, $(window).width() / WIDTH);
         Crafty.viewport.scale(ratio);
-        $('#cr-stage').css({ width: WIDTH * ratio, height: HEIGHT * ratio });
+        $('#cr-stage').css({ width: WIDTH * ratio, height: HEIGHT * ratio, 'padding-bottom': 0 });
       }
       updateScale();
       $(window).resize(updateScale);

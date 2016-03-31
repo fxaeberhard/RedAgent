@@ -78,7 +78,7 @@ h3 {
   >div {
     @include make-container(0);
     max-width: 1104px;
-    @media (min-width: 801px) {
+    @media (min-width: 831px) {
       margin-top: .7rem;
       padding: 0 15px;
     }
@@ -673,9 +673,23 @@ main article.visible ul.objectives li::before {
 
 /* Crafty styles */
 
+.embed {
+  width: 800px;
+  max-width: 100%;
+}
+
 #cr-stage {
   line-height: 0;
   cursor: pointer;
+  position: relative;
+  display: block;
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+  padding-bottom: 74%;
+  > .loader {
+    position: absolute;
+  }
   .Text {
     height: auto!important;
     // @include size(auto !important);
@@ -917,7 +931,7 @@ a.link {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  // height: 100vh;
   > div {
     position: relative;
     background-color: $red;
