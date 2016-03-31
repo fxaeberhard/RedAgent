@@ -69,7 +69,7 @@ jQuery(function($) {
 
       // Show hide current page
       currentPage && Crafty.pause();
-      $('.game').toggleView(!currentPage);
+      $('.game').toggleView(!currentPage).css('visibility', 'visible');
       $('.page').toggleView(currentPage);
       $('.loader').fadeOut();
 
@@ -447,9 +447,9 @@ jQuery(function($) {
   $.fn.extend({
     toggleView: function(doShow, a, b) {
       if (doShow) {
-        this.show(a, b);
+        return this.show(a, b);
       } else {
-        this.hide(a, b);
+        return this.hide(a, b);
       }
     },
     setSlide: function(doShow) {

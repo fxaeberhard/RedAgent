@@ -676,6 +676,13 @@ main article.visible ul.objectives li::before {
 #cr-stage {
   line-height: 0;
   cursor: pointer;
+  position: relative;
+  width: 800px;
+  height: 595px;
+  max-width: 100%;
+  > .loader {
+    position: absolute;
+  }
   .Text {
     height: auto!important;
     // @include size(auto !important);
@@ -917,7 +924,7 @@ a.link {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  // height: 100vh;
   > div {
     position: relative;
     background-color: $red;
