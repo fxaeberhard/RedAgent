@@ -236,6 +236,7 @@ AddDefaultCharset utf-8
 <IfModule mod_rewrite.c>
     
     # SECTION BEGIN Redcms
+    RewriteEngine On
     RewriteCond %{HTTP_HOST} ^redcms\.
     RewriteCond %{REQUEST_URI} !^/redcms/
     RewriteCond %{REQUEST_URI} /$
@@ -244,7 +245,6 @@ AddDefaultCharset utf-8
     # SECTION END SubDomainOnFolder
 
     # SECTION BEGIN SubDomainOnFolder
-    RewriteEngine on
     RewriteCond %{HTTP_HOST} ^(album|arthur|redcms|mariage|wallogram|schlempf|test3|moulou|test1|test2|test|tikiwiki)\.
     RewriteCond %{REQUEST_URI} !^/(album|arthur|mariage|redcms|wallogram|schlempf|test3|moulou|test1|test2|test|tikiwiki)/
     RewriteCond %{DOCUMENT_ROOT}/%1 -d
@@ -275,8 +275,8 @@ AddDefaultCharset utf-8
     #RewriteRule ^([^/]+)(.+)$ /~$1/$2 [L]
 
     ########### red-agent.com -> www.red-agent.com
-    #RewriteCond %{HTTP_HOST} ^red-agent.com [nocase]
-    #RewriteRule ^(.*) http://www.red-agent.com/$1 [L,R=301]
+    RewriteCond %{HTTP_HOST} ^www.red-agent.com [nocase]
+    RewriteRule ^(.*) http://red-agent.com/$1 [L,R=301]
 
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
@@ -285,10 +285,10 @@ AddDefaultCharset utf-8
     RewriteRule ^imgpp/(.*)$        imgp.php?src=$1 [QSA,NC,L]
     
     RewriteRule ^User+Experience/$ projects.html
-    RewriteRule ^Resume/$ http://www.red-agent.com/contact.html  [R=301,L]
-    RewriteRule ^Contact/$ http://www.red-agent.com/contact.html  [R=301,L]
-    RewriteRule ^User+Experience/$ http://www.red-agent.com/projects.html  [R=301,L]
-    RewriteRule ^Games/$ http://www.red-agent.com/projects.html  [R=301,L]
+    RewriteRule ^Resume/$ http://red-agent.com/contact.html  [R=301,L]
+    RewriteRule ^Contact/$ http://red-agent.com/contact.html  [R=301,L]
+    RewriteRule ^User+Experience/$ http://red-agent.com/projects.html  [R=301,L]
+    RewriteRule ^Games/$ http://red-agent.com/projects.html  [R=301,L]
 
     RewriteRule ^contact\.html$ index.php?page=contact [L]
     RewriteRule ^projects\.html$ index.php?page=projects [L]
@@ -331,14 +331,14 @@ AddDefaultCharset utf-8
 # Option 2: rewrite example.com → www.example.com
 # Be aware that the following might not be a good idea if you use "real"
 # subdomains for certain parts of your website.
- <IfModule mod_rewrite.c>
-     RewriteEngine On
-     RewriteCond %{HTTPS} !=on
-     RewriteCond %{HTTP_HOST} !^www\. [NC]
-     RewriteCond %{SERVER_ADDR} !=127.0.0.1
-     RewriteCond %{SERVER_ADDR} !=::1
-     RewriteRule ^ %{ENV:PROTO}://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
- </IfModule>
+#<IfModule mod_rewrite.c>
+#    RewriteEngine On
+#    RewriteCond %{HTTPS} !=on
+#    RewriteCond %{HTTP_HOST} !^www\. [NC]
+#    RewriteCond %{SERVER_ADDR} !=127.0.0.1
+#    RewriteCond %{SERVER_ADDR} !=::1
+#    RewriteRule ^ %{ENV:PROTO}://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+#</IfModule>
 
 
 # ######################################################################

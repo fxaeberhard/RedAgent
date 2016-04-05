@@ -170,7 +170,7 @@ $convoId = get_convo_id();
       "@context": "http://schema.org",
       "@type": "Person",
       "name": "Francois-Xavier Aeberhard",
-      "url": "http://www.red-agent.com",
+      "url": "http://red-agent.com",
       "sameAs": [
         "https://plus.google.com/+FrancoisXavierAeberhardRed",
         "https://www.youtube.com/c/FrancoisXavierAeberhardRed",
@@ -178,7 +178,6 @@ $convoId = get_convo_id();
       ]
     }
     </script>
-
 
   </body>
 

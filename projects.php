@@ -391,7 +391,7 @@
 
       <div class="details">
         <div class="links">
-          <a href="http://www.red-agent.com/schlempf/" target="_blank">Website</a>
+          <a href="http://red-agent.com/schlempf/" target="_blank">Website</a>
         </div>
         <div class="techno">
           <div class="icon" data-toggle="tooltip" title="Java 2 Mobile Edition <em>(J2ME)</em>"><svg><use xlink:href="images/sprite.svg#java"/></svg></div>
