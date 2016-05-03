@@ -8,21 +8,47 @@
 jQuery(function($) {
 
   var TILEWIDTH = 64,
+    TILEHEIGHT = TILEWIDTH / 2,
     SPEED = 4.5,
     ISOCOS = Math.cos(0.46365),
     ISOSIN = Math.sin(0.46365),
     WIDTH = 800,
     HEIGHT = 595,
+    TILEPERSCREENX = Math.round(WIDTH / TILEWIDTH),
+    TILEPERSCREENY = Math.round(HEIGHT / TILEHEIGHT),
     MAXX = 1,
     MINX = -1,
     MAXY = 0,
     MINY = -1,
     BORDER = 48,
-    lastName;
+    lastName,
+    greyTiles = [[6, 9], [7, 10], [7, 11], [8, 12], [8, 13], [9, 14], [9, 15], [10, 16],
+          [10, 17], [11, 18], [11, 19], [12, 20], [12, 21], [13, 22], [13, 23], [14, 24],
+          [14, 25], [15, 24], [15, 23], [16, 22], [16, 21], [17, 20], [10, 18], [9, 19], [9, 20],
+          [8, 21], [8, 22], [7, 23], [7, 24], [6, 25], [6, 26], [5, 27], [5, 28],
+          [4, 29], [4, 30], [3, 31], [3, 30], [2, 29], [2, 28], [1, 27], [6, -8],
+          [6, -9], [7, -10], [7, -11],
+          //top guys          
+          [5, -9], [6, -10], [6, -11], [7, -12], [5, -10], [5, -11], [6, -12], [6, -13], [4, -11],
+           [5, -12], [5, -13], [6, -14], [3, -16], [3, -17], [3, -15], [4, -16]
+          // head       
+          ],
+    redTiles = [[0, -17], [1, -16], [1, -15], [2, -14], [2, -13], [3, -12], [3, -11],
+          [4, -10], [4, -9], [5, -8], [5, -7], [6, -6], [6, -5], [7, -4], [7, -3], [7, -2],
+          [6, -1], [6, 0], [6, -7], [7, -8], [7, -9], [8, -10], [4, -12], [4, -13], [5, -14],
+          [5, -15], [6, -16], [6, -15], [7, -14], [7, -13], [8, -12], [8, -11], [9, -10],
+          [9, -9], [10, -8], [10, -9], [11, -10], [1, -11], [4, -14], [4, -15], [3, -14],
+          [2, -15], [4, -17], [4, -18], [2, -17], [3, -18] // head     
+         ],
+    tilesMap = {},
+    initialized = false,
+    tileLoaded = [];
 
   var Game = {
     players: {},
     init: function() {
+      if (initialized) return;
+      initialized = true;
 
       Game.initChat();
 
@@ -40,12 +66,19 @@ jQuery(function($) {
       updateScale();
       $(window).resize(updateScale);
 
-      // Init grid
-      for (var x = 12 * (MAXX + 1); x >= MINX * 12; x--) {
-        for (var y = MINY * 37; y < (MAXY + 1) * 37; y++) {
-          Crafty.e('Tile').place(x, y).randomSprite();
-        }
-      }
+      // Build tiles map
+      greyTiles.forEach(function(o) {
+        tilesMap[o[0]] = tilesMap[o[0]] || {};
+        tilesMap[o[0]][o[1]] = 'lightgray';
+      });
+      redTiles.forEach(function(o) {
+        tilesMap[o[0]] = tilesMap[o[0]] || {};
+        tilesMap[o[0]][o[1]] = 'red';
+      });
+
+      // console.profile();
+      // Init tiles
+      Game.loadTiles(0, 0);
 
       // Init player
       var player = Crafty.e('PlayablePC')
@@ -97,7 +130,6 @@ jQuery(function($) {
 
       // Play sound and animation in disco screen
       setInterval(function() {
-        var player = Crafty('PlayablePC');
         if (player.screen.x === -1 && player.screen.y === 0) {
           var tiles = Crafty('Tile');
           tiles.each(function(i) {
@@ -121,6 +153,19 @@ jQuery(function($) {
         }
       }, 400);
     },
+    loadTiles: function(screenX, screenY) {
+      if (tileLoaded[screenX + '' + screenY]) {
+        return;
+      }
+      tileLoaded[screenX + '' + screenY] = true;
+      var minX = screenX * 12,
+        maxY = (screenY + 1) * 37;
+      for (var x = (screenX + 1) * 12; x >= minX; x--) {
+        for (var y = screenY * 37; y < maxY; y++) {
+          Crafty.e('Tile').place(x, y).randomSprite();
+        }
+      }
+    },
     getPlayer: function(id) {
       return Game.players[id];
     },
@@ -137,7 +182,7 @@ jQuery(function($) {
       Game.chat(p.label(), msg); // display it in the chat
     },
     initChat: function() {
-      $('.chat-msgs').perfectScrollbar();
+      //$('.chat-msgs').perfectScrollbar();
 
       // On 'enter' key in textarea,
       $('.chat textarea').keypress(function(e) {
@@ -182,7 +227,7 @@ jQuery(function($) {
     addParagraph: function(msg, cssclass) {
       $('.chat-msgs').append('<div class="chat-msg ' + cssclass + '">' + msg + '</div>')
         .animate({ scrollTop: $('.chat-msgs').prop('scrollHeight') }, 1500)
-        .perfectScrollbar('update');
+        //.perfectScrollbar('update');
     },
   };
   $.Game = Game;
@@ -210,7 +255,8 @@ jQuery(function($) {
       this.requires('2D ' + Crafty.support.canvas ? 'Canvas' : 'DOM');
     },
     place: function(x, y, screenX, screenY) {
-      Crafty.isometric.place(x + (screenX || 0) * Math.round(WIDTH / TILEWIDTH), y + (screenY || 0) * Math.round(HEIGHT * 2 / TILEWIDTH), 0, this);
+      this._pos = { x: x + (screenX || 0) * TILEPERSCREENX, y: y + (screenY || 0) * TILEPERSCREENY }
+      Crafty.isometric.place(this._pos.x, this._pos.y, 0, this);
       return this;
     }
   });
@@ -237,33 +283,11 @@ jQuery(function($) {
     },
     randomSprite: function() {
       var r = Math.random(),
-        pos = (Crafty.isometric.px2pos(this.x, this.y)),
-        comp = function(i) {
-          return pos.x !== i[0] || pos.y !== i[1];
-        },
-        greyTiles = [[6, 9], [7, 10], [7, 11], [8, 12], [8, 13], [9, 14], [9, 15], [10, 16],
-          [10, 17], [11, 18], [11, 19], [12, 20], [12, 21], [13, 22], [13, 23], [14, 24],
-          [14, 25], [15, 24], [15, 23], [16, 22], [16, 21], [17, 20], [10, 18], [9, 19], [9, 20],
-          [8, 21], [8, 22], [7, 23], [7, 24], [6, 25], [6, 26], [5, 27], [5, 28],
-          [4, 29], [4, 30], [3, 31], [3, 30], [2, 29], [2, 28], [1, 27], [6, -8],
-          [6, -9], [7, -10], [7, -11],
-          //top guys          
-          [5, -9], [6, -10], [6, -11], [7, -12], [5, -10], [5, -11], [6, -12], [6, -13], [4, -11],
-           [5, -12], [5, -13], [6, -14], [3, -16], [3, -17], [3, -15], [4, -16]
-          // head       
-          ],
-        redTiles = [[0, -17], [1, -16], [1, -15], [2, -14], [2, -13], [3, -12], [3, -11],
-          [4, -10], [4, -9], [5, -8], [5, -7], [6, -6], [6, -5], [7, -4], [7, -3], [7, -2],
-          [6, -1], [6, 0], [6, -7], [7, -8], [7, -9], [8, -10], [4, -12], [4, -13], [5, -14],
-          [5, -15], [6, -16], [6, -15], [7, -14], [7, -13], [8, -12], [8, -11], [9, -10],
-          [9, -9], [10, -8], [10, -9], [11, -10], [1, -11], [4, -14], [4, -15], [3, -14],
-          [2, -15], [4, -17], [4, -18], [2, -17], [3, -18] // head     
-         ];
+        // pos = this._pos;
+        pos = Crafty.isometric.px2pos(this.x, this.y);
 
-      if ($.grep(greyTiles, comp, this).length) {
-        this.__sprite = 'lightgray'; // light gray path
-      } else if ($.grep(redTiles, comp, this).length) {
-        this.__sprite = 'red'; // red bot
+      if (tilesMap[pos.x] && tilesMap[pos.x][pos.y]) {
+        this.__sprite = tilesMap[pos.x][pos.y];
       } else if (r > 0.12) {
         this.__sprite = 'white'; // white
       } else if (r > 0.10) {
@@ -347,6 +371,7 @@ jQuery(function($) {
    */
   Crafty.c('PlayerCharacter', {
     init: function() {
+      var countdown = 0;
       this.requires('Character, Actor, PlayerSprite, SpriteAnimation, Tween') //Collision
         //.collision([32, 32, 64, 48, 32, 64, 0, 48]) // Set up hit box
         .reel('Down', 1000, 0, 2, 16) // Set up animations
@@ -358,6 +383,13 @@ jQuery(function($) {
             .moveTo(this.targetMove.x, this.targetMove.y, this.targetMove.z);
         })
         .bind('EnterFrame', function() {
+
+          if (countdown > 0) {
+            countdown--;
+            return;
+          }
+          countdown = 10;
+
           var z = 200,
             that = this;
 
@@ -469,14 +501,14 @@ jQuery(function($) {
           } else if (this.x + 32 < this.screen.x * WM2B + BORDER && this.screen.x > MINX) {
             Crafty.viewport.pan(-WM2B, 0, 1000);
             this.screen.x--;
-          }
-          if (this.y + 62 > this.screen.y * HM2B + HMB && this.screen.y < MAXY) {
+          } else if (this.y + 62 > this.screen.y * HM2B + HMB && this.screen.y < MAXY) {
             Crafty.viewport.pan(0, HM2B, 1000);
             this.screen.y++;
           } else if (this.y + 62 < this.screen.y * HM2B + BORDER && this.screen.y > MINY) {
             Crafty.viewport.pan(0, -HM2B, 1000);
             this.screen.y--;
           }
+          Game.loadTiles(this.screen.x, this.screen.y);
         });
     }
   });

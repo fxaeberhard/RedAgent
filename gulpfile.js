@@ -39,7 +39,7 @@ gulp.task('usemin', ['imagemin', 'sass', 'copy'], function() {
       html: [minifyhtml({ empty: true })],
       js: [uglify() /*, rev()*/ ],
       jsAttributes: {
-        async: true
+        // async: true
       }
     }))
     // .pipe(revReplace({
@@ -110,7 +110,6 @@ gulp.task('copy', function() {
     .pipe(rev.manifest())
     .pipe(gulp.dest('dist/fonts'));
 })
-
 
 // Configure clean task
 gulp.task('clean', function() {

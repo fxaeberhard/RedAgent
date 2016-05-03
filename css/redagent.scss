@@ -88,6 +88,7 @@ h3 {
         margin: 0 auto;
       }
       .chat {
+        overflow: hidden;
         display: none;
       }
       @media (min-width: 1020px) {
@@ -132,6 +133,8 @@ footer {
   .chat-msgs {
     position: relative;
     height: 536px;
+    overflow-y: scroll;
+    width: calc(100% + 17px);
     .chat-msg {
       padding: 0 0 0 0.4rem;
       font-size: 0.9rem;
@@ -157,7 +160,7 @@ footer {
     }
   }
   textarea {
-    width: 94%;
+    width: 100%;
     border: 1px solid #580000;
     margin: 0;
     padding: 5px 2.5%;

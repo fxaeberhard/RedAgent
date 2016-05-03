@@ -18,8 +18,8 @@ jQuery(function($) {
      * 
      */
     init: function() {
-
-      Game.init();
+      // console.profile();
+      !currentPage && Game.init();
       //App.hideableNav();
       App.smoothScroll();
       App.history();
@@ -46,6 +46,8 @@ jQuery(function($) {
         html: true
       });
 
+      // console.profileEnd();
+
       // Keep track if window is focused or not
       $(window).blur(function() {
         App.windowActive = false;
@@ -68,7 +70,7 @@ jQuery(function($) {
       });
 
       // Show hide current page
-      currentPage && Crafty.pause();
+      //currentPage && Crafty.pause();
       $('.game').toggleView(!currentPage).css('visibility', 'visible');
       $('.page').toggleView(currentPage);
       $('.loader').fadeOut();
@@ -170,6 +172,7 @@ jQuery(function($) {
           // Back to main page
           $('.page').fadeOut();
           $('.game').fadeIn();
+          Game.init();
           Crafty.isPaused() && Crafty.pause();
         }
       });

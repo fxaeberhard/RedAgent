@@ -65,7 +65,7 @@ $convoId = get_convo_id();
 
     <!-- build:css css/styles.css -->
     <!-- Libraries -->
-    <link rel="stylesheet" href="bower_components/perfect-scrollbar/css/perfect-scrollbar.min.css" />
+    <!-- <link rel="stylesheet" href="bower_components/perfect-scrollbar/css/perfect-scrollbar.min.css" /> -->
     <link rel="stylesheet" href="bower_components/slick-carousel/slick/slick.css" />
     <link rel="stylesheet" href="bower_components/photoswipe/dist/photoswipe.css">
     <!-- <link rel="stylesheet" href="bower_components/photoswipe/dist/default-skin/default-skin.css"> -->
@@ -128,14 +128,14 @@ $convoId = get_convo_id();
     <script src="bower_components/tether/dist/js/tether.min.js"></script>
     <script src="bower_components/bootstrap/js/dist/util.js"></script>
     <script src="bower_components/bootstrap/js/dist/tooltip.js"></script>
-    <script src="bower_components/perfect-scrollbar/js/min/perfect-scrollbar.jquery.min.js"></script>
+    <!-- <script src="bower_components/perfect-scrollbar/js/min/perfect-scrollbar.jquery.min.js"></script> -->
     <script src="bower_components/jquery.cookie/jquery.cookie.js"></script>
     <script src="bower_components/crafty/dist/crafty-min.js"></script>
     <script src="bower_components/photoswipe/dist/photoswipe.min.js"></script>
     <script src="bower_components/photoswipe/dist/photoswipe-ui-default.min.js"></script>
     <script src="bower_components/pusher/dist/pusher.min.js"></script>
     <script src="bower_components/webfontloader/webfontloader.js"></script>
-    <script src="js/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    <!-- <script src="js/modernizr-2.8.3-respond-1.4.2.min.js"></script> -->
     <script src="js/scrollspy.js"></script>
     <script src="js/slick.js"></script>
     <!-- <script src="bower_components/slick-carousel/slick/slick.min.js"></script> -->
@@ -149,6 +149,14 @@ $convoId = get_convo_id();
 
     <!-- Google analytics -->
     <script>
+        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+        ga('create', 'UA-12224039-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    <!-- Google analytics -->
+  <!--   <script>
     (function(i, s, o, g, r, a, m) {
       i['GoogleAnalyticsObject'] = r;
       i[r] = i[r] || function() {
@@ -162,7 +170,7 @@ $convoId = get_convo_id();
     })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
     ga('create', 'UA-12224039-1', 'auto');
     ga('send', 'pageview');
-    </script>
+    </script> -->
 
     <!-- Google Knowledge Graph -->
     <script type="application/ld+json">
