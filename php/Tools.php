@@ -20,7 +20,7 @@ $pages = array(
 function title($page = '') {
     if ($page == 'post') {
         $post = filter_input(INPUT_GET, 'post');
-        echo ucfirst(str_replace('-', ' ', $post));
+        echo ucfirst(preg_replace('/^[0-9]+/', '',str_replace('-', ' ', $post)));
     } else {
         global $pages;
         echo $pages[$page]["title"];
@@ -64,7 +64,7 @@ function lazypicture($src, $options = "") {
 }
 
 function gallery($dir, $options = "", $lazy = true) {
-    $files = glob("images/projects/$dir/*.{jpg,gif,png,jpeg,JPG,GIF,PNG,JPEG}", GLOB_BRACE);
+    $files = glob("images/$dir/*.{jpg,gif,png,jpeg,JPG,GIF,PNG,JPEG}", GLOB_BRACE);
     sort($files, SORT_LOCALE_STRING);
     echo '<div class="slick" itemscope itemtype="http://schema.org/ImageGallery">';
     $i = 0;
@@ -87,7 +87,7 @@ function gallery($dir, $options = "", $lazy = true) {
 }
 
 function hiddenGallery($dir) {
-    $files = glob("images/projects/$dir/*.{jpg,gif,png,jpeg,JPG,GIF,PNG,JPEG}", GLOB_BRACE);
+    $files = glob("images/$dir/*.{jpg,gif,png,jpeg,JPG,GIF,PNG,JPEG}", GLOB_BRACE);
     sort($files, SORT_LOCALE_STRING);
     foreach ($files as $entry) {
       $s = getimagesize($entry);

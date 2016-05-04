@@ -280,7 +280,7 @@ jQuery(function($) {
      */
     photoswipe: function() {
       function getItems(gallery) {
-        return $(':not(.slick-cloned) > [data-gallery=' + gallery + ']').map(function() {
+        return $(':not(.slick-cloned) > [data-gallery="' + gallery + '"]').map(function() {
           var size = $(this).data('size').split('x');
           return { src: $(this).attr('href'), w: size[0], h: size[1] };
         });

@@ -11,7 +11,7 @@
   <?php
     $post = filter_input(INPUT_GET, 'post');
     $path = 'blog';
-
+echo $post;
     include $path . '/' . $post . '.html';
   ?>
 

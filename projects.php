@@ -52,7 +52,7 @@
       <div class="details">
         <div class="links">
           <a href="http://www.wallogram.ch/" target="_blank">Website</a>
-          <?php hiddenGallery('wallogram'); ?>
+          <?php hiddenGallery('projects/wallogram'); ?>
           <a href data-slick-open>Pictures</a>
           <a href="https://github.com/fxaeberhard/Wallogram" target="_blank">Sources</a>
         </div>
@@ -77,7 +77,7 @@
   <!-- Programming game -->
   <article id="proggame">
     <div>
-      <?php gallery('proggame', '', false); ?>
+      <?php gallery('projects/proggame', '', false); ?>
     </div>
     <div>
       <h1>Programming game</h1>
@@ -113,7 +113,7 @@
   <!-- Stalker -->
   <article id="stalker">
     <div>
-      <?php gallery("stalker", "ar=3:2&crop-to-fit"); ?>
+      <?php gallery("projects/stalker", "ar=3:2&crop-to-fit"); ?>
     </div>
     <div>
       <h1>Stalker - Experimenting the Zone</h1>
@@ -147,7 +147,7 @@
   <!-- Wegas -->
   <article id="wegas">
     <div>
-      <?php gallery("wegas", "ar=1.83&crop-to-fit"); ?>
+      <?php gallery("projects/wegas", "ar=1.83&crop-to-fit"); ?>
     </div>
     <div>
       <h1>Wegas</h1>
@@ -291,7 +291,7 @@
   <!--  3D  Blogosphere-->
   <article id="3dblogosphere">
     <div>
-      <?php gallery("3DBlogosphere", "ff&ar=3:2"); ?>
+      <?php gallery("projects/3DBlogosphere", "ff&ar=3:2"); ?>
     </div>
     <div>
       <h1>3DBlogosphere</h1>
@@ -357,7 +357,7 @@
   <!-- Webdesign -->
   <article id="webdesign">
     <div>
-      <?php gallery("webdesign", "ar=4:3&ff"); ?>
+      <?php gallery("projects/webdesign", "ar=4:3&ff"); ?>
     </div>
     <div>
       <h1>Independant web design</h1>
@@ -445,7 +445,7 @@
   <article id="schlempf">
     <div>
       <!--<iframe src="http://www.slideshare.net/slideshow/embed_code/4800011?rel=0" width="420" height="350" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px 1px 0; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>-->
-      <?php gallery("schlempf"); ?>
+      <?php gallery("projects/schlempf"); ?>
     </div>
 
     <div>
@@ -473,7 +473,7 @@
   <!-- EyeKidz -->
   <article id="eyekidz">
     <div>
-      <?php gallery("eyekidz", "cf&ar=4:3"); ?>
+      <?php gallery("projects/eyekidz", "cf&ar=4:3"); ?>
     </div>
 
     <div>

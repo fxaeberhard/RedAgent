@@ -23,9 +23,12 @@
     $path = 'blog';
     
     $files = glob('blog/*');
-    uasort($files, function($a, $b) {
-      return filectime($a) < filectime($b);
-    });
+
+    sort($files, SORT_LOCALE_STRING);
+    $files = array_reverse($files);
+    // uasort($files, function($a, $b) {
+    //   return filectime($a) < filectime($b);
+    // });
 
     foreach ($files as $f) {
       $addon = '<a href="http://red-agent.com/post-' . str_replace($path . '/', '', $f) . '#disqus_thread" class="pull-right link">0 Comments</a>';
