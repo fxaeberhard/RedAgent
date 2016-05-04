@@ -1,3 +1,5 @@
+<?php require_once 'php/Tools.php'; ?>
+
 <!-- Navbar -->
 <main id="contact">
   <article class="firstRow">
@@ -89,11 +91,18 @@
       </div>
     </div>
     <div class="message">
-      <h3>Get in touch</h3>
 
+      <h3>Competencies</h3>
+      <div class="competencies">
+        <div>Software Engineering</div>
+        <div>Managment</div>
+        <div>User Experience</div>
+      </div>
+
+      <h3>Get in touch</h3>
       <form class="indent" action="javascript:;" id="contactForm">
         <!-- <input class="form-control" type="mail" placeholder="Your mail" required> -->
-        <textarea class="form-control" placeholder="Your message" rows="4" required></textarea>
+        <textarea class="form-control" placeholder="Your message" rows="3" required></textarea>
         <button>
           <svg><use xlink:href="images/sprite.svg#send"></use></svg> Send
           <div class="done">

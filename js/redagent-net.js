@@ -13,9 +13,6 @@ jQuery(function($) {
 
   var Net = {
     init: function() {
-
-      if (!window.Pusher) return;
-
       //Pusher.log = console.log;
 
       // Init pusher 
@@ -24,7 +21,8 @@ jQuery(function($) {
       });
       channel = Net.channel = pusher.subscribe(PRESENCECHANNEL);
 
-      channel.bind('pusher:subscription_succeeded', function(members) { // On connection to the channel,
+      // On connection to the channel,
+      channel.bind('pusher:subscription_succeeded', function(members) {
         // console.log("Presence channel subscription_succeeded, count: " + members.count);
         var label = $.cookie("chatname") || "Anonymous " + members.count;
         Crafty('PlayablePC').label(label);
@@ -79,22 +77,21 @@ jQuery(function($) {
     },
     sendJump: function() {
       var p = Crafty("PlayablePC");
-      Net.trigger("jump", { //                                      // Send him a message to tell our actual position
+      Net.trigger("jump", { // Send him a message to tell our actual position
         x: p.x,
         y: p.y,
         name: p.label()
       });
     },
     trigger: function(name, data) {
-      channel && channel.trigger("client-" + name, $.extend(data, {
-        id: channel.members.me.id
-      }));
+      channel && channel.trigger("client-" + name, $.extend(data, { id: channel.members.me.id }));
     },
     playNotification: function() {
       // console.log("App.playNotification()");
       !$.App.windowActive && new Audio('images/Air Plane Ding.mp3').play();
     }
-  }
+  };
+
   $.Net = Net;
 
 });

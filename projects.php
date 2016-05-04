@@ -4,9 +4,7 @@
 <header>
   <nav>
     <a href="/" class="nav-link close">
-      <svg>
-        <use xlink:href="images/sprite.svg#back" />
-      </svg>
+      <svg><use xlink:href="images/sprite.svg#back" /></svg>
     </a>
     <div class="collapse navbar-toggleable" id="navbar-header">
       <ul>
@@ -21,9 +19,7 @@
       </ul>
     </div>
     <form class="form-inline pull-xs-right hidden-md-down">
-      <svg>
-        <use xlink:href="images/sprite.svg#search" />
-      </svg>
+      <svg><use xlink:href="images/sprite.svg#search" /></svg>
       <input class="form-control" type="text" placeholder="Search" />
     </form>
     <!-- <button class="navbar-toggler hidden-sm-up pull-right" type="button" data-toggle="collapse" data-target="#navbar-header" aria-controls="navbar-header">&#9776;</button> -->
@@ -42,9 +38,7 @@
         <img class="img-fluid" src="i/projects/wallogram/teaser.jpg?w=526" srcset="i/projects/wallogram/teaser.jpg?w=526, i/projects/wallogram/teaser.jpg?w=789 1.5x, i/projects/wallogram/teaser.jpg?w=1052 2x" alt="Wallogram" />
         <!-- <img src="images/projects/wallogram/teaser.jpg" /> -->
         <!-- </picture> -->
-        <svg>
-          <use xlink:href="images/sprite.svg#youtube" />
-        </svg>
+        <svg><use xlink:href="images/sprite.svg#youtube" /></svg>
       </a>
     </div>
     <div>
@@ -64,24 +58,16 @@
         </div>
         <div class="techno">
           <div class="icon" data-toggle="tooltip" title="Node.js">
-            <svg>
-              <use xlink:href="images/sprite.svg#nodejs" />
-            </svg>
+            <svg><use xlink:href="images/sprite.svg#nodejs" /></svg>
           </div>
           <div class="icon" data-toggle="tooltip" title="MongoDB">
-            <svg>
-              <use xlink:href="images/sprite.svg#mongodb" />
-            </svg>
+            <svg><use xlink:href="images/sprite.svg#mongodb" /></svg>
           </div>
           <div class="icon" data-toggle="tooltip" title="Javascript">
-            <svg>
-              <use xlink:href="images/sprite.svg#javascript" />
-            </svg>
+            <svg><use xlink:href="images/sprite.svg#javascript" /></svg>
           </div>
           <div class="icon" data-toggle="tooltip" title="Websocket">
-            <svg>
-              <use xlink:href="images/sprite.svg#websocket" />
-            </svg>
+            <svg><use xlink:href="images/sprite.svg#websocket" /></svg>
           </div>
         </div>
       </div>
@@ -91,7 +77,7 @@
   <!-- Programming game -->
   <article id="proggame">
     <div>
-      <?php renderGallery('proggame', '', false); ?>
+      <?php gallery('proggame', '', false); ?>
     </div>
     <div>
       <h1>Programming game</h1>
@@ -110,19 +96,13 @@
         </div>
         <div class="techno">
           <div class="icon" data-toggle="tooltip" title="Java EE (Glassfish)">
-            <svg>
-              <use xlink:href="images/sprite.svg#java" />
-            </svg>
+            <svg><use xlink:href="images/sprite.svg#java" /></svg>
           </div>
           <div class="icon" data-toggle="tooltip" title="Javascript (YUI 3)">
-            <svg>
-              <use xlink:href="images/sprite.svg#javascript" />
-            </svg>
+            <svg><use xlink:href="images/sprite.svg#javascript" /></svg>
           </div>
           <div class="icon" data-toggle="tooltip" title="Canvas (Crafty)">
-            <svg>
-              <use xlink:href="images/sprite.svg#html" />
-            </svg>
+            <svg><use xlink:href="images/sprite.svg#html" /></svg>
           </div>
         </div>
       </div>
@@ -133,7 +113,7 @@
   <!-- Stalker -->
   <article id="stalker">
     <div>
-      <?php renderGallery("stalker", "ar=3:2&crop-to-fit"); ?>
+      <?php gallery("stalker", "ar=3:2&crop-to-fit"); ?>
     </div>
     <div>
       <h1>Stalker - Experimenting the Zone</h1>
@@ -151,19 +131,13 @@
         </div>
         <div class="techno">
           <div class="icon" data-toggle="tooltip" title="Javascript">
-            <svg>
-              <use xlink:href="images/sprite.svg#javascript" />
-            </svg>
+            <svg><use xlink:href="images/sprite.svg#javascript" /></svg>
           </div>
           <div class="icon" data-toggle="tooltip" title="Websocket">
-            <svg>
-              <use xlink:href="images/sprite.svg#websocket" />
-            </svg>
+            <svg><use xlink:href="images/sprite.svg#websocket" /></svg>
           </div>
           <div class="icon" data-toggle="tooltip" title="WebGL">
-            <svg>
-              <use xlink:href="images/sprite.svg#webgl" />
-            </svg>
+            <svg><use xlink:href="images/sprite.svg#webgl" /></svg>
           </div>
         </div>
       </div>
@@ -173,7 +147,7 @@
   <!-- Wegas -->
   <article id="wegas">
     <div>
-      <?php renderGallery("wegas", "ar=1.83&crop-to-fit"); ?>
+      <?php gallery("wegas", "ar=1.83&crop-to-fit"); ?>
     </div>
     <div>
       <h1>Wegas</h1>
@@ -193,19 +167,13 @@
         </div>
         <div class="techno">
           <div class="icon" data-toggle="tooltip" title="JavaEE <em>(Glassfish 3)</em>">
-            <svg>
-              <use xlink:href="images/sprite.svg#java" />
-            </svg>
+            <svg><use xlink:href="images/sprite.svg#java" /></svg>
           </div>
           <div class="icon" data-toggle="tooltip" title="PostgreSQL">
-            <svg>
-              <use xlink:href="images/sprite.svg#postgres" />
-            </svg>
+            <svg><use xlink:href="images/sprite.svg#postgres" /></svg>
           </div>
           <div class="icon" data-toggle="tooltip" title="JavaScript <em>(YUI 3)</em>">
-            <svg>
-              <use xlink:href="images/sprite.svg#javascript" />
-            </svg>
+            <svg><use xlink:href="images/sprite.svg#javascript" /></svg>
           </div>
         </div>
       </div>
@@ -218,9 +186,7 @@
       <a href="https://www.youtube.com/watch?v=EKI3U_uFv7Y" data-youtube-id="EKI3U_uFv7Y">
         <?php lazypicture('projects/mjte.jpg') ?>
         <!-- <img class="img-fluid" data-lazy-srcset="i/?w=526, i/?w=789 1.5x, i/?w=1052 2x" data-lazy-src="i/projects/mjte_720.jpg" /> -->
-        <svg>
-          <use xlink:href="images/sprite.svg#youtube" />
-        </svg>
+        <svg><use xlink:href="images/sprite.svg#youtube" /></svg>
       </a>
     </div>
     <div>
@@ -237,14 +203,10 @@
         </div>
         <div class="techno">
           <div class="icon" data-toggle="tooltip" title="C++ <em>(Nintendo Revolution SDK)</em>">
-            <svg>
-              <use xlink:href="images/sprite.svg#cplusplus" />
-            </svg>
+            <svg><use xlink:href="images/sprite.svg#cplusplus" /></svg>
           </div>
           <div class="icon" data-toggle="tooltip" title="Actionscript 2.0 <em>(in-game interfaces)</em>">
-            <svg>
-              <use xlink:href="images/sprite.svg#flash" />
-            </svg>
+            <svg><use xlink:href="images/sprite.svg#flash" /></svg>
           </div>
         </div>
       </div>
@@ -275,14 +237,10 @@
         </div>
         <div class="techno">
           <div class="icon" data-toggle="tooltip" title="Actionscript 3.0">
-            <svg>
-              <use xlink:href="images/sprite.svg#flash" />
-            </svg>
+            <svg><use xlink:href="images/sprite.svg#flash" /></svg>
           </div>
           <div class="icon" data-toggle="tooltip" title="Facebook SDK">
-            <svg>
-              <use xlink:href="images/sprite.svg#facebook2" />
-            </svg>
+            <svg><use xlink:href="images/sprite.svg#facebook2" /></svg>
           </div>
         </div>
       </div>
@@ -295,9 +253,7 @@
       <a href="https://www.youtube.com/watch?v=S6FgI2CR9I4" data-youtube-id="S6FgI2CR9I4">
         <?php lazypicture('projects/justdance2.jpg') ?>
         <!-- <img class="img-fluid" data-lazy-src="//i.ytimg.com/vi/S6FgI2CR9I4/maxresdefault.jpg" /> -->
-        <svg>
-          <use xlink:href="images/sprite.svg#youtube" />
-        </svg>
+        <svg><use xlink:href="images/sprite.svg#youtube" /></svg>
       </a>
     </div>
     <div>
@@ -315,24 +271,16 @@
         </div>
         <div class="techno">
           <div class="icon" data-toggle="tooltip" title="C++ <em>(Nintendo SDK & PS3 SDK)</em>">
-            <svg>
-              <use xlink:href="images/sprite.svg#cplusplus" />
-            </svg>
+            <svg><use xlink:href="images/sprite.svg#cplusplus" /></svg>
           </div>
           <div class="icon" data-toggle="tooltip" title="Objective C <em>(iPhone application)</em>">
-            <svg>
-              <use xlink:href="images/sprite.svg#csharp" />
-            </svg>
+            <svg><use xlink:href="images/sprite.svg#csharp" /></svg>
           </div>
           <div class="icon" data-toggle="tooltip" title="Actionscript 2.0 <em>(in-game interfaces)</em>">
-            <svg>
-              <use xlink:href="images/sprite.svg#flash" />
-            </svg>
+            <svg><use xlink:href="images/sprite.svg#flash" /></svg>
           </div>
           <div class="icon" data-toggle="tooltip" title="Python">
-            <svg>
-              <use xlink:href="images/sprite.svg#python" />
-            </svg>
+            <svg><use xlink:href="images/sprite.svg#python" /></svg>
           </div>
           <!-- <div class="icon" data-toggle="tooltip" title="PHP <em>(web-server for Facebook Application)</em>"><svg><use xlink:href="images/sprite.svg#php"/></svg></div> -->
         </div>
@@ -343,7 +291,7 @@
   <!--  3D  Blogosphere-->
   <article id="3dblogosphere">
     <div>
-      <?php renderGallery("3DBlogosphere", "ff&ar=3:2"); ?>
+      <?php gallery("3DBlogosphere", "ff&ar=3:2"); ?>
     </div>
     <div>
       <h1>3DBlogosphere</h1>
@@ -360,19 +308,13 @@
         </div>
         <div class="techno">
           <div class="icon" data-toggle="tooltip" title="Java <em>(J2EE, J2SE, Project Wonderland, JMonkey & Glassfish)</em>">
-            <svg>
-              <use xlink:href="images/sprite.svg#java" />
-            </svg>
+            <svg><use xlink:href="images/sprite.svg#java" /></svg>
           </div>
           <div class="icon" data-toggle="tooltip" title="XSLT">
-            <svg>
-              <use xlink:href="images/sprite.svg#xml" />
-            </svg>
+            <svg><use xlink:href="images/sprite.svg#xml" /></svg>
           </div>
           <div class="icon" data-toggle="tooltip" title="JavaScript">
-            <svg>
-              <use xlink:href="images/sprite.svg#javascript" />
-            </svg>
+            <svg><use xlink:href="images/sprite.svg#javascript" /></svg>
           </div>
         </div>
       </div>
@@ -386,9 +328,7 @@
         <?php lazypicture('projects/dtouch.jpg') ?>
         <!-- <img class="img-fluid"  src="//i.ytimg.com/vi/tPcI2RbFaSM/mqdefault.jpg" /> -->
         <!-- <img class="img-fluid" data-lazy-src="images/projects/dtouch_720.jpg" /> -->
-        <svg>
-          <use xlink:href="images/sprite.svg#youtube" />
-        </svg>
+        <svg><use xlink:href="images/sprite.svg#youtube" /></svg>
       </a>
     </div>
     <div>
@@ -407,9 +347,7 @@
         </div>
         <div class="techno">
           <div class="icon" data-toggle="tooltip" title="C++">
-            <svg>
-              <use xlink:href="images/sprite.svg#cplusplus" />
-            </svg>
+            <svg><use xlink:href="images/sprite.svg#cplusplus" /></svg>
           </div>
         </div>
       </div>
@@ -419,7 +357,7 @@
   <!-- Webdesign -->
   <article id="webdesign">
     <div>
-      <?php renderGallery("webdesign", "ar=4:3&ff"); ?>
+      <?php gallery("webdesign", "ar=4:3&ff"); ?>
     </div>
     <div>
       <h1>Independant web design</h1>
@@ -448,24 +386,16 @@
         </div>
         <div class="techno">
           <div class="icon" data-toggle="tooltip" title="Php">
-            <svg>
-              <use xlink:href="images/sprite.svg#php" />
-            </svg>
+            <svg><use xlink:href="images/sprite.svg#php" /></svg>
           </div>
           <div class="icon" data-toggle="tooltip" title="MySql">
-            <svg>
-              <use xlink:href="images/sprite.svg#mysql" />
-            </svg>
+            <svg><use xlink:href="images/sprite.svg#mysql" /></svg>
           </div>
           <div class="icon" data-toggle="tooltip" title="JavaScript <em>(YUI 3)</em>">
-            <svg>
-              <use xlink:href="images/sprite.svg#javascript" />
-            </svg>
+            <svg><use xlink:href="images/sprite.svg#javascript" /></svg>
           </div>
           <div class="icon" data-toggle="tooltip" title="Smarty">
-            <svg>
-              <use xlink:href="images/sprite.svg#smarty" />
-            </svg>
+            <svg><use xlink:href="images/sprite.svg#smarty" /></svg>
           </div>
           <!-- <div class="icon" data-toggle="tooltip" title="Html"><svg><use xlink:href="images/sprite.svg#html"/></svg></div> -->
           <!-- <div class="icon" data-toggle="tooltip" title="CSS"><svg><use xlink:href="images/sprite.svg#css"/></svg></div> -->
@@ -493,24 +423,16 @@
         </div>
         <div class="techno">
           <div class="icon" data-toggle="tooltip" title="Php">
-            <svg>
-              <use xlink:href="images/sprite.svg#php" />
-            </svg>
+            <svg><use xlink:href="images/sprite.svg#php" /></svg>
           </div>
           <div class="icon" data-toggle="tooltip" title="MySql">
-            <svg>
-              <use xlink:href="images/sprite.svg#mysql" />
-            </svg>
+            <svg><use xlink:href="images/sprite.svg#mysql" /></svg>
           </div>
           <div class="icon" data-toggle="tooltip" title="JavaScript <em>(YUI 3)</em>">
-            <svg>
-              <use xlink:href="images/sprite.svg#javascript" />
-            </svg>
+            <svg><use xlink:href="images/sprite.svg#javascript" /></svg>
           </div>
           <div class="icon" data-toggle="tooltip" title="Smarty">
-            <svg>
-              <use xlink:href="images/sprite.svg#smarty" />
-            </svg>
+            <svg><use xlink:href="images/sprite.svg#smarty" /></svg>
           </div>
           <!-- <div class="icon" data-toggle="tooltip" title="Html"><svg><use xlink:href="images/sprite.svg#html"/></svg></div> -->
           <!-- <div class="icon" data-toggle="tooltip" title="CSS"><svg><use xlink:href="images/sprite.svg#css"/></svg></div> -->
@@ -523,7 +445,7 @@
   <article id="schlempf">
     <div>
       <!--<iframe src="http://www.slideshare.net/slideshow/embed_code/4800011?rel=0" width="420" height="350" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px 1px 0; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>-->
-      <?php renderGallery("schlempf"); ?>
+      <?php gallery("schlempf"); ?>
     </div>
 
     <div>
@@ -541,9 +463,7 @@
         </div>
         <div class="techno">
           <div class="icon" data-toggle="tooltip" title="Java 2 Mobile Edition <em>(J2ME)</em>">
-            <svg>
-              <use xlink:href="images/sprite.svg#java" />
-            </svg>
+            <svg><use xlink:href="images/sprite.svg#java" /></svg>
           </div>
         </div>
       </div>
@@ -553,7 +473,7 @@
   <!-- EyeKidz -->
   <article id="eyekidz">
     <div>
-      <?php renderGallery("eyekidz", "cf&ar=4:3"); ?>
+      <?php gallery("eyekidz", "cf&ar=4:3"); ?>
     </div>
 
     <div>
@@ -570,9 +490,7 @@
         </div>
         <div class="techno">
           <div class="icon" data-toggle="tooltip" title="ActionScript">
-            <svg>
-              <use xlink:href="images/sprite.svg#flash" />
-            </svg>
+            <svg><use xlink:href="images/sprite.svg#flash" /></svg>
           </div>
         </div>
       </div>
@@ -600,24 +518,16 @@
         </div>
         <div class="techno">
           <div class="icon" data-toggle="tooltip" title="Php">
-            <svg>
-              <use xlink:href="images/sprite.svg#php" />
-            </svg>
+            <svg><use xlink:href="images/sprite.svg#php" /></svg>
           </div>
           <div class="icon" data-toggle="tooltip" title="MySql">
-            <svg>
-              <use xlink:href="images/sprite.svg#mysql" />
-            </svg>
+            <svg><use xlink:href="images/sprite.svg#mysql" /></svg>
           </div>
           <div class="icon" data-toggle="tooltip" title="JavaScript <em>(YUI 2)</em>">
-            <svg>
-              <use xlink:href="images/sprite.svg#javascript" />
-            </svg>
+            <svg><use xlink:href="images/sprite.svg#javascript" /></svg>
           </div>
           <div class="icon" data-toggle="tooltip" title="Html">
-            <svg>
-              <use xlink:href="images/sprite.svg#html" />
-            </svg>
+            <svg><use xlink:href="images/sprite.svg#html" /></svg>
           </div>
           <!-- <div class="icon" data-toggle="tooltip" title="CSS"><svg><use xlink:href="images/sprite.svg#css"/></svg></div> -->
         </div>

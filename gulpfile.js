@@ -39,7 +39,8 @@ gulp.task('usemin', ['imagemin', 'sass', 'copy'], function() {
       html: [minifyhtml({ empty: true })],
       js: [uglify() /*, rev()*/ ],
       jsAttributes: {
-        // async: true
+        // async: true,
+        // defer: true
       }
     }))
     // .pipe(revReplace({

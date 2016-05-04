@@ -7,6 +7,7 @@
  */
 jQuery(function($) {
   var BODY = 'body',
+    CLICK = 'click',
     Game = $.Game,
     Net = $.Net,
     loc = window.location.pathname;
@@ -18,8 +19,14 @@ jQuery(function($) {
      * 
      */
     init: function() {
-      // console.profile();
-      !currentPage && Game.init();
+      if (!currentPage)
+        App.game();
+
+      // Show hide current page
+      $('.game').toggleView(!currentPage).css('visibility', 'visible');
+      $('.page').toggleView(currentPage);
+      $('.loader').fadeOut();
+
       //App.hideableNav();
       App.smoothScroll();
       App.history();
@@ -28,13 +35,13 @@ jQuery(function($) {
       App.initPage();
 
       // Youtube video lazy load
-      $(BODY).on('click', '[data-youtube-id]', function(e) {
+      $(BODY).on(CLICK, '[data-youtube-id]', function(e) {
         e.preventDefault();
         $(this).html('<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" src="http://www.youtube.com/embed/' + $(this).data('youtube-id') + '?autoplay=1&rel=0&controls=1&autohide=1&color2=580000&showinfo=0&modestbranding=1&rel=0" allowfullscreen></iframe></div>');
       });
 
       // Slick slider links 
-      $(BODY).on('click', '[data-slick-open]', function(e) {
+      $(BODY).on(CLICK, '[data-slick-open]', function(e) {
         e.preventDefault();
         $(this).closest('article').find('[data-gallery]').get($(this).data('index') || 0).click();
       });
@@ -46,8 +53,6 @@ jQuery(function($) {
         html: true
       });
 
-      // console.profileEnd();
-
       // Keep track if window is focused or not
       $(window).blur(function() {
         App.windowActive = false;
@@ -58,24 +63,12 @@ jQuery(function($) {
 
       // Contact form
       $(BODY).on('submit', '#contactForm', function() {
-        $(this).addClass("sent");
-
         // Call send mail method
         $.post('php/sendMail.php', 'from=' + encodeURIComponent($(this).find('input').val()) + '&msg=' + encodeURIComponent($(this).find('textarea').val()));
 
-        $(this).find('input, textarea').val('');
-        setTimeout(function() {
-          $(this).removeClass('sent');
-        }.bind(this), 5000);
+        $(this).addClass("sent").find('input, textarea').val('');
+        setTimeout($(this).removeClass.bind($(this), 'sent'), 5000);
       });
-
-      // Show hide current page
-      //currentPage && Crafty.pause();
-      $('.game').toggleView(!currentPage).css('visibility', 'visible');
-      $('.page').toggleView(currentPage);
-      $('.loader').fadeOut();
-
-      Net.init();
 
       WebFont.load({
         custom: {
@@ -83,6 +76,14 @@ jQuery(function($) {
           urls: ['css/font.css']
         }
       });
+    },
+    gameInitalized: false,
+    game: function() {
+      if (!App.gameInitalized) {
+        Game.init();
+        Net.init();
+        App.gameInitalized = true;
+      }
     },
     /**
      * Scrollspy
@@ -172,14 +173,14 @@ jQuery(function($) {
           // Back to main page
           $('.page').fadeOut();
           $('.game').fadeIn();
-          Game.init();
+          App.game();
           Crafty.isPaused() && Crafty.pause();
         }
       });
 
-      $(BODY).on('click', '.nav-link.close, footer a', function(e) {
+      $(BODY).on(CLICK, '.nav-link.close, footer a', function(e) {
         e.preventDefault();
-        App.showPage($(this).attr('href').replace('.html', '').replace('/', ''))
+        App.showPage($(this).attr('href').replace('.html', '').replace('/', ''));
       });
     },
     /**
@@ -216,7 +217,7 @@ jQuery(function($) {
      * Smooth scroll on anchor link
      */
     smoothScroll: function() {
-      $(BODY).on('click', 'a[href*="#"]:not([href="#"])', function() {
+      $(BODY).on(CLICK, 'a[href*="#"]:not([href="#"])', function() {
         if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
           var target = $(this.hash);
           target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
@@ -233,8 +234,8 @@ jQuery(function($) {
      * Hide Header on on scroll down
      */
     hideableNav: function() {
-      var lastScrollTop = 0;
-      var delta = 5;
+      var didScroll, lastScrollTop = 0,
+        delta = 5;
 
       $(window).scroll(function(event) {
         didScroll = true;
@@ -259,11 +260,10 @@ jQuery(function($) {
         if (st > lastScrollTop && st > App.navBarHeight) {
           // Scroll Down
           $(BODY).removeClass('nav-down').addClass('nav-up');
-        } else {
+        } else if (st + $(window).height() < $(document).height()) {
           // Scroll Up
-          if (st + $(window).height() < $(document).height()) {
-            $(BODY).removeClass('nav-up').addClass('nav-down');
-          }
+          $(BODY).removeClass('nav-up').addClass('nav-down');
+
         }
         lastScrollTop = st;
       }
@@ -286,56 +286,30 @@ jQuery(function($) {
         });
       }
 
-      $(BODY).on('click', '[data-gallery]', function() {
+      $(BODY).on(CLICK, '[data-gallery]', function() {
         event.preventDefault();
-        var options = {
-          index: $(this).data('index'),
-          // bgOpacity: 0.7,
-          showHideOpacity: true,
-          history: false,
-          getThumbBoundsFn: function(index) {
-            var p = this.offset();
-            return { x: p.left, y: p.top, w: this.find('img').width(), h: this.find('img').height() };
-          }.bind($(this))
-        };
 
-        // Initialize PhotoSwipe
-        var lightBox = new PhotoSwipe($('.pswp')[0], PhotoSwipeUI_Default, getItems($(this).data('gallery')), options);
-        lightBox.init();
+        var init = $.proxy(function() {
+          // Initialize PhotoSwipe
+          new PhotoSwipe($('.pswp')[0], PhotoSwipeUI_Default, getItems($(this).data('gallery')), {
+            index: $(this).data('index'),
+            // bgOpacity: 0.7,
+            showHideOpacity: true,
+            history: false,
+            getThumbBoundsFn: function(index) {
+              var p = this.offset();
+              return { x: p.left, y: p.top, w: this.find('img').width(), h: this.find('img').height() };
+            }.bind($(this))
+          }).init();
+        }, this);
+
+        if (!window.PhotoSwipe) {
+          $.when(
+              $.ajax({ url: 'bower_components/photoswipe/dist/photoswipe.min.js', dataType: "script", cache: true }),
+              $.ajax({ url: 'bower_components/photoswipe/dist/photoswipe-ui-default.min.js', dataType: "script", cache: true }))
+            .then(init);
+        } else init();
       });
-    },
-    /**
-     *
-     */
-    fancybox: function() {
-
-      // Fancy box gallery
-      $.extend($.fancybox.defaults, {
-        padding: 0,
-        autoPlay: true,
-        //prevEffect: 'none',
-        //nextEffect: 'none',
-        helpers: {
-          title: {
-            //type: 'outside'
-          },
-          thumbs: {
-            width: 80,
-            height: 80,
-            source: function(current) {
-              var e = $(current.element);
-              if (e.data('thumbnail'))
-                return $(current.element).data('thumbnail');
-              else
-                return e.find('img').attr('src');
-            }
-          }
-        }
-      });
-
-      // Update fancybox links
-      $('.fancybox').fancybox();
-
     },
     /**
      *
@@ -413,40 +387,14 @@ jQuery(function($) {
     //     });
     //   });
     // }
-  }
-  $.App = App;
+  };
 
-  /* Require config */
-  // require.config({
-  //   baseUrl: 'js/',
-  //   paths: {
-  //     slick: 'slick/slick',
-  //     tinyMCE: 'tinymce/tinymce.min'
-  //       //jquery: 'jquery-2.1.1.min'
-  //   },
-  //   shim: {
-  //     tinyMCE: {
-  //       exports: 'tinyMCE',
-  //       init: function() {
-  //         this.tinyMCE.DOM.events.domLoaded = true;
-  //         this.tinyMCE.baseURL = 'lib/tinymce';
-  //         this.tinyMCE.suffix = '.min';
-  //         return this.tinyMCE;
-  //       }
-  //     }
-  //     //'slick': {
-  //     //    deps: ['jquery'],
-  //     //    exports: 'jQuery.fn.slick'
-  //     //},
-  //     //jquery: {
-  //     //    exports: 'jQuery'
-  //     //}
-  //   }
-  // });
+  $.App = App;
 
   String.prototype.capitalizeFirstLetter = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
-  }
+  };
+
   $.fn.extend({
     toggleView: function(doShow, a, b) {
       if (doShow) {

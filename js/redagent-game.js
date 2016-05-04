@@ -41,15 +41,11 @@ jQuery(function($) {
           [2, -15], [4, -17], [4, -18], [2, -17], [3, -18] // head     
          ],
     tilesMap = {},
-    initialized = false,
     tileLoaded = [];
 
   var Game = {
     players: {},
     init: function() {
-      if (initialized) return;
-      initialized = true;
-
       Game.initChat();
 
       Crafty.init(WIDTH, HEIGHT); // Init crafty
@@ -97,9 +93,9 @@ jQuery(function($) {
       });
 
       // Init houses
-      Crafty.e('House').setTargetPage('projects').place(5.5, 3.2).attr('z', 201);
-      Crafty.e('House').setTargetPage('contact').place(0.5, 21.2).attr('z', 204);
-      Crafty.e('House').setTargetPage('blog').place(16.5, 14.2).attr('z', 206);
+      Crafty.e('House').targetPage('projects').place(5.5, 3.2).attr('z', 201);
+      Crafty.e('House').targetPage('contact').place(0.5, 21.2).attr('z', 204);
+      Crafty.e('House').targetPage('blog').place(16.5, 14.2).attr('z', 206);
 
       // Init bot
       Game.players.bot = Crafty.e('Actor, Character, BotSprite')
@@ -226,8 +222,8 @@ jQuery(function($) {
     },
     addParagraph: function(msg, cssclass) {
       $('.chat-msgs').append('<div class="chat-msg ' + cssclass + '">' + msg + '</div>')
-        .animate({ scrollTop: $('.chat-msgs').prop('scrollHeight') }, 1500)
-        //.perfectScrollbar('update');
+        .animate({ scrollTop: $('.chat-msgs').prop('scrollHeight') }, 1500);
+      //.perfectScrollbar('update');
     },
   };
   $.Game = Game;
@@ -255,7 +251,7 @@ jQuery(function($) {
       this.requires('2D ' + Crafty.support.canvas ? 'Canvas' : 'DOM');
     },
     place: function(x, y, screenX, screenY) {
-      this._pos = { x: x + (screenX || 0) * TILEPERSCREENX, y: y + (screenY || 0) * TILEPERSCREENY }
+      this._pos = { x: x + (screenX || 0) * TILEPERSCREENX, y: y + (screenY || 0) * TILEPERSCREENY };
       Crafty.isometric.place(this._pos.x, this._pos.y, 0, this);
       return this;
     }
@@ -320,10 +316,10 @@ jQuery(function($) {
         if (!this._label) {
           this._label = Crafty.e('2D, DOM, Text, Label' + (this.has('PlayablePC') ? ', PCLabel' : ''))
             .attr({ x: this.x + 24, y: this.y + 60, z: 400 })
-            .textFont({ size: .9 / Crafty.viewport._scale + 'rem' })
+            .textFont({ size: 0.9 / Crafty.viewport._scale + 'rem' })
             .css({
               'border-radius': 2 / s + 'px',
-              padding: .2 / s + 'rem ' + (0.5 / s) + 'rem',
+              padding: 0.2 / s + 'rem ' + (0.5 / s) + 'rem',
             });
           this.attach(this._label);
         }
@@ -337,8 +333,8 @@ jQuery(function($) {
       var that = this,
         textE = Crafty.e('2D, DOM, Text, Dialog')
         .attr({ x: this.x - 125, y: this.y - 20, w: 270, z: 401, visible: false })
-        .textFont({ size: .9 / Crafty.viewport._scale + 'rem' })
-        .css({ padding: .3 / Crafty.viewport._scale + 'rem' }),
+        .textFont({ size: 0.9 / Crafty.viewport._scale + 'rem' })
+        .css({ padding: 0.3 / Crafty.viewport._scale + 'rem' }),
         connector = Crafty.e('2D, DOM, Connector')
         .attr({ w: 32, h: 32, z: 402, visible: false });
 
@@ -439,8 +435,8 @@ jQuery(function($) {
 
       return this;
     },
+    // Move player and make sure it will open window
     moveAndNotify: function(x, y, src) {
-      // Move player and make sure it will open window
       this.moveTo(x, y, 0)
         .clickedOn = src;
       $.Net.trigger('move', { x: x, y: y });
@@ -448,8 +444,8 @@ jQuery(function($) {
     },
     pos2px: function(x, y, z) {
       return {
-        x: x * 64 + (y & 1) * (64 / 2),
-        y: y * 64 / 4 - 32 - 5
+        x: x * TILEWIDTH + (y & 1) * TILEHEIGHT,
+        y: y * TILEWIDTH / 4 - 32 - 5
       };
     },
     cart2px: function(v) {
@@ -545,8 +541,8 @@ jQuery(function($) {
           this.animate('Appear'); // Start animation
         }, 500);
     },
-    setTargetPage: function(page) {
-      var row = { contact: 0, projects: 1, blog: 2 }[page];
+    targetPage: function(page) {
+      var row = ['contact', 'projects', 'blog'].indexOf(page);
       this.attr('targetPage', page)
         .reel('Appear', 1000, 0, row, 24)
         .reel('Open', 900, 23, row, 21)
@@ -561,7 +557,7 @@ jQuery(function($) {
           $.App.showPage(this.attr('targetPage'));
         }, 900)
         .timeout(function() {
-          this.animate('Close')
+          this.animate('Close');
         }, 1000);
     }
   });

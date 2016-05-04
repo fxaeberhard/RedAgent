@@ -293,6 +293,7 @@ AddDefaultCharset utf-8
     RewriteRule ^contact\.html$ index.php?page=contact [L]
     RewriteRule ^projects\.html$ index.php?page=projects [L]
     RewriteRule ^blog\.html$ index.php?page=blog [L]
+    RewriteRule ^post-(.*)\.html$ index.php?page=post&post=$1 [L]
 </IfModule>
 
 # ----------------------------------------------------------------------
