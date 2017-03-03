@@ -18,7 +18,7 @@
     "slick-carousel": "^1.5.9",
     "crafty": "^0.7.1",
     "photoswipe": "^4.1.1",
-    "pusher": "^3.0.0",
-    "webfontloader": "^1.6.24"
+    "webfontloader": "^1.6.24",
+    "pusher-js": "pusher#^4.0.0"
   }
 }

@@ -93,7 +93,7 @@ gulp.task('imagemin', ['svg-sprite'], function() {
 // Configure other assets copy task
 gulp.task('copy', function() {
 
-  gulp.src(['./php/**/*', 'imgp.php'], { base: "." })
+  gulp.src(['./php/**/*', 'imgp.php', './vendor/**'], { base: "." })
     // .pipe(minifyhtml({ empty: true }))
     .pipe(gulp.dest('dist'))
 
@@ -101,7 +101,7 @@ gulp.task('copy', function() {
     // .pipe(cssnano())
     .pipe(gulp.dest('dist/css/'));
 
-  gulp.src(['contact.php', 'blog.php', 'contact.php', 'projects.php', 'php/photoswipe.html', 'blog'], { base: "." })
+  gulp.src(['contact.php', 'blog.php', 'contact.php', 'projects.php', 'post.php', 'php/photoswipe.html', 'blog/*'], { base: "." })
     .pipe(minifyhtml({ empty: true }))
     .pipe(gulp.dest('dist/'));
 

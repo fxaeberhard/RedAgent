@@ -3,6 +3,7 @@
 
 <?php
 require_once 'php/Tools.php';
+global $page;
 $page = filter_input(INPUT_GET, 'page');
 $convoId = get_convo_id();
 ?>
@@ -66,14 +67,14 @@ $convoId = get_convo_id();
 
     <!-- build:css css/styles.css -->
     <!-- Libraries -->
-    <link rel="stylesheet" href="bower_components/slick-carousel/slick/slick.css" />
+    <link rel="stylesheet" href="bower_components/slick-carousel/slick/slick.css">
     <link rel="stylesheet" href="bower_components/photoswipe/dist/photoswipe.css">
     <!-- <link rel="stylesheet" href="bower_components/perfect-scrollbar/css/perfect-scrollbar.min.css" /> -->
     <!-- <link rel="stylesheet" href="bower_components/photoswipe/dist/default-skin/default-skin.css"> -->
     <!-- <link rel="stylesheet" href="bower_components/slick-carousel/slick/slick-theme.css" /> -->
 
     <!-- Custom styles -->
-    <link href="css/redagent.css" rel="stylesheet" />
+    <link href="css/redagent.css" rel="stylesheet">
     <!--endbuild-->
   </head>
 
@@ -131,7 +132,7 @@ $convoId = get_convo_id();
     <script src="bower_components/bootstrap/js/dist/tooltip.js"></script>
     <script src="bower_components/jquery.cookie/jquery.cookie.js"></script>
     <script src="bower_components/crafty/dist/crafty-min.js"></script>
-    <script src="bower_components/pusher/dist/pusher.min.js"></script>
+    <script src="bower_components/pusher-js/dist/web/pusher.js"></script>
     <script src="bower_components/webfontloader/webfontloader.js"></script>
     <script src="js/scrollspy.js"></script>
     <script src="js/slick.js"></script>
@@ -157,23 +158,7 @@ $convoId = get_convo_id();
     ga('create', 'UA-12224039-1', 'auto');
     ga('send', 'pageview');
     </script>
-    <script async src='https://www.google-analytics.com/analytics.js'></script>
-
-    <!--<script>
-    (function(i, s, o, g, r, a, m) {
-      i['GoogleAnalyticsObject'] = r;
-      i[r] = i[r] || function() {
-        (i[r].q = i[r].q || []).push(arguments)
-      }, i[r].l = 1 * new Date();
-      a = s.createElement(o),
-        m = s.getElementsByTagName(o)[0];
-      a.async = 1;
-      a.src = g;
-      m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-    ga('create', 'UA-12224039-1', 'auto');
-    ga('send', 'pageview');
-    </script> -->
+    <!-- <script async defer src='https://www.google-analytics.com/analytics.js'></script> -->
 
     <!-- Google Knowledge Graph -->
     <script type="application/ld+json">

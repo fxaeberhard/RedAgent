@@ -1,10 +1,10 @@
 <?php
 
-require_once 'Pusher.php';
+require_once '../vendor/pusher/pusher-php-server/lib/Pusher.php';
 
-define("APP_KEY", "9d4eb6ada84f3af3c77f");
-define("APP_SECRET", "c0ecc6aa74215d03cc22");
-define("APP_ID", "10827");
+define("APP_KEY", "52b7c53f33754e278bd6");
+define("APP_SECRET", "551ccd900c3d322346ee");
+define("APP_ID", "309220");
 
 //if (is_user_logged_in()) {
 

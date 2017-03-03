@@ -7,7 +7,8 @@
  */
 jQuery(function($) {
   var PRESENCECHANNEL = "presence-redagent",
-    APPKEY = '9d4eb6ada84f3af3c77f',
+    // APPKEY = '9d4eb6ada84f3af3c77f',
+    APPKEY = '52b7c53f33754e278bd6',
     AUTHENDPOINT = 'php/endpoint.php',
     channel, Game = $.Game;
 
@@ -17,7 +18,9 @@ jQuery(function($) {
 
       // Init pusher 
       var pusher = new Pusher(APPKEY, {
-        authEndpoint: AUTHENDPOINT
+        authEndpoint: AUTHENDPOINT,
+        cluster: 'eu',
+        encrypted: true
       });
       channel = Net.channel = pusher.subscribe(PRESENCECHANNEL);
 
@@ -31,6 +34,9 @@ jQuery(function($) {
         });
         Net.sendJump();
       });
+      channel.bind('pusher:subscription_error', function(error) {
+        console.log('error', error);
+      })
 
       channel.bind('pusher:member_added', function(member) { // When somebody connect,
         // console.log("Member added, count: ", channel.members.count);

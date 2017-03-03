@@ -255,7 +255,7 @@ AddDefaultCharset utf-8
     RewriteEngine On
     Options +FollowSymlinks
     # Options +SymLinksIfOwnerMatch
-    RewriteBase /RedAgent/
+    RewriteBase /edsa-Work/RedAgent/
 
     # RewriteOptions <options>
     RewriteCond %{HTTPS} =on
