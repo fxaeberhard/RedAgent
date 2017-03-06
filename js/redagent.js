@@ -164,7 +164,7 @@ jQuery(function($) {
           $('.game').fadeOut();
 
           // Fetch page content from server
-          $.get(page + '.php', function(r) {
+          $.get('php/' + page + '.php', function(r) {
             $('.page').html(r).fadeIn();
             $('.loader').fadeOut();
             App.initPage();

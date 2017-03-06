@@ -44,25 +44,15 @@ $convoId = get_convo_id();
     <meta name="twitter:image" content="{{imageUrl}}"> -->
 
     <!-- Favicon -->
-    <link rel="apple-touch-icon" href="/images/icon/apple.png">
-    <link rel="apple-touch-icon" sizes="57x57" href="/images/icon/apple-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="/images/icon/apple-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="/images/icon/apple-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="/images/icon/apple-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="/images/icon/apple-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="/images/icon/apple-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="/images/icon/apple-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="/images/icon/apple-152x152.png">
+
+    <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/images/icon/apple-180x180.png">
     <link rel="icon" type="image/png" href="/images/icon/favicon-32x32.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="/images/icon/favicon-194x194.png" sizes="194x194">
-    <link rel="icon" type="image/png" href="/images/icon/favicon-96x96.png" sizes="96x96">
-    <link rel="icon" type="image/png" href="/images/icon/andro-192x192.png" sizes="192x192">
     <link rel="icon" type="image/png" href="/images/icon/favicon-16x16.png" sizes="16x16">
     <link rel="manifest" href="/images/icon/manifest.json">
     <link rel="mask-icon" href="/images/icon/safari-pinned-tab.svg" color="#580000">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="msapplication-TileImage" content="/images/icon/mstile-144x144.png">
+    <link rel="shortcut icon" href="/images/icon/favicon.ico">
+    <meta name="msapplication-config" content="/images/icon/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
 
     <!-- build:css css/styles.css -->
@@ -82,7 +72,7 @@ $convoId = get_convo_id();
 
     <!-- Pages -->
     <section class="page">
-      <?php if ($page) include "$page.php"; ?>
+      <?php if ($page) include "php/$page.php"; ?>
     </section>
 
     <!-- Game -->

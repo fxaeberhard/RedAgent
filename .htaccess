@@ -281,8 +281,8 @@ AddDefaultCharset utf-8
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
 
-    RewriteRule ^i/(.*)$        imgp.php?src=$1 [QSA,NC,L]
-    RewriteRule ^imgpp/(.*)$        imgp.php?src=$1 [QSA,NC,L]
+    RewriteRule ^i/(.*)$            php/imgp.php?src=$1 [QSA,NC,L]
+    RewriteRule ^imgpp/(.*)$        php/imgp.php?src=$1 [QSA,NC,L]
     
     RewriteRule ^User+Experience/$ projects.html
     RewriteRule ^Resume/$ http://red-agent.com/contact.html  [R=301,L]

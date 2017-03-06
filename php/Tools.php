@@ -4,7 +4,7 @@ global $pages;
 $pages = array(
     "" => array(
         "title" => "Red Agent - Francois-Xavier Aeberhard portfolio",
-        "description" => "My name is Francois-Xavier Aeberhard, I'm an user experience enginee and this is my portfolio."),
+        "description" => "My name is Francois-Xavier Aeberhard, I'm an user experience engineer and this is my portfolio."),
     "projects" => array(
         "title" => "Francois-Xavier Aeberhard Projects",
         "description" => "Discover my work: Wallogram, Programming game, Michael Jackson the experiene and much more."),
