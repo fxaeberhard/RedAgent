@@ -37,8 +37,8 @@ $config = array(
 $config = array(
 
     'mode'         => 'production',               // 'production', 'development', 'strict'
-    'image_path'   =>  __DIR__ . '/images/',
-    'cache_path'   =>  __DIR__ . '/cache/',
+    'image_path'   =>  __DIR__ . '/../assets/images/',
+    'cache_path'   =>  __DIR__ . '/../cache/',
     // "valid_filename" => "#^.+$#"
     //'image_path'   =>  __DIR__ . '/img/',
     //'cache_path'   =>  __DIR__ . '/../cache/',
