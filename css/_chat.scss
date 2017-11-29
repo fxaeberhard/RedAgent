@@ -1,0 +1,163 @@
+.chat-button {
+  background: transparentize($white, .1);
+  padding: 7px 14px 5px;
+  border-radius: 32px;
+  position: fixed;
+  top: 13px;
+  right: 17px;
+  z-index: 26;
+  display: flex;
+  justify-content: center;
+  color: $red;
+  font-size: 1.7rem;
+  cursor: pointer;
+  transition: 0.3s ease;
+  font-weight: bold;
+
+  svg {
+    width: 40px;
+    height: 47px;
+    margin-right: 8px;
+    margin-top: -3px;
+    fill: $red;
+  }
+
+  &.empty {
+    transform: translateX(200px);
+  }
+
+  &:hover {
+    background: $lightgray;
+  }
+}
+
+.chat {
+  $width: 400px;
+  max-width: 100vw;
+  position: fixed;
+  top: 0;
+  right: -2px;
+  width: 300px;
+  background: $white;
+  border-left: 2px solid $red;
+  height: 100vh;
+  z-index: 29;
+  overflow: hidden;
+  width: 0;
+  transition: 0.3s ease;
+  background: $white;
+
+  .chat-open & {
+    width: $width;
+  }
+
+  > div {
+    padding: 10px;
+    width: $width - 2px;
+
+    .members {
+      display: inline-block;
+      font-size: 0.8rem;
+      color: darkgray;
+      float: left;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 90%;
+    }
+
+    .chat-msgs {
+      clear: both;
+      height: calc(100vh - 105px);
+
+      > div {
+        height: 100%;
+        position: relative;
+      }
+
+      .chat-msg {
+        font-size: 0.9rem;
+        color: $red;
+
+        .name {
+          color: $orange;
+          display: block; // margin: 0 0 -.1rem -0.4rem;
+          text-transform: uppercase;
+          font-size: 0.7rem;
+        }
+
+        &.self {
+          color: darkgray!important;
+          text-align: right;
+        }
+
+        &.newtalker+.newtalker {
+          margin-top: 0.5rem;
+        }
+      }
+
+      .notification {
+        color: darkgray;
+        font-style: italic;
+      }
+    }
+
+    textarea {
+      width: 100%;
+      border: none;
+      border-top: 2px solid #580000;
+      margin: 0;
+      padding: 5px 0;
+      display: block;
+      margin-top: 5px;
+      font-size: 0.9em;
+      background: $white;
+      vertical-align: bottom;
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}
+
+.close-button {
+  $size: 20px;
+  float: left;
+  height: $size;
+  width: $size;
+  position: relative;
+  box-sizing: border-box;
+  line-height: $size;
+  display: inline-block;
+  margin: 0 9px 15px 0;
+
+  &:after,
+  &:before {
+    $width: 20px;
+    $height: 3px;
+    transform: rotate(-45deg);
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -$height/2;
+    margin-left: -$width/2;
+    display: block;
+    height: $height;
+    width: $width;
+    background-color: $red;
+    transition: all 0.2s ease-out;
+  }
+
+  &:after {
+    transform: rotate(45deg);
+  }
+
+  &:hover {
+    &:after,
+    &:before {
+      transform: rotate(0deg);
+    }
+  }
+}

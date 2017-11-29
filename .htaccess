@@ -234,7 +234,7 @@ AddDefaultCharset utf-8
 #     appropriate schema automatically (http or https).
 
 <IfModule mod_rewrite.c>
-    
+
     # SECTION BEGIN Redcms
     RewriteEngine On
     RewriteCond %{HTTP_HOST} ^redcms\.
@@ -255,7 +255,7 @@ AddDefaultCharset utf-8
     RewriteEngine On
     Options +FollowSymlinks
     # Options +SymLinksIfOwnerMatch
-    RewriteBase /edsa-Work/RedAgent/
+    RewriteBase /edsa-work/RedAgent/
 
     # RewriteOptions <options>
     RewriteCond %{HTTPS} =on
@@ -283,17 +283,17 @@ AddDefaultCharset utf-8
 
     RewriteRule ^i/(.*)$            php/imgp.php?src=$1 [QSA,NC,L]
     RewriteRule ^imgpp/(.*)$        php/imgp.php?src=$1 [QSA,NC,L]
-    
+
     RewriteRule ^User+Experience/$ projects.html
     RewriteRule ^Resume/$ http://red-agent.com/contact.html  [R=301,L]
     RewriteRule ^Contact/$ http://red-agent.com/contact.html  [R=301,L]
     RewriteRule ^User+Experience/$ http://red-agent.com/projects.html  [R=301,L]
     RewriteRule ^Games/$ http://red-agent.com/projects.html  [R=301,L]
 
-    RewriteRule ^contact\.html$ index.php?page=contact [L]
-    RewriteRule ^projects\.html$ index.php?page=projects [L]
-    RewriteRule ^blog\.html$ index.php?page=blog [L]
-    RewriteRule ^post-(.*)\.html$ index.php?page=post&post=$1 [L]
+    RewriteRule ^Contact$ index.php?page=Contact [L]
+    RewriteRule ^Projects$ index.php?page=Projects [L]
+    RewriteRule ^Blog$ index.php?page=Blog [L]
+    RewriteRule ^Post-(.*)$ index.php?page=Post&post=$1 [L]
 </IfModule>
 
 # ----------------------------------------------------------------------

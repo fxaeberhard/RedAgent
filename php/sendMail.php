@@ -47,5 +47,3 @@ if (!$mail->send()) {
 } else {
     echo "Message sent!";
 }
-
-?>

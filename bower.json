@@ -16,9 +16,10 @@
     "tether": "^1.2.0",
     "svg4everybody": "^2.0.3",
     "slick-carousel": "^1.5.9",
-    "crafty": "^0.7.1",
+    "crafty": "^0.8.0",
     "photoswipe": "^4.1.1",
     "webfontloader": "^1.6.24",
-    "pusher-js": "pusher#^4.0.0"
+    "pusher-js": "pusher#^4.0.0",
+    "lodash": "^4.17.4"
   }
 }

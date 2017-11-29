@@ -1,24 +1,25 @@
-<?php require_once 'php/Tools.php'; ?>
+<?php require_once 'app.php'; ?>
 
 <!-- Navbar -->
-<header>
-  <nav>
-    <a href="blog.html" class="nav-link close"><svg><use xlink:href="images/sprite.svg#back"/></svg></a>
-  </nav>
-</header>
+
+<a href="Blog" class="nav-link close"><svg><use xlink:href="assets/images/sprite.svg#back"/></svg></a>
+
+<!-- header>
+  <nav></nav>
+</header> -->
 
 <main>
   <?php
     $post = filter_input(INPUT_GET, 'post');
     $path = 'blog';
-echo $post;
+    // echo $post;
     include $path . '/' . $post . '.html';
   ?>
 
     <div id="disqus_thread"></div>
     <script>
     var disqus_config = function() {
-      this.page.url = "http://red-agent.com/post-<?php echo $post ?>.html";
+      this.page.url = "http://red-agent.com/post-<?php echo $post ?>";
       this.page.identifier = "<?php echo $post ?>";
     };
     (function() {

@@ -1,0 +1,153 @@
+$darkorange: #d3531a;
+
+.menu {
+	position: fixed;
+	top: 10px;
+	left: 10px;
+	z-index: 30;
+
+	.hamburger,
+	a {
+		position: absolute;
+		top: 0;
+		left: 0;
+		border-radius: 35px;
+		transition: top 0.3s ease, width 0.4s linear 0.2s;
+		background: transparentize($white, .1);
+	}
+
+	a {
+		width: 60px;
+		height: 60px;
+		opacity: 0;
+		display: flex;
+		align-items: center;
+		flex-wrap: nowrap;
+		color: $red;
+		overflow: hidden;
+
+		& > svg {
+			flex-shrink: 0;
+			height: 40px;
+			width: 40px;
+			margin: 0 10px 0 16px;
+			fill: $red;
+		}
+	}
+
+	&.open {
+		a {
+			opacity: 1;
+			top: 75px;
+			width: 150px;
+
+			&:nth-child(2) {
+				top: 150px;
+			}
+
+			&:nth-child(3) {
+				top: 225px;
+			}
+		}
+	}
+}
+
+.hamburger {
+	width: 70px;
+	height: 60px;
+	position: relative;
+	padding: 0 10px 0 10%;
+	transform: rotate(0deg);
+	transition: 0.5s ease-in-out;
+	cursor: pointer;
+
+	&:hover {
+		background: $lightgray;
+	}
+
+	span {
+		display: block;
+		position: absolute;
+		height: 9px;
+		width: 40px;
+		background: $red;
+		border-radius: 9px;
+		opacity: 1;
+		left: 15px;
+		transform: rotate(0deg);
+		transition: 0.25s ease-in-out;
+
+		&:nth-child(1) {
+			top: 13px;
+		}
+
+		&:nth-child(2) {
+			top: 25px;
+		}
+
+		&:nth-child(3) {
+			top: 37px;
+		}
+	}
+
+	.open & {
+		span:nth-child(1) {
+			top: 25px;
+			transform: rotate(135deg);
+		}
+
+		span:nth-child(2) {
+			opacity: 0;
+			left: -60px;
+		}
+
+		span:nth-child(3) {
+			top: 25px;
+			transform: rotate(-135deg);
+		}
+	}
+}
+// Link effect
+
+.menu a span {
+	position: relative;
+	display: inline-block;
+	outline: none;
+	text-decoration: none!important;
+
+	&::before {
+		color: $red;
+		text-shadow: 0 0 1px rgba(255, 255, 255, 0.3);
+		position: absolute;
+		transition: transform 0.3s, opacity 0.3s;
+		pointer-events: none;
+	}
+
+	&::after {
+		content: '';
+		@include absolute(auto, auto, 0, 0);
+		@include size(100%, 2px);
+		background: $orange;
+		opacity: 0;
+		transform: translateY(5px);
+		transition: transform 0.3s, opacity 0.3s;
+		pointer-events: none;
+	}
+}
+
+.menu a:focus,
+.menu a:hover {
+	text-decoration: none;
+
+	span {
+		&::before {
+			opacity: 0;
+			transform: translateY(-2px);
+		}
+
+		&::after {
+			opacity: 1;
+			transform: translateY(0px);
+		}
+	}
+}

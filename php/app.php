@@ -1,20 +1,21 @@
 <?php
 
 global $pages;
+
 $pages = array(
     "" => array(
         "title" => "Red Agent - Francois-Xavier Aeberhard portfolio",
         "description" => "My name is Francois-Xavier Aeberhard, I'm an user experience engineer and this is my portfolio."),
-    "projects" => array(
+    "Projects" => array(
         "title" => "Francois-Xavier Aeberhard Projects",
         "description" => "Discover my work: Wallogram, Programming game, Michael Jackson the experiene and much more."),
-    "contact" => array(
+    "Contact" => array(
         "title" => "Contact Francois-Xavier Aeberhard",
         "description" => "Francois-Xavier Aeberhard, Level 110 User experience engineer"),
-    "blog" => array(
+    "Blog" => array(
         "title" => "Francois-Xavier Aeberhard Blog",
         "description" => "Drawings, movies or small games, this is what i do in my free time and I want to keep a trace of."),
-    "post" => array(
+    "Post" => array(
         "description" => "Francois-Xavier Aeberhard Blog"));
 
 function title($page = '') {
@@ -36,12 +37,12 @@ function footer($page = '') {
     global $pages;
     echo '<footer>';
     echo '<h1>François-Xavier Aeberhard Portfolio</h1>';
-    $links = ['blog','contact', 'projects'];
+    $links = ['Blog','Contact', 'Projects'];
     foreach ($links as $p ) {
         if ($page == $p) {
             echo '<a class="current">'.ucfirst($p)."</a>";
         } else {
-            echo '<a href="'.$p.'.html">'.ucfirst($p)."</a>";
+            echo '<a href="'.$p.'">'.ucfirst($p)."</a>";
         }
     }
     echo '</footer>';
@@ -64,16 +65,16 @@ function lazypicture($src, $options = "") {
 }
 
 function gallery($dir, $options = "", $lazy = true) {
-    $files = glob("images/$dir/*.{jpg,gif,png,jpeg,JPG,GIF,PNG,JPEG}", GLOB_BRACE);
+    $files = glob(__DIR__  . "/../assets/images/$dir/*.{jpg,gif,png,jpeg,JPG,GIF,PNG,JPEG}", GLOB_BRACE);
     sort($files, SORT_LOCALE_STRING);
     echo '<div class="slick" itemscope itemtype="http://schema.org/ImageGallery">';
     $i = 0;
     $options = 'sa=jpg&' . $options;
     foreach ($files as $entry) {
+        $src = str_replace(__DIR__ .'/../assets/images/', '', $entry);
         $size = getimagesize($entry);
         echo '<figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">';
-        echo '<a href="' . $entry . '" data-gallery="' . $dir . '" itemprop="contentUrl" data-size="'. $size[0] . 'x' . $size[1] .'" data-index="' . $i . '">';
-        $src = str_replace('images/', '', $entry);
+        echo '<a href="i/'.$src.'" data-gallery="' . $dir . '" itemprop="contentUrl" data-size="'. $size[0] . 'x' . $size[1] .'" data-index="' . $i . '">';
 
         if (!$lazy && $i == 0) {
             echo '<img class="img-fluid center-block" src="i/'. $src . '?w=526&' . $options . '" srcset="i/'. $src . '?w=526&' . $options . ', i/'. $src . '?w=789&' . $options . ' 1.5x, i/'. $src . '?w=1052&' . $options . ' 2x"/>';
@@ -87,16 +88,28 @@ function gallery($dir, $options = "", $lazy = true) {
 }
 
 function hiddenGallery($dir) {
-    $files = glob("images/$dir/*.{jpg,gif,png,jpeg,JPG,GIF,PNG,JPEG}", GLOB_BRACE);
+    $files = glob(__DIR__ ."/../assets/images/$dir/*.{jpg,gif,png,jpeg,JPG,GIF,PNG,JPEG}", GLOB_BRACE);
     sort($files, SORT_LOCALE_STRING);
     foreach ($files as $entry) {
       $s = getimagesize($entry);
-      echo '<a data-gallery="'. $dir . '" href="' . $entry . '" data-size="'. $s[0] . 'x' . $s[1] .'" class="hide"></a>';
+      $src = str_replace(__DIR__ .'/../assets/images/', '', $entry);
+      echo '<a data-gallery="'. $dir . '" href="i/' . $src . '" data-size="'. $s[0] . 'x' . $s[1] .'" class="hide"></a>';
     }
 }
 
+function path() {
+	  if ($_SERVER["REMOTE_ADDR"] == "127.0.0.1")
+    	return '/edsa-work/RedAgent';
+		else
+			return '';
+}
+
+function url($path) {
+    echo path() . $path;
+}
+
 // function renderBootstrapGallery($dir, $options = "") {
-//     $path = "images/projects/" . $dir . "/";
+//     $path = "assets/images/projects/" . $dir . "/";
 //     $files = listdir($path);
 //     sort($files, SORT_LOCALE_STRING);
 //     echo '<div id="'.$dir.'Carousel" class="carousel slide" data-ride="carousel">';
@@ -134,5 +147,3 @@ function hiddenGallery($dir) {
 //     echo '</a>';
 //     echo '</div>';
 // }
-
-?>

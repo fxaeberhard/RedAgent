@@ -1,0 +1,227 @@
+#contact {
+  padding-top: 0;
+  position: relative;
+  article {
+    margin-bottom: 1.5rem!important;
+    padding: 0;
+  }
+  h3 {
+    font-size: 1.2rem;
+    padding-bottom: .3rem;
+  }
+  .close {
+    position: absolute;
+    top: 0;
+    left: .5rem;
+    z-index: 1;
+  }
+  .firstRow {
+    .pic {
+      img {
+        border-radius: 50%;
+        margin: 1rem auto 0;
+      }
+      @include media-breakpoint-up(sm) {
+        @include make-col-span(3);
+      }
+      @include media-breakpoint-up(md) {
+        @include make-col-span(2);
+      }
+    }
+    .coord {
+      @include media-breakpoint-up(sm) {
+        @include make-col-span(9);
+      }
+      @include media-breakpoint-up(md) {
+        @include make-col-span(10);
+      }
+      h1 {
+        margin-top: 1.5rem;
+      }
+      h2 {
+        margin: 0.3rem 0;
+      }
+      .links {
+        margin-bottom: 0.3rem;
+        a {
+          margin-right: 2rem;
+          font-size: 1.4rem;
+          svg {
+            @include size(1.6rem, 1.4rem);
+            fill: $red;
+            margin-bottom: -4px;
+            margin-right: 0.2rem;
+          }
+          &:last-child {
+            margin: 0;
+          }
+        }
+      }
+      .icon {
+        @include size(1.9rem, 1.8rem);
+        margin: 0.1rem 0.5rem 0 -0.2rem;
+      }
+    }
+  }
+  .secrow {
+    >div {
+      @include media-breakpoint-up(sm) {
+        @include make-col-span(6);
+      }
+    }
+    >div:first-child {
+      >div {
+        margin: -.2rem 0 0.5rem .7rem;
+        >div:first-child {
+          display: inline-block;
+          overflow-x: visible;
+          margin: 0 auto;
+          width: 2rem;
+          >div {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            svg {
+              background: white;
+              @include size(2.4rem);
+              fill: $red;
+              border: 1px solid $gray;
+              padding: 0.5rem 0.1rem 0.3rem;
+              border-top-right-radius: 42%;
+              border-top-left-radius: 42%;
+              border-bottom: none;
+            }
+            strong {
+              background: $red;
+              color: $white;
+              border-radius: 0.25rem;
+              padding: 0.05rem 0.2rem;
+              line-height: 1.1rem;
+              font-size: 0.8rem;
+              text-transform: uppercase;
+              margin-top: -0.1rem;
+              min-width: 2.4rem;
+              text-align: center;
+            }
+          }
+        }
+        >div:nth-child(2) {
+          position: relative;
+          width: calc( 100% - 2.57rem);
+          display: inline-block;
+          vertical-align: top;
+          color: $gray;
+          font-style: italic;
+          line-height: 1.2rem;
+          background: $red;
+          font-size: 0.8rem;
+          margin: 0.7rem 0 0 -1px;
+          border: 1px solid $gray;
+          border-left: none;
+          >:first-child {
+            background: white;
+            width: 0;
+            transition: 2.5s;
+            padding-left: .4rem;
+            word-wrap: normal;
+            white-space: nowrap;
+            overflow: hidden;
+          }
+        }
+      }
+    }
+    .competencies {
+      position: relative;
+      height: 12rem;
+      margin: 0 0 .5rem;
+      div {
+        border-radius: 50%;
+        background: rgba(88, 0, 0, 0.1);
+        border: 1px solid rgba(88, 0, 0, 0.8);
+        position: absolute;
+        text-align: center;
+        transform: scale(0);
+        transition: .5s;
+      }
+       :first-child {
+        top: 2.1rem;
+        left: calc(50% - 5rem);
+        font-size: 1.3rem;
+        width: 10rem;
+        height: 10rem;
+        line-height: 1.5rem;
+        padding-top: 3.4rem;
+        transition-delay: 3.1s;
+      }
+       :nth-child(2) {
+        top: 0;
+        left: calc(50% + 3rem);
+        font-size: 0.85rem;
+        width: 7rem;
+        height: 7rem;
+        line-height: 1.5rem;
+        padding-top: 2.7rem;
+        transition-delay: 2.6s;
+      }
+       :last-child {
+        top: 0.4rem;
+        left: calc(50% - 11rem);
+        padding-top: 2.5rem;
+        width: 7.5rem;
+        height: 7.6rem;
+        line-height: 1.2rem;
+        transition-delay: 2.9s;
+      }
+    }
+    button {
+      line-height: 2rem;
+      background: $red;
+      color: $white;
+      border: none;
+      margin: 1rem auto 0;
+      padding: 0.3rem 0;
+      display: block;
+      fill: $white;
+      width: 14rem;
+      position: relative;
+      white-space: nowrap;
+      svg {
+        @include size(2rem);
+        vertical-align: top;
+        margin-right: .4rem;
+        transition: .3s;
+      }
+      .done {
+        position: absolute;
+        top: 0;
+        @include size(100%);
+        z-index: 1;
+        font-size: .9rem;
+        line-height: 1.1rem;
+        text-align: center;
+        padding: 0.25rem;
+        opacity: 0;
+        transition: .2s;
+        transition-delay: .3s;
+      }
+      &:hover {
+        svg {
+          transform: rotate(40deg);
+        }
+      }
+    }
+    .sent button {
+      outline: none;
+      svg {
+        margin-left: 250px;
+      }
+      .done {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+#contact .visible .competencies div {
+  transform: scale(1, 1);
+}

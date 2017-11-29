@@ -1,0 +1,45 @@
+.chat {
+  display: none;
+  .chat-msgs {
+    position: relative;
+    height: 536px;
+    overflow-y: scroll;
+    width: calc(100% + 17px);
+    .chat-msg {
+      padding: 0 0 0 0.4rem;
+      font-size: 0.9rem;
+      color: $red;
+      .name {
+        color: $orange;
+        display: block;
+        margin: 0 0 -.1rem -0.4rem;
+        text-transform: uppercase;
+        font-size: 0.7rem;
+      }
+      &.self {
+        color: darkgray!important;
+        text-align: right;
+      }
+      &.newtalker+.newtalker {
+        margin-top: .5rem;
+      }
+    }
+    .notification {
+      color: darkgray;
+      font-style: italic;
+    }
+  }
+  textarea {
+    width: 100%;
+    border: 1px solid #580000;
+    margin: 0;
+    padding: 5px 2.5%;
+    display: block;
+    margin-top: 5px;
+    font-size: 0.9em;
+    background: $white;
+    &:focus {
+      outline: none;
+    }
+  }
+}

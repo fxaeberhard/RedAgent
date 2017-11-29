@@ -1,135 +1,112 @@
-/* File: gulpfile.js */
+/* jshint esversion:6 */
+/* globals require */
 
 // grab our packages
-var gulp = require('gulp'),
-	uglify = require('gulp-uglify'),
-	usemin = require('gulp-usemin'),
-	sass = require('gulp-sass'),
-	cssnano = require('gulp-cssnano'),
-	autoprefixer = require('gulp-autoprefixer'),
-	sourcemaps = require('gulp-sourcemaps'),
-	minifyhtml = require('gulp-minify-html'),
-	// browserSync = require('browser-sync'),
-	rev = require('gulp-rev'),
-	jshint = require('gulp-jshint'),
-	imagemin = require('gulp-imagemin'),
-	pngquant = require('imagemin-pngquant'),
-	revReplace = require('gulp-rev-replace'),
-	clean = require('gulp-clean'),
-	svgSprite = require('gulp-svg-sprite');
+const gulp = require('gulp'),
+	plugins = require('gulp-load-plugins')()
 
 // Define the default task and add the watch task to it
-gulp.task('default', ['watch']);
+gulp.task('default', ['watch'])
 
 // Define build task
-gulp.task('build', ['usemin']);
+gulp.task('build', ['usemin'])
+gulp.task('dist', ['build']) //alias
 
 // Configure watch task
 gulp.task('watch', ['sass', 'browser-sync'], function() {
-	gulp.watch('css/*.scss', ['sass']);
-	gulp.watch('images/sprite/*.svg', ['svg-sprite'], ['reload']);
-	// gulp.watch(['./*.html', './js/**/*.js', './css/*.css'], ['reload']);
-});
+	gulp.watch('css/*.scss', ['sass'])
+	gulp.watch('assets/images/sprite/*.svg', ['svg-sprite'])
+	// gulp.watch(['./*.html', './js/**/*.js', './css/*.css'], ['reload'])
+})
 
 // Configure usemin task
 gulp.task('usemin', ['imagemin', 'sass', 'copy'], function() {
-	gulp.src(['index.php'])
-		.pipe(usemin({
-			css: [cssnano() /*, rev()*/ ],
-			html: [minifyhtml({ empty: true })],
-			js: [uglify() /*, rev()*/ ],
-			jsAttributes: {
-				// async: true,
-				// defer: true
-			}
+	// gulp.task('usemin', [], function() {
+	return gulp.src(['index.php'])
+		.pipe(plugins.usemin({
+			css: [plugins.cleanCss() /*, plugins.rev()*/ ],
+			html: [plugins.minifyHtml({ empty: true })],
+			js: [plugins.uglify() /*, plugins.rev()*/ ],
+			// jsAttributes: { async: true, defer: true }
 		}))
-		// .pipe(revReplace({
-		//   manifest: gulp.src(['dist/images/rev-manifest.json', 'dist/fonts/rev-manifest.json'])
-		// }))
-		.pipe(gulp.dest('dist/'));
-});
+		// .pipe(revReplace({ manifest: gulp.src(['dist/assets/images/rev-manifest.json', 'dist/assets/fonts/rev-manifest.json']) }))
+		.pipe(gulp.dest('dist/'))
+})
 
 // Configure sass task
 gulp.task('sass', function() {
-	gulp.src('css/*.scss')
-		.pipe(sourcemaps.init())
-		.pipe(sass({ errLogToConsole: true, outputStyle: 'expanded' }).on('error', sass.logError))
-		.pipe(autoprefixer())
-		.pipe(sourcemaps.write())
+	return gulp.src('css/*.scss')
+		// .pipe(sourcemaps.init())
+		.pipe(plugins.sass({ errLogToConsole: true, outputStyle: 'expanded' }).on('error', plugins.sass.logError))
+		.pipe(plugins.autoprefixer())
+		// .pipe(sourcemaps.write())
 		.pipe(gulp.dest('css'))
-});
+})
 
 // Configure svg-sprite
 gulp.task('svg-sprite', function() {
-	gulp.src('images/sprite/**/*.svg')
-		.pipe(svgSprite({
+	return gulp.src('assets/images/sprite/*.svg')
+		.pipe(plugins.svgSprite({
 			mode: {
-				symbol: {
-					dest: '.',
-					sprite: 'sprite.svg'
-				}
+				symbol: { dest: '.', sprite: 'sprite.svg' }
 			}
 		}))
-		.pipe(gulp.dest('images/'));
-});
+		.pipe(gulp.dest('assets/images/'))
+})
 
 // Configure imagemin task
 gulp.task('imagemin', ['svg-sprite'], function() {
-	return gulp.src('images/**/*')
-		.pipe(imagemin({
-			progressive: true,
-			svgoPlugins: [
-				{ removeViewBox: false },
-				{ cleanupIDs: false }
-			],
-			use: [pngquant()]
-		}))
+	return gulp.src('assets/images/**/*')
+		.pipe(plugins.imagemin([
+      // plugins.imagemin.gifsicle({ interlaced: true }),
+      // plugins.imagemin.jpegtran({ progressive: true }),
+      // plugins.imagemin.optipng({ optimizationLevel: 5 }),
+      // plugins.imagemin.svgo({ plugins: [{ removeViewBox: true }] })
+    ], { verbose: true }))
 		// .pipe(rev())
-		.pipe(gulp.dest('dist/images'))
-		.pipe(rev.manifest())
-		.pipe(gulp.dest('dist/images'));
-});
+		.pipe(gulp.dest('dist/assets/images'))
+	// .pipe(plugins.rev.manifest())
+	// .pipe(gulp.dest('dist/assets/images'))
+})
 
 // Configure other assets copy task
 gulp.task('copy', function() {
-
-	gulp.src(['./php/**/*', 'imgp.php', './vendor/**'], { base: "." })
-		// .pipe(minifyhtml({ empty: true }))
+	gulp.src(['css/font.css', 'sitemap.xml', '.htaccess', 'assets/sounds/**/*', 'vendor/**'], { base: '.' })
 		.pipe(gulp.dest('dist'))
 
-	gulp.src('css/font.css')
-		// .pipe(cssnano())
-		.pipe(gulp.dest('dist/css/'));
+	// gulp.src(['css/font.css'])
+	// 	.pipe(cssnano())
+	// 	.pipe(gulp.dest('dist/'))
 
-	gulp.src([ /*'php/*',*/ 'blog/*'], { base: "." })
-		.pipe(minifyhtml({ empty: true }))
-		.pipe(gulp.dest('dist/'));
+	gulp.src(['php/**/*'], { base: "." })
+		// .pipe(plugins.minifyHtml({ empty: true }))
+		.pipe(gulp.dest('dist'))
 
-	return gulp.src('fonts/**/*')
+	return gulp.src('assets/fonts/**/*')
 		// .pipe(rev())
-		.pipe(gulp.dest('dist/fonts'))
-		.pipe(rev.manifest())
-		.pipe(gulp.dest('dist/fonts'));
+		.pipe(gulp.dest('dist/assets/fonts'))
+	// .pipe(plugins.rev.manifest())
+	// .pipe(gulp.dest('dist/assets/fonts'))
 })
 
 // Configure clean task
 gulp.task('clean', function() {
 	return gulp.src('dist', { read: false })
-		.pipe(clean());
-});
+		.pipe(plugins.clean())
+})
 
 // configure the jshint task
 gulp.task('jshint', function() {
 	return gulp.src('js/**/*.js')
-		.pipe(jshint())
-		.pipe(jshint.reporter('default'));
-});
+		.pipe(plugins.jshint())
+		.pipe(plugins.jshint.reporter('default'))
+})
 
 // Configure browsersync task
 gulp.task('reload', function() {
-	// browserSync.reload();
-});
+	// browserSync.reload()
+})
 
 gulp.task('browser-sync', function() {
-	// browserSync.init({server: { baseDir: './app' }});
-});
+	// browserSync.init({server: { baseDir: './app' }})
+})
