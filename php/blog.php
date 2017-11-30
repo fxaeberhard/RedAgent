@@ -33,7 +33,7 @@
     // });
 
     foreach ($files as $f) {
-      $postUrl =  '//red-agent.com/post-' . str_replace([$path, '.html'], '', $f);
+      $postUrl =  'https://red-agent.com/post-' . str_replace([$path, '.html'], '', $f);
       $addon = '<a href="' . $postUrl . '#disqus_thread" class="pull-right link">0 Comments</a>';
       include $f;
     }

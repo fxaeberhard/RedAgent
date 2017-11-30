@@ -31,7 +31,7 @@ var App = (function($) {
 			// Youtube video lazy load
 			$(BODY).on(CLICK, '[data-youtube-id]', function(e) {
 				e.preventDefault()
-				$(this).html('<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" src="http://www.youtube.com/embed/' + $(this).data('youtube-id') + '?autoplay=1&rel=0&controls=1&autohide=1&color2=580000&showinfo=0&modestbranding=1&rel=0" allowfullscreen></iframe></div>')
+				$(this).html('<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" src="https://www.youtube.com/embed/' + $(this).data('youtube-id') + '?autoplay=1&rel=0&controls=1&autohide=1&color2=580000&showinfo=0&modestbranding=1&rel=0" allowfullscreen></iframe></div>')
 			})
 
 			// Slick slider links

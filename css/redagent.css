@@ -3027,7 +3027,7 @@ a.pswp__share--download:hover {
 }
 
 .dialog .text {
-  padding: 0 10px;
+  padding: 10px 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3051,7 +3051,7 @@ a.pswp__share--download:hover {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  padding: 0 10px;
+  padding: 10px 0;
   margin-left: 50px;
   margin-bottom: 10px;
 }

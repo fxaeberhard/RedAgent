@@ -1,175 +1,176 @@
 /**
 * Dialog
 */
+
 .dialog-open {
-  .chat,
-  .game {
-    filter: blur(1px);
-  }
+	.chat,
+	.game {
+		filter: blur(1px);
+	}
 }
 
 .dialog {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: transparentize($white, .1);
-  z-index: 6500;
-  overflow: auto;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: transparentize($white, .1);
+	z-index: 6500;
+	overflow: auto;
 
-  > div {
-    display: flex;
-    min-height: 100%;
+	> div {
+		display: flex;
+		min-height: 100%;
 
-    > div {
-      width: 100%;
-      max-width: 1000px;
-      @include make-container(1.5rem);
-      align-self: flex-end;
-    }
-  }
+		> div {
+			width: 100%;
+			max-width: 1000px;
+			@include make-container(1.5rem);
+			align-self: flex-end;
+		}
+	}
 
-  .portrait {
-    display: block;
-    width: 50px;
-    height: 50px;
-    background: $white url("../assets/images/sprite-game.png") -8px 7px;
-    border: 2px solid $red;
-    flex-grow: 0;
-    border-radius: 50%;
-    align-self: flex-end;
-  }
+	.portrait {
+		display: block;
+		width: 50px;
+		height: 50px;
+		background: $white url("../assets/images/sprite-game.png") -8px 7px;
+		border: 2px solid $red;
+		flex-grow: 0;
+		border-radius: 50%;
+		align-self: flex-end;
+	}
 
-  .line {
-    width: 100%;
-  }
+	.line {
+		width: 100%;
+	}
 
-  .text {
-    padding: 0 10px;
-    display: flex;
-    color: $gray;
-    margin-right: 50px;
+	.text {
+		padding: 10px 0;
+		display: flex;
+		color: $gray;
+		margin-right: 50px;
 
-    .portrait {
-      background: $white url("../assets/images/sprite-game.png") -2311px -128px;
-      border-color: $gray;
-    }
+		.portrait {
+			background: $white url("../assets/images/sprite-game.png") -2311px -128px;
+			border-color: $gray;
+		}
 
-    .bubble,
-    .bubble i,
-    .bubble:after,
-    .bubble:before {
-      border-color: $gray;
-    }
-  }
+		.bubble,
+		.bubble i,
+		.bubble:after,
+		.bubble:before {
+			border-color: $gray;
+		}
+	}
 
-  .choices {
-    display: flex;
-    padding: 0 10px;
-    margin-left: 50px;
-    margin-bottom: 10px;
+	.choices {
+		display: flex;
+		padding: 10px 0;
+		margin-left: 50px;
+		margin-bottom: 10px;
 
-    .bubble > div {
-      margin: 5px 0 10px;
+		.bubble > div {
+			margin: 5px 0 10px;
 
-      &:last-child {
-        margin-bottom: 5px;
-      }
-    }
+			&:last-child {
+				margin-bottom: 5px;
+			}
+		}
 
-    a {
-      &:focus,
-      &:hover {
-        color: $red;
-      }
-    }
+		a {
+			&:focus,
+			&:hover {
+				color: $red;
+			}
+		}
 
-    .answered {
-      a {
-        opacity: 0.5;
-        cursor: auto;
+		.answered {
+			a {
+				opacity: 0.5;
+				cursor: auto;
 
-        &.selected {
-          opacity: 1;
+				&.selected {
+					opacity: 1;
 
-          &::after {
-            opacity: 1!important;
-            transform: translateY(0px)!important;
-          }
-        }
+					&::after {
+						opacity: 1!important;
+						transform: translateY(0px)!important;
+					}
+				}
 
-        &:focus,
-        &:hover {
-          &:after {
-            display: none;
-          }
-        }
-      }
-    }
-  }
+				&:focus,
+				&:hover {
+					&:after {
+						display: none;
+					}
+				}
+			}
+		}
+	}
 
-  .bubble {
-    position: relative;
-    padding: 17px 25px;
-    margin: 0 0 3em;
-    border: 2px solid $red;
-    background: $white;
-    border-radius: 20px;
-    min-width: 240px;
-    flex-grow: 1;
-    width: calc(100% - 50px);
+	.bubble {
+		position: relative;
+		padding: 17px 25px;
+		margin: 0 0 3em;
+		border: 2px solid $red;
+		background: $white;
+		border-radius: 20px;
+		min-width: 240px;
+		flex-grow: 1;
+		width: calc(100% - 50px);
 
-    &:after,
-    &:before {
-      content: "";
-      position: absolute;
-      z-index: 10;
-      left: 20px;
-      bottom: -30px;
-      border-style: solid;
-      border-width: 0 2px 2px 0;
-      border-color: $red;
-      background: transparent;
-      display: block;
-    }
+		&:after,
+		&:before {
+			content: "";
+			position: absolute;
+			z-index: 10;
+			left: 20px;
+			bottom: -30px;
+			border-style: solid;
+			border-width: 0 2px 2px 0;
+			border-color: $red;
+			background: transparent;
+			display: block;
+		}
 
-    &:before {
-      width: 50px;
-      height: 30px;
-      border-bottom-right-radius: 80px 50px;
-    }
+		&:before {
+			width: 50px;
+			height: 30px;
+			border-bottom-right-radius: 80px 50px;
+		}
 
-    &:after {
-      width: 20px;
-      height: 30px;
-      border-bottom-right-radius: 40px 50px;
-    }
+		&:after {
+			width: 20px;
+			height: 30px;
+			border-bottom-right-radius: 40px 50px;
+		}
 
-    i {
-      content: "";
-      position: absolute;
-      bottom: -10px;
-      left: 40px;
-      width: 28px;
-      height: 15px;
-      background: $white;
-    }
+		i {
+			content: "";
+			position: absolute;
+			bottom: -10px;
+			left: 40px;
+			width: 28px;
+			height: 15px;
+			background: $white;
+		}
 
-    &.bubble-right {
-      &:after,
-      &:before {
-        left: auto;
-        right: 20px;
-        border-width: 0 0 2px 2px;
-        border-bottom-right-radius: 0;
-        border-bottom-left-radius: 40px 50px;
-      }
+		&.bubble-right {
+			&:after,
+			&:before {
+				left: auto;
+				right: 20px;
+				border-width: 0 0 2px 2px;
+				border-bottom-right-radius: 0;
+				border-bottom-left-radius: 40px 50px;
+			}
 
-      i {
-        right: 40px;
-        left: auto;
-      }
-    }
-  }
+			i {
+				right: 40px;
+				left: auto;
+			}
+		}
+	}
 }
