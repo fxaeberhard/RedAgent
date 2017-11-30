@@ -381,12 +381,12 @@ blockquote {
 }
 
 a {
-  color: #580000;
+  color: #6d0101;
   text-decoration: none;
 }
 
 a:focus, a:hover {
-  color: #0c0000;
+  color: #210000;
   text-decoration: underline;
 }
 
@@ -1412,11 +1412,11 @@ input[type="checkbox"].disabled {
 }
 
 .text-primary {
-  color: #580000 !important;
+  color: #6d0101 !important;
 }
 
 a.text-primary:focus, a.text-primary:hover {
-  color: #250000;
+  color: #3a0101;
 }
 
 .text-success {
@@ -2597,7 +2597,7 @@ a.pswp__share--download:hover {
           align-items: center;
   -ms-flex-wrap: nowrap;
       flex-wrap: nowrap;
-  color: #580000;
+  color: #6d0101;
   overflow: hidden;
 }
 
@@ -2607,7 +2607,7 @@ a.pswp__share--download:hover {
   height: 40px;
   width: 40px;
   margin: 0 10px 0 16px;
-  fill: #580000;
+  fill: #6d0101;
 }
 
 .menu.open a {
@@ -2644,7 +2644,7 @@ a.pswp__share--download:hover {
   position: absolute;
   height: 9px;
   width: 40px;
-  background: #580000;
+  background: #6d0101;
   border-radius: 9px;
   opacity: 1;
   left: 15px;
@@ -2690,7 +2690,7 @@ a.pswp__share--download:hover {
 }
 
 .menu a span::before {
-  color: #580000;
+  color: #6d0101;
   text-shadow: 0 0 1px rgba(255, 255, 255, 0.3);
   position: absolute;
   transition: opacity 0.3s, -webkit-transform 0.3s;
@@ -2814,7 +2814,7 @@ a.pswp__share--download:hover {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  color: #580000;
+  color: #6d0101;
   font-size: 1.7rem;
   cursor: pointer;
   transition: 0.3s ease;
@@ -2826,7 +2826,7 @@ a.pswp__share--download:hover {
   height: 47px;
   margin-right: 8px;
   margin-top: -3px;
-  fill: #580000;
+  fill: #6d0101;
 }
 
 .chat-button.empty {
@@ -2845,7 +2845,7 @@ a.pswp__share--download:hover {
   right: -2px;
   width: 300px;
   background: #F8FEF2;
-  border-left: 2px solid #580000;
+  border-left: 2px solid #6d0101;
   height: 100vh;
   z-index: 29;
   overflow: hidden;
@@ -2886,7 +2886,7 @@ a.pswp__share--download:hover {
 
 .chat > div .chat-msgs .chat-msg {
   font-size: 0.9rem;
-  color: #580000;
+  color: #6d0101;
 }
 
 .chat > div .chat-msgs .chat-msg .name {
@@ -2950,7 +2950,7 @@ a.pswp__share--download:hover {
   display: block;
   height: 3px;
   width: 20px;
-  background-color: #580000;
+  background-color: #6d0101;
   transition: all 0.2s ease-out;
 }
 
@@ -3013,7 +3013,7 @@ a.pswp__share--download:hover {
   width: 50px;
   height: 50px;
   background: #F8FEF2 url("../assets/images/sprite-game.png") -8px 7px;
-  border: 2px solid #580000;
+  border: 2px solid #6d0101;
   -webkit-box-flex: 0;
       -ms-flex-positive: 0;
           flex-grow: 0;
@@ -3065,7 +3065,7 @@ a.pswp__share--download:hover {
 }
 
 .dialog .choices a:focus, .dialog .choices a:hover {
-  color: #580000;
+  color: #6d0101;
 }
 
 .dialog .choices .answered a {
@@ -3091,7 +3091,7 @@ a.pswp__share--download:hover {
   position: relative;
   padding: 17px 25px;
   margin: 0 0 3em;
-  border: 2px solid #580000;
+  border: 2px solid #6d0101;
   background: #F8FEF2;
   border-radius: 20px;
   min-width: 240px;
@@ -3109,7 +3109,7 @@ a.pswp__share--download:hover {
   bottom: -30px;
   border-style: solid;
   border-width: 0 2px 2px 0;
-  border-color: #580000;
+  border-color: #6d0101;
   background: transparent;
   display: block;
 }
@@ -3301,7 +3301,7 @@ header form svg {
 }
 
 .close > svg {
-  fill: #580000;
+  fill: #6d0101;
   transition: 0.3s ease;
   width: 1.45rem;
   height: 1.45rem;
@@ -3412,7 +3412,7 @@ main article > div {
 }
 
 main article h1 {
-  color: #580000;
+  color: #6d0101;
   font-family: Din, Helvetica;
   font-weight: 600;
   margin: 0.1rem 0;
@@ -3476,7 +3476,7 @@ main ul.objectives li::after {
   height: 15px;
   display: block;
   z-index: 1;
-  border: 1px solid #580000;
+  border: 1px solid #6d0101;
   border-radius: 3px;
 }
 
@@ -3589,7 +3589,7 @@ main article.visible ul.objectives li::before {
 
 footer {
   font-size: 0.8rem;
-  color: #580000;
+  color: #6d0101;
   padding: 0 0.1rem 1rem;
 }
 
@@ -3675,7 +3675,7 @@ footer a {
 #contact .firstRow .coord .links a svg {
   width: 1.6rem;
   height: 1.4rem;
-  fill: #580000;
+  fill: #6d0101;
   margin-bottom: -4px;
   margin-right: 0.2rem;
 }
@@ -3724,7 +3724,7 @@ footer a {
   background: white;
   width: 2.4rem;
   height: 2.4rem;
-  fill: #580000;
+  fill: #6d0101;
   border: 1px solid gray;
   padding: 0.5rem 0.1rem 0.3rem;
   border-top-right-radius: 42%;
@@ -3733,7 +3733,7 @@ footer a {
 }
 
 #contact .secrow > div:first-child > div > div:first-child > div strong {
-  background: #580000;
+  background: #6d0101;
   color: #F8FEF2;
   border-radius: 0.25rem;
   padding: 0.05rem 0.2rem;
@@ -3753,7 +3753,7 @@ footer a {
   color: gray;
   font-style: italic;
   line-height: 1.2rem;
-  background: #580000;
+  background: #6d0101;
   font-size: 0.8rem;
   margin: 0.7rem 0 0 -1px;
   border: 1px solid gray;
@@ -3821,7 +3821,7 @@ footer a {
 
 #contact .secrow button {
   line-height: 2rem;
-  background: #580000;
+  background: #6d0101;
   color: #F8FEF2;
   border: none;
   margin: 1rem auto 0;
@@ -4052,7 +4052,7 @@ footer a:hover::after {
   width: 100%;
   height: 100%;
   padding: 0.2rem;
-  fill: #580000;
+  fill: #6d0101;
 }
 
 .icon:after {
@@ -4109,7 +4109,7 @@ footer a:hover::after {
 
 .loader > div {
   position: relative;
-  background-color: #580000;
+  background-color: #6d0101;
   width: 10px;
   height: 10px;
   margin: 0 auto;

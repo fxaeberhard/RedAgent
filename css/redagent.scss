@@ -1,6 +1,6 @@
 /* Variables */
-$nav-height: 50px;
-$red: #580000;
+$nav-height: 50px; // $red: #580000;
+$red: #6d0101;
 $lightgray: #EDEDED;
 $gray: gray;
 $darkgray: #1B0404; //http://www.colourlovers.com/palette/648171/Lightening
@@ -13,7 +13,7 @@ $yellow: #FFDC11;
 $green: #79992E; // $blue: #00014E;
 /* Bootstrap variables */
 $body-color: #373a3c;
-$brand-primary: $red;
+$brand-primary: $red; // $link-color: #9e0202; // $link-color: darkred; // $link-color: lighten($brand-primary,0.3);
 $border-radius: 0;
 $input-color: $body-color;
 $input-border-color: #ccc;
@@ -124,7 +124,6 @@ h3 {
 /**
  * Pages styles
  */
-
 .page {
 	@include absolute(0, 0, auto, 0);
 	background: $white;
@@ -238,7 +237,6 @@ header {
 }
 //
 /* Pages styles */
-
 main {
 	@include make-container(1.5rem);
 
@@ -455,7 +453,6 @@ footer {
 /*
  * Utils
  */
-
 .hide {
 	display: none!important;
 }
@@ -465,7 +462,6 @@ footer {
 }
 //
 /* Youtube videos */
-
 [data-youtube-id] {
 	cursor: pointer;
 	position: relative;
@@ -487,7 +483,6 @@ footer {
 }
 //
 /* Crafty styles */
-
 #cr-stage {
 	width: 100% !important;
 	max-height: 100vh;
@@ -539,7 +534,6 @@ footer {
 }
 //
 /** Bootstrap */
-
 .tooltip {
 	z-index: 6600;
 }
@@ -549,7 +543,6 @@ footer {
 }
 //
 /* Effect 17: move up fade out, push border */
-
 .link,
 .link-effect a,
 .links a,
@@ -605,7 +598,6 @@ footer a {
  * Effect 9a
  * http://tympanus.net/Development/IconHoverEffects/
  */
-
 .icon {
 	border-radius: 50%;
 	position: relative;
@@ -639,7 +631,6 @@ footer a {
 /**
  *  Loader
  */
-
 .loader {
 	@include fixed(0, 0, 0, 0);
 	z-index: 6700;
@@ -693,7 +684,6 @@ footer a {
 /**
  * Disqus
  */
-
 #disqus_thread {
 	margin: 40px 20px;
 	overflow: hidden;
@@ -707,7 +697,6 @@ footer a {
 /**
  * Photoswipe
  */
-
 .pswp {
 	z-index: 6600;
 }

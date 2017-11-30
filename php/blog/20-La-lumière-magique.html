@@ -3,17 +3,26 @@
 		<?php gallery("blog/arlette", "ar=16:9&ff"); ?>
 	</div>
 	<div class="redagent-page-text">
+
 		<h1>Arlette la Chouette</h1>
 		<h2>December 21, 2016</h2>
-		<p>Guidés par une mascotte virtuelle et munis d’une lampe magique, les enfants partiront à la découverte des trois musées de Nyon. Sur le chemin et dans les salles ils devront chercher les indices cachés permettant de résoudre une énigme. A chaque étape, ils devront entrer un code dans une application leur donnant accès à la question suivante.</p>
+		<p>Guidés par une mascotte virtuelle et munis d’une lampe magique, les enfants partiront à la découverte des trois musées de Nyon. Sur le chemin et dans les salles ils devront chercher les indices cachés permettant de résoudre une énigme. A chaque étape,
+			ils devront entrer un code dans une application leur donnant accès à la question suivante.</p>
+
 		<?php if (!isset($isList)) {?>
-		<P>Le parent aide l’enfant à installer Arlette la chouette sur son smartphone, lance la page web, allume la lampe de poche et lui remet son téléphone. A partir de là, c’est l’enfant qui dirige la visite du musée. L’enfant doit alors suivre les instruction de l’application et trouver différents codes et énigmes dissimulés dans le musée afin d’aider son compagnon, Arlette la Chouette à retrouver ses trois petits perdus dans les 3 musées de la ville de Nyon.</p>
-		<p>Chercher des indices cachés, résoudre des énigmes, révéler des codes avec une lampe, retrouver un lieu grâce à une image: tels sont les défis que relèveront les enfants grâce à l’application “La lumière magique”. Ils partiront sur les traces d’Elisabeth, Marcel et Auguste, les enfants d’Arlette la chouette, qui ont disparu chacun dans l’un des musées de Nyon. Les différentes étapes du parcours amèneront les petits visiteurs à explorer les salles des trois musées et à découvrir les collections sur un mode ludique.</p>
+		<P>Le parent aide l’enfant à installer Arlette la chouette sur son smartphone, lance la page web, allume la lampe de poche et lui remet son téléphone. A partir de là, c’est l’enfant qui dirige la visite du musée. L’enfant doit alors suivre les instruction
+			de l’application et trouver différents codes et énigmes dissimulés dans le musée afin d’aider son compagnon, Arlette la Chouette à retrouver ses trois petits perdus dans les 3 musées de la ville de Nyon.</p>
+		<p>Chercher des indices cachés, résoudre des énigmes, révéler des codes avec une lampe, retrouver un lieu grâce à une image: tels sont les défis que relèveront les enfants grâce à l’application “La lumière magique”. Ils partiront sur les traces d’Elisabeth,
+			Marcel et Auguste, les enfants d’Arlette la chouette, qui ont disparu chacun dans l’un des musées de Nyon. Les différentes étapes du parcours amèneront les petits visiteurs à explorer les salles des trois musées et à découvrir les collections sur un
+			mode ludique.</p>
 		<p>Projet réalisé dans le cadre de <a href="http://www.museomix.ch/en/2017/01/la-lumiere-magique/" target="_blank">Museomix 2016</a> avec Muriel Grand, Pauline Granger, Cassandre Poirier-Simon, Corinne Sandoz, Marie-France Thomas, Saskia Vellas.</p>
+
 		<?php } else { ?>
-		<a href="<?php echo $postUrl ?>">Lire la suite...</a>
+		<a href="<?php echo $postUrl ?>" class="link">Lire la suite...</a>
 		<br>
+
 		<?php } ?>
+
 		<br>
 		<a href="//red-agent.com/work/Arlette/" target="_blank" class="link">Jouer en ligne</a>
 		<?php echo isset($addon) ? $addon : '';?>

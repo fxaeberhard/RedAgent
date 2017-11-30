@@ -1,7 +1,6 @@
 <?php require_once 'app.php'; ?>
 
 <!-- Navbar -->
-
 <a href="Blog" class="nav-link close"><svg><use xlink:href="assets/images/sprite.svg#back"/></svg></a>
 
 <!-- header>
@@ -19,7 +18,7 @@
     <div id="disqus_thread"></div>
     <script>
     var disqus_config = function() {
-      this.page.url = "http://red-agent.com/post-<?php echo $post ?>";
+      this.page.url = "https://red-agent.com/post-<?php echo $post ?>";
       this.page.identifier = "<?php echo $post ?>";
     };
     (function() {

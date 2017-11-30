@@ -1,0 +1,57 @@
+<article id="parliamentimpact">
+	<div>
+		<?php gallery("blog/parliament", "ar=16:9&ff"); ?>
+	</div>
+	<div class="redagent-page-text">
+		<h1>Parliament Impact at Opendata.ch Research Hackdays </h1>
+		<h2>June 5 and 6, 2015</h2>
+		<p>
+			Measuring the impact of political action by comparing the occurrences of keywords contained in the Swiss Parliament documents (motions, postulates, interpellations, questions, etc.) and the occurrences of the same keywords in a national newspaper.
+		</p>
+
+		<?php if (!isset($isList)) {?>
+		<h3>Data visualizations</h3>
+		<ul>
+			<li>interactive bubble chart, with time slider</li>
+			<li>many static visualizations (histograms, etc.)</li>
+			<li>experimental network visualization (see it online here)</li>
+			<li>party-patterns</li>
+		</ul>
+
+		<h3>Data</h3>
+		<ul>
+			<li>CH Parliament “<a href="http://www.parlament.ch/e/suche/pages/curia-vista.aspx" title="http://www.parlament.ch/e/suche/pages/curia-vista.aspx" rel="nofollow">Curia Vista</a>” database (spring session, march 2015), <a href="http://ws.parlament.ch/affairs"
+				  title="http://ws.parlament.ch/affairs" rel="nofollow">Parliament Web Services</a></li>
+			<li><a href="http://www.nzz.ch" title="http://www.nzz.ch" rel="nofollow">Neue Zürcher Zeitung</a> (march 2015-today) </li>
+			<li> Keyword selection: Thesaurus of &gt;10 keywords (+synonyms)</li>
+		</ul>
+
+		<h3>Team</h3>
+		<ul>
+			<li><a href="http://www.martingrandjean.ch" title="http://www.martingrandjean.ch" rel="nofollow">Martin Grandjean</a></li>
+			<li>Carmen Jambé</li>
+			<li>Cécile Grivaz</li>
+			<li><a href="http://www.lionelwalter.ch" title="http://www.lionelwalter.ch" rel="nofollow">Lionel Walter</a></li>
+			<li><a href="http://red-agent.com" title="http://red-agent.com" rel="nofollow">François-Xavier Aeberhard</a></li>
+			<li>Antoni Mylka</li>
+			<li>Michael Süess</li>
+			<li>Raphaël Halloran</li>
+		</ul>
+		<h3>Tools</h3>
+		<ul>
+			<li> Crawling tool: <a href="http://www.quantinum.com" title="http://www.quantinum.com" rel="nofollow">Quantinum</a></li>
+			<li> Visualization: <a href="http://www.gephi.org" title="http://www.gephi.org" rel="nofollow">Gephi</a>, D3.JS, Inkscape, Illustrator</li>
+		</ul>
+
+		<?php } else { ?>
+		<a href="<?php echo $postUrl ?>" class="link">Continue reading...</a>
+		<br>
+
+		<?php } ?>
+
+		<br>
+		<a href="//red-agent.com/work/OpenDataHackDay/" target="_blank" class="link">Prototype</a>
+		<a href="https://github.com/fxaeberhard/polscrap" title="https://github.com/fxaeberhard/polscrap" rel="nofollow" target="_blank" class="link">Github</a>
+		<?php echo isset($addon) ? $addon : '';?>
+	</div>
+</article>

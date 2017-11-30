@@ -1,20 +1,19 @@
+# Red agent
 
-Todo
+## Todo
 * choose closest position on interact instead of bottom right always
 * saves on local storage (state of charachers/tiles/ etc.)
 
-
-Questions
+## Questions
 * Couleur de fond
 * Cursor
 
-Todo
+## Todo
 * Blog:
-** Parliament impact http://red-agent.com/stuff/opendatahackday/slider.html
 ** Grunt
 ** Must die
 ** lien programming game
 ** lien redcms.red-agent.com
 
-
+## Ref
 sudo systemctl restart php7.0-fpm
