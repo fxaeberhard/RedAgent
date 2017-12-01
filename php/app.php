@@ -19,7 +19,7 @@ $pages = array(
         "description" => "Francois-Xavier Aeberhard Blog"));
 
 function title($page = '') {
-    if ($page == 'post') {
+    if ($page == 'Post') {
         $post = filter_input(INPUT_GET, 'post');
         echo ucfirst(preg_replace('/^[0-9]+/', '',str_replace('-', ' ', $post)));
     } else {

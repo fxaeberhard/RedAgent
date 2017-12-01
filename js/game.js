@@ -88,6 +88,8 @@ var Game = (function($) {
 			// }, 4000)
 		},
 		loadTilesAround: function load(x, y, radius, delay) {
+			if (x instanceof Object) return Game.loadTilesAround(x.x, x.y, y, radius)
+
 			radius = radius || 6
 			var c = 0
 			for (var i = x - radius; i < x + radius + 1; i++) {

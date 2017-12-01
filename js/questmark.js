@@ -38,7 +38,7 @@ Crafty.c('QuestMark', {
 			.attr({ x: this.x, y: this.y - 24, w: 64, h: 64, z: 19999 })
 
 		var p = this.position()
-		Game.loadTilesAround(p.x, p.y, 2)
+		Game.loadTilesAround(p.x, p.y, 1)
 
 		this.attach(this._questmark)
 	},

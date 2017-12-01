@@ -2572,7 +2572,7 @@ a.pswp__share--download:hover {
   position: fixed;
   top: 10px;
   left: 10px;
-  z-index: 30;
+  z-index: 40;
 }
 
 .menu .hamburger,
@@ -2913,7 +2913,6 @@ a.pswp__share--download:hover {
 .chat > div textarea {
   width: 100%;
   border: none;
-  border-top: 2px solid #580000;
   margin: 0;
   padding: 5px 0;
   display: block;

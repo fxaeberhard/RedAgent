@@ -10,9 +10,14 @@
 <main>
   <?php
     $post = filter_input(INPUT_GET, 'post');
-    $path = 'blog';
-    // echo $post;
-    include $path . '/' . $post . '.html';
+    $path = __DIR__ . '/blog';
+		$p = $path . '/' . $post . '.html';
+		if (!file_exists($p)) {
+  		header('HTTP/1.0 404 Not Found');
+			echo "404 Page not found.";
+			die();
+		}
+    include $p;
   ?>
 
     <div id="disqus_thread"></div>

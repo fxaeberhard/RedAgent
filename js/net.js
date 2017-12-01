@@ -60,7 +60,7 @@ var Net = (function($) {
 
 			channel.bind('client-move', function(e) { // When somebody else moves,
 				// console.log("Client-move", e)
-				Game.getPlayer(e.id).moveTo(e.x, e.y).initialized = true // update it's sprite
+				Game.getPlayer(e.id).moveTo(e).initialized = true // update it's sprite
 			})
 
 			channel.bind('client-jump', function(e) { // Postion update event, so players are at the right position at the beginning
@@ -70,6 +70,9 @@ var Net = (function($) {
 					p.attr({ x: e.x, y: e.y })
 						.label(e.name)
 						.initialized = true
+
+					Game.loadTilesAround(p.position(), 1)
+
 					p.visible = true
 					// p.isNewPlayer && Game.notify(e.name + " has joined.")
 					updateCounter()

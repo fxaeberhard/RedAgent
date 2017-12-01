@@ -76,6 +76,9 @@ Crafty.c('PlayerCharacter', {
 		var countdown = 0
 		this.requires('Character, PlayerSprite, SpriteAnimation, Movable') //Collision
 			//.collision([32, 32, 64, 48, 32, 64, 0, 48]) // Set up hit box
+			.bind('TweenEnd', function() {
+				Game.loadTilesAround(this.position(), this.has('PlayableCharacter') ? null : 1)
+			})
 			.offset(0, -8)
 			.reel('Down', 1000, 0, 2, 16) // Set up animations
 			.reel('Up', 1000, 0, 3, 16)
@@ -220,10 +223,6 @@ Crafty.c('PlayableCharacter', {
 	init: function() {
 		this.screen = { x: 0, y: 0 }
 		this.requires('PlayerCharacter')
-			.bind('TweenEnd', function() {
-				var p = this.position()
-				Game.loadTilesAround(p.x, p.y)
-			})
 			.bind('MoveEnd', function() {
 				// If we're heading to a clickable object
 				if (this.clickedOn) this.clickedOn.trigger('Interact')

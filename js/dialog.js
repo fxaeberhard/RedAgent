@@ -25,11 +25,12 @@ Crafty.c('Dialog', {
 		$('.menu').removeClass('open')
 
 		$('.dialog').on('click', '.choices:not(.answered) a', this.onChoice.bind(this))
-			.on('click', '.close', function(e) {
+			.on('click', /*'.close',*/ function(e) {
 				e.preventDefault()
 				e.stopPropagation()
 				this.closeDialog()
 			}.bind(this))
+			.on('click', '.line', function(e) { e.stopPropagation() })
 
 		this.renderLine('start')
 	},
@@ -69,7 +70,7 @@ Crafty.c('Dialog', {
 		}, 10)
 	},
 
-	closeDialog: function() {
+	closeDialog: function(e) {
 		$('.dialog').remove()
 		$('body').removeClass('dialog-open')
 	},

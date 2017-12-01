@@ -22,7 +22,7 @@ Crafty.extend({
 
 			Crafty.e('Character, BotSprite, QuestCondition, Dialog') // AudioSource
 				// .placeAt(501, 501)
-				.placeAt(506, 492)
+				.placeAt(513, 492)
 				.condition("quests.goq1.started()")
 				.dialog({
 					start: {
@@ -64,7 +64,7 @@ Crafty.extend({
 			// Init bot
 			Game.players.bot = Crafty.e('Character, BotSprite, Dialog, QuestCondition')
 				.placeAt(504, 500)
-				.label('Red agent')
+				// .label('Red agent')
 				.condition("quests.goq1.notStarted()")
 				.dialog({
 					start: {
@@ -106,7 +106,7 @@ Crafty.extend({
 						text: "Why don't you check his <a href=\"/Projects\">projects page</a>.",
 						choices: [
 							{ text: "Nice link thanks!", next: "start" },
-							{ text: "A link, really?! You sure seem to be lazy for an IA.", next: "projects_link_lazy" }
+							{ text: "A link, really?! You sure seem to be one lazy IA.", next: "projects_link_lazy" }
             ]
 					},
 					projects_link_lazy: {

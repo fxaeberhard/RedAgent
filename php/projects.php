@@ -8,7 +8,8 @@
 	<nav>
 		<div class="collapse navbar-toggleable" id="navbar-header">
 			<ul>
-				<li><a href="#wallogram" class="active nav-link">2015</a></li>
+				<li><a href="#horizon" class="active nav-link">2016</a></li>
+				<li><a href="#wallogram" class="nav-link">2015</a></li>
 				<li><a href="#proggame" class="nav-link">2014</a></li>
 				<li><a href="#stalker" class="nav-link">2013</a></li>
 				<li><a href="#wegas" class="nav-link">2011</a></li>
@@ -28,51 +29,97 @@
 
 <main>
 
-	<!-- Wallogram -->
-	<article id="wallogram">
-		<div>
-			<a href="https://www.youtube.com/watch?v=W1kdVlAAzcQ" class="embed-responsive embed-responsive-16by9" data-youtube-id="W1kdVlAAzcQ">
-				<!-- <picture> -->
-				<!-- <source srcset="imgpp/projects/wallogram/teaser.jpg?w=522" media="(max-width:543px)" /> -->
-				<!-- <source srcset="imgpp/projects/wallogram/teaser.jpg?w=480, imgpp/projects/wallogram/teaser.jpg?w=950 x2" media="(min-width:544px) AND (max-width:894px)" /> -->
-				<img class="img-fluid" src="i/projects/wallogram/teaser.jpg?w=526" srcset="i/projects/wallogram/teaser.jpg?w=526, i/projects/wallogram/teaser.jpg?w=789 1.5x, i/projects/wallogram/teaser.jpg?w=1052 2x" alt="Wallogram" />
-				<!-- <img src="assets/images/projects/wallogram/teaser.jpg" /> -->
-				<!-- </picture> -->
-				<svg><use xlink:href="assets/images/sprite.svg#youtube" /></svg>
-			</a>
-		</div>
-		<div>
-			<h1>Wallogram</h1>
-			<h2>January 2015 - Interactive video mapping</h2>
-			<ul class="objectives">
-				<li>Turn a wall into a game playground</li>
-				<li>Let player use his mobile phone as a gamepad</li>
-				<li>Present the project during <em>Portrait Robot</em> exhibit at Maison d'ailleurs</li>
-			</ul>
-			<div class="details">
-				<div class="links">
-					<a href="http://wallogram.ch/" target="_blank">Website</a>
-					<?php hiddenGallery('projects/wallogram'); ?>
-					<a href data-slick-open>Pictures</a>
-					<a href="https://github.com/fxaeberhard/Wallogram" target="_blank">Sources</a>
-				</div>
-				<div class="techno">
-					<div class="icon" data-toggle="tooltip" title="Node.js">
-						<svg><use xlink:href="assets/images/sprite.svg#nodejs" /></svg>
+		<!-- Wallogram -->
+		<article id="horizon">
+			<div>
+				<?php gallery('projects/horizon', '', false); ?>
+			</div>
+			<div>
+				<h1>Horizon</h1>
+				<h2>July 2016 - </h2>
+				<p>
+					The Horizon project aims at gathering and analyzing data from social network (Facebook, Tweeter, YouTube ...) in order to create emotional indicators linked to specific topics and questions. My role was to industrialize the different steps of the process and create a SAAS platform.
+				</p>
+				<ul class="objectives">
+					<li>Audit the existing architecture and emit recommendations</li>
+					<li>Automate  time-consuming operation and optimize the architecture</li>
+					<li>Participate in daily operations (bug fixing, client support)</li>
+				</ul>
+				<div class="details">
+					<div class="links">
+						<!-- <a href="http://wallogram.ch/" target="_blank">Website</a> -->
+						<a href data-slick-open>Screenshots</a>
+						<!-- <a href="https://github.com/fxaeberhard/Wallogram" target="_blank">Sources</a> -->
 					</div>
-					<div class="icon" data-toggle="tooltip" title="MongoDB">
-						<svg><use xlink:href="assets/images/sprite.svg#mongodb" /></svg>
-					</div>
-					<div class="icon" data-toggle="tooltip" title="Javascript">
-						<svg><use xlink:href="assets/images/sprite.svg#javascript" /></svg>
-					</div>
-					<div class="icon" data-toggle="tooltip" title="Websocket">
-						<svg><use xlink:href="assets/images/sprite.svg#websocket" /></svg>
+					<div class="techno">
+						<div class="icon" data-toggle="tooltip" title="Node.js">
+							<svg><use xlink:href="assets/images/sprite.svg#nodejs" /></svg>
+						</div>
+						<div class="icon" data-toggle="tooltip" title="Python">
+							<svg><use xlink:href="assets/images/sprite.svg#python" /></svg>
+						</div>
+						<div class="icon" data-toggle="tooltip" title="RabbitMQ">
+							<svg><use xlink:href="assets/images/sprite.svg#rabbitmq" /></svg>
+						</div>
+						<div class="icon" data-toggle="tooltip" title="Docker">
+							<svg><use xlink:href="assets/images/sprite.svg#docker" /></svg>
+						</div>
+						<div class="icon" data-toggle="tooltip" title="MongoDB">
+							<svg><use xlink:href="assets/images/sprite.svg#mongodb" /></svg>
+						</div>
+						<div class="icon" data-toggle="tooltip" title="Neo4j">
+							<svg><use xlink:href="assets/images/sprite.svg#neo4j" /></svg>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	</article>
+		</article>
+
+		<!-- Wallogram -->
+		<article id="wallogram">
+			<div>
+				<a href="https://www.youtube.com/watch?v=W1kdVlAAzcQ" class="embed-responsive embed-responsive-16by9" data-youtube-id="W1kdVlAAzcQ">
+					<!-- <picture> -->
+					<!-- <source srcset="imgpp/projects/wallogram/teaser.jpg?w=522" media="(max-width:543px)" /> -->
+					<!-- <source srcset="imgpp/projects/wallogram/teaser.jpg?w=480, imgpp/projects/wallogram/teaser.jpg?w=950 x2" media="(min-width:544px) AND (max-width:894px)" /> -->
+					<img class="img-fluid" src="i/projects/wallogram/teaser.jpg?w=526" srcset="i/projects/wallogram/teaser.jpg?w=526, i/projects/wallogram/teaser.jpg?w=789 1.5x, i/projects/wallogram/teaser.jpg?w=1052 2x" alt="Wallogram" />
+					<!-- <img src="assets/images/projects/wallogram/teaser.jpg" /> -->
+					<!-- </picture> -->
+					<svg><use xlink:href="assets/images/sprite.svg#youtube" /></svg>
+				</a>
+			</div>
+			<div>
+				<h1>Wallogram</h1>
+				<h2>January 2015 - Interactive video mapping</h2>
+				<ul class="objectives">
+					<li>Turn a wall into a game playground</li>
+					<li>Let player use his mobile phone as a gamepad</li>
+					<li>Present the project during <em>Portrait Robot</em> exhibit at Maison d'ailleurs</li>
+				</ul>
+				<div class="details">
+					<div class="links">
+						<a href="http://wallogram.ch/" target="_blank">Website</a>
+						<?php hiddenGallery('projects/wallogram'); ?>
+						<a href data-slick-open>Pictures</a>
+						<a href="https://github.com/fxaeberhard/Wallogram" target="_blank">Sources</a>
+					</div>
+					<div class="techno">
+						<div class="icon" data-toggle="tooltip" title="Node.js">
+							<svg><use xlink:href="assets/images/sprite.svg#nodejs" /></svg>
+						</div>
+						<div class="icon" data-toggle="tooltip" title="MongoDB">
+							<svg><use xlink:href="assets/images/sprite.svg#mongodb" /></svg>
+						</div>
+						<div class="icon" data-toggle="tooltip" title="Javascript">
+							<svg><use xlink:href="assets/images/sprite.svg#javascript" /></svg>
+						</div>
+						<div class="icon" data-toggle="tooltip" title="Websocket">
+							<svg><use xlink:href="assets/images/sprite.svg#websocket" /></svg>
+						</div>
+					</div>
+				</div>
+			</div>
+		</article>
 
 	<!-- Programming game -->
 	<article id="proggame">
@@ -152,7 +199,7 @@
 		</div>
 		<div>
 			<h1>Wegas</h1>
-			<h2>January 2012 - UX Engineer at School for Business & Engineering Vaud (HEIG-Vd)</h2>
+			<h2>January 2012 - UX Engineer at School for Business & Engineering Vaud (Heig-vd)</h2>
 
 			<ul class="objectives">
 				<li>Create a Web Game Authoring System for rapid development of serious games</li>
@@ -295,9 +342,9 @@
 					<div class="icon" data-toggle="tooltip" title="Actionscript 2.0 <em>(in-game interfaces)</em>">
 						<svg><use xlink:href="assets/images/sprite.svg#flash" /></svg>
 					</div>
-					<div class="icon" data-toggle="tooltip" title="Python">
+					<!-- <div class="icon" data-toggle="tooltip" title="Python">
 						<svg><use xlink:href="assets/images/sprite.svg#python" /></svg>
-					</div>
+					</div> -->
 					<!-- <div class="icon" data-toggle="tooltip" title="PHP <em>(web-server for Facebook Application)</em>"><svg><use xlink:href="assets/images/sprite.svg#php"/></svg></div> -->
 				</div>
 			</div>
