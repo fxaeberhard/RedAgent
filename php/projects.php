@@ -36,7 +36,7 @@
 			</div>
 			<div>
 				<h1>Horizon</h1>
-				<h2>July 2016 - </h2>
+				<h2>July 2016 - Social Media Lab at EPFL</h2>
 				<p>
 					The Horizon project aims at gathering and analyzing data from social network (Facebook, Tweeter, YouTube ...) in order to create emotional indicators linked to specific topics and questions. My role was to industrialize the different steps of the process and create a SAAS platform.
 				</p>

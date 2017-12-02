@@ -124,6 +124,7 @@ h3 {
 /**
  * Pages styles
  */
+
 .page {
 	@include absolute(0, 0, auto, 0);
 	background: $white;
@@ -155,6 +156,9 @@ header {
 	.navbar-toggleable {
 		@include media-breakpoint-up(sm) {
 			display: block !important;
+		}
+		@include media-breakpoint-down(lg) {
+			padding-left: 4rem;
 		}
 	}
 
@@ -212,17 +216,19 @@ header {
 
 .close {
 	position: fixed;
-	top: 13px;
+	top: 3px;
 	left: 17px;
 	padding: 0.25rem 0.6rem 0.05rem;
 	margin: 0.2rem 0;
 	background: $white;
+	z-index: 6600;
+	border-radius: 50%;
 
 	> svg {
 		fill: $red;
 		transition: 0.3s ease;
 		@include size(1.45rem, 1.45rem);
-		@include media-breakpoint-up(lg) {
+		@include media-breakpoint-up(xl) {
 			@include size(2.5rem, 2.5rem);
 		}
 	}
@@ -234,9 +240,13 @@ header {
 			transform: translateX(-5px);
 		}
 	}
+	@include media-breakpoint-up(xl) {
+		top: 13px;
+	}
 }
 //
 /* Pages styles */
+
 main {
 	@include make-container(1.5rem);
 
@@ -453,6 +463,7 @@ footer {
 /*
  * Utils
  */
+
 .hide {
 	display: none!important;
 }
@@ -462,6 +473,7 @@ footer {
 }
 //
 /* Youtube videos */
+
 [data-youtube-id] {
 	cursor: pointer;
 	position: relative;
@@ -483,6 +495,7 @@ footer {
 }
 //
 /* Crafty styles */
+
 #cr-stage {
 	width: 100% !important;
 	max-height: 100vh;
@@ -534,6 +547,7 @@ footer {
 }
 //
 /** Bootstrap */
+
 .tooltip {
 	z-index: 6600;
 }
@@ -543,6 +557,7 @@ footer {
 }
 //
 /* Effect 17: move up fade out, push border */
+
 .link,
 .link-effect a,
 .links a,
@@ -598,6 +613,7 @@ footer a {
  * Effect 9a
  * http://tympanus.net/Development/IconHoverEffects/
  */
+
 .icon {
 	border-radius: 50%;
 	position: relative;
@@ -631,6 +647,7 @@ footer a {
 /**
  *  Loader
  */
+
 .loader {
 	@include fixed(0, 0, 0, 0);
 	z-index: 6700;
@@ -684,6 +701,7 @@ footer a {
 /**
  * Disqus
  */
+
 #disqus_thread {
 	margin: 40px 20px;
 	overflow: hidden;
@@ -697,6 +715,7 @@ footer a {
 /**
  * Photoswipe
  */
+
 .pswp {
 	z-index: 6600;
 }

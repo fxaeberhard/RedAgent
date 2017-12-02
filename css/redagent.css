@@ -3234,6 +3234,12 @@ header {
   }
 }
 
+@media (max-width: 1199px) {
+  header .navbar-toggleable {
+    padding-left: 4rem;
+  }
+}
+
 header ul {
   padding-left: 0;
   margin-bottom: 0;
@@ -3292,11 +3298,13 @@ header form svg {
 
 .close {
   position: fixed;
-  top: 13px;
+  top: 3px;
   left: 17px;
   padding: 0.25rem 0.6rem 0.05rem;
   margin: 0.2rem 0;
   background: #F8FEF2;
+  z-index: 6600;
+  border-radius: 50%;
 }
 
 .close > svg {
@@ -3306,7 +3314,7 @@ header form svg {
   height: 1.45rem;
 }
 
-@media (min-width: 992px) {
+@media (min-width: 1200px) {
   .close > svg {
     width: 2.5rem;
     height: 2.5rem;
@@ -3316,6 +3324,12 @@ header form svg {
 .close:active svg, .close:focus svg, .close:hover svg {
   -webkit-transform: translateX(-5px);
           transform: translateX(-5px);
+}
+
+@media (min-width: 1200px) {
+  .close {
+    top: 13px;
+  }
 }
 
 /* Pages styles */
