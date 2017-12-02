@@ -4,13 +4,13 @@ global $pages;
 
 $pages = array(
     "" => array(
-        "title" => "Red Agent - Francois-Xavier Aeberhard portfolio",
+        "title" => "Francois-Xavier Aeberhard Portfolio - Red Agent",
         "description" => "My name is Francois-Xavier Aeberhard, I'm an user experience engineer and this is my portfolio."),
     "Projects" => array(
         "title" => "Francois-Xavier Aeberhard Projects",
         "description" => "Discover my work: Wallogram, Programming game, Michael Jackson the experiene and much more."),
     "Contact" => array(
-        "title" => "Contact Francois-Xavier Aeberhard",
+        "title" => "Francois-Xavier Aeberhard Contact",
         "description" => "Francois-Xavier Aeberhard, Level 110 User experience engineer"),
     "Blog" => array(
         "title" => "Francois-Xavier Aeberhard Blog",

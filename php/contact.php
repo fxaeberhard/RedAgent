@@ -25,10 +25,15 @@
         <a class="icon" data-toggle="tooltip" title="GitHub" href="https://github.com/fxaeberhard/" target="_blank">
           <svg><use xlink:href="assets/images/sprite.svg#github"></use></svg>
         </a>
-        <a class="icon" data-toggle="tooltip" title="Deviant Art" href="https://fxaeberhard.deviantart.com/gallery/" target="_blank">
+        <a class="icon" data-toggle="tooltip" title="Stack Overflow" href="https://stackoverflow.com/users/4700795/fran%C3%A7ois-xavier-aeberhard" target="_blank">
+          <svg><use xlink:href="assets/images/sprite.svg#stackoverflow"></use></svg>
+        </a>
+				<a class="icon" data-toggle="tooltip" title="Skype" href="skype:francois.xavier.aeberhard?add" target="_blank">
+          <svg><use xlink:href="assets/images/sprite.svg#skype"></use></svg>
+        </a>
+				<a class="icon" data-toggle="tooltip" title="Deviant Art" href="https://fxaeberhard.deviantart.com/gallery/" target="_blank">
           <svg><use xlink:href="assets/images/sprite.svg#deviantart1"></use></svg>
         </a>
-
         <!-- <a href="https://plus.google.com/[YOUR PERSONAL G+ PROFILE NUMBER]" rel="me">Me on Google+</a> -->
       </div>
 
