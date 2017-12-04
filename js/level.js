@@ -3,12 +3,12 @@ Crafty.extend({
 		goq1: new Quest({}),
 		q1: new Quest({
 			title: "First steps",
-			text: "Find your first client",
-			objectives: {
-				workers: {
-					title: "Find your fellow engineer and define a solution"
-				}
-			}
+			text: "Find Francois-Xavier's client"
+			// objectives: {
+			// 	workers: {
+			// 		title: "Find your fellow engineer and define a solution"
+			// 	}
+			// }
 		})
 	},
 	objects: [{
