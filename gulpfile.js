@@ -20,8 +20,8 @@ gulp.task('watch', ['sass', 'browser-sync'], function() {
 })
 
 // Configure usemin task
-gulp.task('usemin', ['imagemin', 'sass', 'copy'], function() {
-	// gulp.task('usemin', [], function() {
+gulp.task('usemin', ['sass', 'copy'], function() {
+// gulp.task('usemin', ['imagemin', 'sass', 'copy'], function() {
 	return gulp.src(['index.php'])
 		.pipe(plugins.usemin({
 			css: [plugins.cleanCss() /*, plugins.rev()*/ ],
@@ -58,10 +58,10 @@ gulp.task('svg-sprite', function() {
 gulp.task('imagemin', ['svg-sprite'], function() {
 	return gulp.src('assets/images/**/*')
 		.pipe(plugins.imagemin([
-      // plugins.imagemin.gifsicle({ interlaced: true }),
-      // plugins.imagemin.jpegtran({ progressive: true }),
-      // plugins.imagemin.optipng({ optimizationLevel: 5 }),
-      // plugins.imagemin.svgo({ plugins: [{ removeViewBox: true }] })
+      plugins.imagemin.gifsicle({ interlaced: true }),
+      plugins.imagemin.jpegtran({ progressive: true }),
+      plugins.imagemin.optipng({ optimizationLevel: 5 }),
+      plugins.imagemin.svgo({ plugins: [{ removeViewBox: true }] })
     ], { verbose: true }))
 		// .pipe(rev())
 		.pipe(gulp.dest('dist/assets/images'))
@@ -71,7 +71,7 @@ gulp.task('imagemin', ['svg-sprite'], function() {
 
 // Configure other assets copy task
 gulp.task('copy', function() {
-	gulp.src(['css/font.css', 'sitemap.xml', '.htaccess', 'assets/sounds/**/*', 'vendor/**'], { base: '.' })
+	gulp.src(['css/font.css', 'sitemap.xml', '.htaccess', 'robots.txt', 'assets/sounds/**/*', 'vendor/**'], { base: '.' })
 		.pipe(gulp.dest('dist'))
 
 	// gulp.src(['css/font.css'])

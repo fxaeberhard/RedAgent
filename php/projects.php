@@ -524,6 +524,34 @@
 		</div>
 	</article>
 
+	<!-- EyeKidz -->
+	<article id="eyekidz">
+		<div>
+			<?php gallery("projects/eyekidz", "cf&ar=4:3"); ?>
+		</div>
+
+		<div>
+			<h1>EyeKidz</h1>
+			<h2>Januar-August 2005 - User interface designer at EverMore Innovation</h2>
+
+			<ul class="objectives">
+				<li>Design and implement the interface of EyeKidz, a browser for children</li>
+			</ul>
+
+			<div class="details">
+				<div class="links">
+					<a href="http://www.commentcamarche.net/download/telecharger-34055037-eye-kidz" target="_blank">Download</a>
+				</div>
+				<div class="techno">
+					<div class="icon" data-toggle="tooltip" title="ActionScript">
+						<svg><use xlink:href="assets/images/sprite.svg#flash" /></svg>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</article>
+
 	<!-- Schlempf -->
 	<article id="schlempf">
 		<div>
@@ -548,71 +576,6 @@
 					<div class="icon" data-toggle="tooltip" title="Java 2 Mobile Edition <em>(J2ME)</em>">
 						<svg><use xlink:href="assets/images/sprite.svg#java" /></svg>
 					</div>
-				</div>
-			</div>
-		</div>
-	</article>
-
-	<!-- EyeKidz -->
-	<article id="eyekidz">
-		<div>
-			<?php gallery("projects/eyekidz", "cf&ar=4:3"); ?>
-		</div>
-
-		<div>
-			<h1>EyeKidz</h1>
-			<h2>March 2005 - User interface designer at EverMore Innovation</h2>
-
-			<ul class="objectives">
-				<li>Design and implement the interface of EyeKidz, a browser for children</li>
-			</ul>
-
-			<div class="details">
-				<div class="links">
-					<a href="http://www.commentcamarche.net/download/telecharger-34055037-eye-kidz" target="_blank">Download</a>
-				</div>
-				<div class="techno">
-					<div class="icon" data-toggle="tooltip" title="ActionScript">
-						<svg><use xlink:href="assets/images/sprite.svg#flash" /></svg>
-					</div>
-				</div>
-			</div>
-		</div>
-	</article>
-
-	<!-- YUIMyAdmin -->
-	<article id="yuimyadmin">
-		<div>
-			<img class="img-fluid center-block" data-lazy-src="assets/images/projects/yuimyadmin.png" />
-		</div>
-		<div>
-			<h1>YuiMyAdmin</h1>
-			<h2>March 2003 - Open source project</h2>
-
-			<ul class="objectives">
-				<li>Create a web-based app to manage databases using Yahoo! User Interface (YUI) library</li>
-			</ul>
-
-			<div class="details">
-				<div class="links">
-					<a href="http://yuimyadmin.sourceforge.net/yuimyadmin/" target="_blank">Try online</a> <i class="spacer"></i>
-					<a href="http://yuimyadmin.sourceforge.net/" target="_blank">Website</a> <i class="spacer"></i>
-					<a href="https://sourceforge.net/projects/yuimyadmin/files/" target="_blank">Sources</a>
-				</div>
-				<div class="techno">
-					<div class="icon" data-toggle="tooltip" title="Php">
-						<svg><use xlink:href="assets/images/sprite.svg#php" /></svg>
-					</div>
-					<div class="icon" data-toggle="tooltip" title="MySql">
-						<svg><use xlink:href="assets/images/sprite.svg#mysql" /></svg>
-					</div>
-					<div class="icon" data-toggle="tooltip" title="JavaScript <em>(YUI 2)</em>">
-						<svg><use xlink:href="assets/images/sprite.svg#javascript" /></svg>
-					</div>
-					<div class="icon" data-toggle="tooltip" title="Html">
-						<svg><use xlink:href="assets/images/sprite.svg#html" /></svg>
-					</div>
-					<!-- <div class="icon" data-toggle="tooltip" title="CSS"><svg><use xlink:href="assets/images/sprite.svg#css"/></svg></div> -->
 				</div>
 			</div>
 		</div>

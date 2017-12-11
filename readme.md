@@ -1,4 +1,4 @@
-# Red agent
+# Red Agent
 
 ## Todo
 * choose closest position on interact instead of bottom right always
@@ -7,20 +7,15 @@
 * Click on dialog bg => discard dialog
 * change exclamation mark
 * marker's Target should be visible on quest active
-* Fix Schlempf
-* Fix arthur
-*
+* Fix Schlempf (menu)
+* Fix arthur.red-agent.com
+* Blog:
+** lien programming game
+** lien redcms.red-agent.com
 
 ## Questions
 * Couleur de fond
 * Cursor
-
-## Todo
-* Blog:
-** Grunt
-** Must die
-** lien programming game
-** lien redcms.red-agent.com
 
 ## Ref
 sudo systemctl restart php7.0-fpm

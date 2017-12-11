@@ -5,16 +5,16 @@ global $pages;
 $pages = array(
     "" => array(
         "title" => "Francois-Xavier Aeberhard Portfolio - Red Agent",
-        "description" => "My name is Francois-Xavier Aeberhard, I'm an user experience engineer and this is my portfolio."),
+        "description" => "I'm Francois-Xavier Aeberhard, a user experience engineer and this is my portfolio."),
     "Projects" => array(
-        "title" => "Francois-Xavier Aeberhard Projects",
-        "description" => "Discover my work: Wallogram, Programming game, Michael Jackson the experiene and much more."),
+        "title" => "Projects by Francois-Xavier Aeberhard",
+        "description" => "Discover my work in video games, web, data visualisation and blockchains."),
     "Contact" => array(
-        "title" => "Francois-Xavier Aeberhard Contact",
-        "description" => "Francois-Xavier Aeberhard, Level 110 User experience engineer"),
+        "title" => "Contact Francois-Xavier Aeberhard",
+        "description" => "Francois-Xavier Aeberhard, Level 110 User Experience Engineer"),
     "Blog" => array(
         "title" => "Francois-Xavier Aeberhard Blog",
-        "description" => "Drawings, movies or small games, this is what i do in my free time and I want to keep a trace of."),
+        "description" => "Drawings, movies, games coding jams, this is what i do on my own time."),
     "Post" => array(
         "description" => "Francois-Xavier Aeberhard Blog"));
 
