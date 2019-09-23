@@ -316,7 +316,7 @@ html {
 
 html {
   font-size: 16px;
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 body {
@@ -724,11 +724,6 @@ mark,
 .form-control:focus {
   border-color: gray;
   outline: none;
-}
-
-.form-control::-webkit-input-placeholder {
-  color: #999;
-  opacity: 1;
 }
 
 .form-control:-ms-input-placeholder {
@@ -1903,19 +1898,16 @@ a.text-danger:focus, a.text-danger:hover {
   -moz-user-select: none;
   -ms-user-select: none;
       user-select: none;
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-touch-callout: none;
 }
 
 .pswp__zoom-wrap {
   position: absolute;
   width: 100%;
-  -webkit-transform-origin: left top;
   transform-origin: left top;
   /* for open/close transition */
-  transition: -webkit-transform 333ms cubic-bezier(0.4, 0, 0.22, 1);
   transition: transform 333ms cubic-bezier(0.4, 0, 0.22, 1);
-  transition: transform 333ms cubic-bezier(0.4, 0, 0.22, 1), -webkit-transform 333ms cubic-bezier(0.4, 0, 0.22, 1);
 }
 
 .pswp__bg {
@@ -2197,11 +2189,8 @@ a.text-danger:focus, a.text-danger:hover {
   width: auto;
   right: 44px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
-  -webkit-transform: translateY(6px);
-          transform: translateY(6px);
-  transition: -webkit-transform 0.25s;
+  transform: translateY(6px);
   transition: transform 0.25s;
-  transition: transform 0.25s, -webkit-transform 0.25s;
   -webkit-backface-visibility: hidden;
   will-change: transform;
 }
@@ -2234,8 +2223,7 @@ a.text-danger:focus, a.text-danger:hover {
 }
 
 .pswp__share-modal--fade-in .pswp__share-tooltip {
-  -webkit-transform: translateY(0);
-          transform: translateY(0);
+  transform: translateY(0);
 }
 
 /* increase size of share links on touch devices */
@@ -2251,7 +2239,7 @@ a.pswp__share--facebook:before {
   position: absolute;
   top: -12px;
   right: 15px;
-  border: 6px solid transparent;
+  border: 6px solid rgba(0, 0, 0, 0);
   border-bottom-color: #FFF;
   -webkit-pointer-events: none;
   -moz-pointer-events: none;
@@ -2375,13 +2363,11 @@ a.pswp__share--download:hover {
 }
 
 .pswp--css_animation .pswp__preloader--active .pswp__preloader__icn {
-  -webkit-animation: clockwise 500ms linear infinite;
-          animation: clockwise 500ms linear infinite;
+  animation: clockwise 500ms linear infinite;
 }
 
 .pswp--css_animation .pswp__preloader--active .pswp__preloader__donut {
-  -webkit-animation: donut-rotate 1000ms cubic-bezier(0.4, 0, 0.22, 1) infinite;
-          animation: donut-rotate 1000ms cubic-bezier(0.4, 0, 0.22, 1) infinite;
+  animation: donut-rotate 1000ms cubic-bezier(0.4, 0, 0.22, 1) infinite;
 }
 
 .pswp--css_animation .pswp__preloader__icn {
@@ -2431,55 +2417,24 @@ a.pswp__share--download:hover {
   }
 }
 
-@-webkit-keyframes clockwise {
-  0% {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
-  }
-}
-
 @keyframes clockwise {
   0% {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
+    transform: rotate(0deg);
   }
   100% {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
-  }
-}
-
-@-webkit-keyframes donut-rotate {
-  0% {
-    -webkit-transform: rotate(0);
-            transform: rotate(0);
-  }
-  50% {
-    -webkit-transform: rotate(-140deg);
-            transform: rotate(-140deg);
-  }
-  100% {
-    -webkit-transform: rotate(0);
-            transform: rotate(0);
+    transform: rotate(360deg);
   }
 }
 
 @keyframes donut-rotate {
   0% {
-    -webkit-transform: rotate(0);
-            transform: rotate(0);
+    transform: rotate(0);
   }
   50% {
-    -webkit-transform: rotate(-140deg);
-            transform: rotate(-140deg);
+    transform: rotate(-140deg);
   }
   100% {
-    -webkit-transform: rotate(0);
-            transform: rotate(0);
+    transform: rotate(0);
   }
 }
 
@@ -2582,19 +2537,17 @@ a.pswp__share--download:hover {
   left: 0;
   border-radius: 35px;
   transition: top 0.3s ease, width 0.4s linear 0.2s;
-  background: rgba(248, 254, 242, 0.9);
+  background: rgba(255, 255, 255, 0.9);
 }
 
 .menu a {
   width: 60px;
   height: 60px;
   opacity: 0;
-  display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+      align-items: center;
   -ms-flex-wrap: nowrap;
       flex-wrap: nowrap;
   color: #6d0101;
@@ -2629,8 +2582,7 @@ a.pswp__share--download:hover {
   height: 60px;
   position: relative;
   padding: 0 10px 0 10%;
-  -webkit-transform: rotate(0deg);
-          transform: rotate(0deg);
+  transform: rotate(0deg);
   transition: 0.5s ease-in-out;
   cursor: pointer;
 }
@@ -2648,8 +2600,7 @@ a.pswp__share--download:hover {
   border-radius: 9px;
   opacity: 1;
   left: 15px;
-  -webkit-transform: rotate(0deg);
-          transform: rotate(0deg);
+  transform: rotate(0deg);
   transition: 0.25s ease-in-out;
 }
 
@@ -2667,8 +2618,7 @@ a.pswp__share--download:hover {
 
 .open .hamburger span:nth-child(1) {
   top: 25px;
-  -webkit-transform: rotate(135deg);
-          transform: rotate(135deg);
+  transform: rotate(135deg);
 }
 
 .open .hamburger span:nth-child(2) {
@@ -2678,8 +2628,7 @@ a.pswp__share--download:hover {
 
 .open .hamburger span:nth-child(3) {
   top: 25px;
-  -webkit-transform: rotate(-135deg);
-          transform: rotate(-135deg);
+  transform: rotate(-135deg);
 }
 
 .menu a span {
@@ -2693,9 +2642,7 @@ a.pswp__share--download:hover {
   color: #6d0101;
   text-shadow: 0 0 1px rgba(255, 255, 255, 0.3);
   position: absolute;
-  transition: opacity 0.3s, -webkit-transform 0.3s;
   transition: transform 0.3s, opacity 0.3s;
-  transition: transform 0.3s, opacity 0.3s, -webkit-transform 0.3s;
   pointer-events: none;
 }
 
@@ -2710,11 +2657,8 @@ a.pswp__share--download:hover {
   height: 2px;
   background: #D87309;
   opacity: 0;
-  -webkit-transform: translateY(5px);
-          transform: translateY(5px);
-  transition: opacity 0.3s, -webkit-transform 0.3s;
+  transform: translateY(5px);
   transition: transform 0.3s, opacity 0.3s;
-  transition: transform 0.3s, opacity 0.3s, -webkit-transform 0.3s;
   pointer-events: none;
 }
 
@@ -2726,15 +2670,13 @@ a.pswp__share--download:hover {
 .menu a:focus span::before,
 .menu a:hover span::before {
   opacity: 0;
-  -webkit-transform: translateY(-2px);
-          transform: translateY(-2px);
+  transform: translateY(-2px);
 }
 
 .menu a:focus span::after,
 .menu a:hover span::after {
   opacity: 1;
-  -webkit-transform: translateY(0px);
-          transform: translateY(0px);
+  transform: translateY(0px);
 }
 
 /*
@@ -2773,8 +2715,7 @@ a.pswp__share--download:hover {
 .slick-prev:hover {
   opacity: 0.9 !important;
   outline: none;
-  -webkit-transform: scale(1.1);
-          transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 @media (max-width: 991px) {
@@ -2786,13 +2727,11 @@ a.pswp__share--download:hover {
 
 .slick-prev {
   left: 0;
-  -webkit-transform: rotate(180deg);
-          transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
 .slick-prev:focus, .slick-prev:hover {
-  -webkit-transform: scale(1.1) rotate(180deg);
-          transform: scale(1.1) rotate(180deg);
+  transform: scale(1.1) rotate(180deg);
 }
 
 .slick-next {
@@ -2801,19 +2740,17 @@ a.pswp__share--download:hover {
 
 /* Dots */
 .chat-button {
-  background: rgba(248, 254, 242, 0.9);
+  background: rgba(255, 255, 255, 0.9);
   padding: 7px 14px 5px;
   border-radius: 32px;
   position: fixed;
   top: 13px;
   right: 17px;
   z-index: 26;
-  display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+      justify-content: center;
   color: #6d0101;
   font-size: 1.7rem;
   cursor: pointer;
@@ -2830,8 +2767,7 @@ a.pswp__share--download:hover {
 }
 
 .chat-button.empty {
-  -webkit-transform: translateX(200px);
-          transform: translateX(200px);
+  transform: translateX(200px);
 }
 
 .chat-button:hover {
@@ -2844,14 +2780,14 @@ a.pswp__share--download:hover {
   top: 0;
   right: -2px;
   width: 300px;
-  background: #F8FEF2;
+  background: white;
   border-left: 2px solid #6d0101;
   height: 100vh;
   z-index: 29;
   overflow: hidden;
   width: 0;
   transition: 0.3s ease;
-  background: #F8FEF2;
+  background: white;
 }
 
 .chat-open .chat {
@@ -2918,7 +2854,7 @@ a.pswp__share--download:hover {
   display: block;
   margin-top: 5px;
   font-size: 0.9em;
-  background: #F8FEF2;
+  background: white;
   vertical-align: bottom;
 }
 
@@ -2938,8 +2874,7 @@ a.pswp__share--download:hover {
 }
 
 .close-button:after, .close-button:before {
-  -webkit-transform: rotate(-45deg);
-          transform: rotate(-45deg);
+  transform: rotate(-45deg);
   content: '';
   position: absolute;
   top: 50%;
@@ -2954,13 +2889,11 @@ a.pswp__share--download:hover {
 }
 
 .close-button:after {
-  -webkit-transform: rotate(45deg);
-          transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 
 .close-button:hover:after, .close-button:hover:before {
-  -webkit-transform: rotate(0deg);
-          transform: rotate(0deg);
+  transform: rotate(0deg);
 }
 
 /**
@@ -2968,8 +2901,7 @@ a.pswp__share--download:hover {
 */
 .dialog-open .chat,
 .dialog-open .game {
-  -webkit-filter: blur(1px);
-          filter: blur(1px);
+  filter: blur(1px);
 }
 
 .dialog {
@@ -2978,13 +2910,12 @@ a.pswp__share--download:hover {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(248, 254, 242, 0.9);
+  background: rgba(255, 255, 255, 0.9);
   z-index: 6500;
   overflow: auto;
 }
 
 .dialog > div {
-  display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   min-height: 100%;
@@ -3011,11 +2942,10 @@ a.pswp__share--download:hover {
   display: block;
   width: 50px;
   height: 50px;
-  background: #F8FEF2 url("../assets/images/sprite-game.png") -8px 7px;
+  background: white url("../assets/images/sprite-game.png") -8px 7px;
   border: 2px solid #6d0101;
-  -webkit-box-flex: 0;
-      -ms-flex-positive: 0;
-          flex-grow: 0;
+  -ms-flex-positive: 0;
+      flex-grow: 0;
   border-radius: 50%;
   -ms-flex-item-align: end;
       align-self: flex-end;
@@ -3027,7 +2957,6 @@ a.pswp__share--download:hover {
 
 .dialog .text {
   padding: 10px 0;
-  display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   color: gray;
@@ -3035,7 +2964,7 @@ a.pswp__share--download:hover {
 }
 
 .dialog .text .portrait {
-  background: #F8FEF2 url("../assets/images/sprite-game.png") -2311px -128px;
+  background: white url("../assets/images/sprite-game.png") -2311px -128px;
   border-color: gray;
 }
 
@@ -3047,7 +2976,6 @@ a.pswp__share--download:hover {
 }
 
 .dialog .choices {
-  display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   padding: 10px 0;
@@ -3078,8 +3006,7 @@ a.pswp__share--download:hover {
 
 .dialog .choices .answered a.selected::after {
   opacity: 1 !important;
-  -webkit-transform: translateY(0px) !important;
-          transform: translateY(0px) !important;
+  transform: translateY(0px) !important;
 }
 
 .dialog .choices .answered a:focus:after, .dialog .choices .answered a:hover:after {
@@ -3091,12 +3018,11 @@ a.pswp__share--download:hover {
   padding: 17px 25px;
   margin: 0 0 3em;
   border: 2px solid #6d0101;
-  background: #F8FEF2;
+  background: white;
   border-radius: 20px;
   min-width: 240px;
-  -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
+  -ms-flex-positive: 1;
+      flex-grow: 1;
   width: calc(100% - 50px);
 }
 
@@ -3132,7 +3058,7 @@ a.pswp__share--download:hover {
   left: 40px;
   width: 28px;
   height: 15px;
-  background: #F8FEF2;
+  background: white;
 }
 
 .dialog .bubble.bubble-right:after, .dialog .bubble.bubble-right:before {
@@ -3160,7 +3086,7 @@ html {
 }
 
 body {
-  background: #F8FEF2;
+  background: white;
 }
 
 figure {
@@ -3187,7 +3113,7 @@ h3 {
   right: 0;
   bottom: auto;
   left: 0;
-  background: #F8FEF2;
+  background: white;
   z-index: 6600;
   min-height: 100vh;
 }
@@ -3218,7 +3144,7 @@ header {
   right: 0;
   bottom: auto;
   left: 0;
-  background: #F8FEF2;
+  background: white;
   -webkit-transform: translateZ(0);
   transition: top 0.2s ease-in-out;
   z-index: 1300;
@@ -3267,7 +3193,7 @@ header .nav-link:hover {
 
 header .nav-link.active {
   background: #D87309;
-  color: #F8FEF2;
+  color: white;
 }
 
 header form {
@@ -3278,7 +3204,7 @@ header form {
 header form .form-control {
   padding: 0.1rem 0.2rem 0.1rem 1.4rem;
   font-size: 0.9rem;
-  background: #F8FEF2;
+  background: white;
 }
 
 header form .form-control:focus {
@@ -3302,7 +3228,7 @@ header form svg {
   left: 17px;
   padding: 0.25rem 0.6rem 0.05rem;
   margin: 0.2rem 0;
-  background: #F8FEF2;
+  background: white;
   z-index: 6600;
   border-radius: 50%;
 }
@@ -3322,8 +3248,7 @@ header form svg {
 }
 
 .close:active svg, .close:focus svg, .close:hover svg {
-  -webkit-transform: translateX(-5px);
-          transform: translateX(-5px);
+  transform: translateX(-5px);
 }
 
 @media (min-width: 1200px) {
@@ -3387,14 +3312,12 @@ main article::after {
 main article [data-lazy-src] {
   opacity: 0;
   transition: 0.4s;
-  -webkit-transform: scale(0.95);
-          transform: scale(0.95);
+  transform: scale(0.95);
 }
 
 main article.visible [data-lazy-src] {
   opacity: 1;
-  -webkit-transform: scale(1);
-          transform: scale(1);
+  transform: scale(1);
 }
 
 main article > div {
@@ -3507,8 +3430,7 @@ main ul.objectives li::before {
   background: url("data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMS4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDQ4OC44NzggNDg4Ljg3OCIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNDg4Ljg3OCA0ODguODc4OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgd2lkdGg9IjE2cHgiIGhlaWdodD0iMTZweCI+CjxnPgoJPGc+CgkJPHBvbHlnb24gcG9pbnRzPSIxNDMuMjk0LDM0MC4wNTggNTAuODM3LDI0Ny42MDIgMCwyOTguNDM5IDEyMi4wMDksNDIwLjQ0NyAxMjIuMTQ5LDQyMC4zMDYgICAgIDE0NC40MjMsNDQyLjU4IDQ4OC44NzgsOTguMTIzIDQzNy4wNTUsNDYuMjk4ICAgIiBmaWxsPSIjNTgwMDAwIi8+Cgk8L2c+Cgk8Zz4KCTwvZz4KCTxnPgoJPC9nPgoJPGc+Cgk8L2c+Cgk8Zz4KCTwvZz4KCTxnPgoJPC9nPgoJPGc+Cgk8L2c+Cgk8Zz4KCTwvZz4KCTxnPgoJPC9nPgoJPGc+Cgk8L2c+Cgk8Zz4KCTwvZz4KCTxnPgoJPC9nPgoJPGc+Cgk8L2c+Cgk8Zz4KCTwvZz4KCTxnPgoJPC9nPgoJPGc+Cgk8L2c+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPC9zdmc+Cg==") no-repeat center center;
   transition: all 0.3s ease;
   transition-delay: 0.4s;
-  -webkit-transform: scale(0);
-          transform: scale(0);
+  transform: scale(0);
   opacity: 0;
 }
 
@@ -3596,8 +3518,7 @@ main .details .techno::before {
 
 main article.visible ul.objectives li::before {
   opacity: 1;
-  -webkit-transform: scale(1);
-          transform: scale(1);
+  transform: scale(1);
 }
 
 footer {
@@ -3721,16 +3642,12 @@ footer a {
 }
 
 #contact .secrow > div:first-child > div > div:first-child > div {
-  display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-direction: column;
+      flex-direction: column;
 }
 
 #contact .secrow > div:first-child > div > div:first-child > div svg {
@@ -3747,7 +3664,7 @@ footer a {
 
 #contact .secrow > div:first-child > div > div:first-child > div strong {
   background: #6d0101;
-  color: #F8FEF2;
+  color: white;
   border-radius: 0.25rem;
   padding: 0.05rem 0.2rem;
   line-height: 1.1rem;
@@ -3795,8 +3712,7 @@ footer a {
   border: 1px solid rgba(88, 0, 0, 0.8);
   position: absolute;
   text-align: center;
-  -webkit-transform: scale(0);
-          transform: scale(0);
+  transform: scale(0);
   transition: .5s;
 }
 
@@ -3835,12 +3751,12 @@ footer a {
 #contact .secrow button {
   line-height: 2rem;
   background: #6d0101;
-  color: #F8FEF2;
+  color: white;
   border: none;
   margin: 1rem auto 0;
   padding: 0.3rem 0;
   display: block;
-  fill: #F8FEF2;
+  fill: white;
   width: 14rem;
   position: relative;
   white-space: nowrap;
@@ -3870,8 +3786,7 @@ footer a {
 }
 
 #contact .secrow button:hover svg {
-  -webkit-transform: rotate(40deg);
-          transform: rotate(40deg);
+  transform: rotate(40deg);
 }
 
 #contact .secrow .sent button {
@@ -3887,8 +3802,7 @@ footer a {
 }
 
 #contact .visible .competencies div {
-  -webkit-transform: scale(1, 1);
-          transform: scale(1, 1);
+  transform: scale(1, 1);
 }
 
 /*
@@ -3925,8 +3839,7 @@ footer a {
 
 [data-youtube-id]:hover svg {
   opacity: 0.8;
-  -webkit-transform: scale(1.1);
-          transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 /* Crafty styles */
@@ -3941,7 +3854,7 @@ footer a {
 }
 
 #cr-stage .Dialog {
-  background-color: #F8FEF2;
+  background-color: white;
   color: #580000;
   border: 1px solid #580000;
   line-height: 1.1em;
@@ -3950,7 +3863,7 @@ footer a {
 #cr-stage .Label {
   width: auto !important;
   height: auto !important;
-  color: #F8FEF2;
+  color: white;
   white-space: nowrap;
   text-align: 'center';
   background-color: rgba(128, 128, 128, 0.7);
@@ -4014,11 +3927,8 @@ footer a::after {
   height: 2px;
   background: #D87309;
   opacity: 0;
-  -webkit-transform: translateY(5px);
-          transform: translateY(5px);
-  transition: opacity 0.3s, -webkit-transform 0.3s;
+  transform: translateY(5px);
   transition: transform 0.3s, opacity 0.3s;
-  transition: transform 0.3s, opacity 0.3s, -webkit-transform 0.3s;
   pointer-events: none;
 }
 
@@ -4030,8 +3940,7 @@ footer a::after {
 footer a:focus::after,
 footer a:hover::after {
   opacity: 1;
-  -webkit-transform: translateY(0px);
-          transform: translateY(0px);
+  transform: translateY(0px);
 }
 
 .current,
@@ -4045,8 +3954,7 @@ footer a:hover::after {
 .current:hover::after {
   background: gray;
   opacity: 1;
-  -webkit-transform: translateY(0px);
-          transform: translateY(0px);
+  transform: translateY(0px);
 }
 
 /*
@@ -4081,16 +3989,12 @@ footer a:hover::after {
   box-sizing: content-box;
   box-shadow: 0 0 0 3px #D87309;
   opacity: 0;
-  transition: opacity 0.2s, -webkit-transform 0.2s;
   transition: transform 0.2s, opacity 0.2s;
-  transition: transform 0.2s, opacity 0.2s, -webkit-transform 0.2s;
-  -webkit-transform: scale(0.8);
-          transform: scale(0.8);
+  transform: scale(0.8);
 }
 
 .icon:hover:after {
-  -webkit-transform: scale(1);
-          transform: scale(1);
+  transform: scale(1);
   opacity: 1;
 }
 
@@ -4104,20 +4008,15 @@ footer a:hover::after {
   bottom: 0;
   left: 0;
   z-index: 6700;
-  background: #F8FEF2;
-  display: -webkit-box;
+  background: white;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
 }
 
 .loader > div {
@@ -4141,41 +4040,24 @@ footer a:hover::after {
   left: -10px;
   top: -5px;
   background-color: #D87309;
-  -webkit-transform-origin: 15px 10px;
-          transform-origin: 15px 10px;
-  -webkit-animation: axis 1s linear infinite;
-          animation: axis 1s linear infinite;
+  transform-origin: 15px 10px;
+  animation: axis 1s linear infinite;
 }
 
 .loader > div:before {
   left: -25px;
   top: -15px;
   background-color: #79992E;
-  -webkit-transform-origin: 30px 20px;
-          transform-origin: 30px 20px;
-  -webkit-animation: axis 2s linear infinite;
-          animation: axis 2s linear infinite;
-}
-
-@-webkit-keyframes axis {
-  0% {
-    -webkit-transform: rotateZ(0deg) translate3d(0, 0, 0);
-            transform: rotateZ(0deg) translate3d(0, 0, 0);
-  }
-  100% {
-    -webkit-transform: rotateZ(360deg) translate3d(0, 0, 0);
-            transform: rotateZ(360deg) translate3d(0, 0, 0);
-  }
+  transform-origin: 30px 20px;
+  animation: axis 2s linear infinite;
 }
 
 @keyframes axis {
   0% {
-    -webkit-transform: rotateZ(0deg) translate3d(0, 0, 0);
-            transform: rotateZ(0deg) translate3d(0, 0, 0);
+    transform: rotateZ(0deg) translate3d(0, 0, 0);
   }
   100% {
-    -webkit-transform: rotateZ(360deg) translate3d(0, 0, 0);
-            transform: rotateZ(360deg) translate3d(0, 0, 0);
+    transform: rotateZ(360deg) translate3d(0, 0, 0);
   }
 }
 

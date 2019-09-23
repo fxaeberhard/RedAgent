@@ -8,7 +8,10 @@
 	<nav>
 		<div class="collapse navbar-toggleable" id="navbar-header">
 			<ul>
-				<li><a href="#horizon" class="active nav-link">2016</a></li>
+				<li><a href="#ariston" class="active nav-link">2019</a></li>
+				<li><a href="#mineority" class="nav-link">2018</a></li>
+				<li><a href="#festy" class=" nav-link">2017</a></li>
+				<li><a href="#horizon" class=" nav-link">2016</a></li>
 				<li><a href="#wallogram" class="nav-link">2015</a></li>
 				<li><a href="#proggame" class="nav-link">2014</a></li>
 				<li><a href="#stalker" class="nav-link">2013</a></li>
@@ -29,7 +32,144 @@
 
 <main>
 
-		<!-- Wallogram -->
+		<!-- Ariston  -->
+		<article id="ariston">
+			<div>
+				<img class="img-fluid center-block" src="assets/images/projects/ariston.jpg" />
+			</div>
+			<div>
+				<h1>Ariston Timepieces</h1>
+				<h2>February 2019 - Lausannne Switzerland</h2>
+				<p>
+<!--					Festy is a payment system that leverages the use of both cryptocurrencies and blockchain data structure to lower fees and improve security for shop owners.-->
+				</p>
+				<ul class="objectives">
+<!--					<li>Secured a 594 Dash (200'00USD) funding from Dash community (<a href="https://www.dashcentral.org/p/Bring-Festy-to-Irish-Pubs-Global-Market">link</a>)</li>-->
+<!--					<li>Architectured backend and mobile app allowing to pay with multiple cryptocurrencies (Bitcoin, Dash, Ether, Litecoin)</li>-->
+<!--					<li>Led a team of five developers</li>-->
+				</ul>
+				<div class="details">
+					<div class="links">
+						<a href="http://www.ariston-timepieces.com.ch/" target="_blank">Website</a>
+						<a href="http://www.ariston-timepieces.com.ch/" target="_blank">Android app</a>
+						<a href="http://www.ariston-timepieces.com.ch/" target="_blank">IOS app</a>
+						<!--						<a href data-slick-open>Screenshots</a>-->
+						<!-- <a href="https://github.com/fxaeberhard/Wallogram" target="_blank">Sources</a> -->
+					</div>
+					<div class="techno">
+						<div class="icon" data-toggle="tooltip" title="Bitcoin">
+							<svg><use xlink:href="assets/images/sprite.svg#bitcoin" /></svg>
+						</div>
+						<div class="icon" data-toggle="tooltip" title="Ethereum, Solidity">
+							<svg><use xlink:href="assets/images/sprite.svg#ethereum" /></svg>
+						</div>
+						<div class="icon" data-toggle="tooltip" title="Node.js">
+							<svg><use xlink:href="assets/images/sprite.svg#nodejs" /></svg>
+						</div>
+						<div class="icon" data-toggle="tooltip" title="PostgreSQL">
+							<svg><use xlink:href="assets/images/sprite.svg#postgres" /></svg>
+						</div>
+						<div class="icon" data-toggle="tooltip" title="React, Redux, React Native">
+							<svg><use xlink:href="assets/images/sprite.svg#react" /></svg>
+						</div>
+					</div>
+				</div>
+			</div>
+		</article>
+
+		<!-- Mineority  -->
+		<article id="mineority">
+			<div>
+				<img class="img-fluid center-block" src="assets/images/projects/Mineority.png" />
+			</div>
+			<div>
+				<h1>Mineority</h1>
+				<h2>June 2018 - Kiev, Ukrainv</h2>
+				<p>
+					Festy is a payment system that leverages the use of both cryptocurrencies and blockchain data structure to lower fees and improve security for shop owners.
+				</p>
+				<ul class="objectives">
+					<li>Secured a 594 Dash (200'00USD) funding from Dash community (<a href="https://www.dashcentral.org/p/Bring-Festy-to-Irish-Pubs-Global-Market">link</a>)</li>
+					<li>Architectured backend and mobile app allowing to pay with multiple cryptocurrencies (Bitcoin, Dash, Ether, Litecoin)</li>
+					<li>Led a team of five developers</li>
+				</ul>
+				<div class="details">
+					<div class="links">
+						<!-- <a href="http://wallogram.ch/" target="_blank">Website</a> -->
+						<a href data-slick-open>Screenshots</a>
+						<!-- <a href="https://github.com/fxaeberhard/Wallogram" target="_blank">Sources</a> -->
+					</div>
+					<div class="techno">
+						<div class="icon" data-toggle="tooltip" title="Ethereum, Solidity">
+							<svg><use xlink:href="assets/images/sprite.svg#ethereum" /></svg>
+						</div>
+						<div class="icon" data-toggle="tooltip" title="Node.js">
+							<svg><use xlink:href="assets/images/sprite.svg#nodejs" /></svg>
+						</div>
+						<div class="icon" data-toggle="tooltip" title="PostgreSQL">
+							<svg><use xlink:href="assets/images/sprite.svg#postgres" /></svg>
+						</div>
+						<div class="icon" data-toggle="tooltip" title="React, Redux">
+							<svg><use xlink:href="assets/images/sprite.svg#react" /></svg>
+						</div>
+					</div>
+				</div>
+			</div>
+		</article>
+
+		<!-- Festy -->
+		<article id="festy">
+			<div>
+				<a href="https://www.youtube.com/watch?v=2Qn_0ODwN2U" class="embed-responsive embed-responsive-16by9" data-youtube-id="2Qn_0ODwN2U">
+					<img class="img-fluid" src="http://img.youtube.com/vi/2Qn_0ODwN2U/maxresdefault.jpg" srcset="http://img.youtube.com/vi/2Qn_0ODwN2U/maxresdefault.jpg" alt="Festy" />
+					<svg><use xlink:href="assets/images/sprite.svg#youtube" /></svg>
+				</a>
+			</div>
+			<div>
+				<h1>Festy</h1>
+				<h2>December 2017 - Cork, Ireland</h2>
+				<p>
+					Festy is a payment system that leverages the use of both cryptocurrencies and blockchain data structure to lower fees and improve security for shop owners.
+				</p>
+				<ul class="objectives">
+					<li>Secured a 594 Dash (200'00USD) funding from Dash community (<a href="https://www.dashcentral.org/p/Bring-Festy-to-Irish-Pubs-Global-Market">link</a>)</li>
+					<li>Architectured backend and mobile app allowing to pay with multiple cryptocurrencies (Bitcoin, Dash, Ether, Litecoin)</li>
+					<li>Led a team of five developers</li>
+				</ul>
+				<div class="details">
+					<div class="links">
+						<!-- <a href="http://wallogram.ch/" target="_blank">Website</a> -->
+						<a href data-slick-open>Screenshots</a>
+						<!-- <a href="https://github.com/fxaeberhard/Wallogram" target="_blank">Sources</a> -->
+					</div>
+					<div class="techno">
+						<div class="icon" data-toggle="tooltip" title="Bitcoin">
+							<svg><use xlink:href="assets/images/sprite.svg#bitcoin" /></svg>
+						</div>
+						<div class="icon" data-toggle="tooltip" title="Ethereum, Solidity">
+							<svg><use xlink:href="assets/images/sprite.svg#ethereum" /></svg>
+						</div>
+						<div class="icon" data-toggle="tooltip" title="Dash">
+							<svg><use xlink:href="assets/images/sprite.svg#dash" /></svg>
+						</div>
+						<div class="icon" data-toggle="tooltip" title="Tendermint">
+							<svg><use xlink:href="assets/images/sprite.svg#tendermint" /></svg>
+						</div>
+						<div class="icon" data-toggle="tooltip" title="Node.js">
+							<svg><use xlink:href="assets/images/sprite.svg#nodejs" /></svg>
+						</div>
+						<div class="icon" data-toggle="tooltip" title="React, Redux, React Native">
+							<svg><use xlink:href="assets/images/sprite.svg#react" /></svg>
+						</div>
+						<!-- <div class="icon" data-toggle="tooltip" title="MongoDB">
+							<svg><use xlink:href="assets/images/sprite.svg#mongodb" /></svg>
+						</div> -->
+					</div>
+				</div>
+			</div>
+		</article>
+
+		<!-- Horizon -->
 		<article id="horizon">
 			<div>
 				<?php gallery('projects/horizon', '', false); ?>
@@ -304,7 +444,7 @@
 	<!-- Just Dance 2 -->
 	<article id="jd2">
 		<div>
-			<a href="https://www.youtube.com/watch?v=S6FgI2CR9I4" data-youtube-id="S6FgI2CR9I4">
+			<a href="https://www.youtube.com/watch?v=H0_dL5w_3WA" data-youtube-id="H0_dL5w_3WA">
 				<?php lazypicture('projects/justdance2.jpg') ?>
 				<!-- <img class="img-fluid" data-lazy-src="//i.ytimg.com/vi/S6FgI2CR9I4/maxresdefault.jpg" /> -->
 				<svg><use xlink:href="assets/images/sprite.svg#youtube" /></svg>
@@ -490,7 +630,7 @@
 	<!-- Redcms -->
 	<article id="redcms">
 		<div>
-			<img class="img-fluid center-block" data-lazy-src="assets/images/projects/redcms-logo-whitish.jpg" />
+			<img class="img-fluid center-block" data-lazy-src="assets/images/projects/redcms-logo.jpg" />
 		</div>
 		<div>
 			<h1>RedCMS</h1>

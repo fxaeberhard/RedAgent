@@ -59,8 +59,8 @@ $config = array(
     //     'jpeg_optimize_cmd' => '/usr/local/bin/jpegtran -copy none -optimize',
     // ),
     
-    // 'background_color' => "0000000",
-    'background_color' => "F8FEF200",
+     'background_color' => "000000",
+//    'background_color' => "F8FEF200",
     'max_width'     => 4000,
     'max_height'    => 4000,
     // //'cache_control' => "max-age=86400",
