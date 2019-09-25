@@ -15,11 +15,10 @@
 				<li><a href="#wallogram" class="nav-link">2015</a></li>
 				<li><a href="#proggame" class="nav-link">2014</a></li>
 				<li><a href="#stalker" class="nav-link">2013</a></li>
-				<li><a href="#wegas" class="nav-link">2011</a></li>
+				<li><a href="#wegas" class="nav-link">2012</a></li>
 				<li><a href="#mjte" class="nav-link">2010</a></li>
 				<li><a href="#3dblogosphere" class="nav-link">2009</a></li>
-				<li><a href="#redcms" class="nav-link">2006</a></li>
-				<li><a href="#schlempf" class="nav-link">2005</a></li>
+				<li><a href="#redcms" class="nav-link">2008</a></li>
 			</ul>
 		</div>
 		<form class="form-inline pull-xs-right hidden-md-down">
@@ -35,28 +34,31 @@
 		<!-- Ariston  -->
 		<article id="ariston">
 			<div>
-				<img class="img-fluid center-block" src="assets/images/projects/ariston.jpg" />
+				<?php gallery('projects/ariston', '', false); ?>
+				<!-- <img class="img-fluid center-block" src="assets/images/projects/ariston.jpg" /> -->
 			</div>
 			<div>
 				<h1>Ariston Timepieces</h1>
-				<h2>February 2019 - Lausannne Switzerland</h2>
+				<h2>July 2019 - Lausannne, Switzerland</h2>
 				<p>
-<!--					Festy is a payment system that leverages the use of both cryptocurrencies and blockchain data structure to lower fees and improve security for shop owners.-->
+					Ariston is the first luxury watch that encompass crypto wallet. A physical encryption key is embedded in the case and allows the customer to access his assets (Bitcoin, Ether, etc.).
 				</p>
 				<ul class="objectives">
-<!--					<li>Secured a 594 Dash (200'00USD) funding from Dash community (<a href="https://www.dashcentral.org/p/Bring-Festy-to-Irish-Pubs-Global-Market">link</a>)</li>-->
-<!--					<li>Architectured backend and mobile app allowing to pay with multiple cryptocurrencies (Bitcoin, Dash, Ether, Litecoin)</li>-->
-<!--					<li>Led a team of five developers</li>-->
+					<li>Development the iOS and Android apps</li>
+					<li>Industrialization of the coin</li>
+					<li>Project management</li>
 				</ul>
 				<div class="details">
 					<div class="links">
-						<a href="http://www.ariston-timepieces.com.ch/" target="_blank">Website</a>
-						<a href="http://www.ariston-timepieces.com.ch/" target="_blank">Android app</a>
-						<a href="http://www.ariston-timepieces.com.ch/" target="_blank">IOS app</a>
+						<a href="https://ariston-timepieces.com" target="_blank">Website</a>
+						<a href="https://play.google.com/store/apps/details?id=com.ariston.Ariston" target="_blank">Playstore</a>
 						<!--						<a href data-slick-open>Screenshots</a>-->
 						<!-- <a href="https://github.com/fxaeberhard/Wallogram" target="_blank">Sources</a> -->
 					</div>
 					<div class="techno">
+						<div class="icon" data-toggle="tooltip" title="React Native">
+							<svg><use xlink:href="assets/images/sprite.svg#react" /></svg>
+						</div>
 						<div class="icon" data-toggle="tooltip" title="Bitcoin">
 							<svg><use xlink:href="assets/images/sprite.svg#bitcoin" /></svg>
 						</div>
@@ -66,12 +68,9 @@
 						<div class="icon" data-toggle="tooltip" title="Node.js">
 							<svg><use xlink:href="assets/images/sprite.svg#nodejs" /></svg>
 						</div>
-						<div class="icon" data-toggle="tooltip" title="PostgreSQL">
+						<!-- <div class="icon" data-toggle="tooltip" title="PostgreSQL">
 							<svg><use xlink:href="assets/images/sprite.svg#postgres" /></svg>
-						</div>
-						<div class="icon" data-toggle="tooltip" title="React, Redux, React Native">
-							<svg><use xlink:href="assets/images/sprite.svg#react" /></svg>
-						</div>
+						</div> -->
 					</div>
 				</div>
 			</div>
@@ -80,26 +79,29 @@
 		<!-- Mineority  -->
 		<article id="mineority">
 			<div>
-				<img class="img-fluid center-block" src="assets/images/projects/Mineority.png" />
+				<?php gallery('projects/mineority', '', false); ?>
+				<!-- <img class="img-fluid center-block" src="assets/images/projects/Mineority.png" /> -->
 			</div>
 			<div>
 				<h1>Mineority</h1>
-				<h2>June 2018 - Kiev, Ukrainv</h2>
+				<h2>June 2018 - Lausanne, Suisse</h2>
 				<p>
-					Festy is a payment system that leverages the use of both cryptocurrencies and blockchain data structure to lower fees and improve security for shop owners.
+					Mineority.io allows you to buy graphic cards to mine crypto currencies using a smart contract <em>(Solidity)</em>. The goal is to allow full control on the cards for the users and full traceability for the manufacturer.
 				</p>
 				<ul class="objectives">
-					<li>Secured a 594 Dash (200'00USD) funding from Dash community (<a href="https://www.dashcentral.org/p/Bring-Festy-to-Irish-Pubs-Global-Market">link</a>)</li>
-					<li>Architectured backend and mobile app allowing to pay with multiple cryptocurrencies (Bitcoin, Dash, Ether, Litecoin)</li>
-					<li>Led a team of five developers</li>
+					<li>Develop the frontend and backend interacting with the Ethereum smart contract</li>
+					<li>Team Management</li>
 				</ul>
 				<div class="details">
 					<div class="links">
 						<!-- <a href="http://wallogram.ch/" target="_blank">Website</a> -->
-						<a href data-slick-open>Screenshots</a>
+						<!-- <a href data-slick-open>Screenshots</a> -->
 						<!-- <a href="https://github.com/fxaeberhard/Wallogram" target="_blank">Sources</a> -->
 					</div>
 					<div class="techno">
+						<div class="icon" data-toggle="tooltip" title="React, Redux">
+							<svg><use xlink:href="assets/images/sprite.svg#react" /></svg>
+						</div>
 						<div class="icon" data-toggle="tooltip" title="Ethereum, Solidity">
 							<svg><use xlink:href="assets/images/sprite.svg#ethereum" /></svg>
 						</div>
@@ -109,9 +111,6 @@
 						<div class="icon" data-toggle="tooltip" title="PostgreSQL">
 							<svg><use xlink:href="assets/images/sprite.svg#postgres" /></svg>
 						</div>
-						<div class="icon" data-toggle="tooltip" title="React, Redux">
-							<svg><use xlink:href="assets/images/sprite.svg#react" /></svg>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -120,10 +119,13 @@
 		<!-- Festy -->
 		<article id="festy">
 			<div>
-				<a href="https://www.youtube.com/watch?v=2Qn_0ODwN2U" class="embed-responsive embed-responsive-16by9" data-youtube-id="2Qn_0ODwN2U">
+				<div>
+					<img class="img-fluid center-block" src="assets/images/projects/festy/festy-app-demo-small.gif" />
+				</div>
+				<!-- <a href="https://www.youtube.com/watch?v=2Qn_0ODwN2U" class="embed-responsive embed-responsive-16by9" data-youtube-id="2Qn_0ODwN2U">
 					<img class="img-fluid" src="http://img.youtube.com/vi/2Qn_0ODwN2U/maxresdefault.jpg" srcset="http://img.youtube.com/vi/2Qn_0ODwN2U/maxresdefault.jpg" alt="Festy" />
 					<svg><use xlink:href="assets/images/sprite.svg#youtube" /></svg>
-				</a>
+				</a> -->
 			</div>
 			<div>
 				<h1>Festy</h1>
@@ -138,8 +140,8 @@
 				</ul>
 				<div class="details">
 					<div class="links">
-						<!-- <a href="http://wallogram.ch/" target="_blank">Website</a> -->
-						<a href data-slick-open>Screenshots</a>
+						<a href="https://festy.ie" target="_blank">Website</a>
+						<!-- <a href data-slick-open>Screenshots</a> -->
 						<!-- <a href="https://github.com/fxaeberhard/Wallogram" target="_blank">Sources</a> -->
 					</div>
 					<div class="techno">
@@ -230,7 +232,7 @@
 			</div>
 			<div>
 				<h1>Wallogram</h1>
-				<h2>January 2015 - Interactive video mapping</h2>
+				<h2>January 2015 - Interactive video mapping at Maison d'ailleurs Museum, Yverdon</h2>
 				<ul class="objectives">
 					<li>Turn a wall into a game playground</li>
 					<li>Let player use his mobile phone as a gamepad</li>
@@ -268,7 +270,7 @@
 		</div>
 		<div>
 			<h1>Programming game</h1>
-			<h2>March 2014 - UX Engineer at School for Business & Engineering Vaud (Heig-vd)</h2>
+			<h2>March 2014 - UX Engineer at School for Business & Engineering Vaud (Heig)</h2>
 
 			<ul class="objectives">
 				<li>Teach javascript with fun</li>
@@ -278,7 +280,8 @@
 			<div class="details">
 				<div class="links">
 					<!-- <a href="http://wegas.red-agent.com/game.html?token=proggame&al=1" target="_blank">Play online</a> -->
-					<a href="http://wegas.albasim.ch/#/play/proggamedem-oh" target="_blank">Play online</a>
+					<!-- <a href="http://wegas.albasim.ch/#/play/proggamedem-oh" target="_blank">Play online</a> -->
+					<a href="https://wegas.albasim.ch/#/play/pact-demo" target="_blank">Play online</a>
 					<a href data-slick-open>Screenshots</a>
 					<a href="https://github.com/Heigvd/Wegas" target="_blank">Sources</a>
 				</div>
@@ -305,7 +308,7 @@
 		</div>
 		<div>
 			<h1>Stalker - Experimenting the Zone</h1>
-			<h2>September 2013 - Exhibit design at Maison d'Ailleurs museum, coproduced by Heig-vd</h2>
+			<h2>September 2013 - Exhibit design at Maison d'Ailleurs Museum, Yverdon</h2>
 
 			<ul class="objectives">
 				<li>Make the visitor experiment the secret room present in Tarkovski's movie</li>
@@ -349,7 +352,7 @@
 
 			<div class="details">
 				<div class="links">
-					<a href="http://www.seedin.ch/" target="_blank">Try online</a>
+					<a href="https://wegas.albasim.ch" target="_blank">Try online</a>
 					<a href data-slick-open>Screenshots</a>
 					<a href="https://github.com/Heigvd/Wegas" target="_blank">Sources</a>
 				</div>
@@ -382,7 +385,7 @@
 		</div>
 		<div>
 			<h1>Michael Jackson: The Experience - Wii</h1>
-			<h2>August 2010 - User Interface Programmer at Ubisoft</h2>
+			<h2>August 2010 - User Interface Engineer at Ubisoft</h2>
 
 			<ul class="objectives">
 				<li>Design and implement the in-game user interface on Nintendo Wii</li>
@@ -418,7 +421,7 @@
 		</div>
 		<div>
 			<h1>Michael Jackson: The Exerience - Web</h1>
-			<h2>August 2010 - User Interface Programmer at Ubisoft</h2>
+			<h2>August 2010 - User Interface Engineer at Ubisoft</h2>
 
 			<ul class="objectives">
 				<li>Create a rhythm game where player uses keyboard to mimic Michael</li>
@@ -451,7 +454,7 @@
 			</a>
 		</div>
 		<div>
-			<h1>Just Dance 2 - Wii</h1>
+			<h1>Just Dance 2 - Wii & PS3</h1>
 			<h2>February 2010 - Gameplay Programmer at Ubisoft</h2>
 
 			<ul class="objectives">
@@ -498,7 +501,7 @@
 		</div>
 		<div>
 			<h1>3DBlogosphere</h1>
-			<h2>August 2009 - Knowledge Management Engineer at Siemens Corporate Research</h2>
+			<h2>October 2009 - Knowledge Management Engineer at Siemens Corporate Research</h2>
 
 			<ul class="objectives">
 				<li>Use virtual worlds to enhance collaboration in a company</li>
@@ -536,7 +539,7 @@
 		</div>
 		<div>
 			<h1>Audio D-Touch</h1>
-			<h2>February 2009 - Semester project at Design and Media Laboratory (LDM, EPFL)</h2>
+			<h2>June 2009 - Research project at Design and Media Laboratory (LDM, EPFL)</h2>
 
 			<ul class="objectives">
 				<li>Design and implement a tangible user interface (TUI) for audio sequencing</li>
@@ -563,8 +566,8 @@
 			<?php gallery("projects/webdesign", "ar=4:3&ff"); ?>
 		</div>
 		<div>
-			<h1>Independant web design</h1>
-			<h2>January 2006 - August 2009</h2>
+			<h1>Web design</h1>
+			<h2>February 2009 - Lausanne, Switzerland</h2>
 
 			<ul class="objectives">
 				<li>Create websites and e-commerce platforms for small businesses</li>
@@ -573,8 +576,8 @@
 
 			<div class="details">
 				<div class="links">
-					<a target="_blank" href="http://www.juliecampiche.com/">juliecampiche.com</a>
-					<a target="_blank" href="http://samiralaoui.ch">samiralaoui.ch</a>
+					<a target="_blank" href="https://www.juliecampiche.com/">juliecampiche.com</a>
+					<a target="_blank" href="https://samiralaoui.ch">samiralaoui.ch</a>
 					<a target="_blank" href="http://www.marisolimage.ch">marisolimage.ch</a>
 					<a target="_blank" href="http://www.smagonline.ch">smagonline.ch</a>
 					<a target="_blank" href="http://www.swissdesignnetwork.org">swissdesignnetwork.org</a>
@@ -634,7 +637,7 @@
 		</div>
 		<div>
 			<h1>RedCMS</h1>
-			<h2>January 2006 - August 2009 - Open source project</h2>
+			<h2>February 2009 - Open source project</h2>
 
 			<ul class="objectives">
 				<li>Create a lightweight CMS designed with AJAX in mind</li>
@@ -672,7 +675,7 @@
 
 		<div>
 			<h1>EyeKidz</h1>
-			<h2>Januar-August 2005 - User interface designer at EverMore Innovation</h2>
+			<h2>August 2008 - User interface designer at EverMore Innovation</h2>
 
 			<ul class="objectives">
 				<li>Design and implement the interface of EyeKidz, a browser for children</li>
@@ -701,7 +704,7 @@
 
 		<div>
 			<h1>Schlempf</h1>
-			<h2>June 2005 - Student game contest</h2>
+			<h2>January 2008 - Student game contest</h2>
 
 			<ul class="objectives">
 				<li>Create a mobile game mixing life simulation and adventure</li>
@@ -710,10 +713,10 @@
 
 			<div class="details">
 				<div class="links">
-					<a href="http://red-agent.com/schlempf/index.htm" target="_blank">Website</a>
+					<a href="https://red-agent.com/schlempf/" target="_blank">Website</a>
 				</div>
 				<div class="techno">
-					<div class="icon" data-toggle="tooltip" title="Java 2 Mobile Edition <em>(J2ME)</em>">
+					<div class="icon" data-toggle="tooltip" title="Java Mobile">
 						<svg><use xlink:href="assets/images/sprite.svg#java" /></svg>
 					</div>
 				</div>

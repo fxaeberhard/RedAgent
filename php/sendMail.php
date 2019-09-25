@@ -15,15 +15,17 @@ $mail->SMTPDebug = 0;
 //Ask for HTML-friendly debug output
 $mail->Debugoutput = 'html';
 //Set the hostname of the mail server
-$mail->Host = "mail.infomaniak.ch";
+$mail->Host = "smtp.gmail.com";
 //Set the SMTP port number - likely to be 25, 465 or 587
-$mail->Port = 587;
+$mail->Port = 465;
+//
+$mail->SMTPSecure = "ssl";
 //Whether to use SMTP authentication
 $mail->SMTPAuth = true;
 //Username to use for SMTP authentication
-$mail->Username = "mailing@red-agent.com";
+$mail->Username = "redagentmailer@gmail.com";
 //Password to use for SMTP authentication
-$mail->Password = "mi90ao";
+$mail->Password = "M436bhhRXJvexqi";
 
 //Set who the message is to be sent from
 $mail->setFrom($_REQUEST["from"]);
