@@ -22,11 +22,12 @@ $input-border-focus: $gray;
 $font-family-base: 'Open Sans', Helvetica;
 $din-family: Din, Helvetica; //
 /* Libraries */
+@import "font";
 @import "bootstrap";
 @import "mixin";
 $pswp__assets-path: "../assets/images/";
 @import "../bower_components/photoswipe/src/css/main.scss";
-@import "../bower_components/photoswipe/src/css/default-skin/default-skin.scss"; // @import "font";
+@import "../bower_components/photoswipe/src/css/default-skin/default-skin.scss";
 @import "menu";
 @import "slick";
 @import "chat";
@@ -291,6 +292,9 @@ main {
 		> :first-child {
 			@include media-breakpoint-up(lg) {
 				@include make-col-span(5);
+			}
+			video {
+				max-width: 100%;
 			}
 		}
 

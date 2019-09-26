@@ -63,7 +63,7 @@ $config = array(
 //    'background_color' => "F8FEF200",
     'max_width'     => 4000,
     'max_height'    => 4000,
-    // //'cache_control' => "max-age=86400",
+    'cache_control' => "max-age=31557600",
     'jpg_quality'  => 90,
     'png_compression' => 1
 );

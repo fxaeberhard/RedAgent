@@ -56,12 +56,12 @@ var App = (function($) {
 			})
 
 			// Load fonts
-			WebFont.load({
+		/*	WebFont.load({
 				custom: {
 					families: ['Din', 'Open Sans'],
 					urls: ['css/font.css']
 				}
-			})
+			})*/
 
 			// Navigation
 			$('.menu .hamburger').click(function() {
@@ -405,7 +405,7 @@ var App = (function($) {
 		// }
 	}
 
-	$(window).load(App.init)
+	$(window).on('load', App.init)
 
 	return App
 }(jQuery));

@@ -50,8 +50,8 @@
 				</ul>
 				<div class="details">
 					<div class="links">
-						<a href="https://ariston-timepieces.com" target="_blank">Website</a>
-						<a href="https://play.google.com/store/apps/details?id=com.ariston.Ariston" target="_blank">Playstore</a>
+						<a href="https://ariston-timepieces.com" target="_blank" rel="noreferrer">Website</a>
+						<a href="https://play.google.com/store/apps/details?id=com.ariston.Ariston" target="_blank" rel="noreferrer">Playstore</a>
 						<!--						<a href data-slick-open>Screenshots</a>-->
 						<!-- <a href="https://github.com/fxaeberhard/Wallogram" target="_blank">Sources</a> -->
 					</div>
@@ -94,7 +94,7 @@
 				</ul>
 				<div class="details">
 					<div class="links">
-						<!-- <a href="http://wallogram.ch/" target="_blank">Website</a> -->
+						<!-- <a href="http://wallogram.ch/" target="_blank" rel="noreferrer">Website</a> -->
 						<!-- <a href data-slick-open>Screenshots</a> -->
 						<!-- <a href="https://github.com/fxaeberhard/Wallogram" target="_blank">Sources</a> -->
 					</div>
@@ -120,7 +120,11 @@
 		<article id="festy">
 			<div>
 				<div>
-					<img class="img-fluid center-block" src="assets/images/projects/festy/festy-app-demo-small.gif" />
+					<!-- <img class="img-fluid center-block" src="assets/images/projects/festy/festy-app-demo-small.gif" /> -->
+					<video autoplay loop muted playsinline>
+					  <source src="assets/images/projects/festy/festy-app-demo.webm" type="video/webm">
+					  <source src="assets/images/projects/festy/festy-app-demo.mp4" type="video/mp4">
+					</video>
 				</div>
 				<!-- <a href="https://www.youtube.com/watch?v=2Qn_0ODwN2U" class="embed-responsive embed-responsive-16by9" data-youtube-id="2Qn_0ODwN2U">
 					<img class="img-fluid" src="http://img.youtube.com/vi/2Qn_0ODwN2U/maxresdefault.jpg" srcset="http://img.youtube.com/vi/2Qn_0ODwN2U/maxresdefault.jpg" alt="Festy" />
@@ -134,13 +138,13 @@
 					Festy is a payment system that leverages the use of both cryptocurrencies and blockchain data structure to lower fees and improve security for shop owners.
 				</p>
 				<ul class="objectives">
-					<li>Secured a 594 Dash (200'00USD) funding from Dash community (<a href="https://www.dashcentral.org/p/Bring-Festy-to-Irish-Pubs-Global-Market">link</a>)</li>
+					<li>Secured a 594 Dash (200'00USD) funding from Dash community (<a href="https://www.dashcentral.org/p/Bring-Festy-to-Irish-Pubs-Global-Market" rel="noreferrer">link</a>)</li>
 					<li>Architectured backend and mobile app allowing to pay with multiple cryptocurrencies (Bitcoin, Dash, Ether, Litecoin)</li>
 					<li>Led a team of five developers</li>
 				</ul>
 				<div class="details">
 					<div class="links">
-						<a href="https://festy.ie" target="_blank">Website</a>
+						<a href="https://festy.ie" target="_blank" rel="noreferrer">Website</a>
 						<!-- <a href data-slick-open>Screenshots</a> -->
 						<!-- <a href="https://github.com/fxaeberhard/Wallogram" target="_blank">Sources</a> -->
 					</div>
@@ -220,7 +224,7 @@
 		<!-- Wallogram -->
 		<article id="wallogram">
 			<div>
-				<a href="https://www.youtube.com/watch?v=W1kdVlAAzcQ" class="embed-responsive embed-responsive-16by9" data-youtube-id="W1kdVlAAzcQ">
+				<a href="https://www.youtube.com/watch?v=W1kdVlAAzcQ" class="embed-responsive embed-responsive-16by9" data-youtube-id="W1kdVlAAzcQ" rel="noreferrer">
 					<!-- <picture> -->
 					<!-- <source srcset="imgpp/projects/wallogram/teaser.jpg?w=522" media="(max-width:543px)" /> -->
 					<!-- <source srcset="imgpp/projects/wallogram/teaser.jpg?w=480, imgpp/projects/wallogram/teaser.jpg?w=950 x2" media="(min-width:544px) AND (max-width:894px)" /> -->
@@ -240,10 +244,10 @@
 				</ul>
 				<div class="details">
 					<div class="links">
-						<a href="http://wallogram.ch/" target="_blank">Website</a>
+						<a href="http://wallogram.ch/" target="_blank" rel="noreferrer">Website</a>
 						<?php hiddenGallery('projects/wallogram'); ?>
 						<a href data-slick-open>Pictures</a>
-						<a href="https://github.com/fxaeberhard/Wallogram" target="_blank">Sources</a>
+						<a href="https://github.com/fxaeberhard/Wallogram" target="_blank" rel="noreferrer">Github</a>
 					</div>
 					<div class="techno">
 						<div class="icon" data-toggle="tooltip" title="Node.js">
@@ -281,9 +285,9 @@
 				<div class="links">
 					<!-- <a href="http://wegas.red-agent.com/game.html?token=proggame&al=1" target="_blank">Play online</a> -->
 					<!-- <a href="http://wegas.albasim.ch/#/play/proggamedem-oh" target="_blank">Play online</a> -->
-					<a href="https://wegas.albasim.ch/#/play/pact-demo" target="_blank">Play online</a>
+					<a href="https://wegas.albasim.ch/#/play/pact-demo" target="_blank" rel="noreferrer">Play online</a>
 					<a href data-slick-open>Screenshots</a>
-					<a href="https://github.com/Heigvd/Wegas" target="_blank">Sources</a>
+					<a href="https://github.com/Heigvd/Wegas" target="_blank" rel="noreferrer">Github</a>
 				</div>
 				<div class="techno">
 					<div class="icon" data-toggle="tooltip" title="Java EE (Glassfish)">
@@ -317,7 +321,7 @@
 
 			<div class="details">
 				<div class="links">
-					<a href="http://www.ailleurs.ch/en/expositions/archives/exposition-stalker-experimenter-la-zone/#" target="_blank">Website</a>
+					<a href="http://www.ailleurs.ch/en/expositions/archives/exposition-stalker-experimenter-la-zone/#" target="_blank" rel="noreferrer">Website</a>
 					<a href data-slick-open>Pictures</a>
 				</div>
 				<div class="techno">
@@ -352,9 +356,9 @@
 
 			<div class="details">
 				<div class="links">
-					<a href="https://wegas.albasim.ch" target="_blank">Try online</a>
+					<a href="https://wegas.albasim.ch" target="_blank" rel="noreferrer">Try online</a>
 					<a href data-slick-open>Screenshots</a>
-					<a href="https://github.com/Heigvd/Wegas" target="_blank">Sources</a>
+					<a href="https://github.com/Heigvd/Wegas" target="_blank" rel="noreferrer">Github</a>
 				</div>
 				<div class="techno">
 					<div class="icon" data-toggle="tooltip" title="JavaEE <em>(Glassfish 3)</em>">
@@ -377,7 +381,7 @@
 	<!-- MJ -->
 	<article id="mjte">
 		<div>
-			<a href="https://www.youtube.com/watch?v=EKI3U_uFv7Y" data-youtube-id="EKI3U_uFv7Y">
+			<a href="https://www.youtube.com/watch?v=EKI3U_uFv7Y" data-youtube-id="EKI3U_uFv7Y" rel="noreferrer">
 				<?php lazypicture('projects/mjte.jpg') ?>
 				<!-- <img class="img-fluid" data-lazy-srcset="i/?w=526, i/?w=789 1.5x, i/?w=1052 2x" data-lazy-src="i/projects/mjte_720.jpg" /> -->
 				<svg><use xlink:href="assets/images/sprite.svg#youtube" /></svg>
@@ -393,7 +397,7 @@
 
 			<div class="details">
 				<div class="links">
-					<a href="http://www.nintendo.com/games/detail/smpbynnlvHGr3gN6PTn9kNc2htjE6apS" target="_blank">Official website</a>
+					<a href="http://www.nintendo.com/games/detail/smpbynnlvHGr3gN6PTn9kNc2htjE6apS" target="_blank" rel="noreferrer">Official website</a>
 				</div>
 				<div class="techno">
 					<div class="icon" data-toggle="tooltip" title="C++">
@@ -413,7 +417,7 @@
 	<!--  MJTE Web game-->
 	<article id="mjteweb">
 		<div>
-			<a href="http://apps.facebook.com/mjte_minigame/" target="_blank">
+			<a href="http://apps.facebook.com/mjte_minigame/" target="_blank" rel="noreferrer">
 				<?php lazypicture('projects/mjte_minigame.jpg') ?>
 				<!-- <img class="img-fluid" data-lazy-src="assets/images/projects/mjte_minigame_720.jpg" /> -->
 				<!-- <div class="play-button"></div> -->
@@ -430,7 +434,7 @@
 
 			<div class="details">
 				<div class="links">
-					<a href="http://apps.facebook.com/mjte_minigame/" target="_blank">Play online</a>
+					<a href="http://apps.facebook.com/mjte_minigame/" target="_blank" rel="noreferrer">Play online</a>
 				</div>
 				<div class="techno">
 					<div class="icon" data-toggle="tooltip" title="Actionscript 3.0">
@@ -447,7 +451,7 @@
 	<!-- Just Dance 2 -->
 	<article id="jd2">
 		<div>
-			<a href="https://www.youtube.com/watch?v=H0_dL5w_3WA" data-youtube-id="H0_dL5w_3WA">
+			<a href="https://www.youtube.com/watch?v=H0_dL5w_3WA" data-youtube-id="H0_dL5w_3WA" rel="noreferrer">
 				<?php lazypicture('projects/justdance2.jpg') ?>
 				<!-- <img class="img-fluid" data-lazy-src="//i.ytimg.com/vi/S6FgI2CR9I4/maxresdefault.jpg" /> -->
 				<svg><use xlink:href="assets/images/sprite.svg#youtube" /></svg>
@@ -464,7 +468,7 @@
 
 			<div class="details">
 				<div class="links">
-					<a href="http://www.nintendo.com/games/detail/2EC398vHy15QEeuA2gp2AqlCpANwFMYL" target="_blank">Official website</a>
+					<a href="http://www.nintendo.com/games/detail/2EC398vHy15QEeuA2gp2AqlCpANwFMYL" target="_blank" rel="noreferrer">Official website</a>
 				</div>
 				<div class="techno">
 					<div class="icon" data-toggle="tooltip" title="C++">
@@ -510,7 +514,7 @@
 
 			<div class="details">
 				<div class="links">
-					<a href="http://www.iaeng.org/publication/WCECS2009/WCECS2009_pp764-767.pdf" target="_blank">“3DBlogosphere: A Multisynchronous Approach of Virtual Worlds to Sustain Company Wide Communication”</a>Aeberhard Francois-Xavier, Steve Russell, ICIMT 2009, ACM
+					<a href="http://www.iaeng.org/publication/WCECS2009/WCECS2009_pp764-767.pdf" target="_blank" rel="noreferrer">“3DBlogosphere: A Multisynchronous Approach of Virtual Worlds to Sustain Company Wide Communication”</a>Aeberhard Francois-Xavier, Steve Russell, ICIMT 2009, ACM
 				</div>
 				<div class="techno">
 					<div class="icon" data-toggle="tooltip" title="Java <em>(J2EE, J2SE, Project Wonderland, JMonkey & Glassfish)</em>">
@@ -530,7 +534,7 @@
 	<!--  DTouch -->
 	<article id="dtouch">
 		<div>
-			<a href="https://www.youtube.com/watch?v=tPcI2RbFaSM" data-youtube-id="tPcI2RbFaSM">
+			<a href="https://www.youtube.com/watch?v=tPcI2RbFaSM" data-youtube-id="tPcI2RbFaSM" rel="noreferrer">
 				<?php lazypicture('projects/dtouch.jpg') ?>
 				<!-- <img class="img-fluid"  src="//i.ytimg.com/vi/tPcI2RbFaSM/mqdefault.jpg" /> -->
 				<!-- <img class="img-fluid" data-lazy-src="assets/images/projects/dtouch_720.jpg" /> -->
@@ -548,8 +552,8 @@
 
 			<div class="details">
 				<div class="links">
-					<!-- <a href="http://www.d-touch.org/audio/" target="_blank">Website</a> -->
-					<a href="https://www.youtube.com/watch?v=cKd8NXWwvKI" target="_blank">Website</a>
+					<!-- <a href="http://www.d-touch.org/audio/" target="_blank" rel="noreferrer">Website</a> -->
+					<a href="https://www.youtube.com/watch?v=cKd8NXWwvKI" target="_blank" rel="noreferrer">Website</a>
 				</div>
 				<div class="techno">
 					<div class="icon" data-toggle="tooltip" title="C++">
@@ -576,21 +580,21 @@
 
 			<div class="details">
 				<div class="links">
-					<a target="_blank" href="https://www.juliecampiche.com/">juliecampiche.com</a>
-					<a target="_blank" href="https://samiralaoui.ch">samiralaoui.ch</a>
-					<a target="_blank" href="http://www.marisolimage.ch">marisolimage.ch</a>
-					<a target="_blank" href="http://www.smagonline.ch">smagonline.ch</a>
-					<a target="_blank" href="http://www.swissdesignnetwork.org">swissdesignnetwork.org</a>
-					<a target="_blank" href="http://www.velo-migrateur.com">velo-migrateur.com</a>
-					<a target="_blank" href="http://www.hopiclowns.ch">hopiclowns.ch</a>
+					<a target="_blank" href="https://www.juliecampiche.com/" rel="noreferrer">juliecampiche.com</a>
+					<a target="_blank" href="https://samiralaoui.ch" rel="noreferrer">samiralaoui.ch</a>
+					<a target="_blank" href="http://www.marisolimage.ch" rel="noreferrer">marisolimage.ch</a>
+					<a target="_blank" href="http://www.smagonline.ch" rel="noreferrer">smagonline.ch</a>
+					<a target="_blank" href="http://www.swissdesignnetwork.org" rel="noreferrer">swissdesignnetwork.org</a>
+					<a target="_blank" href="http://www.velo-migrateur.com" rel="noreferrer">velo-migrateur.com</a>
+					<a target="_blank" href="http://www.hopiclowns.ch" rel="noreferrer">hopiclowns.ch</a>
 					<a href data-slick-open data-index="12">espace-est-ouest.com</a>
 					<a href data-slick-open data-index="13">freshprod.com</a>
 					<a href data-slick-open data-index="14">fiduswiss.ch</a>
 					<a href data-slick-open data-index="8">one-appointment.com</a>
 					<a href data-slick-open data-index="7">micronarc.ch</a>
 					<a href data-slick-open data-index="5">timetotime.com</a>
-					<a target="_blank" href="http://www.ultra-son.ch/">ultra-son.ch</a>
-					<a target="_blank" href="http://www.fag.ch/">fag-avenches.ch</a>
+					<a target="_blank" href="http://www.ultra-son.ch/" rel="noreferrer">ultra-son.ch</a>
+					<a target="_blank" href="http://www.fag.ch/" rel="noreferrer">fag-avenches.ch</a>
 				</div>
 				<div class="techno">
 					<div class="icon" data-toggle="tooltip" title="Php">
@@ -645,7 +649,7 @@
 
 			<div class="details">
 				<div class="links">
-					<a href="http://redcms.red-agent.com" target="_blank">Website</a>
+					<a href="http://redcms.red-agent.com" target="_blank" rel="noreferrer">Website</a>
 				</div>
 				<div class="techno">
 					<div class="icon" data-toggle="tooltip" title="Php">
@@ -683,7 +687,7 @@
 
 			<div class="details">
 				<div class="links">
-					<a href="http://www.commentcamarche.net/download/telecharger-34055037-eye-kidz" target="_blank">Download</a>
+					<a href="http://www.commentcamarche.net/download/telecharger-34055037-eye-kidz" target="_blank" rel="noreferrer">Download</a>
 				</div>
 				<div class="techno">
 					<div class="icon" data-toggle="tooltip" title="ActionScript">
@@ -713,7 +717,7 @@
 
 			<div class="details">
 				<div class="links">
-					<a href="https://red-agent.com/schlempf/" target="_blank">Website</a>
+					<a href="https://red-agent.com/schlempf/" target="_blank" rel="noreferrer">Website</a>
 				</div>
 				<div class="techno">
 					<div class="icon" data-toggle="tooltip" title="Java Mobile">

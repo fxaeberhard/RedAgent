@@ -1,6 +1,42 @@
 /* Variables */
 /* Bootstrap variables */
 /* Libraries */
+@font-face {
+  font-family: "Din";
+  font-style: normal;
+  font-weight: 300;
+  font-display: auto;
+  src: url("../assets/fonts/din-light-webfont.eot");
+  src: local("Din"), url("../assets/fonts/din-light-webfont.eot?#iefix") format("embedded-opentype"), url("../assets/fonts/din-light-webfont.woff") format("woff"), url("../assets/fonts/din-light-webfont.ttf") format("truetype"), url("../assets/fonts/din-light-webfont.svg#din_lightregular") format("svg");
+}
+
+@font-face {
+  font-family: "Din";
+  font-style: normal;
+  font-weight: bold;
+  font-display: auto;
+  src: url("../assets/fonts/din-bold-webfont.eot");
+  src: local("Din"), url("../assets/fonts/din-bold-webfont.eot?#iefix") format("embedded-opentype"), url("../assets/fonts/din-bold-webfont.woff") format("woff"), url("../assets/fonts/din-bold-webfont.ttf") format("truetype"), url("../assets/fonts/din-bold-webfont.svg#dinbold") format("svg");
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 300;
+  font-display: auto;
+  src: url("../assets/fonts/OpenSans-Light-webfont.eot");
+  src: local("Open Sans"), url("../assets/fonts/OpenSans-Light-webfont.eot?#iefix") format("embedded-opentype"), url("../assets/fonts/OpenSans-Light-webfont.woff") format("woff"), url("../assets/fonts/OpenSans-Light-webfont.ttf") format("truetype"), url("../assets/fonts/OpenSans-Light-webfont.svg#open_sanslight") format("svg");
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: auto;
+  src: url("../assets/fonts/OpenSans-Regular-webfont.eot");
+  src: local("Open Sans"), url("../assets/fonts/OpenSans-Regular-webfont.eot?#iefix") format("embedded-opentype"), url("../assets/fonts/OpenSans-Regular-webfont.woff") format("woff"), url("../assets/fonts/OpenSans-Regular-webfont.ttf") format("truetype"), url("../assets/fonts/OpenSans-Regular-webfont.svg#open_sansregular") format("svg");
+}
+
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 html {
   font-family: sans-serif;
@@ -1867,6 +1903,7 @@ a.text-danger:focus, a.text-danger:hover {
   height: 100%;
   background: #000;
   opacity: 0;
+  transform: translateZ(0);
   -webkit-backface-visibility: hidden;
   will-change: opacity;
 }
@@ -3339,6 +3376,10 @@ main article > div {
   main article > :first-child {
     width: 41.66667%;
   }
+}
+
+main article > :first-child video {
+  max-width: 100%;
 }
 
 @media (min-width: 992px) {
