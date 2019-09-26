@@ -29,10 +29,10 @@ var App = (function($) {
 			App.initPage()
 
 			// Youtube video lazy load
-			$(BODY).on(CLICK, '[data-youtube-id]', function(e) {
-				e.preventDefault()
-				$(this).html('<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" src="https://www.youtube.com/embed/' + $(this).data('youtube-id') + '?autoplay=1&rel=0&controls=1&autohide=1&color2=580000&showinfo=0&modestbranding=1&rel=0" allowfullscreen></iframe></div>')
-			})
+			// $(BODY).on(CLICK, '[data-youtube-id]', function(e) {
+			// 	e.preventDefault()
+			// 	$(this).html('<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" src="https://www.youtube.com/embed/' + $(this).data('youtube-id') + '?autoplay=1&rel=0&controls=1&autohide=1&color2=580000&showinfo=0&modestbranding=1&rel=0&mute=1" allowfullscreen></iframe></div>')
+			// })
 
 			// Slick slider links
 			$(BODY).on(CLICK, '[data-slick-open]', function(e) {
@@ -116,6 +116,12 @@ var App = (function($) {
 				$(this).find('[data-lazy-srcset]').each(function() {
 					$(this).attr('srcset', $(this).data('lazy-srcset')).removeAttr('data-lazy-srcset')
 				})
+
+				// Load youtube videos
+				$(this).find('[data-youtube-id]').each(function () {
+						$(this).html('<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" src="https://www.youtube.com/embed/' + $(this).data('youtube-id') + '?autoplay=1&rel=0&controls=1&autohide=1&color2=580000&showinfo=0&modestbranding=1&rel=0&mute=1" allowfullscreen></iframe></div>')
+				})
+
 			})
 
 			$('article').on('scrollSpy:enter scrollSpy:exit', function(e) {

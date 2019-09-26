@@ -145,7 +145,7 @@ $page = filter_input(INPUT_GET, 'page');
 		//convoId = "<?php //echo $convoId; ?>";
 	</script>
 
-	<!-- build:js js/scripts.js -->
+	<!-- build:js js/scripts2.js -->
 	<!-- Libraries -->
 	<script src="bower_components/lodash/dist/lodash.min.js"></script>
 	<script src="bower_components/jquery/dist/jquery.min.js"></script>

@@ -34,6 +34,7 @@ Crafty.c('House', {
 	openPage: function() {
 		this.animate('Open')
 			.timeout(function() {
+				$('body').removeClass('nocursor')
 				App.showPage(this.attr('targetPage'))
 			}, 900)
 			.timeout(function() {
