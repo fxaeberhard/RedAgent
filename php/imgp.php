@@ -44,10 +44,10 @@ $config = array(
     //'cache_path'   =>  __DIR__ . '/../cache/',
     //'alias_path'   =>  __DIR__ . '/img/alias/',
     //'remote_allow' => true,
-    //'password'     => false,                      
+    //'password'     => false,
     // "secret-password",
 
-    
+
     // 'postprocessing' => array(
     //     'png_filter'        => true,
     //     'png_filter_cmd'    => '/usr/local/bin/optipng -q',
@@ -55,11 +55,11 @@ $config = array(
     //     'png_deflate'       => true,
     //     'png_deflate_cmd'   => '/usr/local/bin/pngout -q',
 
-        // 'jpeg_optimize'     => true,    
+        // 'jpeg_optimize'     => true,
     //     'jpeg_optimize_cmd' => '/usr/local/bin/jpegtran -copy none -optimize',
     // ),
-    
-     'background_color' => "000000",
+
+     'background_color' => "ffffff",
 //    'background_color' => "F8FEF200",
     'max_width'     => 4000,
     'max_height'    => 4000,
@@ -129,7 +129,7 @@ class CHttpGet
     public function setUrl($url)
     {
         $parts = parse_url($url);
-        
+
         $path = "";
         if (isset($parts['path'])) {
             $pathParts = explode('/', $parts['path']);
@@ -173,7 +173,7 @@ class CHttpGet
     public function parseHeader()
     {
         //$header = explode("\r\n", rtrim($this->response['headerRaw'], "\r\n"));
-        
+
         $rawHeaders = rtrim($this->response['headerRaw'], "\r\n");
         # Handle multiple responses e.g. with redirections (proxies too)
         $headerGroups = explode("\r\n\r\n", $rawHeaders);
@@ -514,7 +514,7 @@ class CRemoteImage
         if (defined("CIMAGE_USER_AGENT")) {
             $cimageVersion = CIMAGE_USER_AGENT;
         }
-        
+
         $this->http->setHeader("User-Agent", "$cimageVersion (PHP/". phpversion() . " cURL)");
         $this->http->setHeader("Accept", "image/jpeg,image/png,image/gif");
 
@@ -663,7 +663,7 @@ class CRemoteImage
         $date   = strtotime($this->cache['Date']);
         $maxAge = $this->cache['Max-Age'];
         $now    = time();
-        
+
         if ($imageExists && $date + $maxAge > $now) {
             return $this->fileName;
         }
@@ -726,11 +726,11 @@ class CWhitelist
         if ($whitelist !== null) {
             $this->set($whitelist);
         }
-        
+
         if (empty($item) or empty($this->whitelist)) {
             return false;
         }
-        
+
         foreach ($this->whitelist as $regexp) {
             if (preg_match("#$regexp#", $item)) {
                 return true;
@@ -830,17 +830,17 @@ class CAsciiArt
             "customCharacterSet" => null,
         );
         $default = array_merge($default, $options);
-        
+
         if (!is_null($default['customCharacterSet'])) {
             $this->addCharacterSet('custom', $default['customCharacterSet']);
             $default['characterSet'] = 'custom';
         }
-        
+
         $this->scale = $default['scale'];
         $this->characters = $this->characterSet[$default['characterSet']];
         $this->charCount = strlen($this->characters);
         $this->luminanceStrategy = $default['luminanceStrategy'];
-        
+
         return $this;
     }
 
@@ -861,7 +861,7 @@ class CAsciiArt
         $ascii = null;
         $incY = $this->scale;
         $incX = $this->scale / 2;
-        
+
         for ($y = 0; $y < $height - 1; $y += $incY) {
             for ($x = 0; $x < $width - 1; $x += $incX) {
                 $toX = min($x + $this->scale / 2, $width - 1);
@@ -892,7 +892,7 @@ class CAsciiArt
     {
         $numPixels = ($x2 - $x1 + 1) * ($y2 - $y1 + 1);
         $luminance = 0;
-        
+
         for ($x = $x1; $x <= $x2; $x++) {
             for ($y = $y1; $y <= $y2; $y++) {
                 $rgb   = imagecolorat($img, $x, $y);
@@ -902,7 +902,7 @@ class CAsciiArt
                 $luminance += $this->getLuminance($red, $green, $blue);
             }
         }
-        
+
         return $luminance / $numPixels;
     }
 
@@ -3811,7 +3811,7 @@ class CCache
 
         $exists = is_dir($path);
         $res  = $exists ? "exists" : "does not exist";
-        
+
         if ($exists) {
             $res .= is_writable($path) ? ", writable" : ", not writable";
         }
@@ -4215,7 +4215,7 @@ $allowRemote = getConfig('remote_allow', false);
 
 if ($allowRemote && $passwordMatch !== false) {
     $cacheRemote = $cache->getPathToSubdir("remote");
-    
+
     $pattern = getConfig('remote_pattern', null);
     $img->setRemoteDownload($allowRemote, $cacheRemote, $pattern);
 

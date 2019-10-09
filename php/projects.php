@@ -34,7 +34,7 @@
 		<!-- Ariston  -->
 		<article id="ariston">
 			<div>
-				<?php gallery('projects/ariston', '', false); ?>
+				<?php gallery('projects/ariston'); ?>
 				<!-- <img class="img-fluid center-block" src="assets/images/projects/ariston.jpg" /> -->
 			</div>
 			<div>
@@ -79,7 +79,7 @@
 		<!-- Mineority  -->
 		<article id="mineority">
 			<div>
-				<?php gallery('projects/mineority', '', false); ?>
+				<?php gallery('projects/mineority'); ?>
 				<!-- <img class="img-fluid center-block" src="assets/images/projects/Mineority.png" /> -->
 			</div>
 			<div>
@@ -178,7 +178,7 @@
 		<!-- Horizon -->
 		<article id="horizon">
 			<div>
-				<?php gallery('projects/horizon', '', false); ?>
+				<?php gallery('projects/horizon'); ?>
 			</div>
 			<div>
 				<h1>Horizon</h1>
@@ -228,7 +228,8 @@
 					<!-- <picture> -->
 					<!-- <source srcset="imgpp/projects/wallogram/teaser.jpg?w=522" media="(max-width:543px)" /> -->
 					<!-- <source srcset="imgpp/projects/wallogram/teaser.jpg?w=480, imgpp/projects/wallogram/teaser.jpg?w=950 x2" media="(min-width:544px) AND (max-width:894px)" /> -->
-					<img class="img-fluid" src="i/projects/wallogram/teaser.jpg?w=526" srcset="i/projects/wallogram/teaser.jpg?w=526, i/projects/wallogram/teaser.jpg?w=789 1.5x, i/projects/wallogram/teaser.jpg?w=1052 2x" alt="Wallogram" />
+					<!-- <img class="img-fluid" src="i/projects/wallogram/teaser.jpg?w=526" srcset="i/projects/wallogram/teaser.jpg?w=526, i/projects/wallogram/teaser.jpg?w=789 1.5x, i/projects/wallogram/teaser.jpg?w=1052 2x" alt="Wallogram" /> -->
+					<?php lazypicture('projects/wallogram/teaser.jpg'); ?>
 					<!-- <img src="assets/images/projects/wallogram/teaser.jpg" /> -->
 					<!-- </picture> -->
 					<svg><use xlink:href="assets/images/sprite.svg#youtube" /></svg>
@@ -270,7 +271,7 @@
 	<!-- Programming game -->
 	<article id="proggame">
 		<div>
-			<?php gallery('projects/proggame', '', false); ?>
+			<?php lazygallery('projects/proggame'); ?>
 		</div>
 		<div>
 			<h1>Programming game</h1>
@@ -308,7 +309,7 @@
 	<!-- Stalker -->
 	<article id="stalker">
 		<div>
-			<?php gallery("projects/stalker", "ar=3:2&crop-to-fit"); ?>
+			<?php lazygallery("projects/stalker", "ar=3:2&crop-to-fit"); ?>
 		</div>
 		<div>
 			<h1>Stalker - Experimenting the Zone</h1>
@@ -342,7 +343,7 @@
 	<!-- Wegas -->
 	<article id="wegas">
 		<div>
-			<?php gallery("projects/wegas", "ar=1.83&crop-to-fit"); ?>
+			<?php lazygallery("projects/wegas", "ar=1.83&crop-to-fit"); ?>
 		</div>
 		<div>
 			<h1>Wegas</h1>
@@ -367,7 +368,7 @@
 					<div class="icon" data-toggle="tooltip" title="PostgreSQL">
 						<svg><use xlink:href="assets/images/sprite.svg#postgres" /></svg>
 					</div>
-					<div class="icon" data-toggle="tooltip" title="JavaScript <em>(YUI 3)</em>">
+					<div class="icon" data-toggle="tooltip" title="JavaScript">
 						<svg><use xlink:href="assets/images/sprite.svg#javascript" /></svg>
 					</div>
 					<div class="icon" data-toggle="tooltip" title="Selenium">
@@ -501,7 +502,7 @@
 	<!--  3D  Blogosphere-->
 	<article id="3dblogosphere">
 		<div>
-			<?php gallery("projects/3DBlogosphere", "ff&ar=3:2"); ?>
+			<?php lazygallery("projects/3DBlogosphere", "ff&ar=3:2"); ?>
 		</div>
 		<div>
 			<h1>3DBlogosphere</h1>
@@ -567,7 +568,7 @@
 	<!-- Webdesign -->
 	<article id="webdesign">
 		<div>
-			<?php gallery("projects/webdesign", "ar=4:3&ff"); ?>
+			<?php lazygallery("projects/webdesign", "ar=4:3&ff"); ?>
 		</div>
 		<div>
 			<h1>Web design</h1>
@@ -674,7 +675,7 @@
 	<!-- EyeKidz -->
 	<article id="eyekidz">
 		<div>
-			<?php gallery("projects/eyekidz", "cf&ar=4:3"); ?>
+			<?php lazygallery("projects/eyekidz", "cf&ar=4:3"); ?>
 		</div>
 
 		<div>
@@ -703,7 +704,7 @@
 	<article id="schlempf">
 		<div>
 			<!--<iframe src="http://www.slideshare.net/slideshow/embed_code/4800011?rel=0" width="420" height="350" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px 1px 0; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>-->
-			<?php gallery("projects/schlempf"); ?>
+			<?php lazygallery("projects/schlempf"); ?>
 		</div>
 
 		<div>

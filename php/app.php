@@ -1,5 +1,9 @@
 <?php
 
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
+
 global $pages;
 
 $pages = array(
@@ -59,12 +63,21 @@ function get_convo_id() {
     return $convo_id;
 }
 
+function picture($src, $options = "") {
+    $options = 'sa=jpg&nu&' . $options;
+    echo '<img class="img-fluid" srcset="i/'. $src . '?w=526&' . $options . ', i/'. $src . '?w=789&' . $options . ' 1.5x, i/'. $src . '?w=1052&' . $options . ' 2x" data-lazy-src="i/'. $src . '?w=526&' . $options . '" />';
+}
+
 function lazypicture($src, $options = "") {
     $options = 'sa=jpg&nu&' . $options;
     echo '<img class="img-fluid" data-lazy-srcset="i/'. $src . '?w=526&' . $options . ', i/'. $src . '?w=789&' . $options . ' 1.5x, i/'. $src . '?w=1052&' . $options . ' 2x" data-lazy-src="i/'. $src . '?w=526&' . $options . '" />';
 }
 
-function gallery($dir, $options = "", $lazy = true) {
+function lazygallery($dir, $options = "") {
+  gallery($dir, $options, true);
+}
+
+function gallery($dir, $options = "", $lazy = false) {
     $files = glob(__DIR__  . "/../assets/images/$dir/*.{jpg,gif,png,jpeg,JPG,GIF,PNG,JPEG}", GLOB_BRACE);
     sort($files, SORT_LOCALE_STRING);
     echo '<div class="slick" itemscope itemtype="http://schema.org/ImageGallery">';
