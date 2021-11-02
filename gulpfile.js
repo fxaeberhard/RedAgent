@@ -61,7 +61,7 @@ gulp.task('imagemin', ['svg-sprite'], function() {
       plugins.imagemin.gifsicle({ interlaced: true }),
       plugins.imagemin.jpegtran({ progressive: true }),
       plugins.imagemin.optipng({ optimizationLevel: 5 }),
-      plugins.imagemin.svgo({ plugins: [{ removeViewBox: true }] })
+      // plugins.imagemin.svgo({ plugins: [{ removeViewBox: true }] })
     ], { verbose: true }))
 		// .pipe(rev())
 		.pipe(gulp.dest('dist/assets/images'))

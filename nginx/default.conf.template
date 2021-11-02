@@ -1,0 +1,55 @@
+server {
+
+    listen       80;
+    server_name  localhost;
+#;     server_name myapp.loc;
+#	server_name localhost
+
+    root /var/www/myapp/dist;
+    index index.php index.html index.htm;
+
+    access_log /var/log/nginx/php-access.log;
+    error_log /var/log/nginx/php-error.log;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+        rewrite ^/projects.html$ /Projects redirect;
+        rewrite ^/blog.html$ /Blog redirect;
+        rewrite ^/contact.html$ /Contact redirect;
+        rewrite ^/post-12-Love-Quest.html$ /post-12-Love-Quest redirect;
+        rewrite ^/post-17-My-online-songbook.html$ /post-17-My-online-songbook redirect;
+        rewrite ^/post-01-Michael's-day's-game.html$ /post-01-Michael's-day's-game redirect;
+        rewrite ^/post-09-Un-jeu-pour-le-mariage-d'un-pote.html$ /post-09-Un-jeu-pour-le-mariage-d'un-pote redirect;
+        rewrite ^/post-09-Pauline-L'histoire-d'une-belle-ï¿½popï¿½ee.html$ /post-09-Pauline-L'histoire-d'une-belle-ï¿½popï¿½e redirect;
+        rewrite ^/post-06-Wo-bist-du-mein-unerlassiliches-Armoat.html$ /post-06-Wo-bist-du-mein-unerlassiliches-Armoat redirect;
+        rewrite ^/post-16-Un-jeu-pour-Arthur.html$ /post-16-Un-jeu-pour-Arthur redirect;
+        rewrite ^/Resume/$ /Projects redirect;
+        rewrite ^/Games/$ /Projects redirect;
+        rewrite ^/wallogram$ http://wallogram.ch/ redirect;
+        rewrite ^/wallogram/$ http://wallogram.ch/ redirect;
+        if (!-f $request_filename) {
+          rewrite ^/post-(.*)$ /index.php?page=Post&post=$1;
+          #rewrite ^/(.*)$ /index.php?page=$1;
+          rewrite ^/Projects$ /index.php?page=Projects;
+          rewrite ^/Blog$ /index.php?page=Blog;
+          rewrite ^/Contact(.*)$ /index.php?page=Contact;
+        }
+    }
+
+    #image server
+  	location /i/ {
+  	  	rewrite ^/i/(.*)(\?(.*))?$ /php/imgp.php?src=$1&$3;
+  	}
+
+    # PHP-FPM Configuration Nginx
+    location ~ \.php$ {
+        try_files $uri = 404;
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_pass php:9000;
+        fastcgi_index index.php;
+        include fastcgi_params;
+        fastcgi_param REQUEST_URI $request_uri;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param PATH_INFO $fastcgi_path_info;
+    }
+}

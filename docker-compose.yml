@@ -1,0 +1,37 @@
+#web:
+#  image: nginx:latest
+#  ports:
+#    - 8080:80
+
+
+version: "3.7"
+
+services:
+
+  nginx:
+    image: nginx:1.19
+    ports:
+      - 80:80
+    volumes:
+      - .:/var/www/myapp
+      - ./nginx:/etc/nginx/templates
+    depends_on:
+      - php
+
+  php:
+#    image: php:7.2-fpm
+    build:
+      context: .
+      dockerfile: Dockerfile.php
+    volumes:
+      - .:/var/www/myapp
+#      - ./php.ini-development:/usr/local/etc/php/php.ini-development
+#      - ./php.ini-production:/usr/local/etc/php/php.ini-production
+
+  node:
+#    image: node:8
+    build: .
+    command: gulp dist && mv bower_components dist/
+    volumes:
+      - ./dist:/app/dist
+#      - ./php.ini:/usr/local/etc/php/php.ini
