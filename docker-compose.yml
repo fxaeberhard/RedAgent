@@ -5,10 +5,9 @@ services:
     image: nginx:1.19
     ports:
       - 80:80
-      - 443:443
     volumes:
       - .:/var/www/myapp
-      - ./nginx/default.conf.template:/etc/nginx/templates/default.conf.template
+      - ./nginx/dev:/etc/nginx/templates
     depends_on:
       - php
 
