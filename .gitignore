@@ -1,5 +1,6 @@
 cache/*
 dist/*
+data/*
 .sass-cache/*
 bower_components/*
 node_modules/*

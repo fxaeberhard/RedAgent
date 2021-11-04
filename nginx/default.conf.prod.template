@@ -1,14 +1,43 @@
 server {
-    root /var/www/RedAgent;
-    index index.php index.html index.htm index.nginx-debian.html;
-    server_name red-agent.com;
+    listen       80;
+    server_name  red-agent.com www.red-agent.com;
+
+    location /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+    }
+
+    if ($host = www.red-agent.com) {
+        return 301 https://red-agent.com$request_uri;
+    }
+
+    if ($host = red-agent.com) {
+        return 301 https://$host$request_uri;
+    }
+
+    return 404; # managed by Certbot
+}
+
+server {
+    listen 443 ssl;
+    server_name red-agent.com www.red-agent.com;
+
+    ssl_certificate /etc/letsencrypt/live/red-agent.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/red-agent.com/privkey.pem;
+    include /etc/letsencrypt/options-ssl-nginx.conf;
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+
+    root /var/www/myapp/dist;
+    index index.php index.html index.htm;
+
+    access_log /var/log/nginx/php-access.log;
+    error_log /var/log/nginx/php-error.log;
 
     if ($host = www.red-agent.com) {
         return 301 https://red-agent.com$request_uri;
     }
 
     location / {
-        try_files $uri $uri/ =404;
+        try_files $uri $uri/ /index.php?$query_string;
         rewrite ^/projects.html$ /Projects redirect;
         rewrite ^/blog.html$ /Blog redirect;
         rewrite ^/contact.html$ /Contact redirect;
@@ -23,7 +52,6 @@ server {
         rewrite ^/Games/$ /Projects redirect;
         rewrite ^/wallogram$ http://wallogram.ch/ redirect;
         rewrite ^/wallogram/$ http://wallogram.ch/ redirect;
-        #rewrite ^/$ /newlocation redirect;
         if (!-f $request_filename) {
           rewrite ^/post-(.*)$ /index.php?page=Post&post=$1;
           #rewrite ^/(.*)$ /index.php?page=$1;
@@ -38,36 +66,15 @@ server {
   	  	rewrite ^/i/(.*)(\?(.*))?$ /php/imgp.php?src=$1&$3;
   	}
 
+    # PHP-FPM Configuration Nginx
     location ~ \.php$ {
-        include snippets/fastcgi-php.conf;
-        fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
+        try_files $uri = 404;
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_pass php:9000;
+        fastcgi_index index.php;
+        include fastcgi_params;
+        fastcgi_param REQUEST_URI $request_uri;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param PATH_INFO $fastcgi_path_info;
     }
-
-    location ~ /\.ht {
-        deny all;
-    }
-
-    listen 443 ssl; # managed by Certbot
-    ssl_certificate /etc/letsencrypt/live/red-agent.com/fullchain.pem; # managed by Certbot
-    ssl_certificate_key /etc/letsencrypt/live/red-agent.com/privkey.pem; # managed by Certbot
-    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
-    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
-
-
-}
-server {
-    if ($host = www.red-agent.com) {
-        return 301 https://red-agent.com$request_uri;
-    } # managed by Certbot
-
-
-    if ($host = red-agent.com) {
-        return 301 https://$host$request_uri;
-    } # managed by Certbot
-
-
-    listen 80;
-    server_name red-agent.com www.red-agent.com;
-    return 404; # managed by Certbot
-
 }

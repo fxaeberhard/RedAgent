@@ -1,11 +1,8 @@
 server {
-
     listen       80;
     server_name  localhost;
-#;     server_name myapp.loc;
-#	server_name localhost
 
-    root /var/www/myapp/dist;
+    root /var/www/myapp;
     index index.php index.html index.htm;
 
     access_log /var/log/nginx/php-access.log;
