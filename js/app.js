@@ -71,7 +71,7 @@ var App = (function($) {
 			// Contact form
 			$(BODY).on('submit', '#contactForm', function() {
 				// Call send mail method
-				$.post('php/sendMail.php', 'from=' + encodeURIComponent($(this).find('input').val()) + '&msg=' + encodeURIComponent($(this).find('textarea').val()))
+				$.post('php/sendTelegram.php', 'from=' + encodeURIComponent($(this).find('input').val()) + '&msg=' + encodeURIComponent($(this).find('textarea').val()))
 
 				$(this).addClass("sent").find('input, textarea').val('')
 				setTimeout($(this).removeClass.bind($(this), 'sent'), 5000)
